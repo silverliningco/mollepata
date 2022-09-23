@@ -6,6 +6,10 @@ import { FooterComponent } from './footer/footer.component';
 import { HomeComponent } from './home/home.component';
 import { ReleasesComponent } from './releases/releases.component';
 
+/* angular material */
+import {MatCardModule} from '@angular/material/card';
+import {MatIconModule} from '@angular/material/icon';
+
 
 
 @NgModule({
@@ -17,7 +21,10 @@ import { ReleasesComponent } from './releases/releases.component';
   ],
   imports: [
     CommonModule,
-    BasicEstructureRoutingModule
+    BasicEstructureRoutingModule,
+
+    MatCardModule,
+    MatIconModule
   ]
 })
 export class BasicEstructureModule { }
