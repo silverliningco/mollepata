@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+
 
 @Component({
   selector: 'app-nominal-size',
@@ -8,9 +9,18 @@ import { Component, OnInit } from '@angular/core';
 
 export class NominalSizeComponent implements OnInit {
 
+  @Output() nominalsize = new EventEmitter();
+
+  size = [1, 2, 3, 4 ];
+
+
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  emit(s:any){
+    this.nominalsize.emit(s);
   }
 
 }

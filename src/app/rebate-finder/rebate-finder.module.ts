@@ -1,22 +1,32 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { RebateFinderComponent } from './rebate-finder/rebate-finder.component';
-import { HeatingAndCoolingComponent } from './heating-and-cooling/heating-and-cooling.component';
-import { ResultsRfComponent } from './results-rf/results.component';
-import { RebateFinderRoutingModule } from './rebate-finder-routing.module';
+// routing 
+import { RebateFinderRoutingModule } from './rebate-finder-routing.module' 
 
+// componets
+import { Card2Component } from './card2/card2.component';
+import { HeatedCooledComponent } from './heated-cooled/heated-cooled.component';
+import { NominalSizeComponent } from './nominal-size/nominal-size.component';
+import { RebateFinderComponent } from './rebate-finder/rebate-finder.component';
+import { ResultsComponent} from './results/results.component';
+
+// angular
+import {MatSelectModule} from '@angular/material/select';
 
 
 @NgModule({
   declarations: [
+    ResultsComponent,
+    HeatedCooledComponent,
+    NominalSizeComponent,
     RebateFinderComponent,
-    HeatingAndCoolingComponent,
-    ResultsComponent
+    Card2Component
   ],
   imports: [
     CommonModule,
-    RebateFinderRoutingModule
+    RebateFinderRoutingModule,
+    MatSelectModule
   ]
 })
 export class RebateFinderModule { }

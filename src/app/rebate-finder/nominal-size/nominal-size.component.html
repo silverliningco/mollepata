@@ -1,10 +1,18 @@
+<br>
 <p>nominal-size works!</p>
 
-<label>Cooling tons</label>
-<option>1</option>
-<option>2</option>
-<option>3</option>
-<option>4</option>
+<!-- input -->
+<mat-form-field appearance="fill"  > 
+    <mat-label>nominal-size?</mat-label>
+    <mat-select >
+        <mat-option  *ngFor="let s of size; let i = index" [value]="s" (click)="emit(s)">
+             {{s}} 
+            </mat-option>
+    </mat-select>
+</mat-form-field>
 
+
+<br>
 <label>Heating BTUH</label>
-<input></input>
+<br>
+<!-- <input></input> --> 

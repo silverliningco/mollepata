@@ -5,7 +5,7 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { HomeComponent } from './home/home.component';
 import { ReleasesComponent } from './releases/releases.component';
-
+ 
 /* angular material */
 import {MatCardModule} from '@angular/material/card';
 import {MatIconModule} from '@angular/material/icon';
@@ -25,6 +25,8 @@ import {MatIconModule} from '@angular/material/icon';
 
     MatCardModule,
     MatIconModule
+  ], exports: [
+    // RebateFinderModule
   ]
 })
 export class BasicEstructureModule { }

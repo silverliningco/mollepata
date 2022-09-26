@@ -9,11 +9,21 @@ import { Component, Input, OnInit } from '@angular/core';
 export class ResultsComponent implements OnInit {
 
   // searchInputs represents high level user inputs passed down from the parent component.
-  @Input() searchInputs = ''; // decorate the property with @Input()
+  // @Input() searchInputs: any = ''; // decorate the property with @Input()
+
+
+  @Input() searchInputs: any = '';
 
   constructor() { }
 
   ngOnInit(): void {
+    
+  }
+
+  parse(){
+    let a = JSON.parse(this.searchInputs);
+    a. my_size
+
   }
 
 }

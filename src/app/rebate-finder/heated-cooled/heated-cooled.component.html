@@ -1,10 +1,26 @@
 <p>heated-cooled works!</p>
 
-<label>Provides cooling?</label>
-<option>Yes</option>
-<option>No</option>
+<mat-form-field appearance="fill"  > 
+    <mat-label>Provides cooling?</mat-label>
+    <mat-select >
+        <mat-option  *ngFor="let c of cooling" [value]="c.value" (click)="currentcooling(c.value)"> 
+            {{c.viewValue}} 
+        </mat-option>
+    </mat-select>
+</mat-form-field>
 
-<label>Provides heating?</label>
-<option>Yes</option>
-<option>No</option>
-<option>Existing or non-TDR furnace</option>
+<mat-form-field appearance="fill"  > 
+    <mat-label>Provides heating?</mat-label>
+    <mat-select >
+        <mat-option  *ngFor="let h of heating" [value]="h.value" (click)="curretheating(h.value)">
+             {{h.viewValue}} 
+            </mat-option>
+    </mat-select>
+</mat-form-field>
+
+
+<br>
+
+<button (click)="emit()">sent</button>
+<br>
+

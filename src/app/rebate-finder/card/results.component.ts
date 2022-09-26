@@ -9,11 +9,12 @@ import { Component, Input, OnInit } from '@angular/core';
 export class ResultsComponent implements OnInit {
 
   // searchInputs represents high level user inputs passed down from the parent component.
-  @Input() searchInputs = ''; // decorate the property with @Input()
+  //@Input() searchInputs = ''; // decorate the property with @Input()
 
   constructor() { }
 
   ngOnInit(): void {
+    
   }
 
 }

@@ -8,12 +8,19 @@ import { Component, OnInit } from '@angular/core';
 
 export class RebateFinderComponent implements OnInit {
 
-  // searchInputs represents high level user inputs for this search.
-  searchInputs = 'Some user inputs here oxoxoxo';
+
+  my_size:any= '------';
+  my_cooling_heating: any= '-----';
+
+
+  mysearchInputs:any = {
+    my_size: this.my_size,
+    my_cooling_heating: this.my_cooling_heating
+  }
 
   constructor() { }
 
   ngOnInit(): void {
   }
-
+ 
 }
