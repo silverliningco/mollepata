@@ -1,19 +1,18 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RebateFinderHomeComponent } from './rebate-finder-home/rebate-finder-home.component';
-import { CoolingOnlyRfComponent } from './cooling-only-rf/cooling-only-rf.component';
-import { HeatingAndCoolingRfComponent } from './heating-and-cooling-rf/heating-and-cooling-rf.component';
-import { ResultsRfComponent } from './results-rf/results-rf.component';
-import { RebateFinderRoutingModule } from './rebate-finder-routing-.module';
+
+import { RebateFinderComponent } from './rebate-finder/rebate-finder.component';
+import { HeatingAndCoolingComponent } from './heating-and-cooling/heating-and-cooling.component';
+import { ResultsRfComponent } from './results-rf/results.component';
+import { RebateFinderRoutingModule } from './rebate-finder-routing.module';
 
 
 
 @NgModule({
   declarations: [
-    RebateFinderHomeComponent,
-    CoolingOnlyRfComponent,
-    HeatingAndCoolingRfComponent,
-    ResultsRfComponent
+    RebateFinderComponent,
+    HeatingAndCoolingComponent,
+    ResultsComponent
   ],
   imports: [
     CommonModule,
