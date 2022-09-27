@@ -1,17 +1,41 @@
-<p>rebate-finder works!</p>
 
-<p>Some form controls to get the user inputs here...</p>
-<h4>cooling_heating : {{my_cooling_heating | json}}</h4>
-<h4>nominal-size : {{my_size}}</h4>
+<mat-stepper #stepper linear >
 
-<br>
-<hr>
+    <!-- step 1 location -->
+    <mat-step>
+        <app-location></app-location>
+    </mat-step>
+    <!-- step 2 location end -->
 
-<app-heated-cooled (cooling_heating)="my_cooling_heating = $event"></app-heated-cooled>
-<app-nominal-size (nominalsize)="my_size =  $event"></app-nominal-size>
+    <!-- step 2 dwelling info -->
+    <mat-step>
+        <app-dwelling-info></app-dwelling-info>
+    </mat-step>
+    <!-- step 2 dwelling info end -->
 
-<br>
-<hr>
+    <!-- step 3 rebate eligibility-->
+    <mat-step>
+        <app-rebate-eligibility></app-rebate-eligibility>
+    </mat-step>
+    <!-- step 3 rebate eligibility end -->
 
-<app-results [searchInputs]="mysearchInputs"></app-results>
+    <!-- step 4 heated / cooled -->
+    <mat-step>
+        <app-heated-cooled></app-heated-cooled>
+    </mat-step>
+    <!-- step 4 heated / cooled end -->
+
+    <!-- step 5 nominal size -->
+    <mat-step>
+        <app-nominal-size></app-nominal-size>
+    </mat-step>
+    <!-- step 5 nominal size end -->
+
+    <!-- step 6 results -->
+    <mat-step>
+        <app-results></app-results>
+    </mat-step>
+    <!-- step 6 results end -->
+
+</mat-stepper>
 
