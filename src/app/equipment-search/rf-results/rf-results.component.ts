@@ -1,12 +1,12 @@
 import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-results',
-  templateUrl: './results.component.html',
-  styleUrls: ['./results.component.css']
+  selector: 'rf-results',
+  templateUrl: './rf-results.component.html',
+  styleUrls: ['./rf-results.component.css']
 })
 
-export class ResultsComponent implements OnInit {
+export class RFResultsComponent implements OnInit {
 
   // searchInputs represents high level user inputs passed down from the parent component.
   // @Input() searchInputs: any = ''; // decorate the property with @Input()
