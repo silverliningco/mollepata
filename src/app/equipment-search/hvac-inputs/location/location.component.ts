@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
-import { utilityInfo } from '../../models/utility';
+import { utilityInfo } from '../../models/hvac-inputs';
 
 import { EndPointsService } from '../../services/endPoints.service';
 import { bridgeService } from '../../services/bridge.service';
@@ -56,6 +56,8 @@ export class LocationComponent implements OnInit {
       complete: () => console.info('complete')
     })
 
+    this.writeValue();
+
     this.submitInputs();
   }
 
@@ -77,7 +79,17 @@ export class LocationComponent implements OnInit {
     });
   }
 
+  writeValue(): void {
+
+    console.log('a');
+
+    this.utilityGroup.controls['electricUtility'].setValue('');
+    this.utilityGroup.controls['fossilFuelUtilityId'].setValue('');
+  }
+
   submitInputs() {
+
+    console.log('b');
 
     let payload = {
       state: this.stateGroup.controls['state'].value,

@@ -49,7 +49,7 @@
        <!-- utilities -->
        <mat-form-field appearance="fill">
         <mat-label>Electric Utility</mat-label>
-        <mat-select #sGroup formControlName="electricUtility" (change)="submitInputs()">
+        <mat-select #sGroup formControlName="electricUtility" (selectionChange)="submitInputs()">
           <mat-option *ngFor ="let elec of electricity; let i = index" [value]="electricity[i].utilityProviderId"  radioGroup="sGroup">
             {{electricity[i].title}}
           </mat-option>
@@ -59,7 +59,7 @@
 
       <mat-form-field appearance="fill">
         <mat-label>Gas / Oil Utility</mat-label>
-        <mat-select #sGroup formControlName="fossilFuelUtilityId" (change)="submitInputs()">
+        <mat-select #sGroup formControlName="fossilFuelUtilityId" (selectionChange)="submitInputs()">
           <mat-option *ngFor ="let elec of fossilFuel; let i = index" [value]="fossilFuel[i].utilityProviderId" radioGroup="sGroup">
             {{fossilFuel[i].title}}
           </mat-option> 
