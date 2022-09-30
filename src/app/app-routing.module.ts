@@ -1,22 +1,23 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { BasicEstructureRoutingModule } from './basic-estructure/basic-estructure-routing.module';
-
-import {PadreComponent} from './prueba/padre/padre.component';
-
 
 const routes: Routes = [
- /*  {
-    path: '',
-    component: PadreComponent
-  } */
+
+  {
+    path: 'home',
+    loadChildren: () => import('./basic-estructure/basic-estructure.module').then(m => m.BasicEstructureModule)
+  },
+  {
+    path: '**',
+    redirectTo: 'home'
+  }
+
 ];
 
 @NgModule({
   imports: [
-    RouterModule.forRoot(routes),
-    BasicEstructureRoutingModule
+    RouterModule.forRoot(routes)
   ],
   exports: [RouterModule]
 })

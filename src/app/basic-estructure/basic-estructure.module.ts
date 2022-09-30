@@ -9,6 +9,8 @@ import { ReleasesComponent } from './releases/releases.component';
 /* angular material */
 import {MatCardModule} from '@angular/material/card';
 import {MatIconModule} from '@angular/material/icon';
+import { RebateFinderModule } from '../rebate-finder/rebate-finder.module';
+import { BasicEstructureComponent } from './basic-estructure.component';
 
 
 
@@ -17,16 +19,17 @@ import {MatIconModule} from '@angular/material/icon';
     HeaderComponent,
     FooterComponent,
     HomeComponent,
-    ReleasesComponent
+    ReleasesComponent,
+    BasicEstructureComponent
   ],
   imports: [
     CommonModule,
     BasicEstructureRoutingModule,
+    RebateFinderModule,
 
     MatCardModule,
     MatIconModule
   ], exports: [
-    // RebateFinderModule
   ]
 })
 export class BasicEstructureModule { }
