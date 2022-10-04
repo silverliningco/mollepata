@@ -31,12 +31,12 @@ export class LocationComponent implements OnInit {
 
   ngOnInit(): void {
     this.stateGroup = this.formBuilder.group({
-      state: ['', Validators.required]
+      state: [ null, Validators.required]
     });
 
     this.utilityGroup = this.formBuilder.group({
-      electricUtility: ['', Validators.required],
-      fossilFuelUtilityId: ['', Validators.required]
+      electricUtility: [ null, Validators.required],
+      fossilFuelUtilityId: [null, Validators.required]
     });
 
   }
@@ -81,7 +81,7 @@ export class LocationComponent implements OnInit {
 
   writeValue(): void {
 
-    console.log('a');
+    // console.log('a');
 
     this.utilityGroup.controls['electricUtility'].setValue('');
     this.utilityGroup.controls['fossilFuelUtilityId'].setValue('');
@@ -89,7 +89,7 @@ export class LocationComponent implements OnInit {
 
   submitInputs() {
 
-    console.log('b');
+    // console.log('b');
 
     let payload = {
       state: this.stateGroup.controls['state'].value,

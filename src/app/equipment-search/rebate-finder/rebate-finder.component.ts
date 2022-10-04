@@ -3,6 +3,7 @@ import { bridgeService } from '../services/bridge.service';
 
 import { Location, ListUtilities } from '../models/rebate-finder-inputs';
 
+
 @Component({
   selector: 'app-rebate-finder',
   templateUrl: './rebate-finder.component.html',
@@ -11,7 +12,7 @@ import { Location, ListUtilities } from '../models/rebate-finder-inputs';
 export class RebateFinderComponent implements OnInit {
 
   // local variables save data of stepper
-  myLocation: Location = new Location('', new ListUtilities('', '')); 
+  myLocation: Location = new Location(null, new ListUtilities(null, null)); 
 
   desableButton: boolean = true;
 
@@ -31,16 +32,25 @@ export class RebateFinderComponent implements OnInit {
   }
 
 
-  ActiveContinuebutton(inputs:any): boolean{
-
-    this.desableButton = true
-
-    for (const iInput in inputs) {
-      console.log( inputs[iInput]);
-
+  ActiveContinuebutton(input:any): boolean{
+      let ArrayValues =  Object.values(input) ;
+  
+     completeI: for (const value of ArrayValues) {
+      if (typeof value === 'object'){
+        this.ActiveContinuebutton(value);
+      } else {
+        if (value == null || value == undefined || value === ''){
+          this.desableButton = true;
+          break completeI;
+        } else {
+          this.desableButton = false;
+        }
+      }
+     }
+      
+      return this.desableButton;
     }
 
-    return this.desableButton;
-  }
+
 
 }

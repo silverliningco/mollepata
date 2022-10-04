@@ -1,14 +1,14 @@
 // location
 export class Location {
     constructor(
-        public state: string,
-        public utilityProviders: ListUtilities
+        public state: string | null,
+        public utilityProviders: ListUtilities | null
     ) {}
 }
 
 export class ListUtilities {
     constructor(
-        public electricUtilityId: number | string,
-        public fossilFuelUtilityId: number | string
+        public electricUtilityId: number | null,
+        public fossilFuelUtilityId: number | null
     ) {}
 }

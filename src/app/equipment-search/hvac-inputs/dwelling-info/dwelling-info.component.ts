@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
+import { bridgeService } from '../../services/bridge.service';
 
 @Component({
   selector: 'app-dwelling-info',
@@ -7,10 +10,31 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DwellingInfoComponent implements OnInit {
 
-  constructor() { }
+ DwellingInfoGroup !: FormGroup;
+
+
+  constructor(
+    private formBuilder: FormBuilder,
+    public _bridge: bridgeService
+  ) { }
 
   ngOnInit(): void {
+
+    this.DwellingInfoGroup = this.formBuilder.group({
+      year: [ null, Validators.required],
+      gradeStories: [null, Validators.required],
+      nrBedrooms: [null, Validators.required],
+      dwellingType: [null, Validators.required],
+      fossilFuelUtilityId: [null, Validators.required],
+      conditionedBasement: [null, Validators.required],
+      conditionedSpace: [null, Validators.required],
+      skylights: [null, Validators.required],
+    });
+
   }
+
+
+}
 
 
   /* 
@@ -82,4 +106,4 @@ export class DwellingInfoComponent implements OnInit {
   
   */
 
-}
+
