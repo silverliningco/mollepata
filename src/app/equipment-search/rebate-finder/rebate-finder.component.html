@@ -16,10 +16,10 @@
     <!-- step 2 dwelling info -->
     <mat-step>
         <ng-template matStepLabel>Dwelling info</ng-template>
-        <!-- <app-dwelling-info></app-dwelling-info> -->
+        <app-dwelling-info></app-dwelling-info>
         <!-- button -->
         <div fxLayout="column" fxLayoutAlign="center end" class="rc-stepper-buttons">
-            <button type="button" mat-raised-button color="primary" matStepperNext matStepperNext>
+            <button type="button" mat-raised-button color="primary" [disabled]="desableButton" matStepperNext matStepperNext>
                 Continue
                 <mat-icon>arrow_forward</mat-icon>
             </button>
@@ -32,7 +32,7 @@
         <!-- <app-rebate-eligibility></app-rebate-eligibility> -->
         <!-- button -->
         <div fxLayout="column" fxLayoutAlign="center end" class="rc-stepper-buttons">
-            <button type="button" mat-raised-button color="primary" matStepperNext matStepperNext>
+            <button type="button" mat-raised-button color="primary" [disabled]="desableButton" matStepperNext matStepperNext>
                 Continue
                 <mat-icon>arrow_forward</mat-icon>
             </button>
@@ -45,7 +45,7 @@
         <!-- <app-heated-cooled></app-heated-cooled> -->
         <!-- button -->
         <div fxLayout="column" fxLayoutAlign="center end" class="rc-stepper-buttons">
-            <button type="button" mat-raised-button color="primary" matStepperNext matStepperNext>
+            <button type="button" mat-raised-button color="primary" [disabled]="desableButton" matStepperNext matStepperNext>
                 Continue
                 <mat-icon>arrow_forward</mat-icon>
             </button>
@@ -58,7 +58,7 @@
         <!-- <app-nominal-size></app-nominal-size> -->
         <!-- button -->
         <div fxLayout="column" fxLayoutAlign="center end" class="rc-stepper-buttons">
-            <button type="button" mat-raised-button color="primary" matStepperNext matStepperNext>
+            <button type="button" mat-raised-button color="primary" [disabled]="desableButton" matStepperNext matStepperNext>
                 Continue
                 <mat-icon>arrow_forward</mat-icon>
             </button>

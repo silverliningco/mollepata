@@ -1,56 +1,62 @@
 <form [formGroup]="DwellingInfoGroup">
+    <!-- Name of step -->
+    <ng-template matStepLabel>Dwelling Info</ng-template>
+    <h2 class="rc-main-title">Dwelling Info</h2>
+
+
     <!-- year -->
     <mat-label>Year the home was built or last renovated. If you don't know the exact year, enter approximate year.</mat-label>
-    <input matInput placeholder="Heating BTUH" type="number" formControlName="year" required>
+    <br>
+    <input matInput placeholder="year" type="number" formControlName="year" (change)="submitInputs()"  required>
 
+    <br>
 
     <!-- grade stories -->
     <mat-label>Nr. of above grade stories</mat-label>
-    <input matInput placeholder="Heating BTUH" type="number" formControlName="gradeStories" required>
+    <br>
+    <input matInput placeholder="grade Stories" type="number" formControlName="gradeStories" (change)="submitInputs()" required>
 
 
     <!-- Nr. of bedrooms -->
     <mat-label>Nr. of bedrooms</mat-label>
-    <input matInput placeholder="Heating BTUH" type="number" formControlName="nrBedrooms" required>
+    <br>
+    <input matInput placeholder="nr Bedrooms" type="number" formControlName="nrBedrooms" (change)="submitInputs()" required>
 
+    <br>
 
     <!-- Dwelling type -->
     <mat-label>Dwelling type</mat-label>
-    <input matInput placeholder="Heating BTUH" type="number" formControlName="dwellingType" required>
+    <br>
+    <input matInput placeholder="dwelling type" type="number" formControlName="dwellingType" (change)="submitInputs()" required>
 
+    <br>
 
     <!-- conditioned basement -->
-    <mat-label>Dwelling type</mat-label>
-    <input matInput placeholder="Heating BTUH" type="number" formControlName="conditionedBasement" required>
-    <mat-form-field appearance="fill"  >
-        <mat-label>Cooling tons</mat-label>
-        <mat-select  #sGroup formControlName="coolingTons">
-            <mat-option [value]="Yes" radioGroup="sGroup"> Yes </mat-option>
-            <mat-option [value]="No" radioGroup="sGroup"> No  </mat-option>
-        </mat-select>
-    </mat-form-field>
+    <mat-label>Does the home have a conditioned basement?</mat-label>
+    <br>
+    <mat-radio-group formControlName="coolingTons" (change)="submitInputs()" >
+        <mat-radio-button value="yes">Yes</mat-radio-button>
+        <mat-radio-button value="no">No</mat-radio-button>
+    </mat-radio-group>
 
+    <br>
 
     <!-- conditioned space over a garage -->
-    <mat-label>Dwelling type</mat-label>
-    <input matInput placeholder="Heating BTUH" type="number" formControlName="conditionedSpace" required>
-    <mat-form-field appearance="fill"  >
-        <mat-label>Cooling tons</mat-label>
-        <mat-select  #sGroup formControlName="coolingTons">
-            <mat-option [value]="yes" radioGroup="sGroup"> Yes </mat-option>
-            <mat-option [value]="no" radioGroup="sGroup"> No  </mat-option>
-        </mat-select>
-    </mat-form-field>
+    <mat-label>Does the home have a conditioned space over a garage such as a bonus room?</mat-label>
+    <br>
+    <mat-radio-group formControlName="coolingTons" (change)="submitInputs()">
+        <mat-radio-button value="yes">Yes</mat-radio-button>
+        <mat-radio-button value="no">No</mat-radio-button>
+    </mat-radio-group>
+
+    <br>
 
     <!-- skylights -->
-    <mat-label>Dwelling type</mat-label>
-    <input matInput placeholder="Heating BTUH" type="number" formControlName="skylights" required>
-    <mat-form-field appearance="fill"  >
-        <mat-label>Cooling tons</mat-label>
-        <mat-select  #sGroup formControlName="coolingTons">
-            <mat-option [value]="yes" radioGroup="sGroup"> Yes </mat-option>
-            <mat-option [value]="no" radioGroup="sGroup"> No  </mat-option>
-        </mat-select>
-    </mat-form-field>
+    <mat-label>Does the home have any skylights?</mat-label>
+    <br>
+    <mat-radio-group formControlName="coolingTons" (change)="submitInputs()">
+        <mat-radio-button value="yes">Yes</mat-radio-button>
+        <mat-radio-button value="no">No</mat-radio-button>
+    </mat-radio-group>
 </form>
 

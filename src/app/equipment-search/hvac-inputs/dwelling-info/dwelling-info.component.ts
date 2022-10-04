@@ -25,7 +25,6 @@ export class DwellingInfoComponent implements OnInit {
       gradeStories: [null, Validators.required],
       nrBedrooms: [null, Validators.required],
       dwellingType: [null, Validators.required],
-      fossilFuelUtilityId: [null, Validators.required],
       conditionedBasement: [null, Validators.required],
       conditionedSpace: [null, Validators.required],
       skylights: [null, Validators.required],
@@ -33,6 +32,24 @@ export class DwellingInfoComponent implements OnInit {
 
   }
 
+  submitInputs() {
+
+    let payload = {
+      year: this.DwellingInfoGroup.controls['year'].value,
+      gradeStories: this.DwellingInfoGroup.controls['gradeStories'].value,
+      nrBedrooms: this.DwellingInfoGroup.controls['nrBedrooms'].value,
+      dwellingType: this.DwellingInfoGroup.controls['dwellingType'].value,
+      conditionedBasement: this.DwellingInfoGroup.controls['conditionedBasement'].value,
+      conditionedSpace: this.DwellingInfoGroup.controls['conditionedSpace'].value,
+      skylights: this.DwellingInfoGroup.controls['skylights'].value
+    }  
+
+    console.table(payload);
+    /* sent the info to results-rebate */
+    this._bridge.dwellingInfoParams.emit({
+      data: payload
+    });
+  }
 
 }
 
