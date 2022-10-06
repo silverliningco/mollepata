@@ -5,6 +5,7 @@
         <ng-template matStepLabel>Location</ng-template>
         <app-location></app-location>
         <!-- button -->
+        <!-- <app-btt-continue matStepperNext></app-btt-continue> -->
         <div fxLayout="column" fxLayoutAlign="center end" class="rc-stepper-buttons">
             <button type="button" mat-raised-button color="primary" [disabled]="desableButton" matStepperNext>
                 Continue
@@ -18,6 +19,7 @@
         <ng-template matStepLabel>Dwelling info</ng-template>
         <app-dwelling-info></app-dwelling-info>
         <!-- button -->
+        <!-- <app-btt-continue matStepperNext ></app-btt-continue> -->
         <div fxLayout="column" fxLayoutAlign="center end" class="rc-stepper-buttons">
             <button type="button" mat-raised-button color="primary" [disabled]="desableButton" matStepperNext matStepperNext>
                 Continue
@@ -29,8 +31,9 @@
     <!-- step 3 rebate eligibility-->
     <mat-step>
         <ng-template matStepLabel>Rebate eligibility</ng-template>
-        <!-- <app-rebate-eligibility></app-rebate-eligibility> -->
+        <app-rebate-eligibility></app-rebate-eligibility>
         <!-- button -->
+        <!-- <app-btt-continue></app-btt-continue> -->
         <div fxLayout="column" fxLayoutAlign="center end" class="rc-stepper-buttons">
             <button type="button" mat-raised-button color="primary" [disabled]="desableButton" matStepperNext matStepperNext>
                 Continue
@@ -44,6 +47,7 @@
         <ng-template matStepLabel>Heated - Cooled</ng-template>
         <!-- <app-heated-cooled></app-heated-cooled> -->
         <!-- button -->
+        <!-- <app-btt-continue></app-btt-continue> -->
         <div fxLayout="column" fxLayoutAlign="center end" class="rc-stepper-buttons">
             <button type="button" mat-raised-button color="primary" [disabled]="desableButton" matStepperNext matStepperNext>
                 Continue
@@ -57,6 +61,7 @@
         <ng-template matStepLabel>Nominal size</ng-template>
         <!-- <app-nominal-size></app-nominal-size> -->
         <!-- button -->
+        <!-- <app-btt-continue></app-btt-continue> -->
         <div fxLayout="column" fxLayoutAlign="center end" class="rc-stepper-buttons">
             <button type="button" mat-raised-button color="primary" [disabled]="desableButton" matStepperNext matStepperNext>
                 Continue

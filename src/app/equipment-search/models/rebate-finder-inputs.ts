@@ -22,6 +22,7 @@ export class DwellingInfo{
         public dwellingType: string | null,
         public conditionedBasement: string | null,
         public conditionedSpace: string | null,
-        public skylights: string | null
+        public skylights: string | null,
+        public fuelSource: string | null,
     ) {}
 }

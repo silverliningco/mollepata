@@ -13,7 +13,7 @@ export class RebateFinderComponent implements OnInit {
 
   // local variables save data of stepper
   myLocation: Location = new Location(null, new ListUtilities(null, null)); 
-  dwellingInfo: DwellingInfo = new DwellingInfo(null, null, null, null, null, null, null)
+  dwellingInfo: DwellingInfo = new DwellingInfo(null, null, null, null, null, null, null, null)
 
   desableButton: boolean = true;
 
@@ -24,22 +24,27 @@ export class RebateFinderComponent implements OnInit {
   ngOnInit(): void {
     this._bridge.sentLocationParams
         .subscribe((payload: any) => {
-
-          console.log(payload.data);
         
           this.myLocation = payload.data;
-          this.desableButton = true;
-          this.ActiveContinuebutton(this.myLocation);                    
+          // component button
+          // this._bridge.buttonContinue.emit({
+          //   data: this.myLocation
+          //  })
+          this.ParamsRebateEligibility();
+          this.ActiveContinuebutton(this.myLocation);  
          });
     
   this._bridge.dwellingInfoParams
          .subscribe((payload: any) => {
- 
-           console.log(payload.data);
          
-           this.myLocation = payload.data;
-           this.desableButton = true;
-           this.ActiveContinuebutton(this.myLocation);                    
+           this.dwellingInfo = payload.data;
+           // component button
+          //  this._bridge.buttonContinue.emit({
+          //   data: this.dwellingInfo
+          //  })
+
+          this.ParamsRebateEligibility();
+          this.ActiveContinuebutton(this.dwellingInfo);                    
           });
   }
 
@@ -62,8 +67,22 @@ export class RebateFinderComponent implements OnInit {
      }
       
       return this.desableButton;
+  }
+
+  ParamsRebateEligibility(){
+    let payload = {
+      utilityProviders: {
+        electricUtilityId: this.myLocation.utilityProviders?.electricUtilityId, 
+        fossilFuelUtilityId: this.myLocation.utilityProviders?.fossilFuelUtilityId
+      },
+      state: this.myLocation.state,
+      fuelSource: this.dwellingInfo.fuelSource
     }
 
+    this._bridge.paramsRebateEligibility.emit({
+      data: payload
+    });
 
+  }
 
 }

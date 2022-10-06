@@ -6,6 +6,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
 
 import { EquipmentSearchRoutingModule } from './equipment-search-routing.module';
+import { SharedModule } from '../shared/shared.module';
 
 import {HttpInterceptorService } from './services/http-interceptor.service'; 
 
@@ -67,6 +68,7 @@ import {MatTooltipModule} from '@angular/material/tooltip';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    SharedModule,
 
     MatCardModule,
     MatIconModule,
