@@ -51,17 +51,17 @@ export class RebateEligibilityComponent implements OnInit {
     let ArrayValues =  Object.values(prm);
     let complete: boolean = false;
 
-    complete1: for (let value of ArrayValues) {
+    complete: for (let value of ArrayValues) {
       if (value == null || value == undefined || value === ''){
         complete =  false;
-        break complete1
+        break complete
       } else {
         if(typeof value === 'object'){
           let ArrValues = Object.values(value);
-          complete2: for (let valueN of ArrValues) {
+          for (let valueN of ArrValues) {
             if (valueN == null || valueN == undefined || valueN === ''){
               complete =  false;
-              break complete2
+              break complete
             } else {
               complete = true
             }
@@ -77,10 +77,6 @@ export class RebateEligibilityComponent implements OnInit {
       this.params = prm;
       this.LoadEligibilityQuestions();
     }
-  }
-
-  get questions(){
-    return this.rebateEligibilityGroup.get('questions') as FormArray;
   }
 
   PrepareDataEligibilityQuestions(){
@@ -101,7 +97,15 @@ export class RebateEligibilityComponent implements OnInit {
     return body;
   }
 
+  get questions(){
+    return this.rebateEligibilityGroup.get('questions') as FormArray;
+  }
+
   AddQuestion(question:any){
+
+    // se debe de limpliar el FormArray
+    // this.questions.reset();
+
     const RebateEligibilityGroup  = this.formBuilder.group({
       questionId: question.questionId,
       answer: ['',  Validators.required],

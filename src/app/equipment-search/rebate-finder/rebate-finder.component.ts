@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { bridgeService } from '../services/bridge.service';
 
-import { Location, ListUtilities, DwellingInfo } from '../models/rebate-finder-inputs';
+import { Location, ListUtilities, DwellingInfo, ConstructionType } from '../models/rebate-finder-inputs';
 
 
 @Component({
@@ -13,7 +13,7 @@ export class RebateFinderComponent implements OnInit {
 
   // local variables save data of stepper
   myLocation: Location = new Location(null, new ListUtilities(null, null)); 
-  dwellingInfo: DwellingInfo = new DwellingInfo(null, null, null, null, null, null, null, null)
+  dwellingInfo: DwellingInfo = new DwellingInfo(null, new ConstructionType (null, null, null, null, null, null, null))
 
   desableButton: boolean = true;
 

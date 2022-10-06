@@ -16,6 +16,13 @@ export class ListUtilities {
 // Dwelling info
 export class DwellingInfo{
     constructor(
+        public fuelSource: string | null,
+        public ConstructionType: ConstructionType | null
+    ) {}
+}
+
+export class ConstructionType{
+    constructor(
         public year: number | null,
         public gradeStories: number | null,
         public nrBedrooms: number | null,
@@ -23,6 +30,6 @@ export class DwellingInfo{
         public conditionedBasement: string | null,
         public conditionedSpace: string | null,
         public skylights: string | null,
-        public fuelSource: string | null,
     ) {}
 }
+
