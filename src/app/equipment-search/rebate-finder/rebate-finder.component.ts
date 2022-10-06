@@ -17,6 +17,9 @@ export class RebateFinderComponent implements OnInit {
 
   desableButton: boolean = true;
 
+  // outdoorUnits = [ "25HNB6", "25VNA4", "25VNA8" ];
+
+
   constructor(
     public _bridge: bridgeService
   ) { }
