@@ -70,17 +70,31 @@
             </button>
         </div>
     </mat-step>
+    
 
     <!-- step 6 results -->
     <mat-step>
         <ng-template matStepLabel>AHRI Combinations</ng-template>
-        <!-- <h2 class="rc-main-title">AHRI Combinations</h2> -->
-        <!-- <app-card
-        *ngFor="let outdoorUnit of outdoorUnits"
-        [hero]="outdoorUnit"
+
+        <form [formGroup]="outdoorGroup">
+            <!-- utilities -->
+            <mat-form-field appearance="fill">
+                <mat-label>outdoorUnits</mat-label>
+                <mat-select #sGroup formControlName="outdoor" (selectionChange)="changeOutdoor()">
+                <mat-option *ngFor ="let outdoorUnit of outdoorUnits; let i = index" [value]="outdoorUnit.id"  radioGroup="sGroup">
+                    {{outdoorUnit.id}}
+                </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </form>
+       
+
+        <app-card
+        *ngFor="let indoor of indoors"
+        [indoor]="indoor"
         [master]="master"
-        ></app-card> -->
-        
+        ></app-card>
+
     </mat-step> 
   
   </mat-stepper>

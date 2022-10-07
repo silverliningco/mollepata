@@ -1,4 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
+
+export interface OutdoorUnits {
+  id: string,
+  indoor: string[]
+}
+
 
 @Component({
   selector: 'app-card',
@@ -7,9 +13,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CardComponent implements OnInit {
 
+  @Input() indoor!: string[];
+  @Input('master') masterName = '';
+
   constructor() { }
 
   ngOnInit(): void {
   }
 
+ 
 }

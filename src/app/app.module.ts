@@ -6,20 +6,18 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedModule } from './shared/shared.module';
 import { BasicEstructureModule } from './basic-estructure/basic-estructure.module';
-import { EquipmentSearchModule } from './equipment-search/equipment-search.module';
 
 
 @NgModule({
   declarations: [
-    AppComponent,
+    AppComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     SharedModule,
-    BasicEstructureModule,
-    EquipmentSearchModule
+    BasicEstructureModule
   ],
   bootstrap: [AppComponent]
 })
