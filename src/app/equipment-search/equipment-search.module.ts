@@ -3,50 +3,94 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
-// routes
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+
+
 import { EquipmentSearchRoutingModule } from './equipment-search-routing.module';
+import { SharedModule } from '../shared/shared.module';
 
-// componets
-import { CardComponent } from './card/card.component';
-import { HeatedCooledComponent } from './shared/heated-cooled/heated-cooled.component';
-import { NominalSizeComponent } from './shared/nominal-size/nominal-size.component';
+import {HttpInterceptorService } from './services/http-interceptor.service'; 
+
+import { AhriMatchupsComponent } from './ahri-matchups/ahri-matchups.component';
 import { RebateFinderComponent } from './rebate-finder/rebate-finder.component';
-import { RFResultsComponent} from './rf-results/rf-results.component';
-import { DwellingInfoComponent } from './shared/dwelling-info/dwelling-info.component';
-import { RebateEligibilityComponent } from './shared/rebate-eligibility/rebate-eligibility.component';
+import { HvacSystemDetailComponent } from './hvac-system-detail/hvac-system-detail.component';
+import { LocationComponent } from './hvac-inputs/location/location.component';
+import { DwellingInfoComponent } from './hvac-inputs/dwelling-info/dwelling-info.component';
+import { HeatedCooledComponent } from './hvac-inputs/heated-cooled/heated-cooled.component';
+import { RebateEligibilityComponent } from './hvac-inputs/rebate-eligibility/rebate-eligibility.component';
+import { NominalSizeComponent } from './hvac-inputs/nominal-size/nominal-size.component';
+import { FiltersComponent } from './hvac-inputs/filters/filters.component';
+import { AvailableRebatesComponent } from './hvac-inputs/available-rebates/available-rebates.component';
+import { ProductLinesComponent } from './hvac-inputs/product-lines/product-lines.component';
+import { StockStatusComponent } from './hvac-inputs/stock-status/stock-status.component';
+import { CardComponent } from './hvac-results/card/card.component';
+import { TableComponent } from './hvac-results/table/table.component';
 
-// angular
-import {MatSelectModule} from '@angular/material/select';
-import {MatStepperModule} from '@angular/material/stepper';
-import {MatButtonModule} from '@angular/material/button';
-import {MatRadioModule} from '@angular/material/radio';
+
+/* angular material */
+import {MatCardModule} from '@angular/material/card';
 import {MatIconModule} from '@angular/material/icon';
-import { LocationComponent } from './shared/location/location.component';
+import {MatStepperModule} from '@angular/material/stepper';
+import {MatRadioModule} from '@angular/material/radio';
+import {MatFormFieldModule} from '@angular/material/form-field'; 
+import {MatInputModule } from '@angular/material/input';
+import {FlexLayoutModule } from '@angular/flex-layout';
+import {MatButtonModule} from '@angular/material/button';
+import {MatSelectModule} from '@angular/material/select';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatListModule} from '@angular/material/list';
+import {MatChipsModule} from '@angular/material/chips';
+import {MatExpansionModule} from '@angular/material/expansion';
+import {MatDialogModule} from '@angular/material/dialog';
+import {MatTabsModule} from '@angular/material/tabs';
+import {MatTooltipModule} from '@angular/material/tooltip';
+
 
 @NgModule({
   declarations: [
-    RFResultsComponent,
-    HeatedCooledComponent,
-    NominalSizeComponent,
+    AhriMatchupsComponent,
     RebateFinderComponent,
-    CardComponent,
+    HvacSystemDetailComponent,
+    LocationComponent,
     DwellingInfoComponent,
+    HeatedCooledComponent,
     RebateEligibilityComponent,
-    LocationComponent
+    NominalSizeComponent,
+    FiltersComponent,
+    AvailableRebatesComponent,
+    ProductLinesComponent,
+    StockStatusComponent,
+    CardComponent,
+    TableComponent
   ],
   imports: [
     CommonModule,
     EquipmentSearchRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-
     HttpClientModule,
-    // angular material
-    MatSelectModule,
+    SharedModule,
+
+    MatCardModule,
+    MatIconModule,
     MatStepperModule,
-    MatButtonModule,
     MatRadioModule,
-    MatIconModule
+    MatFormFieldModule,
+    MatInputModule,
+    FlexLayoutModule,
+    MatButtonModule,
+    MatSelectModule,
+    MatCheckboxModule,
+    MatListModule,
+    MatChipsModule,
+    MatExpansionModule,
+    MatDialogModule,
+    MatTabsModule,
+    MatTooltipModule,
+  ],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: HttpInterceptorService, multi: true }
+
   ]
 })
 export class EquipmentSearchModule { }

@@ -1,13 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-// componets
-import { RebateFinderComponent } from './rebate-finder/rebate-finder.component';
-
-const routes: Routes = [{
-  path: '',
-  component: RebateFinderComponent
-}]
+const routes: Routes = [];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],

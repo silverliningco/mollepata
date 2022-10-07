@@ -1,41 +1,87 @@
 
-<mat-stepper #stepper linear >
+<mat-stepper #stepper linear  >
 
     <!-- step 1 location -->
     <mat-step>
+        <ng-template matStepLabel>Location</ng-template>
         <app-location></app-location>
+        <!-- button -->
+        <!-- <app-btt-continue matStepperNext></app-btt-continue> -->
+        <div fxLayout="column" fxLayoutAlign="center end" class="rc-stepper-buttons">
+            <button type="button" mat-raised-button color="primary" [disabled]="desableButton" matStepperNext>
+                Continue
+                <mat-icon>arrow_forward</mat-icon>
+            </button>
+        </div>
     </mat-step>
-    <!-- step 2 location end -->
 
     <!-- step 2 dwelling info -->
     <mat-step>
+        <ng-template matStepLabel>Dwelling info</ng-template>
         <app-dwelling-info></app-dwelling-info>
+        <!-- button -->
+        <!-- <app-btt-continue matStepperNext ></app-btt-continue> -->
+        <div fxLayout="column" fxLayoutAlign="center end" class="rc-stepper-buttons">
+            <button type="button" mat-raised-button color="primary" [disabled]="desableButton" matStepperNext matStepperNext>
+                Continue
+                <mat-icon>arrow_forward</mat-icon>
+            </button>
+        </div>
     </mat-step>
-    <!-- step 2 dwelling info end -->
 
     <!-- step 3 rebate eligibility-->
     <mat-step>
+        <ng-template matStepLabel>Rebate eligibility</ng-template>
         <app-rebate-eligibility></app-rebate-eligibility>
+        <!-- button -->
+        <!-- <app-btt-continue></app-btt-continue> -->
+        <div fxLayout="column" fxLayoutAlign="center end" class="rc-stepper-buttons">
+            <button type="button" mat-raised-button color="primary" [disabled]="desableButton" matStepperNext matStepperNext>
+                Continue
+                <mat-icon>arrow_forward</mat-icon>
+            </button>
+        </div>
     </mat-step>
-    <!-- step 3 rebate eligibility end -->
 
     <!-- step 4 heated / cooled -->
     <mat-step>
-        <app-heated-cooled></app-heated-cooled>
+        <ng-template matStepLabel>Heated - Cooled</ng-template>
+        <!-- <app-heated-cooled></app-heated-cooled> -->
+        <!-- button -->
+        <!-- <app-btt-continue></app-btt-continue> -->
+        <div fxLayout="column" fxLayoutAlign="center end" class="rc-stepper-buttons">
+            <button type="button" mat-raised-button color="primary" [disabled]="desableButton" matStepperNext matStepperNext>
+                Continue
+                <mat-icon>arrow_forward</mat-icon>
+            </button>
+        </div>
     </mat-step>
-    <!-- step 4 heated / cooled end -->
 
     <!-- step 5 nominal size -->
     <mat-step>
-        <app-nominal-size></app-nominal-size>
+        <ng-template matStepLabel>Nominal size</ng-template>
+        <!-- <app-nominal-size></app-nominal-size> -->
+        <!-- button -->
+        <!-- <app-btt-continue></app-btt-continue> -->
+        <div fxLayout="column" fxLayoutAlign="center end" class="rc-stepper-buttons">
+            <button type="button" mat-raised-button color="primary" [disabled]="desableButton" matStepperNext matStepperNext>
+                Continue
+                <mat-icon>arrow_forward</mat-icon>
+            </button>
+        </div>
     </mat-step>
-    <!-- step 5 nominal size end -->
 
     <!-- step 6 results -->
     <mat-step>
-        <rf-results></rf-results>
-    </mat-step>
-    <!-- step 6 results end -->
-
-</mat-stepper>
+        <ng-template matStepLabel>AHRI Combinations</ng-template>
+        <!-- <h2 class="rc-main-title">AHRI Combinations</h2> -->
+        <!-- <app-card
+        *ngFor="let outdoorUnit of outdoorUnits"
+        [hero]="outdoorUnit"
+        [master]="master"
+        ></app-card> -->
+        
+    </mat-step> 
+  
+  </mat-stepper>
 
