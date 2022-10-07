@@ -3,7 +3,6 @@ import { bridgeService } from '../services/bridge.service';
 
 import { Location, ListUtilities, DwellingInfo, ConstructionType } from '../models/rebate-finder-inputs';
 
-
 @Component({
   selector: 'app-rebate-finder',
   templateUrl: './rebate-finder.component.html',
@@ -17,8 +16,18 @@ export class RebateFinderComponent implements OnInit {
 
   desableButton: boolean = true;
 
-  // outdoorUnits = [ "25HNB6", "25VNA4", "25VNA8" ];
+  // prueva 
+  major = 1;
+  minor = 23;
 
+  newMinor() {
+    this.minor++;
+  }
+
+  newMajor() {
+    this.major++;
+    this.minor = 0;
+  }
 
   constructor(
     public _bridge: bridgeService
