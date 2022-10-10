@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { bridgeService } from '../services/bridge.service';
 
-import { Location, ListUtilities, DwellingInfo, ConstructionType } from '../models/rebate-finder-inputs';
+import { Location, ListUtilities, DwellingInfo } from '../models/rebate-finder-inputs';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 // prueva
@@ -26,6 +26,12 @@ export const OUTDOORS = [
 ];
 // prueva
 
+// talves no considerar desableButton?
+export const INPUTS = {
+  'Location': ['state', 'utilityProviders', 'desableButton'],
+   'DwellingInfo': ['fuelSource', 'ConstructionType', 'desableButton']
+}
+
 @Component({
   selector: 'app-rebate-finder',
   templateUrl: './rebate-finder.component.html',
@@ -36,7 +42,7 @@ export class RebateFinderComponent implements OnInit {
 
   // local variables save data of stepper
   myLocation: Location = new Location(null, new ListUtilities(null, null), true); 
-  dwellingInfo: DwellingInfo = new DwellingInfo(null, new ConstructionType (null, null, null, null, null, null, null), true)
+  dwellingInfo: DwellingInfo = new DwellingInfo(null, null, true)
 
   desableButton: boolean = true;
 
@@ -57,7 +63,7 @@ export class RebateFinderComponent implements OnInit {
         .subscribe((payload: any) => {
           this.myLocation = payload.data[0];
           this.myLocation.desableButton = payload.data[1];
-          console.log(this.myLocation)
+          this.SearchType(this.myLocation)
           this.ParamsRebateEligibility();
          });
     
@@ -65,7 +71,6 @@ export class RebateFinderComponent implements OnInit {
          .subscribe((payload: any) => {
            this.dwellingInfo = payload.data[0];
            this.dwellingInfo.desableButton = payload.data[1];
-          console.log(this.myLocation)
           this.ParamsRebateEligibility();                    
           });
     
@@ -134,5 +139,28 @@ export class RebateFinderComponent implements OnInit {
     });
 
   }
+
+  SearchType(payload: object): void {
+    let allInputs = Object.values(INPUTS);
+    let myInputs = Object.keys(payload)
+
+    let equal!: boolean;
+
+    // comparar si los 2 arreglos son iguales 
+    for (const iAll of allInputs) {
+      for (const ieachInput of iAll) {
+        for (const iMyInputs of myInputs) {
+          if (ieachInput === iMyInputs){
+            equal = true;
+          }
+        }
+        
+      }
+    }
+
+  }
+
+  // se necesita un contador 
+  // como hacer que al se iguales le asigne el modelo? 
 
 }

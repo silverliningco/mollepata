@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ConstructionType } from '../../models/rebate-finder-inputs';
 
 import { bridgeService } from '../../services/bridge.service';
 

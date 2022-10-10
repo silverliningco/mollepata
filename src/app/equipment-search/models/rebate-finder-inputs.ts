@@ -18,20 +18,9 @@ export class ListUtilities {
 export class DwellingInfo{
     constructor(
         public fuelSource: string | null,
-        public ConstructionType: ConstructionType | null,
+        public ConstructionType: string | null,
         public desableButton: boolean | null
     ) {}
 }
 
-export class ConstructionType{
-    constructor(
-        public year: number | null,
-        public gradeStories: number | null,
-        public nrBedrooms: number | null,
-        public dwellingType: string | null,
-        public conditionedBasement: string | null,
-        public conditionedSpace: string | null,
-        public skylights: string | null,
-    ) {}
-}
 
