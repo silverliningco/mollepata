@@ -5,59 +5,12 @@
 
     <div fxLayout="column" fxLayout.sm="column" fxLayout.xs="column" fxLayoutAlign="center center" fxLayoutGap="32">
         <div fxFlex="25" fxLayout="column" fxLayoutAlign="left stretch" fxFlex.xs="100" fxFlex.sm="70" fxFlex.md="25">
-            <!-- year -->
-            <mat-label>Year the home was built or last renovated. If you don't know the exact year, enter approximate year.</mat-label>
+            <mat-label>Construction type?</mat-label>
             <br>
-            <input matInput placeholder="year" type="number" formControlName="year" (change)="submitInputs()"  required>
-
-            <br>
-
-            <!-- grade stories -->
-            <mat-label>Nr. of above grade stories</mat-label>
-            <br>
-            <input matInput placeholder="grade Stories" type="number" formControlName="gradeStories" (change)="submitInputs()" required>
-
-
-            <!-- Nr. of bedrooms -->
-            <mat-label>Nr. of bedrooms</mat-label>
-            <br>
-            <input matInput placeholder="nr Bedrooms" type="number" formControlName="nrBedrooms" (change)="submitInputs()" required>
-
-            <br>
-
-            <!-- Dwelling type -->
-            <mat-label>Dwelling type</mat-label>
-            <br>
-            <input matInput placeholder="dwelling type" type="number" formControlName="dwellingType" (change)="submitInputs()" required>
-
-            <br>
-
-            <!-- conditioned basement -->
-            <mat-label>Does the home have a conditioned basement?</mat-label>
-            <br>
-            <mat-radio-group formControlName="conditionedBasement" (change)="submitInputs()" >
-                <mat-radio-button value="yes">Yes</mat-radio-button>
-                <mat-radio-button value="no">No</mat-radio-button>
-            </mat-radio-group>
-
-            <br>
-
-            <!-- conditioned space over a garage -->
-            <mat-label>Does the home have a conditioned space over a garage such as a bonus room?</mat-label>
-            <br>
-            <mat-radio-group formControlName="conditionedSpace" (change)="submitInputs()">
-                <mat-radio-button value="yes">Yes</mat-radio-button>
-                <mat-radio-button value="no">No</mat-radio-button>
-            </mat-radio-group>
-
-            <br>
-
-            <!-- skylights -->
-            <mat-label>Does the home have any skylights?</mat-label>
-            <br>
-            <mat-radio-group formControlName="skylights" (change)="submitInputs()">
-                <mat-radio-button value="yes">Yes</mat-radio-button>
-                <mat-radio-button value="no">No</mat-radio-button>
+            <mat-radio-group formControlName="constructionType" (change)="submitInputs()">
+                <mat-radio-button value="new-construction">New construction</mat-radio-button>
+                <br>
+                <mat-radio-button value="existing-construction">Existing construction</mat-radio-button>
             </mat-radio-group>
         </div>
     </div>

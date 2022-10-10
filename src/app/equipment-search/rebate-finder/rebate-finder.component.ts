@@ -35,8 +35,8 @@ export const OUTDOORS = [
 export class RebateFinderComponent implements OnInit {
 
   // local variables save data of stepper
-  myLocation: Location = new Location(null, new ListUtilities(null, null)); 
-  dwellingInfo: DwellingInfo = new DwellingInfo(null, new ConstructionType (null, null, null, null, null, null, null))
+  myLocation: Location = new Location(null, new ListUtilities(null, null), true); 
+  dwellingInfo: DwellingInfo = new DwellingInfo(null, new ConstructionType (null, null, null, null, null, null, null), true)
 
   desableButton: boolean = true;
 
@@ -55,16 +55,18 @@ export class RebateFinderComponent implements OnInit {
   ngOnInit(): void {
     this._bridge.sentLocationParams
         .subscribe((payload: any) => {
-          this.myLocation = payload.data;
+          this.myLocation = payload.data[0];
+          this.myLocation.desableButton = payload.data[1];
+          console.log(this.myLocation)
           this.ParamsRebateEligibility();
-          this.ActiveContinuebutton(this.myLocation);  
          });
     
     this._bridge.dwellingInfoParams
          .subscribe((payload: any) => {
-           this.dwellingInfo = payload.data;
-          this.ParamsRebateEligibility();
-          this.ActiveContinuebutton(this.dwellingInfo);                    
+           this.dwellingInfo = payload.data[0];
+           this.dwellingInfo.desableButton = payload.data[1];
+          console.log(this.myLocation)
+          this.ParamsRebateEligibility();                    
           });
     
     // prueva
@@ -82,8 +84,6 @@ export class RebateFinderComponent implements OnInit {
     let combination = this.SearchInResponses(OUTDOORS, ['id'], selectOutdoor);
     // console.log(combination[0].indoor);
     this.indoors = combination[0].indoor;
-    
-
   }
 
   SearchInResponses (objectData:Array<any>,  combinations: Array<any>, unit: any) {
@@ -118,26 +118,6 @@ export class RebateFinderComponent implements OnInit {
   }
   // prueva
 
-
-  ActiveContinuebutton(input:any): boolean{
-    
-      let ArrayValues =  Object.values(input) ;
-  
-     completeI: for (const value of ArrayValues) {
-      if (typeof value === 'object'){
-        this.ActiveContinuebutton(value);
-      } else {
-        if (value == null || value == undefined || value === ''){
-          this.desableButton = true;
-          break completeI;
-        } else {
-          this.desableButton = false;
-        }
-      }
-     }
-      
-      return this.desableButton;
-  }
 
   ParamsRebateEligibility(){
     let payload = {

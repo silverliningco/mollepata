@@ -46,7 +46,7 @@ export class RebateEligibilityComponent implements OnInit {
   // por que los valores que no llegan deven de completarce con ''
   completeParams(prm: ParamsRebateEligibility): void{
 
-    console.log(prm)
+    // console.log(prm)
 
     let ArrayValues =  Object.values(prm);
     let complete: boolean = false;

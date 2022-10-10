@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ConstructionType } from '../../models/rebate-finder-inputs';
 
 import { bridgeService } from '../../services/bridge.service';
 
@@ -13,6 +14,8 @@ export class DwellingInfoComponent implements OnInit {
 DwellingInfoGroup !: FormGroup;
 furnaceGroup !: FormGroup;
 
+desableButton: boolean = true;
+
   constructor(
     private formBuilder: FormBuilder,
     public _bridge: bridgeService
@@ -21,13 +24,7 @@ furnaceGroup !: FormGroup;
   ngOnInit(): void {
 
     this.DwellingInfoGroup = this.formBuilder.group({
-      year: [ '', Validators.required],
-      gradeStories: ['', Validators.required],
-      nrBedrooms: ['', Validators.required],
-      dwellingType: ['', Validators.required],
-      conditionedBasement: ['', Validators.required],
-      conditionedSpace: ['', Validators.required],
-      skylights: ['', Validators.required],
+      constructionType: [ '', Validators.required]
     });
 
     this.furnaceGroup = this.formBuilder.group({
@@ -36,22 +33,38 @@ furnaceGroup !: FormGroup;
 
   }
 
+  ActiveContinuebutton(input:any): boolean{
+    
+    let ArrayValues =  Object.values(input);
+
+   completeI: for (const value of ArrayValues) {
+    if (typeof value === 'object'){
+      this.ActiveContinuebutton(value);
+    } else {
+      if (value == null || value == undefined || value === ''){
+        this.desableButton = true;
+        break completeI;
+      } else {
+        this.desableButton = false;
+      }
+    }
+   }
+    
+    return this.desableButton;
+}
+
   submitInputs() {
 
     let payload = {
-      year: this.DwellingInfoGroup.controls['year'].value,
-      gradeStories: this.DwellingInfoGroup.controls['gradeStories'].value,
-      nrBedrooms: this.DwellingInfoGroup.controls['nrBedrooms'].value,
-      dwellingType: this.DwellingInfoGroup.controls['dwellingType'].value,
-      conditionedBasement: this.DwellingInfoGroup.controls['conditionedBasement'].value,
-      conditionedSpace: this.DwellingInfoGroup.controls['conditionedSpace'].value,
-      skylights: this.DwellingInfoGroup.controls['skylights'].value,
+      year: this.DwellingInfoGroup.controls['constructionType'].value,
       fuelSource: this.furnaceGroup.controls['fuelSource'].value,
     }  
 
+    let stateBtt = this.ActiveContinuebutton(payload);
+
     /* sent the info to results-rebate */
     this._bridge.dwellingInfoParams.emit({
-      data: payload
+      data: [payload, stateBtt]
     });
   }
 

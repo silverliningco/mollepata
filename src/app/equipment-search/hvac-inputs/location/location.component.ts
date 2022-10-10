@@ -23,6 +23,8 @@ export class LocationComponent implements OnInit {
   electricity:  Array<utilityInfo> = [];
   fossilFuel: Array<utilityInfo> = [];
 
+  desableButton: boolean = true;
+
   constructor(
     private formBuilder: FormBuilder,
     public _bridge: bridgeService,
@@ -87,6 +89,26 @@ export class LocationComponent implements OnInit {
     this.utilityGroup.controls['fossilFuelUtilityId'].setValue('');
   }
 
+  ActiveContinuebutton(input:any): boolean{
+    
+    let ArrayValues =  Object.values(input);
+
+   completeI: for (const value of ArrayValues) {
+    if (typeof value === 'object'){
+      this.ActiveContinuebutton(value);
+    } else {
+      if (value == null || value == undefined || value === ''){
+        this.desableButton = true;
+        break completeI;
+      } else {
+        this.desableButton = false;
+      }
+    }
+   }
+    
+    return this.desableButton;
+}
+
   submitInputs() {
 
     // console.log('b');
@@ -98,9 +120,12 @@ export class LocationComponent implements OnInit {
         fossilFuelUtilityId: this.utilityGroup.controls['fossilFuelUtilityId'].value 
       }
     }  
+
+    let stateBtt = this.ActiveContinuebutton(payload);
+
     /* sent the info to results-rebate */
     this._bridge.sentLocationParams.emit({
-      data: payload
+      data: [payload, stateBtt]
     });
   }
 

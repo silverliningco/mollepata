@@ -2,7 +2,8 @@
 export class Location {
     constructor(
         public state: string | null,
-        public utilityProviders: ListUtilities | null
+        public utilityProviders: ListUtilities | null,
+        public desableButton: boolean | null
     ) {}
 }
 
@@ -17,7 +18,8 @@ export class ListUtilities {
 export class DwellingInfo{
     constructor(
         public fuelSource: string | null,
-        public ConstructionType: ConstructionType | null
+        public ConstructionType: ConstructionType | null,
+        public desableButton: boolean | null
     ) {}
 }
 
