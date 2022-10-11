@@ -1,1 +1,13 @@
-<h3>{{indoor}}</h3>
+
+
+<div *ngIf="true">
+    <select name="" id="" change="selectOutdoorUnit">
+        <option  *ngFor="let outdoorUnit of outdoorUnits">
+            {{outdoorUnit}}
+        </option>
+    </select>
+</div>
+
+<div *ngIf="!true">
+    <h3>{{selectedOutdoorUnit}}</h3>
+</div>

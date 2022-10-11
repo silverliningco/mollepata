@@ -22,7 +22,7 @@
         <!-- button -->
         <!-- <app-btt-continue matStepperNext ></app-btt-continue> -->
         <div fxLayout="column" fxLayoutAlign="center end" class="rc-stepper-buttons">
-            <button type="button" mat-raised-button color="primary" [disabled]="dwellingInfo.desableButton" matStepperNext matStepperNext>
+            <button type="button" mat-raised-button color="primary" [disabled]="myDwellingInfo.desableButton" matStepperNext matStepperNext>
                 Continue
                 <mat-icon>arrow_forward</mat-icon>
             </button>
@@ -75,23 +75,15 @@
     <!-- step 6 results -->
     <mat-step>
         <ng-template matStepLabel>AHRI Combinations</ng-template>
-
-        <form [formGroup]="outdoorGroup">
-            <!-- utilities -->
-            <mat-form-field appearance="fill">
-                <mat-label>outdoorUnits</mat-label>
-                <mat-select #sGroup formControlName="outdoor" (selectionChange)="changeOutdoor()">
-                <mat-option *ngFor ="let outdoorUnit of outdoorUnits; let i = index" [value]="outdoorUnit.id"  radioGroup="sGroup">
-                    {{outdoorUnit.id}}
-                </mat-option>
-                </mat-select>
-            </mat-form-field>
-        </form>
-       
+        
+        <app-product-lines></app-product-lines>
+        <app-filters></app-filters>
+        <app-stock-status></app-stock-status>
+        <app-available-rebates></app-available-rebates>
 
         <app-card
-        *ngFor="let indoor of indoors"
-        [indoor]="indoor"
+        *ngFor="let outdoorUnit of outdoorUnits"
+        [outdoorUnits]="[outdoorUnit]"
         [master]="master"
         ></app-card>
 
