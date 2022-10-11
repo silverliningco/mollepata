@@ -1,6 +1,6 @@
 
 
-<div *ngIf="true">
+<div *ngIf="lengthOutdoorUnits > 1">
     <select name="" id="" change="selectOutdoorUnit">
         <option  *ngFor="let outdoorUnit of outdoorUnits">
             {{outdoorUnit}}
@@ -8,6 +8,8 @@
     </select>
 </div>
 
-<div *ngIf="!true">
-    <h3>{{selectedOutdoorUnit}}</h3>
+<div *ngIf="lengthOutdoorUnits == 1">
+    <p>outdoor unit: </p>
+    <h3>{{outdoorUnits}}</h3>
+    <!-- <h3>{{selectedOutdoorUnit}}</h3> -->
 </div>
