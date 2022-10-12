@@ -13,6 +13,8 @@ export class bridgeService {
     @Output() paramsRebateEligibility: EventEmitter<any> = new EventEmitter();
 
     @Output() buttonContinue: EventEmitter<any> = new EventEmitter();
+    @Output() beforeOrder: EventEmitter<any> = new EventEmitter();
+    @Output() afterOrder: EventEmitter<any> = new EventEmitter();
 
 
     constructor(

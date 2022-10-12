@@ -13,7 +13,7 @@
         <app-available-rebates></app-available-rebates>
 
         <app-card
-        *ngFor="let outdoorUnit of  $any(outdoorUnits)  | orderResults:outdoorUnits"
+        *ngFor="let outdoorUnit of  outdoorUnits"
         [outdoorUnits]="outdoorUnit"
         [master]="master"
         ></app-card>
