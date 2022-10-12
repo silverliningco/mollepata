@@ -7,7 +7,29 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 // prueva
 export const OUTDOORS1 = [ ['25VNA424A003', '25HPB630A003', '24VNA624A003']];
 
-export const OUTDOORS2 = [ ['25VNA424A003'], ['25HPB630A003'], ['24VNA624A003']];
+export const OUTDOORS2 = [ 
+  [
+    {
+      'outdoor':'25VNA424A003',
+      'total-available-rebate': 100,
+      'EER':  12.50
+    }
+  ], 
+  [
+    {
+      'outdoor':'25HPB630A003',
+      'total-available-rebate': 300,
+      'EER':  12.50
+    }
+  ], 
+  [
+    {
+      'outdoor':'24VNA624A003',
+      'total-available-rebate': null,
+      'EER':  12.50
+    }
+  ]
+];
 // prueva
 
 // talves no considerar desableButton?
@@ -32,8 +54,8 @@ export class RebateFinderComponent implements OnInit {
 
   // prueva 
   outdoorGroup !: FormGroup;
-  outdoorUnits: string[][] = OUTDOORS1;
-  // outdoorUnits: string[][] = OUTDOORS2;
+  // outdoorUnits: string[][] = OUTDOORS1;
+  outdoorUnits: any[][] = OUTDOORS2;
   master = 'Master';
   // prueva
 
