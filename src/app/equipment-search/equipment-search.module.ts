@@ -44,7 +44,6 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatTooltipModule} from '@angular/material/tooltip';
-import { OrderResultsPipe } from './rebate-finder/order-results.pipe';
 
 
 @NgModule({
@@ -62,8 +61,7 @@ import { OrderResultsPipe } from './rebate-finder/order-results.pipe';
     ProductLinesComponent,
     StockStatusComponent,
     CardComponent,
-    TableComponent,
-    OrderResultsPipe
+    TableComponent
   ],
   imports: [
     CommonModule,
