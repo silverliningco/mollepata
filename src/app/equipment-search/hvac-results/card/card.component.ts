@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Result } from '../../models/results';
 
 @Component({
@@ -8,11 +8,10 @@ import { Result } from '../../models/results';
 })
 export class CardComponent implements OnInit {
 
-  @Input() outdoorUnits!: any[];
+  @Input() myResults!: any[];
   @Input('master') masterName = '';
 
-  lengthOutdoorUnits!: number;
-  myResults: Result = new Result(null, null, null)
+  myRes: Result = new Result(null, null, null)
   
 // output: max rebate value
 
@@ -23,12 +22,11 @@ export class CardComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    this.lengthOutdoorUnits = this.outdoorUnits.length;
-    if (this.lengthOutdoorUnits == 1){
-      console.log(this.outdoorUnits[0]);
-      this.myResults = this.outdoorUnits[0];
-    }
 
+    console.log( this.myResults);
+    console.log( typeof this.myResults);
+
+    
     // If length of outdoorUnits == 1, call this.selectedOutdoorUnit(outdoorUnits[0])
     // If length of outdoorUnits > 1, nothing else is required here.
   }

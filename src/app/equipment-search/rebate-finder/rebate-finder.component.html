@@ -6,7 +6,6 @@
         <ng-template matStepLabel>Location</ng-template>
         <app-location></app-location>
         <!-- button -->
-        <!-- <app-btt-continue matStepperNext></app-btt-continue> -->
         <div fxLayout="column" fxLayoutAlign="center end" class="rc-stepper-buttons">
             <button type="button" mat-raised-button color="primary" [disabled]="myLocation.desableButton" matStepperNext>
                 Continue
@@ -20,7 +19,6 @@
         <ng-template matStepLabel>Dwelling info</ng-template>
         <app-dwelling-info></app-dwelling-info>
         <!-- button -->
-        <!-- <app-btt-continue matStepperNext ></app-btt-continue> -->
         <div fxLayout="column" fxLayoutAlign="center end" class="rc-stepper-buttons">
             <button type="button" mat-raised-button color="primary" [disabled]="myDwellingInfo.desableButton" matStepperNext matStepperNext>
                 Continue
@@ -34,9 +32,8 @@
         <ng-template matStepLabel>Rebate eligibility</ng-template>
         <app-rebate-eligibility></app-rebate-eligibility>
         <!-- button -->
-        <!-- <app-btt-continue></app-btt-continue> -->
         <div fxLayout="column" fxLayoutAlign="center end" class="rc-stepper-buttons">
-            <button type="button" mat-raised-button color="primary" [disabled]="desableButton" matStepperNext matStepperNext>
+            <button type="button" mat-raised-button color="primary" [disabled]="" matStepperNext matStepperNext>
                 Continue
                 <mat-icon>arrow_forward</mat-icon>
             </button>
@@ -48,9 +45,8 @@
         <ng-template matStepLabel>Heated - Cooled</ng-template>
         <!-- <app-heated-cooled></app-heated-cooled> -->
         <!-- button -->
-        <!-- <app-btt-continue></app-btt-continue> -->
         <div fxLayout="column" fxLayoutAlign="center end" class="rc-stepper-buttons">
-            <button type="button" mat-raised-button color="primary" [disabled]="desableButton" matStepperNext matStepperNext>
+            <button type="button" mat-raised-button color="primary" [disabled]="" matStepperNext matStepperNext>
                 Continue
                 <mat-icon>arrow_forward</mat-icon>
             </button>
@@ -62,9 +58,9 @@
         <ng-template matStepLabel>Nominal size</ng-template>
         <!-- <app-nominal-size></app-nominal-size> -->
         <!-- button -->
-        <!-- <app-btt-continue></app-btt-continue> -->
         <div fxLayout="column" fxLayoutAlign="center end" class="rc-stepper-buttons">
-            <button type="button" mat-raised-button color="primary" [disabled]="desableButton" matStepperNext matStepperNext>
+            <button type="button" mat-raised-button color="primary" [disabled]="
+            " matStepperNext matStepperNext>
                 Continue
                 <mat-icon>arrow_forward</mat-icon>
             </button>
@@ -82,8 +78,8 @@
         <app-available-rebates></app-available-rebates>
 
         <app-card
-        *ngFor="let outdoorUnit of  outdoorUnits"
-        [outdoorUnits]="outdoorUnit"
+        *ngFor="let myResult of  myResults"
+        [myResults]="myResult"
         [master]="master"
         ></app-card>
 

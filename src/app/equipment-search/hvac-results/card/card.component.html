@@ -1,12 +1,12 @@
-<div *ngIf="lengthOutdoorUnits > 1">
+<!-- <div *ngIf="">
     <select name="" id="" change="selectOutdoorUnit">
         <option  *ngFor="let outdoorUnit of outdoorUnits">
             {{outdoorUnit}}
         </option>
     </select>
-</div>
+</div> -->
 
-<div *ngIf="lengthOutdoorUnits == 1">
+<div >
     <p>outdoor unit: </p>
-    <h3>{{myResults.outdoor}}</h3>
+    <h3>{{myResults | json}}</h3>
 </div>
