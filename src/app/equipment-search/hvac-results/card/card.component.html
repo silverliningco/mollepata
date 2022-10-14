@@ -1,5 +1,3 @@
-
-
 <div *ngIf="lengthOutdoorUnits > 1">
     <select name="" id="" change="selectOutdoorUnit">
         <option  *ngFor="let outdoorUnit of outdoorUnits">
@@ -10,8 +8,5 @@
 
 <div *ngIf="lengthOutdoorUnits == 1">
     <p>outdoor unit: </p>
-    <!-- <h3>{{outdoorUnits|json}}</h3> -->
     <h3>{{myResults.outdoor}}</h3>
-    <h3>{{myResults.totalAvailableRebate}}</h3>
-    <!-- <h3>{{selectedOutdoorUnit}}</h3> -->
 </div>

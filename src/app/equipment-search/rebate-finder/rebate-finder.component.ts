@@ -11,29 +11,32 @@ export const OUTDOORS2 = [
   [
     {
       'outdoor':'25VNA424A003',
-      'totalAvailableRebate': 100,
+      'total-available-rebate': 100,
       'EER':  12.50
     }
   ], 
   [
     {
       'outdoor':'25HPB630A003',
-      'totalAvailableRebate': 300,
+      'total-available-rebate': 300,
       'EER':  12.50
     }
   ], 
   [
     {
       'outdoor':'24VNA624A003',
-      'totalAvailableRebate': null,
+      'total-available-rebate': null,
       'EER':  12.50
     }
   ]
 ];
 // prueva
 
-
-
+// talves no considerar desableButton?
+export const INPUTS_PROPERTIES = {
+  'myLocation': ['state', 'utilityProviders', 'desableButton'],
+  'myDwellingInfo': ['fuelSource', 'ConstructionType', 'desableButton']
+}
 
 @Component({
   selector: 'app-rebate-finder',
@@ -52,7 +55,7 @@ export class RebateFinderComponent implements OnInit {
   // prueva 
   outdoorGroup !: FormGroup;
   // outdoorUnits: string[][] = OUTDOORS1;
-  outdoorUnits!: any[][];
+  outdoorUnits: any[][] = OUTDOORS2;
   master = 'Master';
   // prueva
 
@@ -69,29 +72,14 @@ export class RebateFinderComponent implements OnInit {
          });
     
     this._bridge.dwellingInfoParams
-          .subscribe((payload: any) => {
-            this.myDwellingInfo = payload.data[0];
-            this.myDwellingInfo.desableButton = payload.data[1];
-            this.ParamsRebateEligibility();                    
+         .subscribe((payload: any) => {
+           this.myDwellingInfo = payload.data[0];
+           this.myDwellingInfo.desableButton = payload.data[1];
+          this.ParamsRebateEligibility();                    
           });
-
-    this.callAvailableRebates();
-    this._bridge.afterOrder
-          .subscribe((payload: any) => {
-            this.outdoorUnits = payload.data;
-            console.log(payload.data);
-          });    
     
   }
 
-  const callAvailableRebates = () =>{
-
-    this.outdoorUnits = OUTDOORS2;
-  
-    this._bridge.beforeOrder.emit({
-      data: [this.outdoorUnits]
-    })
-  }
 
   ParamsRebateEligibility(){
     let payload = {
