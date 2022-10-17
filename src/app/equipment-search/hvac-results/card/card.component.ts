@@ -11,11 +11,10 @@ export class CardComponent implements OnInit {
   @Input() myResults!: any[];
   @Input('master') masterName = '';
 
-  myRes!: Result;
   arrayOutdoors!: boolean; // permit show multiple cards or one card for detail or i know my model nr 
   card!: any;
+  outdoors: string[] = [];
   
-
   constructor() { }
 
   ngOnInit(): void {
@@ -31,6 +30,10 @@ export class CardComponent implements OnInit {
       this.ParsingResult(this.myResults)
     } else {
       this.arrayOutdoors = false;
+
+      for (let key in this.myResults) {
+        this.outdoors= this.myResults[key]; 
+      }
     }
     
     // If length of outdoorUnits == 1, call this.selectedOutdoorUnit(outdoorUnits[0])

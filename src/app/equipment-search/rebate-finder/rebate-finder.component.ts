@@ -508,8 +508,8 @@ export class RebateFinderComponent implements OnInit {
 
   // prueva 
   outdoorGroup !: FormGroup;
-//   myResults: any[] = RESULTS1;
-  myResults: any[][] = RESULTS2;
+  myResults: any[] = RESULTS1;
+//   myResults: any[][] = RESULTS2;
   master = 'Master';
   // prueva
 
