@@ -1,12 +1,14 @@
-<!-- <div *ngIf="">
+<div *ngIf="!arrayOutdoors">
     <select name="" id="" change="selectOutdoorUnit">
-        <option  *ngFor="let outdoorUnit of outdoorUnits">
+        <option  *ngFor="let outdoorUnit of myResults">
             {{outdoorUnit}}
         </option>
     </select>
-</div> -->
+</div>
 
-<div >
+<div *ngIf="arrayOutdoors">
     <p>outdoor unit: </p>
-    <h3>{{myResults | json}}</h3>
+    <!-- <div *ngFor="let outdoorUnit of myRes.components">
+        <h3>{{outdoorUnit.id | json}}</h3>
+    </div> -->
 </div>
