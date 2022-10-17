@@ -10,7 +10,7 @@ export const RESULTS1 = [ { "id":['25VNA424A003', '25HPB630A003', '24VNA624A003'
 export const RESULTS2 = [ 
   [
     {
-      "EER": 13.00,
+      "EER": 14.00,
       "AFUE": 97.2,
       "HSPF": null,
       "SEER": 16.00,
@@ -118,7 +118,7 @@ export const RESULTS2 = [
   ], 
   [
     {
-      "EER": 13.00,
+      "EER": 15.00,
       "AFUE": 97.2,
       "HSPF": null,
       "SEER": 16.00,
@@ -279,7 +279,7 @@ export const RESULTS2 = [
   ], 
   [
     {
-      "EER": 13.00,
+      "EER": 16.00,
       "AFUE": 97.2,
       "HSPF": null,
       "SEER": 16.00,
