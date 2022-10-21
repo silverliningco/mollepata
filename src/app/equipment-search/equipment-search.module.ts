@@ -13,6 +13,7 @@ import {HttpInterceptorService } from './services/http-interceptor.service';
 
 import { AhriMatchupsComponent } from './ahri-matchups/ahri-matchups.component';
 import { RebateFinderComponent } from './rebate-finder/rebate-finder.component';
+import { ProductLinesRebateFinderComponent } from './product-lines-rebate-finder/product-lines-rebate-finder.component';
 import { HvacSystemDetailComponent } from './hvac-system-detail/hvac-system-detail.component';
 import { LocationComponent } from './hvac-inputs/location/location.component';
 import { DwellingInfoComponent } from './hvac-inputs/dwelling-info/dwelling-info.component';
@@ -23,6 +24,7 @@ import { FiltersComponent } from './hvac-inputs/filters/filters.component';
 import { AvailableRebatesComponent } from './hvac-inputs/available-rebates/available-rebates.component';
 import { ProductLinesComponent } from './hvac-inputs/product-lines/product-lines.component';
 import { StockStatusComponent } from './hvac-inputs/stock-status/stock-status.component';
+import { SystemDesingComponent } from './hvac-inputs/system-desing/system-desing.component';
 import { CardComponent } from './hvac-results/card/card.component';
 import { TableComponent } from './hvac-results/table/table.component';
 
@@ -61,7 +63,9 @@ import {MatTooltipModule} from '@angular/material/tooltip';
     ProductLinesComponent,
     StockStatusComponent,
     CardComponent,
-    TableComponent
+    TableComponent,
+    SystemDesingComponent,
+    ProductLinesRebateFinderComponent
   ],
   imports: [
     CommonModule,

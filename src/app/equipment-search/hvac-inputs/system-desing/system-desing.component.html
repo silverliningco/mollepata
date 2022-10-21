@@ -1,0 +1,53 @@
+<p>system-desing works!</p>
+
+<!-- Outdoor unit -->
+<mat-form-field appearance="fill">
+    <mat-label>Outdoor unit type:</mat-label>
+    <mat-select #sGroup >
+      <mat-option>Split system</mat-option>
+      <mat-option>Mini-split</mat-option>
+      <mat-option>Single package unit</mat-option>
+    </mat-select>
+</mat-form-field>
+
+  <br>
+
+  <!-- Indoor unit -->
+<mat-form-field appearance="fill">
+    <mat-label>Indoor unit type:</mat-label>
+    <mat-select #sGroup >
+      <mat-option>Fan coil</mat-option>
+      <mat-optgroup>
+        Mini-split indoor unit(s)
+        <mat-option>Qty, unit type, size</mat-option>
+        <mat-option>Qty, unit type, size</mat-option>
+      </mat-optgroup>
+      <mat-option>Furnace + Evaporator coil</mat-option>
+      <mat-option>Boiler + hydro-air coil</mat-option>
+    </mat-select>
+</mat-form-field>
+
+  <br>
+
+<!-- Furnace type -->
+<mat-form-field appearance="fill">
+    <mat-label>Furnace type:</mat-label>
+    <mat-select #sGroup >
+      <mat-option>New ECM furnace</mat-option>
+      <mat-option>Existing or non-ECM furnace</mat-option>
+    </mat-select>
+</mat-form-field>
+
+<br>
+
+<!-- Furnace configuration -->
+<mat-form-field appearance="fill">
+    <mat-label>Furnace configuration:</mat-label>
+    <mat-select #sGroup >
+      <mat-option>Upflow</mat-option>
+      <mat-option>Downflow</mat-option>
+      <mat-option>Horizontal</mat-option>
+    </mat-select>
+</mat-form-field>
+
+<br>
