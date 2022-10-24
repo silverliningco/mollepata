@@ -1,53 +1,76 @@
 <p>system-desing works!</p>
 
-<!-- Outdoor unit -->
-<mat-form-field appearance="fill">
+<form  [formGroup]="systemDesing">
+
+  <!-- Outdoor unit -->
+  <mat-form-field appearance="fill">
     <mat-label>Outdoor unit type:</mat-label>
     <mat-select #sGroup >
-      <mat-option>Split system</mat-option>
-      <mat-option>Mini-split</mat-option>
-      <mat-option>Single package unit</mat-option>
+      <mat-option *ngFor ="let outdoor of outdoors">
+        {{outdoor}}
+      </mat-option>
     </mat-select>
-</mat-form-field>
+  </mat-form-field>
 
   <br>
 
   <!-- Indoor unit -->
-<mat-form-field appearance="fill">
+  <mat-form-field appearance="fill">
     <mat-label>Indoor unit type:</mat-label>
-    <mat-select #sGroup >
-      <mat-option>Fan coil</mat-option>
-      <mat-optgroup>
-        Mini-split indoor unit(s)
-        <mat-option>Qty, unit type, size</mat-option>
-        <mat-option>Qty, unit type, size</mat-option>
-      </mat-optgroup>
-      <mat-option>Furnace + Evaporator coil</mat-option>
-      <mat-option>Boiler + hydro-air coil</mat-option>
+    <mat-select #sGroup formControlName="indoorControl" (selectionChange)="selectIndoor()">
+      <mat-option *ngFor ="let indoor of indoors" value="{{indoor}}" radioGroup="sGroup">
+        {{indoor}}
+      </mat-option>
     </mat-select>
-</mat-form-field>
+  </mat-form-field>
 
   <br>
 
-<!-- Furnace type -->
-<mat-form-field appearance="fill">
+  <!-- Furnace type -->
+  <mat-form-field appearance="fill">
     <mat-label>Furnace type:</mat-label>
     <mat-select #sGroup >
-      <mat-option>New ECM furnace</mat-option>
-      <mat-option>Existing or non-ECM furnace</mat-option>
+      <mat-option *ngFor ="let furnaceType of furnacesType">
+        {{furnaceType}}
+      </mat-option>
     </mat-select>
-</mat-form-field>
+  </mat-form-field>
 
-<br>
+  <br>
 
-<!-- Furnace configuration -->
-<mat-form-field appearance="fill">
+  <!-- Furnace configuration -->
+  <mat-form-field appearance="fill">
     <mat-label>Furnace configuration:</mat-label>
     <mat-select #sGroup >
-      <mat-option>Upflow</mat-option>
-      <mat-option>Downflow</mat-option>
-      <mat-option>Horizontal</mat-option>
+      <mat-option *ngFor ="let furnaceConfiguration of furnacesConfiguration">
+        {{furnaceConfiguration}}
+      </mat-option>
     </mat-select>
-</mat-form-field>
+  </mat-form-field>
 
-<br>
+  <br>
+
+</form>
+
+<form *ngIf="showTable">
+
+  <table>
+    <thead>
+      <tr>
+        <th >qty</th>
+        <th >unit_type</th>
+        <th>size</th>
+        <th>more row</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr >
+        <td >1</td>
+        <td >"Hi wall", "unitSize"</td>
+        <td >1,200.00</td>
+      </tr>
+    </tbody>
+  </table>
+
+</form>
+

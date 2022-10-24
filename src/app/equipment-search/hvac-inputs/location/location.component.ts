@@ -44,7 +44,7 @@ export class LocationComponent implements OnInit {
   }
 
   // utilities
-  ChangeState() {
+  ChangeState():void {
 
     this.sendGasOil = [];
     this.sendElectric = [];
@@ -64,7 +64,7 @@ export class LocationComponent implements OnInit {
   }
 
 
-  GetEachUtility(array: Array<utilityInfo>) {
+  GetEachUtility(array: Array<utilityInfo>): void {
 
     this.electricity = [];
     this.fossilFuel = [];
@@ -109,7 +109,7 @@ export class LocationComponent implements OnInit {
     return this.desableButton;
 }
 
-  submitInputs() {
+  submitInputs(): void {
 
     // console.log('b');
 
