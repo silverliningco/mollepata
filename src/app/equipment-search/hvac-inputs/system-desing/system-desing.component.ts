@@ -14,8 +14,15 @@ export class SystemDesingComponent implements OnInit {
   furnacesType: string[] = ['New ECM furnace', 'Existing or non-ECM furnace'];
   furnacesConfiguration: string[] = ['Upflow', 'Downflow', 'Horizontal'];
 
+  // FormGroup
   systemDesing!: FormGroup; 
+  indoorUnitTable!: FormGroup; 
+
+  // table
   showTable: boolean = false; 
+  showButtons: boolean = false;
+  unitTipes: string[] = ['Mini-Split Air Handler (Full Size)', 'Ducted mini-split Air Handler (Slim Style)', 'Floor/Ceiling Mount', 'Cassette', 'Hi Wall', '1-Way Casette'];
+  sizeOptions: string[] = ['6000', '9000', '12000', '18000', '24000'];
 
   constructor(
     private formBuilder: FormBuilder
@@ -25,19 +32,32 @@ export class SystemDesingComponent implements OnInit {
     this.systemDesing = this.formBuilder.group({
       indoorControl: [null, Validators.required]
     });
+
+    this.indoorUnitTable = this.formBuilder.group({
+      unitTypeControl: [null, Validators.required],
+      sizeControl: [null, Validators.required]
+    });
   }
 
   selectIndoor(): void{
 
     let getValueIndoor = this.systemDesing.controls['indoorControl'].value;
-    console.log(getValueIndoor);
 
     if (getValueIndoor == '1 Qty, unit type, size' || getValueIndoor == '2 Qty, unit type, size'){
       this.showTable = true;
     } else {
       this.showTable = false;
     }
+  }
 
+  addRow(): void{
+
+    let getUnitType = this.indoorUnitTable.controls['unitTypeControl'].value;
+    let getSize = this.indoorUnitTable.controls['sizeControl'].value;
+
+    if (getSize != null && getUnitType != null){
+      this.showButtons = true;
+    }
 
   }
 

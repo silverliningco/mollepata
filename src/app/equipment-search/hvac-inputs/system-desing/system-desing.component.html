@@ -52,7 +52,7 @@
 
 </form>
 
-<form *ngIf="showTable">
+<form *ngIf="showTable" [formGroup]="indoorUnitTable">
 
   <table>
     <thead>
@@ -60,14 +60,41 @@
         <th >qty</th>
         <th >unit_type</th>
         <th>size</th>
-        <th>more row</th>
+        <th>add</th>
+        <th>delete</th>
       </tr>
     </thead>
     <tbody>
       <tr >
         <td >1</td>
-        <td >"Hi wall", "unitSize"</td>
-        <td >1,200.00</td>
+        <td>
+          <mat-form-field appearance="fill">
+            <mat-select #sGroup formControlName="unitTypeControl" (selectionChange)="addRow()">
+              <mat-option *ngFor ="let unitTipe of unitTipes" value="{{unitTipe}}" radioGroup="sGroup">
+                {{unitTipe}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </td>
+        <td >
+          <mat-form-field appearance="fill">
+            <mat-select #sGroup formControlName="sizeControl" (selectionChange)="addRow()">
+              <mat-option *ngFor ="let sizeOption of sizeOptions" value="{{sizeOption}}" radioGroup="sGroup">
+                {{sizeOption}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </td>
+        <td>
+          <button *ngIf="showButtons"  mat-mini-fab color="primary" aria-label="Example icon button with a menu icon">
+            <mat-icon>plus_one</mat-icon>
+          </button>
+        </td>
+        <td>
+          <button *ngIf="showButtons" mat-mini-fab color="primary" aria-label="Example icon button with a menu icon">
+            <mat-icon>restore_from_trash</mat-icon>
+          </button>
+        </td>
       </tr>
     </tbody>
   </table>
