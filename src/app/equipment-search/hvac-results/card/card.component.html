@@ -6,8 +6,278 @@
     </select>
 </div>
 
-<div *ngIf="arrayOutdoors">
-    <p>outdoor unit: </p>
-    <h3>{{card.outdoorUnit}}</h3>
+
+<!-- <div *ngIf="arrayOutdoors">
+    <h2>outddor:</h2>
+    <h2>{{card.outdoorUnit}}</h2>
+
+    <div *ngFor="let unit of card.options">
+        <h4>{{unit.nameOption}}</h4>
+        <div *ngFor="let componentId of unit.options">
+            {{componentId}}
+        </div>
+    </div>
+
+    <div >
+        <h4>{{}}</h4>
+        <h4>{{}}</h4>
+        <h4>{{}}</h4>
+        <h4>{{}}</h4>
+        <h4>{{}}</h4>
+        <h4>{{}}</h4>
+        <h4>{{card.properties.fuelTypes}}</h4>
+        <h4>{{card.properties.AHRIReferences}}</h4>
+        <h4>{{card.properties.availableRebates}}</h4>
+        <h4>{{card.properties.furnaceInputBTUH}}</h4>
+        <h4>{{}}</h4>
+        <h4>{{card.properties.configurationOptions}}</h4>
+        <h4>{{}}</h4>
+        <h4>{{card.properties.furnaceConfigurations}}</h4>
+        <h4>{{card.properties.totalAvailableRebates}}</h4>
+
+    </div>
 </div>
 
+ -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div *ngIf="arrayOutdoors">
+    <mat-card class="rc-card results">
+      <!-- unit ids, amount and reset button -->
+      <div fxLayout="row column" fxLayoutAlign="space-between start" fxLayoutGap="16px grid">
+        <!-- options by units -->
+        <div fxFlex="70" fxFlex.sm="100" fxFlex.xs="100" >
+          <mat-card-header>
+            <!-- outdoor -->
+            <mat-card-title fxLayout="row column" fxLayoutAlign="space-between center" class="123">
+                  <h3> Outddor:</h3>
+                  <p>Outdoor Unit: <b>{{card.outdoorUnit}} </b></p>
+            </mat-card-title>
+
+            <!-- others units  -->
+            <mat-card-subtitle >
+              <!-- indoor and furnace -->
+              <div fxLayout="row column" fxLayoutAlign="space-between center" class="model-nrs" fxLayoutGap="4px grid">
+                <div fxFlex="100"  *ngFor="let unit of card.options">
+                  <span class="rc-small"><b>{{unit.nameOption}}</b></span>
+                  <mat-form-field class="rc-select-multiline">
+                        <mat-select>
+                          <mat-option class="rc-select-multiline-option" *ngFor="let componentId of unit.options" [value]="componentId">
+                            <b>{{componentId}}</b>
+                          </mat-option>
+                        </mat-select>
+                  </mat-form-field>
+                </div>
+
+              </div>
+            </mat-card-subtitle>
+          </mat-card-header>
+        </div>
+        <!-- options by units end -->
+
+        <!-- amount reset snd button -->
+        <div fxFlex="30" fxFlex.xs="100" fxLayout="column" class="rc-show rc-hide-md rc-hide-sm">
+          <div fxFlex="100"class="rebate-price" fxLayout="row" fxLayoutAlign="center center"  >
+            <h5 class="rc-small">REBATES UP</h5>
+            <h1>$0.00</h1>
+            
+          </div>
+          <div fxLayoutAlign="center center">
+            <button mat-button class="rc-reset-button" fxLayout fxLayoutAlign="center center" >
+              RESET CARD
+              <mat-icon> undo</mat-icon>
+            </button>
+          
+          </div>
+        </div>
+        <!-- amount reset and button -->
+          
+      </div>
+      <!-- unit ids, amount and reset button end -->
+
+      <!-- Ratings without options -->  
+      <mat-card-content>
+            <div fxLayout="row column" fxLayoutGap="16px grid" >
+
+              <!-- rebates and configuration -->
+              <div fxFlex="40" fxFlex.md="50" fxFlex.sm="50" fxFlex.xs="100"  >
+                <!-- rebates -->
+                <div class="list-rebates" >
+                  <span class="rc-small"><b>Rebates</b></span>
+                  <ul class="rc-unlisted" >
+                    <li >
+                      <mat-icon> money</mat-icon>
+                      rebate title
+                    </li>
+                  </ul>
+                  <div >
+                    <p>Sorry, we couldn't find any results.</p>
+                  </div>
+                </div>
+
+                
+              </div>
+              <!-- rebates and configuration end -->
+
+                <!-- AHRI ratings -->
+                <div fxFlex="20" fxFlex.md="50" fxFlex.sm="50" fxFlex.xs="100">
+                    <div class="list-ahri-rating">
+                      <mat-accordion>
+                        <mat-expansion-panel [expanded]="true">
+                          <mat-expansion-panel-header class="rc-panel-header-cards">
+                            <mat-panel-title>
+                              <span class="rc-small"><b>AHRI Ratings</b></span>
+                            </mat-panel-title>
+                          </mat-expansion-panel-header>
+                            <div fxLayout="row" class="list-ahri-rating-item">
+                              <div fxFlex="50" fxFlex.md="50" fxFlex.sm="50" fxFlex.xs="50">
+                                <span>SEER</span>
+                              </div>
+                              <div fxFlex="50" fxFlex.md="50" fxFlex.sm="50" fxFlex.xs="50">
+                                {{(card.properties.SEER | number) || "N/A"}}
+                              </div>
+                            </div>
+                            <div fxLayout="row" class="list-ahri-rating-item">
+                              <div fxFlex="50" fxFlex.md="50" fxFlex.sm="50" fxFlex.xs="50">
+                                <span>EER</span>
+                              </div>
+                              <div fxFlex="50" fxFlex.md="50" fxFlex.sm="50" fxFlex.xs="50">
+                                {{(card.properties.EER | number) || "N/A"}}
+                              </div>
+                            </div>
+                            <div fxLayout="row" class="list-ahri-rating-item">
+                              <div fxFlex="50" fxFlex.md="50" fxFlex.sm="50" fxFlex.xs="50">
+                                <span>HPSF</span>
+                              </div>
+                              <div fxFlex="50" fxFlex.md="50" fxFlex.sm="50" fxFlex.xs="50">
+                                {{(card.properties.HSPF | number) || "N/A"}}
+                              </div>
+                            </div>
+                            <div fxLayout="row" class="list-ahri-rating-item">
+                              <div fxFlex="50" fxFlex.md="50" fxFlex.sm="50" fxFlex.xs="50">
+                                <span>AFUE</span>
+                              </div>
+                              <div fxFlex="50" fxFlex.md="50" fxFlex.sm="50" fxFlex.xs="50">
+                                {{(card.properties.AFUE | number) || "N/A"}}
+                              </div>
+                            </div>
+                        </mat-expansion-panel>
+                      </mat-accordion>
+                    </div>
+                </div>
+                <!-- AHRI ratings end -->
+
+                <!-- performance data -->
+                <div fxFlex="40" fxFlex.md="80" fxFlex.sm="80" fxFlex.xs="100">
+                  <div class="list-detail-performance">
+                    <div fxFlex="100" fxFlex.md="100" fxFlex.sm="100" fxFlex.xs="100">
+                      <mat-accordion>
+                        <mat-expansion-panel >
+                          <mat-expansion-panel-header  class="rc-panel-header-cards">
+                            <mat-panel-title>
+                              <span class="rc-small"><b>Detail Performance Data</b></span>
+                            </mat-panel-title>
+                          </mat-expansion-panel-header>
+
+                          <div fxLayout="row" class="list-ahri-rating-item">
+                            <div fxFlex="60" fxFlex.md="50" fxFlex.sm="50" fxFlex.xs="50">
+                              <span>Hcap17</span>
+                            </div>
+                            <div fxFlex="40" fxFlex.md="50" fxFlex.sm="50" fxFlex.xs="50">
+                              {{(card.properties.Hcap17 | number) || "N/A" }}
+                            </div>
+                          </div>
+                          <div fxLayout="row" class="list-ahri-rating-item">
+                            <div fxFlex="60" fxFlex.md="50" fxFlex.sm="50" fxFlex.xs="50">
+                              <span>Hcap47</span>
+                            </div>
+                            <div fxFlex="40" fxFlex.md="50" fxFlex.sm="50" fxFlex.xs="50">
+                              {{(card.properties.Hcap47 | number) || "N/A" }}
+                            </div>
+                          </div>
+                          <div fxLayout="row" class="list-ahri-rating-item">
+                            <div fxFlex="60" fxFlex.md="50" fxFlex.sm="50" fxFlex.xs="50">
+                              <span>Furnace output BTUH</span>
+                            </div>
+                            <div fxFlex="40" fxFlex.md="50" fxFlex.sm="50" fxFlex.xs="50">
+                              {{(card.properties.furnaceOutputBTUH | number) || "N/A" }}
+                            </div>
+                          </div>
+                          <div fxLayout="row" class="list-ahri-rating-item">
+                            <div fxFlex="60" fxFlex.md="50" fxFlex.sm="50" fxFlex.xs="50">
+                              <span>Rated cooling capacity</span>
+                            </div>
+                            <div fxFlex="40" fxFlex.md="50" fxFlex.sm="50" fxFlex.xs="50">
+                              {{(card.properties.coolingCapacityRated| number)  || "N/A"  }}
+                            </div>
+                          </div>
+
+                        </mat-expansion-panel>
+                      </mat-accordion>
+                    </div>
+                  </div>
+                </div>
+                <!-- performance data end -->
+
+            </div>
+      </mat-card-content>
+      <!-- Ratings without options end -->  
+
+        <mat-card-actions>
+          <div fxLayout="row column" fxLayoutAlign="end center" fxLayoutGap="16px grid">
+            <div>
+              <button mat-button class="rc-table-button" fxLayout fxLayoutAlign="center center" >
+                VIEW IN TABLE
+                <mat-icon> table_chart</mat-icon>
+              </button>
+            </div>
+            <div>
+              <button mat-button class="rc-detail-button" fxLayout fxLayoutAlign="center center"  target="_blank">
+                VIEW DETAIL
+                <mat-icon>search</mat-icon>
+              </button>
+            </div>
+            <div>
+              <button mat-button class="rc-card-button">ADD TO CART <mat-icon>add_shopping_cart</mat-icon></button>
+            </div>
+          </div>
+        </mat-card-actions>
+    </mat-card>
+</div>
