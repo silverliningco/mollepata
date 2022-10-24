@@ -65,11 +65,24 @@
       </tr>
     </thead>
     <tbody>
-      <tr >
-        <td >1</td>
+      <!-- rows added -->
+      <tr  *ngFor="let pl of payload; index as i">
+        <td>{{i+1}}</td>
+        <td>{{pl.unit_type}}</td>
+        <td>{{pl.size | number}}</td>
+        <td></td>
+        <td>
+          <button *ngIf="showButtons" (click)="DeleteRow(i+1)" mat-mini-fab color="primary" aria-label="Example icon button with a menu icon">
+            <mat-icon>restore_from_trash</mat-icon>
+          </button>
+        </td>
+      </tr>
+      <!-- row to add  -->
+      <tr>
+        <td >*</td>
         <td>
           <mat-form-field appearance="fill">
-            <mat-select #sGroup formControlName="unitTypeControl" (selectionChange)="addRow()">
+            <mat-select #sGroup formControlName="unitTypeControl" (selectionChange)="ShowButtons()">
               <mat-option *ngFor ="let unitTipe of unitTipes" value="{{unitTipe}}" radioGroup="sGroup">
                 {{unitTipe}}
               </mat-option>
@@ -78,7 +91,7 @@
         </td>
         <td >
           <mat-form-field appearance="fill">
-            <mat-select #sGroup formControlName="sizeControl" (selectionChange)="addRow()">
+            <mat-select #sGroup formControlName="sizeControl" (selectionChange)="ShowButtons()">
               <mat-option *ngFor ="let sizeOption of sizeOptions" value="{{sizeOption}}" radioGroup="sGroup">
                 {{sizeOption}}
               </mat-option>
@@ -86,15 +99,11 @@
           </mat-form-field>
         </td>
         <td>
-          <button *ngIf="showButtons"  mat-mini-fab color="primary" aria-label="Example icon button with a menu icon">
+          <button *ngIf="showButtons" (click)="AddRow()"  mat-mini-fab color="primary" aria-label="Example icon button with a menu icon">
             <mat-icon>plus_one</mat-icon>
           </button>
         </td>
-        <td>
-          <button *ngIf="showButtons" mat-mini-fab color="primary" aria-label="Example icon button with a menu icon">
-            <mat-icon>restore_from_trash</mat-icon>
-          </button>
-        </td>
+        <td></td>
       </tr>
     </tbody>
   </table>

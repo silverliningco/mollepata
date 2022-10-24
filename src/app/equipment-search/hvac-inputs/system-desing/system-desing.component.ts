@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
+export interface Payload {
+  unit_type: string;
+  size: number; 
+}
+
 @Component({
   selector: 'app-system-desing',
   templateUrl: './system-desing.component.html',
@@ -23,6 +28,7 @@ export class SystemDesingComponent implements OnInit {
   showButtons: boolean = false;
   unitTipes: string[] = ['Mini-Split Air Handler (Full Size)', 'Ducted mini-split Air Handler (Slim Style)', 'Floor/Ceiling Mount', 'Cassette', 'Hi Wall', '1-Way Casette'];
   sizeOptions: string[] = ['6000', '9000', '12000', '18000', '24000'];
+  payload: Payload[] = [];
 
   constructor(
     private formBuilder: FormBuilder
@@ -50,7 +56,7 @@ export class SystemDesingComponent implements OnInit {
     }
   }
 
-  addRow(): void{
+  ShowButtons(): void{
 
     let getUnitType = this.indoorUnitTable.controls['unitTypeControl'].value;
     let getSize = this.indoorUnitTable.controls['sizeControl'].value;
@@ -58,7 +64,27 @@ export class SystemDesingComponent implements OnInit {
     if (getSize != null && getUnitType != null){
       this.showButtons = true;
     }
+  }
 
+  AddRow(){
+
+    let getUnitType = this.indoorUnitTable.controls['unitTypeControl'].value;
+    let getSize = this.indoorUnitTable.controls['sizeControl'].value;
+
+    let oneRow = {
+      unit_type: getUnitType,
+      size: getSize
+    }
+
+    this.payload.push(oneRow);
+  }
+
+  DeleteRow(i: number): object[]{
+
+    this.payload.splice(i-1, 1);
+
+    return this.payload;
+    
   }
 
 
