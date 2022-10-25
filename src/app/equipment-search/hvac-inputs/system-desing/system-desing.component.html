@@ -67,7 +67,7 @@
     <tbody>
       <!-- rows added -->
       <tr  *ngFor="let pl of payload; index as i">
-        <td>{{i+1}}</td>
+        <td>{{pl.quantity}}</td>
         <td>{{pl.unit_type}}</td>
         <td>{{pl.size | number}}</td>
         <td></td>
@@ -79,7 +79,15 @@
       </tr>
       <!-- row to add  -->
       <tr>
-        <td >*</td>
+        <td >
+          <mat-form-field appearance="fill">
+            <mat-select #sGroup formControlName="quantityControl" (selectionChange)="ShowButtons()">
+              <mat-option *ngFor ="let qty of quantity" value="{{qty}}" radioGroup="sGroup">
+                {{qty}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </td>
         <td>
           <mat-form-field appearance="fill">
             <mat-select #sGroup formControlName="unitTypeControl" (selectionChange)="ShowButtons()">

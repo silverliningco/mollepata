@@ -23,4 +23,13 @@ export class DwellingInfo{
     ) {}
 }
 
+// nominal size
+export class Nominalsize {
+    constructor(
+        public heatingBTUH: number | null,
+        public coolingTons: number | null,
+        public desableButton: boolean | null
+    ) {}
+}
+
 

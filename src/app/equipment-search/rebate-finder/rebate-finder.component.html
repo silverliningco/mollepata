@@ -56,11 +56,10 @@
     <!-- step 5 nominal size -->
     <mat-step>
         <ng-template matStepLabel>Nominal size</ng-template>
-        <!-- <app-nominal-size></app-nominal-size> -->
+        <app-nominal-size></app-nominal-size>
         <!-- button -->
         <div fxLayout="column" fxLayoutAlign="center end" class="rc-stepper-buttons">
-            <button type="button" mat-raised-button color="primary" [disabled]="
-            " matStepperNext matStepperNext>
+            <button type="button" mat-raised-button color="primary" [disabled]="myNominalSize.desableButton" matStepperNext matStepperNext>
                 Continue
                 <mat-icon>arrow_forward</mat-icon>
             </button>

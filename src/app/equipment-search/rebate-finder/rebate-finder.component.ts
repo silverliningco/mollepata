@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { bridgeService } from '../services/bridge.service';
 
-import { Location, ListUtilities, DwellingInfo } from '../models/rebate-finder-inputs';
+import { Location, ListUtilities, DwellingInfo, Nominalsize } from '../models/rebate-finder-inputs';
 import { FormGroup } from '@angular/forms';
 
 // prueva
@@ -504,7 +504,8 @@ export class RebateFinderComponent implements OnInit {
 
   // local variables save data of stepper
   myLocation: Location = new Location(null, new ListUtilities(null, null), true); 
-  myDwellingInfo: DwellingInfo = new DwellingInfo(null, null, true)
+  myDwellingInfo: DwellingInfo = new DwellingInfo(null, null, true);
+  myNominalSize: Nominalsize = new Nominalsize(null, null, true);
 
   // prueva 
   outdoorGroup !: FormGroup;
@@ -529,7 +530,14 @@ export class RebateFinderComponent implements OnInit {
          .subscribe((payload: any) => {
            this.myDwellingInfo = payload.data[0];
            this.myDwellingInfo.desableButton = payload.data[1];
-          this.ParamsRebateEligibility();                    
+           this.ParamsRebateEligibility();                    
+          });
+
+    this._bridge.nominalSizeParams
+          .subscribe((payload: any) => {
+            this.myNominalSize = payload.data[0];
+            this.myNominalSize.desableButton = payload.data[1];
+            this.ParamsRebateSystemDesing();
           });
     
   }
@@ -550,5 +558,12 @@ export class RebateFinderComponent implements OnInit {
     });
 
   }
+
+  ParamsRebateSystemDesing(){
+    let payload = this.myNominalSize.coolingTons;
+    this._bridge.paramsSystemDesing.emit({
+        data: payload
+    });
+  }  
 
 }
