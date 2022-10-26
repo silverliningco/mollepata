@@ -27,10 +27,11 @@ export class SystemDesingComponent implements OnInit {
 
   // table
   showTable: boolean = false; 
-  showButtons: boolean = false;
+  showButtonAdd: boolean = false;
+  showButtonsDelete: boolean = false;
   unitTipes: string[] = ['Mini-Split Air Handler (Full Size)', 'Ducted mini-split Air Handler (Slim Style)', 'Floor/Ceiling Mount', 'Cassette', 'Hi Wall', '1-Way Casette'];
   sizeOptions: string[] = ['6000', '9000', '12000', '18000', '24000'];
-  quantity: string[] = ['1', '2','3', '4','5'];
+  quantity: number[] = [1, 2, 3, 4, 5];
   payload: Payload[] = [];
 
   nominalcoolingTons!: number;
@@ -77,7 +78,7 @@ export class SystemDesingComponent implements OnInit {
     let getSize = this.indoorUnitTable.controls['sizeControl'].value;
 
     if (getSize != null && getUnitType != null && getQuantity != null){
-      this.showButtons = true;
+      this.showButtonAdd = true;
     }
   }
 
@@ -102,27 +103,28 @@ export class SystemDesingComponent implements OnInit {
   */
   VerifyQuantities(payLoad: Payload[]): boolean{
 
-    let TotalQty: number = 0;
-    let listQty: number[] = [];
-
+    let arr: number[]= [];
     for (let i of payLoad) {
       let myValue: Payload = i;
-      listQty.push(myValue.quantity);
-    } 
+      arr.push(Number(myValue.quantity));
+    }
 
-    TotalQty = listQty.reduce((lats, act) => lats + act )
-
-    console.log(TotalQty);
+    let add = (arr: any) => arr.reduce((a: any, b: any) => a + b, 0);
+    let sum = add(arr);
+    
+    console.log(sum)
 
     // add condition to size
-    /* if (TotalQty < 5){
-      this.showButtons = false;
+    if (sum <= 5){
+      this.showButtonAdd = true;
     } else {
-      this.showButtons = true;
+      this.showButtonAdd = false;
     }
- */
-    return this.showButtons;
+
+    return this.showButtonAdd;
   }
+
+   
 
   DeleteRow(i: number): object[]{
 

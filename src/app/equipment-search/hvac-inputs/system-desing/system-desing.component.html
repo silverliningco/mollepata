@@ -72,7 +72,7 @@
         <td>{{pl.size | number}}</td>
         <td></td>
         <td>
-          <button *ngIf="showButtons" (click)="DeleteRow(i+1)" mat-mini-fab color="primary" aria-label="Example icon button with a menu icon">
+          <button  (click)="DeleteRow(i+1)" mat-mini-fab color="primary" aria-label="Example icon button with a menu icon">
             <mat-icon>restore_from_trash</mat-icon>
           </button>
         </td>
@@ -107,7 +107,7 @@
           </mat-form-field>
         </td>
         <td>
-          <button *ngIf="showButtons" (click)="AddRow()"  mat-mini-fab color="primary" aria-label="Example icon button with a menu icon">
+          <button *ngIf="showButtonAdd" (click)="AddRow()"  mat-mini-fab color="primary" aria-label="Example icon button with a menu icon">
             <mat-icon>plus_one</mat-icon>
           </button>
         </td>
