@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { bridgeService } from "../.././services/bridge.service";
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 export interface Payload {
   quantity: number;
@@ -39,7 +40,8 @@ export class SystemDesingComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    public _bridge: bridgeService
+    public _bridge: bridgeService,
+    private _snackBar: MatSnackBar
   ) { }
 
   ngOnInit(): void {
@@ -94,37 +96,77 @@ export class SystemDesingComponent implements OnInit {
       size: getSize
     }
 
-    this.payload.push(oneRow);
-    this.VerifyQuantities(this.payload);
+    this.VerifyQuantities( oneRow);
   }
 
   /*  quantity <= 5
       size <= 135% of  (nominal cooling tons * 12, 000)
   */
-  VerifyQuantities(payLoad: Payload[]): boolean{
+  VerifyQuantities(oneRow: Payload): void{
 
-    let arr: number[]= [];
-    for (let i of payLoad) {
+   let firstVerify =  this.VerifyQty(oneRow);
+
+  if (firstVerify != null){
+    this.payload.push(firstVerify);
+    let secondVerivy = this.VerifySize(firstVerify);
+  }
+
+   
+  }
+
+  VerifyQty(oneRow: Payload): Payload | null{
+    let arr: number[]= []; // stores the numbers to be added
+    let sum: number = 0;
+
+    for (let i of this.payload) {
       let myValue: Payload = i;
       arr.push(Number(myValue.quantity));
     }
 
-    let add = (arr: any) => arr.reduce((a: any, b: any) => a + b, 0);
-    let sum = add(arr);
-    
-    console.log(sum)
+    arr.push(Number(oneRow.quantity)); 
 
-    // add condition to size
+    let add = (arr: any) => arr.reduce((a: any, b: any) => a + b, 0);
+    sum = add(arr);
+
+    // add condition to quantity
     if (sum <= 5){
-      this.showButtonAdd = true;
+      arr = [];
+      return oneRow;
     } else {
-      this.showButtonAdd = false;
+      this.OpenSnackBar();
+      return null;
     }
 
-    return this.showButtonAdd;
   }
 
-   
+  VerifySize(oneRow: Payload): Payload | null{
+
+    let arr: number[]= [];// stores the size to be added
+    let sum: number = 0;
+
+    for (let i of this.payload) {
+      let myValue: Payload = i;
+      let a = Number(myValue.size) * Number(myValue.quantity);
+      arr.push(a);
+    }
+
+
+    let add = (arr: any) => arr.reduce((a: any, b: any) => a + b, 0);
+    sum = add(arr);
+
+    let size = this.nominalcoolingTons * 12000;
+    console.log(size);
+
+
+
+
+    return null;
+  }
+
+  OpenSnackBar() {
+    this._snackBar.open('The amount must be less than 6 and not more than 135% of cooling tons');
+  }
+
 
   DeleteRow(i: number): object[]{
 
@@ -133,6 +175,7 @@ export class SystemDesingComponent implements OnInit {
     return this.payload;
     
   }
+
 
 
 }
