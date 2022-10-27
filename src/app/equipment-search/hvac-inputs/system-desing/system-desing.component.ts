@@ -100,18 +100,24 @@ export class SystemDesingComponent implements OnInit {
   }
 
   /*  quantity <= 5
-      size <= 135% of  (nominal cooling tons * 12, 000)
+      size < 135% of  (nominal cooling tons * 12, 000)
   */
   VerifyQuantities(oneRow: Payload): void{
 
    let firstVerify =  this.VerifyQty(oneRow);
+   let secondVerivy!: Payload | null;
 
   if (firstVerify != null){
-    this.payload.push(firstVerify);
-    let secondVerivy = this.VerifySize(firstVerify);
+    secondVerivy = this.VerifySize(firstVerify);
   }
 
-   
+  if (secondVerivy != null){
+    this.payload.push(secondVerivy);
+  }
+
+
+  /* cantidad tamaño = tc 36000 *1.35 3633
+  tonelada * 12000 = ton 24000  */
   }
 
   VerifyQty(oneRow: Payload): Payload | null{
@@ -155,9 +161,16 @@ export class SystemDesingComponent implements OnInit {
     sum = add(arr);
 
     let size = this.nominalcoolingTons * 12000;
-    console.log(size);
+    console.log(sum);
 
+    let resul = sum * 1.5;
 
+    if (resul < size){
+      return oneRow;
+    } else {
+      this.OpenSnackBar();
+      return null;
+    }
 
 
     return null;
