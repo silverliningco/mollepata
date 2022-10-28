@@ -46,7 +46,7 @@ export class CardComponent implements OnInit {
  } */
 
   ParsingResult(results: any[]){
-    console.table(results);
+    // console.table(results);
 
     let options=  this.ParsingOptions(results);
     let Firstcombination = this.getFirstCombinationsData(results);
@@ -58,7 +58,7 @@ export class CardComponent implements OnInit {
       options: options
     }
 
-    console.log(this.card);
+    // console.log(this.card);
   }
 
   getFirstCombinationsData(results: any[]): any[]{

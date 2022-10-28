@@ -60,7 +60,7 @@ export const RESULTS2 = [
           "Horizontal",
           "Upflow"
       ],
-      "totalAvailableRebates": null
+      "totalAvailableRebates": 1
     },
     {
         "EER": 13.00,
@@ -168,7 +168,7 @@ export const RESULTS2 = [
           "Horizontal",
           "Upflow"
       ],
-      "totalAvailableRebates": null
+      "totalAvailableRebates": 3
     },
     {
         "EER": 13.00,
@@ -221,7 +221,7 @@ export const RESULTS2 = [
             "Horizontal",
             "Upflow"
         ],
-        "totalAvailableRebates": null
+        "totalAvailableRebates": 4
     },
     {
         "EER": 12.50,
@@ -274,7 +274,7 @@ export const RESULTS2 = [
             "Horizontal",
             "Upflow"
         ],
-        "totalAvailableRebates": null
+        "totalAvailableRebates": 1
     }
   ], 
   [
@@ -329,7 +329,7 @@ export const RESULTS2 = [
           "Horizontal",
           "Upflow"
       ],
-      "totalAvailableRebates": null
+      "totalAvailableRebates": 6
     },
     {
         "EER": 13.00,
@@ -382,7 +382,7 @@ export const RESULTS2 = [
             "Horizontal",
             "Upflow"
         ],
-        "totalAvailableRebates": null
+        "totalAvailableRebates": 7
     },
     {
         "EER": 13.00,
@@ -435,7 +435,7 @@ export const RESULTS2 = [
             "Horizontal",
             "Upflow"
         ],
-        "totalAvailableRebates": null
+        "totalAvailableRebates": 2
     },
     {
         "EER": 13.00,
@@ -524,6 +524,7 @@ export class RebateFinderComponent implements OnInit {
           this.myLocation = payload.data[0];
           this.myLocation.desableButton = payload.data[1];
           this.ParamsRebateEligibility();
+          this.sendResults();
          });
     
     this._bridge.dwellingInfoParams
@@ -539,6 +540,7 @@ export class RebateFinderComponent implements OnInit {
             this.myNominalSize.desableButton = payload.data[1];
             this.ParamsRebateSystemDesing();
           });
+    
     
   }
 
@@ -565,5 +567,13 @@ export class RebateFinderComponent implements OnInit {
         data: payload
     });
   }  
+
+  sendResults(){
+    console.log('estamos aqui');
+     /* sent the info to results-rebate */
+     this._bridge.resultsRebateFinder.emit({
+        data: [this.myResults]
+      });
+  }
 
 }
