@@ -16,6 +16,7 @@
                 <mat-option radioGroup="sGroup" *ngIf="coolT != 0.5" [value]="coolT"> {{coolT | number : '1.1-1'}}</mat-option>
               </div>
             </mat-select>
+            <mat-error *ngIf="nominalSizeGroup.get('coolingTonsControl')?.hasError('required')">You must make a selection</mat-error>
         </mat-form-field>
 
 
@@ -25,19 +26,19 @@
           <input matInput placeholder="Heating BTUH" type="number" formControlName="heatingBTUHControl" (change)="submitInputs()" required>
           
           <!-- error -->
-          <mat-error *ngIf="nominalSizeGroup.get('heatingBTUH')?.hasError('is_not_number') && nominalSizeGroup.get('heatingBTUH')?.touched">
+          <mat-error *ngIf="nominalSizeGroup.get('heatingBTUHControl')?.hasError('is_not_number') && nominalSizeGroup.get('heatingBTUHControl')?.touched">
             Heating BTUH <strong>must be a number.</strong>
           </mat-error>
-          <mat-error *ngIf="nominalSizeGroup.get('heatingBTUH')?.hasError('null_not_permit') && nominalSizeGroup.get('heatingBTUH')?.touched">
+          <mat-error *ngIf="nominalSizeGroup.get('heatingBTUHControl')?.hasError('null_not_permit') && nominalSizeGroup.get('heatingBTUHControl')?.touched">
             Heating BTUH is <strong>required</strong>
           </mat-error>
-          <mat-error *ngIf="nominalSizeGroup.get('heatingBTUH')?.hasError('need_between_4_6_characters') && nominalSizeGroup.get('heatingBTUH')?.touched">
+          <mat-error *ngIf="nominalSizeGroup.get('heatingBTUHControl')?.hasError('need_between_4_6_characters') && nominalSizeGroup.get('heatingBTUHControl')?.touched">
             Heating BTUH must be <strong>between 4 and 6 digits</strong>.
           </mat-error>
-          <mat-error *ngIf="nominalSizeGroup.get('heatingBTUH')?.hasError('Hbtuh_invalid_value') && nominalSizeGroup.get('heatingBTUH')?.touched">               
+          <mat-error *ngIf="nominalSizeGroup.get('heatingBTUHControl')?.hasError('Hbtuh_invalid_value') && nominalSizeGroup.get('heatingBTUHControl')?.touched">               
             Heating BTUH must be a whole number <strong>between 8,000 and 135,000</strong>.
           </mat-error>
-          <mat-error *ngIf="nominalSizeGroup.get('heatingBTUH')?.hasError('it_not_integer') && nominalSizeGroup.get('heatingBTUH')?.touched">
+          <mat-error *ngIf="nominalSizeGroup.get('heatingBTUHControl')?.hasError('it_not_integer') && nominalSizeGroup.get('heatingBTUHControl')?.touched">
             Heating BTUH is not <strong>integer</strong>.
           </mat-error>
         </mat-form-field>
