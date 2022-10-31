@@ -510,7 +510,7 @@ export class RebateFinderComponent implements OnInit {
   // prueva 
   outdoorGroup !: FormGroup;
 //   myResults: any[] = RESULTS1;
-  myResults: any[][] = RESULTS2;
+  myResults: any[][] = [];
   master = 'Master';
   // prueva
 
@@ -539,6 +539,12 @@ export class RebateFinderComponent implements OnInit {
             this.myNominalSize = payload.data[0];
             this.myNominalSize.desableButton = payload.data[1];
             this.ParamsRebateSystemDesing();
+          });
+
+    this._bridge.OrderResultsRebateFinder
+          .subscribe((payload: any) => {
+            this.myResults =  payload.data;
+            console.log(this.myResults);
           });
     
     
@@ -569,7 +575,7 @@ export class RebateFinderComponent implements OnInit {
   }  
 
   sendResults(){
-    console.log('estamos aqui');
+    this.myResults= RESULTS2;
      /* sent the info to results-rebate */
      this._bridge.resultsRebateFinder.emit({
         data: [this.myResults]

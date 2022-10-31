@@ -38,8 +38,11 @@ export class AvailableRebatesComponent implements OnInit {
       });
     }); 
 
-    console.log(this.bestOption);
-    
+    // return the rebatess in order
+    this._bridge.OrderResultsRebateFinder.emit({
+      data: this.bestOption
+    });
+
   }
 
 

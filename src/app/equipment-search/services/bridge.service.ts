@@ -15,7 +15,8 @@ export class bridgeService {
     @Output() paramsRebateEligibility: EventEmitter<any> = new EventEmitter();
     @Output() paramsSystemDesing: EventEmitter<any> = new EventEmitter();
 
-    @Output() resultsRebateFinder: EventEmitter<any> = new EventEmitter();
+    @Output() resultsRebateFinder: EventEmitter<any> = new EventEmitter(); // send to order
+    @Output() OrderResultsRebateFinder: EventEmitter<any> = new EventEmitter(); // rebates in order
 
     constructor(
     ) { } 

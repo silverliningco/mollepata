@@ -116,7 +116,7 @@
         <div fxFlex="30" fxFlex.xs="100" fxLayout="column" class="rc-show rc-hide-md rc-hide-sm">
           <div fxFlex="100"class="rebate-price" fxLayout="row" fxLayoutAlign="center center"  >
             <h5 class="rc-small">REBATES UP</h5>
-            <h1>$0.00</h1>
+            <h1>{{(card.properties.totalAvailableRebates | currency) || "$0.00"}}</h1>
             
           </div>
           <div fxLayoutAlign="center center">
