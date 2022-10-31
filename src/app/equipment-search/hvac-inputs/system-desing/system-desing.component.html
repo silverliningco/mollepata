@@ -24,7 +24,7 @@
     </mat-select>
   </mat-form-field>
 
-  <br>
+  <br> 
 
   <!-- Furnace type -->
   <mat-form-field appearance="fill">
@@ -81,6 +81,7 @@
       <tr>
         <td >
           <mat-form-field appearance="fill">
+            <mat-label>Select</mat-label>
             <mat-select #sGroup formControlName="quantityControl" (selectionChange)="ShowButtons()">
               <mat-option *ngFor ="let qty of quantity" value="{{qty}}" radioGroup="sGroup">
                 {{qty}}
@@ -90,6 +91,7 @@
         </td>
         <td>
           <mat-form-field appearance="fill">
+            <mat-label>Select</mat-label>
             <mat-select #sGroup formControlName="unitTypeControl" (selectionChange)="ShowButtons()">
               <mat-option *ngFor ="let unitTipe of unitTipes" value="{{unitTipe}}" radioGroup="sGroup">
                 {{unitTipe}}
@@ -99,6 +101,7 @@
         </td>
         <td >
           <mat-form-field appearance="fill">
+            <mat-label>Select</mat-label>
             <mat-select #sGroup formControlName="sizeControl" (selectionChange)="ShowButtons()">
               <mat-option *ngFor ="let sizeOption of sizeOptions" value="{{sizeOption}}" radioGroup="sGroup">
                 {{sizeOption}}

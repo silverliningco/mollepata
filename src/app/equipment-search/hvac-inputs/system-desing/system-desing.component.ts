@@ -26,7 +26,7 @@ export class SystemDesingComponent implements OnInit {
   systemDesing!: FormGroup; 
   indoorUnitTable!: FormGroup; 
 
-  // table
+  // table 
   showTable: boolean = false; 
   showButtonAdd: boolean = false;
   showButtonsDelete: boolean = false;
@@ -113,6 +113,9 @@ export class SystemDesingComponent implements OnInit {
 
   if (secondVerivy != null){
     this.payload.push(secondVerivy);
+    this.indoorUnitTable.controls['quantityControl'].reset();
+    this.indoorUnitTable.controls['unitTypeControl'].reset();
+    this.indoorUnitTable.controls['sizeControl'].reset();
   }
 
 
