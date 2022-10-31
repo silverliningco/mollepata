@@ -545,8 +545,7 @@ export class RebateFinderComponent implements OnInit {
           .subscribe((payload: any) => {
             this.myResults =  payload.data;
             console.log(this.myResults);
-          });
-    
+          });   
     
   }
 
