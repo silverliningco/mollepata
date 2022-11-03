@@ -1,1 +1,11 @@
-<p>product-lines works!</p>
+<div fxLayout="row column" fxLayoutAlign="center center" fxLayoutGap="16">
+    <div class="rc-radio-options">
+      <form>
+        <mat-radio-group aria-label="Select an option" >
+          <mat-radio-button *ngFor="let proLine of productLines"  value="proLine" matTooltip='{{proLine}}' aria-label="complete Product Line Name">
+            {{proLine}}
+          </mat-radio-button>
+        </mat-radio-group>
+      </form>
+    </div>
+  </div>

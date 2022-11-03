@@ -13,7 +13,6 @@ import {HttpInterceptorService } from './services/http-interceptor.service';
 
 import { AhriMatchupsComponent } from './ahri-matchups/ahri-matchups.component';
 import { RebateFinderComponent } from './rebate-finder/rebate-finder.component';
-import { ProductLinesRebateFinderComponent } from './product-lines-rebate-finder/product-lines-rebate-finder.component';
 import { HvacSystemDetailComponent } from './hvac-system-detail/hvac-system-detail.component';
 import { LocationComponent } from './hvac-inputs/location/location.component';
 import { DwellingInfoComponent } from './hvac-inputs/dwelling-info/dwelling-info.component';
@@ -65,8 +64,7 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     StockStatusComponent,
     CardComponent,
     TableComponent,
-    SystemDesingComponent,
-    ProductLinesRebateFinderComponent
+    SystemDesingComponent
   ],
   imports: [
     CommonModule,

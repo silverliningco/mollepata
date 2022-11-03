@@ -507,6 +507,8 @@ export class RebateFinderComponent implements OnInit {
   myDwellingInfo: DwellingInfo = new DwellingInfo(null, null, true);
   myNominalSize: Nominalsize = new Nominalsize(null, null, true);
 
+  ProducLines: boolean = false;
+
   // prueva 
   outdoorGroup !: FormGroup;
 //   myResults: any[] = RESULTS1;
@@ -523,15 +525,13 @@ export class RebateFinderComponent implements OnInit {
         .subscribe((payload: any) => {
           this.myLocation = payload.data[0];
           this.myLocation.desableButton = payload.data[1];
-          this.ParamsRebateEligibility();
           this.sendResults();
          });
     
     this._bridge.dwellingInfoParams
          .subscribe((payload: any) => {
            this.myDwellingInfo = payload.data[0];
-           this.myDwellingInfo.desableButton = payload.data[1];
-           this.ParamsRebateEligibility();                    
+           this.myDwellingInfo.desableButton = payload.data[1];                   
           });
 
     this._bridge.nominalSizeParams
@@ -545,26 +545,15 @@ export class RebateFinderComponent implements OnInit {
           .subscribe((payload: any) => {
             this.myResults =  payload.data;
             console.log(this.myResults);
-          });   
+          }); 
+
+    this._bridge.showAllResults
+          .subscribe((payload: any) => {
+            this.ProducLines = payload.data[0];
+          });
     
   }
 
-
-  ParamsRebateEligibility(){
-    let payload = {
-      utilityProviders: {
-        electricUtilityId: this.myLocation.utilityProviders?.electricUtilityId, 
-        fossilFuelUtilityId: this.myLocation.utilityProviders?.fossilFuelUtilityId
-      },
-      state: this.myLocation.state,
-      fuelSource: this.myDwellingInfo.fuelSource
-    }
-
-    this._bridge.paramsRebateEligibility.emit({
-      data: payload
-    });
-
-  }
 
   ParamsRebateSystemDesing(){
     let payload = this.myNominalSize.coolingTons;
