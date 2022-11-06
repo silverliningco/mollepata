@@ -113,9 +113,9 @@ export class SystemDesingComponent implements OnInit {
 
   if (secondVerivy != null){
     this.payload.push(secondVerivy);
-    // this.indoorUnitTable.controls['quantityControl'].reset();
-    // this.indoorUnitTable.controls['unitTypeControl'].reset();
-    // this.indoorUnitTable.controls['sizeControl'].reset();
+    this.indoorUnitTable.controls['quantityControl'].reset();
+    this.indoorUnitTable.controls['unitTypeControl'].reset();
+    this.indoorUnitTable.controls['sizeControl'].reset();
   }
 
 

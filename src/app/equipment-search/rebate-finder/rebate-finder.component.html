@@ -71,19 +71,54 @@
     <!-- step 6 results -->
     <mat-step>
         <ng-template matStepLabel>AHRI Combinations</ng-template>
- 
-        <app-product-lines *ngIf="ProducLines"></app-product-lines>   <!-- ng if  -->
-        <app-filters></app-filters>
-        <app-stock-status></app-stock-status>
-        <app-available-rebates></app-available-rebates>
 
-        <app-card
-        *ngFor="let myResult of  myResults"
-        [myResults]="myResult"
-        [master]="master"
-        ></app-card>
+        <!-- stock status  -->
+        <div class="rc-filter-stock">
+            <app-stock-status></app-stock-status>
+        </div>
+
+        <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxLayoutAlign="center start" fxLayoutAlign.xs="center stretch" fxLayoutAlign.sm="center stretch" fxLayoutGap="16">
+
+            <!-- rebate and filters -->
+            <div fxFlex="30" fxFlex.sm="100" fxFlex.xs="100">
+                <app-filters></app-filters>
+                <app-available-rebates></app-available-rebates>
+            </div>
+
+            <div fxFlex="70" fxFlex.sm="100" fxFlex.xs="100">
+
+                <!-- product line -->
+                <div fxLayout="row column" fxLayoutAlign="center center" fxLayoutGap="16">
+                    <app-product-lines *ngIf="showProducLines"></app-product-lines> 
+                </div>
+
+                <!-- applied filters -->
+                <div fxLayout="row column" fxLayoutAlign="space-between center" fxLayoutGap="8" class="rc-rebate-filters-btn">
+                    <p>aqui va los filtros que se aplican</p>
+                </div>
+
+                <!-- card -->
+                <app-card
+                *ngFor="let myResult of  myResults"
+                [myResults]="myResult"
+                [master]="master"
+                ></app-card>
+
+            </div>
+
+        </div>
 
     </mat-step> 
   
   </mat-stepper>
+
+  <!-- code for not results -->
+  <!-- <div *ngIf="noResultsSearch">
+    <div class="rc-alert info">
+      <mat-icon class="rc-icon-alert">info</mat-icon>
+      <p><b>No Results</b></p>
+      <p>Sorry, we couldn't find any results.</p>
+    </div>
+  </div> -->
+
 

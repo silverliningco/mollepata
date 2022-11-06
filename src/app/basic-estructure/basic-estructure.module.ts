@@ -9,6 +9,9 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { HomeComponent } from './home/home.component';
 import { ReleasesComponent } from './releases/releases.component';
+
+/* breadcrumb */
+import { BreadcrumbModule } from 'xng-breadcrumb';
  
 /* angular material */
 import {MatCardModule} from '@angular/material/card';
@@ -30,6 +33,7 @@ import {MatIconModule} from '@angular/material/icon';
     BasicEstructureRoutingModule,
     EquipmentSearchModule,
 
+    BreadcrumbModule,
     MatCardModule,
     MatIconModule
   ], exports: [

@@ -507,7 +507,7 @@ export class RebateFinderComponent implements OnInit {
   myDwellingInfo: DwellingInfo = new DwellingInfo(null, null, true);
   myNominalSize: Nominalsize = new Nominalsize(null, null, true);
 
-  ProducLines: boolean = false;
+  showProducLines!: boolean;
 
   // prueva 
   outdoorGroup !: FormGroup;
@@ -549,7 +549,7 @@ export class RebateFinderComponent implements OnInit {
 
     this._bridge.showAllResults
           .subscribe((payload: any) => {
-            this.ProducLines = payload.data[0];
+            this.showProducLines = payload.data;
           });
     
   }
