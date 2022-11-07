@@ -37,8 +37,8 @@ export class LocationComponent implements OnInit {
     });
 
     this.utilityGroup = this.formBuilder.group({
-      electricUtility: [ null, Validators.required],
-      fossilFuelUtilityId: [null, Validators.required]
+      electricUtilityControl: [ null, Validators.required],
+      fossilFuelUtilityIdControl: [null, Validators.required]
     });
 
   }
@@ -85,8 +85,8 @@ export class LocationComponent implements OnInit {
 
     // console.log('a');
 
-    this.utilityGroup.controls['electricUtility'].setValue('');
-    this.utilityGroup.controls['fossilFuelUtilityId'].setValue('');
+    this.utilityGroup.controls['electricUtilityControl'].setValue('');
+    this.utilityGroup.controls['fossilFuelUtilityIdControl'].setValue('');
   }
 
   ActiveContinuebutton(input:any): boolean{
@@ -116,8 +116,8 @@ export class LocationComponent implements OnInit {
     let payload = {
       state: this.stateGroup.controls['stateControl'].value,
       utilityProviders: { 
-        electricUtilityId: this.utilityGroup.controls['electricUtility'].value, 
-        fossilFuelUtilityId: this.utilityGroup.controls['fossilFuelUtilityId'].value 
+        electricUtilityId: this.utilityGroup.controls['electricUtilityControl'].value, 
+        fossilFuelUtilityId: this.utilityGroup.controls['fossilFuelUtilityIdControl'].value 
       }
     }  
 
