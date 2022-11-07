@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { bridgeService } from '../services/bridge.service';
 
-import { Location, ListUtilities, DwellingInfo, Nominalsize } from '../models/rebate-finder-inputs';
+import { Location, ListUtilities, DwellingInfo, HeatedCooled, Nominalsize } from '../models/rebate-finder-inputs';
 import { FormGroup } from '@angular/forms';
 
 // prueva
@@ -505,6 +505,7 @@ export class RebateFinderComponent implements OnInit {
   // local variables save data of stepper
   myLocation: Location = new Location(null, new ListUtilities(null, null), true); 
   myDwellingInfo: DwellingInfo = new DwellingInfo(null, null, true);
+  myHeatedCooled: HeatedCooled = new HeatedCooled(null, null, true);
   myNominalSize: Nominalsize = new Nominalsize(null, null, true);
 
   showProducLines!: boolean;
@@ -534,21 +535,28 @@ export class RebateFinderComponent implements OnInit {
            this.myDwellingInfo.desableButton = payload.data[1];                   
           });
 
+    this._bridge.heatedCooledParams
+        .subscribe((payload: any) => {
+            this.myHeatedCooled = payload.data[0];
+            this.myHeatedCooled.desableButton = payload.data[1];   
+            console.log(this.myHeatedCooled);                
+           });
+
     this._bridge.nominalSizeParams
-          .subscribe((payload: any) => {
+        .subscribe((payload: any) => {
             this.myNominalSize = payload.data[0];
             this.myNominalSize.desableButton = payload.data[1];
             this.ParamsRebateSystemDesing();
           });
 
     this._bridge.OrderResultsRebateFinder
-          .subscribe((payload: any) => {
+        .subscribe((payload: any) => {
             this.myResults =  payload.data;
             console.log(this.myResults);
           }); 
 
     this._bridge.showAllResults
-          .subscribe((payload: any) => {
+        .subscribe((payload: any) => {
             this.showProducLines = payload.data;
           });
     

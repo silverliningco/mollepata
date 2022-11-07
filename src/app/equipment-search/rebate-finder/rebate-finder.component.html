@@ -33,7 +33,7 @@
         <app-heated-cooled></app-heated-cooled>
         <!-- button -->
         <div fxLayout="column" fxLayoutAlign="center end" class="rc-stepper-buttons">
-            <button type="button" mat-raised-button color="primary" [disabled]="" matStepperNext matStepperNext>
+            <button type="button" mat-raised-button color="primary" [disabled]="myHeatedCooled.desableButton" matStepperNext matStepperNext>
                 Continue
                 <mat-icon>arrow_forward</mat-icon>
             </button>

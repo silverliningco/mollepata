@@ -11,6 +11,7 @@ export class bridgeService {
     // send data to app-rebate-finder
     @Output() sentLocationParams: EventEmitter<any> = new EventEmitter();
     @Output() dwellingInfoParams: EventEmitter<any> = new EventEmitter();
+    @Output() heatedCooledParams: EventEmitter<any> = new EventEmitter();
     @Output() nominalSizeParams: EventEmitter<any> = new EventEmitter();
     @Output() showAllResults: EventEmitter<any> = new EventEmitter();
 

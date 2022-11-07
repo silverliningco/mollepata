@@ -33,7 +33,7 @@ export class LocationComponent implements OnInit {
 
   ngOnInit(): void {
     this.stateGroup = this.formBuilder.group({
-      state: [ null, Validators.required]
+      stateControl: [ null, Validators.required]
     });
 
     this.utilityGroup = this.formBuilder.group({
@@ -49,7 +49,7 @@ export class LocationComponent implements OnInit {
     this.sendGasOil = [];
     this.sendElectric = [];
 
-    this._endPoint.Utilities(this.stateGroup.controls['state'].value).subscribe({
+    this._endPoint.Utilities(this.stateGroup.controls['stateControl'].value).subscribe({
       next: (resp: any) => {
         let listUtilities: Array<utilityInfo> = resp;
         this.GetEachUtility(listUtilities);
@@ -114,7 +114,7 @@ export class LocationComponent implements OnInit {
     // console.log('b');
 
     let payload = {
-      state: this.stateGroup.controls['state'].value,
+      state: this.stateGroup.controls['stateControl'].value,
       utilityProviders: { 
         electricUtilityId: this.utilityGroup.controls['electricUtility'].value, 
         fossilFuelUtilityId: this.utilityGroup.controls['fossilFuelUtilityId'].value 

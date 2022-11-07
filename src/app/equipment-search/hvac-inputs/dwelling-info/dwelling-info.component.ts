@@ -23,11 +23,11 @@ desableButton: boolean = true;
   ngOnInit(): void {
 
     this.DwellingInfoGroup = this.formBuilder.group({
-      constructionType: [ '', Validators.required]
+      constructionTypeControl: [ '', Validators.required]
     });
 
     this.furnaceGroup = this.formBuilder.group({
-      fuelSource: ['', Validators.required],
+      fuelSourceControl: ['', Validators.required],
     });
 
   }
@@ -55,8 +55,8 @@ desableButton: boolean = true;
   submitInputs() {
 
     let payload = {
-      year: this.DwellingInfoGroup.controls['constructionType'].value,
-      fuelSource: this.furnaceGroup.controls['fuelSource'].value,
+      year: this.DwellingInfoGroup.controls['constructionTypeControl'].value,
+      fuelSource: this.furnaceGroup.controls['fuelSourceControl'].value,
     }  
 
     let stateBtt = this.ActiveContinuebutton(payload);
