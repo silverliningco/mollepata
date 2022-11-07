@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { bridgeService } from '../services/bridge.service';
 
-import { Location, ListUtilities, DwellingInfo, HeatedCooled, Nominalsize } from '../models/rebate-finder-inputs';
+import { Location, ListUtilities, DwellingInfo, HeatedCooled, Nominalsize, SystemDesing, indoorUnitTable } from '../models/rebate-finder-inputs';
 import { FormGroup } from '@angular/forms';
 
 // prueva
@@ -507,6 +507,7 @@ export class RebateFinderComponent implements OnInit {
   myDwellingInfo: DwellingInfo = new DwellingInfo(null, null, true);
   myHeatedCooled: HeatedCooled = new HeatedCooled(null, null, true);
   myNominalSize: Nominalsize = new Nominalsize(null, null, true);
+  mySystemDesing: SystemDesing = new SystemDesing(null, null, null, null, null, true);
 
   showProducLines!: boolean;
 
@@ -551,14 +552,21 @@ export class RebateFinderComponent implements OnInit {
 
     this._bridge.OrderResultsRebateFinder
         .subscribe((payload: any) => {
-            this.myResults =  payload.data;
-            console.log(this.myResults);
+            this.myNominalSize = payload.data[0];
+            this.myNominalSize.desableButton = payload.data[1];
           }); 
 
+    this._bridge.systemDesingParams
+        .subscribe((payload: any) => {
+            this.mySystemDesing = payload.data[0];
+            this.mySystemDesing.desableButton = payload.data[1];
+        });
+
+    // from system desing 
     this._bridge.showAllResults
         .subscribe((payload: any) => {
             this.showProducLines = payload.data;
-          });
+        });
     
   }
 

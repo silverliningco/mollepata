@@ -37,6 +37,8 @@ export class SystemDesingComponent implements OnInit {
 
   nominalcoolingTons!: number;
 
+  desableButton: boolean = true;
+
 
   constructor(
     private formBuilder: FormBuilder,
@@ -52,13 +54,16 @@ export class SystemDesingComponent implements OnInit {
 
 
     this.systemDesing = this.formBuilder.group({
-      indoorControl: [null, Validators.required]
+      outdoorControl: ['', Validators.required],
+      indoorControl: ['', Validators.required],
+      furnaceControl: ['', Validators.required],
+      furnaceConfigurationControl: ['', Validators.required],
     });
 
     this.indoorUnitTable = this.formBuilder.group({
-      quantityControl: [null, Validators.required],
-      unitTypeControl: [null, Validators.required],
-      sizeControl: [null, Validators.required]
+      quantityControl: ['', Validators.required],
+      unitTypeControl: ['', Validators.required],
+      sizeControl: ['', Validators.required]
     });
   }
 
@@ -70,6 +75,7 @@ export class SystemDesingComponent implements OnInit {
       this.showTable = true;
     } else {
       this.showTable = false;
+      this.submitInputs();
     }
   }
 
@@ -107,20 +113,17 @@ export class SystemDesingComponent implements OnInit {
    let firstVerify =  this.VerifyQty(oneRow);
    let secondVerivy!: Payload | null;
 
-  if (firstVerify != null){
-    secondVerivy = this.VerifySize(firstVerify);
-  }
+    if (firstVerify != null){
+      secondVerivy = this.VerifySize(firstVerify);
+    }
 
-  if (secondVerivy != null){
-    this.payload.push(secondVerivy);
-    this.indoorUnitTable.controls['quantityControl'].reset();
-    this.indoorUnitTable.controls['unitTypeControl'].reset();
-    this.indoorUnitTable.controls['sizeControl'].reset();
-  }
-
-
-  /* cantidad tamaño = tc 36000 *1.35 3633
-  tonelada * 12000 = ton 24000  */
+    if (secondVerivy != null){
+      this.payload.push(secondVerivy);
+      this.indoorUnitTable.controls['quantityControl'].reset();
+      this.indoorUnitTable.controls['unitTypeControl'].reset();
+      this.indoorUnitTable.controls['sizeControl'].reset();
+      this.submitInputs();
+    }
   }
 
   VerifyQty(oneRow: Payload): Payload | null{
@@ -174,9 +177,6 @@ export class SystemDesingComponent implements OnInit {
       this.OpenSnackBar();
       return null;
     }
-
-
-    return null;
   }
 
   OpenSnackBar() {
@@ -199,6 +199,54 @@ export class SystemDesingComponent implements OnInit {
     });
   }
 
+  ActiveContinuebutton(input:any): boolean{
+    
+    let ArrayValues =  Object.values(input);
 
+   completeI: for (const value of ArrayValues) {
+    if (typeof value === 'object'){
+      this.ActiveContinuebutton(value);
+    } else {
+      if (value == null || value == undefined || value === ''){
+        this.desableButton = true;
+        break completeI;
+      } else {
+        this.desableButton = false;
+      }
+    }
+   }
+    
+    return this.desableButton;
+  }
+
+  submitInputs(): void {
+
+    let myIndoor = this.systemDesing.controls['indoorControl'].value;
+    let payload = {}
+
+    if(myIndoor == 'Mini-split'){
+      payload = {
+        outdoorControl: this.systemDesing.controls['outdoorControl'].value,
+        indoor: this.systemDesing.controls['indoorControl'].value,
+        furnace: this.systemDesing.controls['furnaceControl'].value,
+        furnaceConfiguration: this.systemDesing.controls['furnaceConfigurationControl'].value,
+        indoorUnitTable: this.payload
+      } 
+    } else {
+      payload = {
+        outdoorControl: this.systemDesing.controls['outdoorControl'].value,
+        indoor: this.systemDesing.controls['indoorControl'].value,
+        furnace: this.systemDesing.controls['furnaceControl'].value,
+        furnaceConfiguration: this.systemDesing.controls['furnaceConfigurationControl'].value
+      } 
+    }
+
+    let stateBtt = this.ActiveContinuebutton(payload);
+
+    /* sent the info to results-rebate */
+    this._bridge.systemDesingParams.emit({
+      data: [payload, stateBtt]
+    });
+  }
 
 }

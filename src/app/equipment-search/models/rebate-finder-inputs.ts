@@ -41,4 +41,24 @@ export class Nominalsize {
     ) {}
 }
 
+// system desing
+export class SystemDesing {
+    constructor(
+        public outdoor: boolean | null,
+        public indoor: boolean | null,
+        public furnace: boolean | null,
+        public furnaceConfiguration: boolean | null,
+        public indoorUnitTable: indoorUnitTable[] | null,
+        public desableButton: boolean | null
+    ) {}
+}
+
+export class indoorUnitTable {
+    constructor(
+        public quantity: number | null,
+        public unitType: number | null,
+        public size: number | null
+    ) {}
+}
+
 

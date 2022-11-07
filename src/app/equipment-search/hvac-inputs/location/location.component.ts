@@ -107,7 +107,7 @@ export class LocationComponent implements OnInit {
    }
     
     return this.desableButton;
-}
+  }
 
   submitInputs(): void {
 

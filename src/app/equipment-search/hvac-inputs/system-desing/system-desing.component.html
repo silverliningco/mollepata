@@ -10,8 +10,8 @@
   <!-- Outdoor unit -->
   <mat-form-field appearance="fill">
     <mat-label>Outdoor unit type:</mat-label>
-    <mat-select #sGroup >
-      <mat-option *ngFor ="let outdoor of outdoors">
+    <mat-select #sGroup formControlName="outdoorControl" (selectionChange)="submitInputs()">
+      <mat-option *ngFor ="let outdoor of outdoors" value="{{outdoor}}" radioGroup="sGroup">
         {{outdoor}}
       </mat-option>
     </mat-select>
@@ -34,8 +34,8 @@
   <!-- Furnace type -->
   <mat-form-field appearance="fill">
     <mat-label>Furnace type:</mat-label>
-    <mat-select #sGroup >
-      <mat-option *ngFor ="let furnaceType of furnacesType">
+    <mat-select #sGroup formControlName="furnaceControl" (selectionChange)="submitInputs()">
+      <mat-option *ngFor ="let furnaceType of furnacesType" value="{{furnaceType}}" radioGroup="sGroup">
         {{furnaceType}}
       </mat-option>
     </mat-select>
@@ -46,8 +46,8 @@
   <!-- Furnace configuration -->
   <mat-form-field appearance="fill">
     <mat-label>Furnace configuration:</mat-label>
-    <mat-select #sGroup >
-      <mat-option *ngFor ="let furnaceConfiguration of furnacesConfiguration">
+    <mat-select #sGroup formControlName="furnaceConfigurationControl" (selectionChange)="submitInputs()">
+      <mat-option *ngFor ="let furnaceConfiguration of furnacesConfiguration" value="{{furnaceConfiguration}}" radioGroup="sGroup">
         {{furnaceConfiguration}}
       </mat-option>
     </mat-select>

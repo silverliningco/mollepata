@@ -13,6 +13,7 @@ export class bridgeService {
     @Output() dwellingInfoParams: EventEmitter<any> = new EventEmitter();
     @Output() heatedCooledParams: EventEmitter<any> = new EventEmitter();
     @Output() nominalSizeParams: EventEmitter<any> = new EventEmitter();
+    @Output() systemDesingParams: EventEmitter<any> = new EventEmitter();
     @Output() showAllResults: EventEmitter<any> = new EventEmitter();
 
     // send data hvac inputs
