@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { bridgeService } from "../.././services/bridge.service";
 import {MatSnackBar} from '@angular/material/snack-bar';
+import { retry } from 'rxjs';
+import { Message } from '@angular/compiler/src/i18n/i18n_ast';
 
 export interface Payload {
   quantity: number;
@@ -118,11 +120,7 @@ export class SystemDesingComponent implements OnInit {
     }
 
     if (secondVerivy != null){
-      this.payload.push(secondVerivy);
-      this.indoorUnitTable.controls['quantityControl'].reset();
-      this.indoorUnitTable.controls['unitTypeControl'].reset();
-      this.indoorUnitTable.controls['sizeControl'].reset();
-      this.submitInputs();
+      this.AddRowToPayload(secondVerivy);
     }
   }
 
@@ -145,7 +143,8 @@ export class SystemDesingComponent implements OnInit {
       arr = [];
       return oneRow;
     } else {
-      this.OpenSnackBar();
+      let message = 'The amount must be less than 6 and not more than 135% of cooling tons';
+      this.OpenSnackBar(message);
       return null;
     }
 
@@ -174,13 +173,33 @@ export class SystemDesingComponent implements OnInit {
     if (resul < size){
       return oneRow;
     } else {
-      this.OpenSnackBar();
+      let message = 'The amount must be less than 6 and not more than 135% of cooling tons';
+      this.OpenSnackBar(message);
       return null;
     }
   }
 
-  OpenSnackBar() {
-    this._snackBar.open('The amount must be less than 6 and not more than 135% of cooling tons');
+  OpenSnackBar(mssg: string) {
+    this._snackBar.open(mssg);
+  }
+
+  AddRowToPayload(oneRow: Payload): Payload | null{
+
+    // verify if all of data is complete
+    let incomplete = this.ActiveContinuebutton(oneRow);
+    console.log(incomplete);
+    if (incomplete == false){
+      this.payload.push(oneRow);
+      this.indoorUnitTable.controls['quantityControl'].reset();
+      this.indoorUnitTable.controls['unitTypeControl'].reset();
+      this.indoorUnitTable.controls['sizeControl'].reset();
+      this.submitInputs();
+    } else {
+      let message = 'Please, complete all the inputs.';
+      this.OpenSnackBar(message);
+    }
+
+    return null
   }
 
 
@@ -200,21 +219,26 @@ export class SystemDesingComponent implements OnInit {
   }
 
   ActiveContinuebutton(input:any): boolean{
-    
-    let ArrayValues =  Object.values(input);
 
-   completeI: for (const value of ArrayValues) {
-    if (typeof value === 'object'){
-      this.ActiveContinuebutton(value);
-    } else {
-      if (value == null || value == undefined || value === ''){
-        this.desableButton = true;
-        break completeI;
-      } else {
-        this.desableButton = false;
+    // verify if exist some value null
+    let haveValueNull = Object.values(input).every(x => x === null);
+
+    if (haveValueNull == false){
+      let ArrayValues =  Object.values(input);
+
+      completeI: for (const value of ArrayValues) {
+        if (typeof value === 'object'){
+          this.ActiveContinuebutton(value);
+        } else {
+          if (value == null || value == undefined || value === ''){
+            this.desableButton = true;
+            break completeI;
+          } else {
+            this.desableButton = false;
+          }
+        }
       }
     }
-   }
     
     return this.desableButton;
   }
