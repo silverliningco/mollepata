@@ -1,1 +1,9 @@
-<p>stock-status works!</p>
+
+<form >
+  <h5 class="rc-filter-group-title">Stock status</h5>
+  <mat-radio-group #rGroup fxLayout="row" fxLayout.xs="column" >
+    <mat-radio-button [value]="false" radioGroup="rGroup">Stock items only</mat-radio-button>
+    <mat-radio-button [value]="true" radioGroup="rGroup">Show all</mat-radio-button>
+  </mat-radio-group>
+</form>
+

@@ -187,7 +187,6 @@ export class SystemDesingComponent implements OnInit {
 
     // verify if all of data is complete
     let incomplete = this.ActiveContinuebutton(oneRow);
-    console.log(incomplete);
     if (incomplete == false){
       this.payload.push(oneRow);
       this.indoorUnitTable.controls['quantityControl'].reset();

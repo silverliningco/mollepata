@@ -511,7 +511,7 @@ export class RebateFinderComponent implements OnInit {
 
   showProducLines!: boolean;
 
-  // prueva 
+
   outdoorGroup !: FormGroup;
 //   myResults: any[] = RESULTS1;
   myResults: any[][] = [];
@@ -539,8 +539,7 @@ export class RebateFinderComponent implements OnInit {
     this._bridge.heatedCooledParams
         .subscribe((payload: any) => {
             this.myHeatedCooled = payload.data[0];
-            this.myHeatedCooled.desableButton = payload.data[1];   
-            console.log(this.myHeatedCooled);                
+            this.myHeatedCooled.desableButton = payload.data[1];                
            });
 
     this._bridge.nominalSizeParams
