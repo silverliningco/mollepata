@@ -82,9 +82,6 @@ export class LocationComponent implements OnInit {
   }
 
   writeValue(): void {
-
-    // console.log('a');
-
     this.utilityGroup.controls['electricUtilityControl'].setValue('');
     this.utilityGroup.controls['fossilFuelUtilityIdControl'].setValue('');
   }
@@ -110,8 +107,6 @@ export class LocationComponent implements OnInit {
   }
 
   submitInputs(): void {
-
-    // console.log('b');
 
     let payload = {
       state: this.stateGroup.controls['stateControl'].value,

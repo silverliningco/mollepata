@@ -5,7 +5,6 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
-
 import { EquipmentSearchRoutingModule } from './equipment-search-routing.module';
 import { SharedModule } from '../shared/shared.module';
 
@@ -26,6 +25,7 @@ import { StockStatusComponent } from './hvac-inputs/stock-status/stock-status.co
 import { SystemDesingComponent } from './hvac-inputs/system-desing/system-desing.component';
 import { CardComponent } from './hvac-results/card/card.component';
 import { TableComponent } from './hvac-results/table/table.component';
+import { AppliedFiltersComponent } from './hvac-inputs/filters/applied-filters/applied-filters.component';
 
 
 /* angular material */
@@ -64,7 +64,8 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     StockStatusComponent,
     CardComponent,
     TableComponent,
-    SystemDesingComponent
+    SystemDesingComponent,
+    AppliedFiltersComponent
   ],
   imports: [
     CommonModule,

@@ -509,6 +509,8 @@ export class RebateFinderComponent implements OnInit {
   myNominalSize: Nominalsize = new Nominalsize(null, null, true);
   mySystemDesing: SystemDesing = new SystemDesing(null, null, null, null, null, true);
 
+  filters!: string[];
+
   showProducLines!: boolean;
 
 
@@ -566,7 +568,19 @@ export class RebateFinderComponent implements OnInit {
         .subscribe((payload: any) => {
             this.showProducLines = payload.data;
         });
+
+    this._bridge.filters
+        .subscribe((payload: any) => {
+            this.filters = payload.data;
+            this.SentListFilters(this.filters);
+        });
     
+  }
+
+  SentListFilters(filters: string[]){
+    this._bridge.filter.emit({
+        data: filters
+    })
   }
 
 
