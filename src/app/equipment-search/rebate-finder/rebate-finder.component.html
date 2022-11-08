@@ -1,7 +1,70 @@
 
 <mat-stepper #stepper linear  >
 
-    
+    <!-- step 1 location -->
+    <mat-step>
+        <ng-template matStepLabel>Location</ng-template>
+        <app-location></app-location>
+        <!-- button -->
+        <div fxLayout="column" fxLayoutAlign="center end" class="rc-stepper-buttons">
+            <button type="button" mat-raised-button color="primary" [disabled]="myLocation.desableButton" matStepperNext>
+                Continue
+                <mat-icon>arrow_forward</mat-icon>
+            </button>
+        </div>
+    </mat-step>
+
+    <!-- step 2 dwelling info -->
+    <mat-step>
+        <ng-template matStepLabel>Dwelling info</ng-template>
+        <app-dwelling-info></app-dwelling-info>
+        <!-- button -->
+        <div fxLayout="column" fxLayoutAlign="center end" class="rc-stepper-buttons">
+            <button type="button" mat-raised-button color="primary" [disabled]="myDwellingInfo.desableButton" matStepperNext matStepperNext>
+                Continue
+                <mat-icon>arrow_forward</mat-icon>
+            </button>
+        </div>
+    </mat-step>
+
+    <!-- step 3 heated / cooled -->
+    <mat-step>
+        <ng-template matStepLabel>Heated - Cooled</ng-template>
+        <app-heated-cooled></app-heated-cooled>
+        <!-- button -->
+        <div fxLayout="column" fxLayoutAlign="center end" class="rc-stepper-buttons">
+            <button type="button" mat-raised-button color="primary" [disabled]="myHeatedCooled.desableButton" matStepperNext matStepperNext>
+                Continue
+                <mat-icon>arrow_forward</mat-icon>
+            </button>
+        </div>
+    </mat-step>
+
+    <!-- step 4 nominal size -->
+    <mat-step>
+        <ng-template matStepLabel>Nominal size</ng-template>
+        <app-nominal-size></app-nominal-size>
+        <!-- button -->
+        <div fxLayout="column" fxLayoutAlign="center end" class="rc-stepper-buttons">
+            <button type="button" mat-raised-button color="primary" [disabled]="myNominalSize.desableButton" matStepperNext matStepperNext>
+                Continue
+                <mat-icon>arrow_forward</mat-icon>
+            </button>
+        </div>
+    </mat-step>
+
+    <!-- step 5 System desing -->
+    <mat-step>
+        <ng-template matStepLabel>System design</ng-template>
+        <app-system-desing></app-system-desing>
+        <!-- button -->
+        <div fxLayout="column" fxLayoutAlign="center end" class="rc-stepper-buttons">
+            <button type="button" mat-raised-button color="primary" [disabled]="mySystemDesing.desableButton" matStepperNext matStepperNext>
+                Continue
+                <mat-icon>arrow_forward</mat-icon>
+            </button>
+        </div>
+    </mat-step>
     
 
     <!-- step 6 results -->
