@@ -158,4 +158,11 @@ export class CardComponent implements OnInit {
     
   }
 
+  openDialog() {
+
+    /* this.dialogRef.open(TableViewComponent, {
+      data: { }
+    }); */
+  }
+
 }

@@ -77,6 +77,12 @@ export class FiltersComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+
+    this._bridge.filters
+        .subscribe((payload: any) => {
+          // this.addFilter = payload.data;
+        });
+
     this.filtersGroup = this.formBuilder.group({
       filterControl: [null, Validators.required]
     });
@@ -84,22 +90,15 @@ export class FiltersComponent implements OnInit {
 
   AddFilter(): void{
 
-    let oneFilter = this.filtersGroup.controls['filterControl'].value
+    let oneFilter = this.filtersGroup.controls['filterControl'].value;
 
     this.addFilter.push(oneFilter);
     this.submitInputs();
   }
 
   submitInputs(): void{
-
     this._bridge.filters.emit({
       data: this.addFilter
     });
-
-  }
-
-
-
-  
-
+  } 
 }

@@ -13,7 +13,7 @@ export class NominalSizeComponent implements OnInit {
 
   myCoolingTons: Array<number> =  [0.5, 1.0, 1.5, 2.0, 2.5, 3.0, 3.5, 4.0, 4.5, 5.0];
 
-  desableButton: boolean = true;
+  disableButton: boolean = true;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -93,15 +93,15 @@ export class NominalSizeComponent implements OnInit {
       this.ActiveContinuebutton(value);
     } else {
       if (value == null || value == undefined || value === ''){
-        this.desableButton = true;
+        this.disableButton = true;
         break completeI;
       } else {
-        this.desableButton = false;
+        this.disableButton = false;
       }
     }
    }
     
-    return this.desableButton;
+    return this.disableButton;
 }
 
   submitInputs(): void {

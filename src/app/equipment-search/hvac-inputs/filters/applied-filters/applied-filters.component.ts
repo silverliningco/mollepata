@@ -33,6 +33,12 @@ export class AppliedFiltersComponent implements OnInit {
 
     console.log(this.listFilters);
   }
+
+  submitInputs(): void{
+    this._bridge.filter.emit({
+      data: this.listFilters
+    });
+  }
   
 
 }

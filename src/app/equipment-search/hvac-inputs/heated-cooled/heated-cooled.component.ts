@@ -12,7 +12,7 @@ export class HeatedCooledComponent implements OnInit {
   
   headedCooledGroup !: FormGroup;
 
-  desableButton: boolean = true;
+  disableButton: boolean = true;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -35,15 +35,15 @@ export class HeatedCooledComponent implements OnInit {
       this.ActiveContinuebutton(value);
     } else {
       if (value == null || value == undefined || value === ''){
-        this.desableButton = true;
+        this.disableButton = true;
         break completeI;
       } else {
-        this.desableButton = false;
+        this.disableButton = false;
       }
     }
    }
     
-    return this.desableButton;
+    return this.disableButton;
 }
 
   submitInputs() {

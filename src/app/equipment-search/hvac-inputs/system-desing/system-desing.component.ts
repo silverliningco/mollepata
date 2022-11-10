@@ -39,7 +39,7 @@ export class SystemDesingComponent implements OnInit {
 
   nominalcoolingTons!: number;
 
-  desableButton: boolean = true;
+  disableButton: boolean = true;
 
 
   constructor(
@@ -230,22 +230,23 @@ export class SystemDesingComponent implements OnInit {
           this.ActiveContinuebutton(value);
         } else {
           if (value == null || value == undefined || value === ''){
-            this.desableButton = true;
+            this.disableButton = true;
             break completeI;
           } else {
-            this.desableButton = false;
+            this.disableButton = false;
           }
         }
       }
     }
     
-    return this.desableButton;
+    return this.disableButton;
   }
 
   submitInputs(): void {
 
     let myIndoor = this.systemDesing.controls['indoorControl'].value;
     let payload = {}
+    let stateBtt!: boolean;
 
     if(myIndoor == 'Mini-split'){
       payload = {
@@ -262,9 +263,11 @@ export class SystemDesingComponent implements OnInit {
         furnace: this.systemDesing.controls['furnaceControl'].value,
         furnaceConfiguration: this.systemDesing.controls['furnaceConfigurationControl'].value
       } 
+
+      stateBtt = true;
     }
 
-    let stateBtt = this.ActiveContinuebutton(payload);
+    stateBtt = this.ActiveContinuebutton(payload);
 
     /* sent the info to results-rebate */
     this._bridge.systemDesingParams.emit({

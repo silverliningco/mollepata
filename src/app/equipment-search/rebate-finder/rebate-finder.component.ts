@@ -510,6 +510,7 @@ export class RebateFinderComponent implements OnInit {
   mySystemDesing: SystemDesing = new SystemDesing(null, null, null, null, null, true);
 
   filters!: string[];
+  filtesApplied!: string[];
 
   showProducLines!: boolean;
 
@@ -572,12 +573,19 @@ export class RebateFinderComponent implements OnInit {
     this._bridge.filters
         .subscribe((payload: any) => {
             this.filters = payload.data;
-            this.SentListFilters(this.filters);
+            this.SendListFilters(this.filters);
         });
+
+    this._bridge.filter
+        .subscribe((payload: any) => {
+            this.filtesApplied = payload.data;
+            // this.SendFilterApplied(this.filtesApplied);
+        });
+    
     
   }
 
-  SentListFilters(filters: string[]){
+  SendListFilters(filters: string[]){
     this._bridge.filter.emit({
         data: filters
     })
@@ -598,5 +606,13 @@ export class RebateFinderComponent implements OnInit {
         data: [this.myResults]
       });
   }
+
+  SendFilterApplied(filtesApplied: string[]){
+    this._bridge.filters.emit({
+      data: filtesApplied  
+    })
+  }
+
+
 
 }
