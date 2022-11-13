@@ -32,6 +32,9 @@ export class LocationComponent implements OnInit {
   fossilFuel: Array<utilityInfo> = [];
   states: string[] = USAstates;
 
+  // search word
+  term: string = 'hola mundo';
+
   disableButton: boolean = true;
 
   constructor(
@@ -209,6 +212,10 @@ export class LocationComponent implements OnInit {
   writeValue(): void {
     this.utilityGroup.controls['electricUtilityControl'].setValue('');
     this.utilityGroup.controls['fossilFuelUtilityIdControl'].setValue('');
+  }
+
+  Search(){
+    console.log('hola mundo');
   }
 
   ActiveContinuebutton(input:any): boolean{

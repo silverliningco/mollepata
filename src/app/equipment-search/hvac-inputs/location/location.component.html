@@ -1,3 +1,16 @@
+<!-- search -->
+<form (ngSubmit)="Search()" autocomplete="off">
+  <h2 class="rc-main-title">State</h2>
+  <div fxLayout fxLayoutAlign="center">
+    <div fxFlex="40" fxLayout="column" fxLayoutAlign="center stretch" fxFlex.xs="100" fxFlex.sm="70" fxFlex.md="40" fxLayoutGap="20">
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Search</mat-label>
+        <input matInput name="term" placeholder="Search info" [(ngModel)]="term" value="Sushi" class="form-control">
+      </mat-form-field>
+    </div>
+  </div>
+</form>
+
 <!-- state -->
 <form [formGroup]="stateGroup">
     <h2 class="rc-main-title">State</h2>
