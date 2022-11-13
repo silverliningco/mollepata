@@ -492,6 +492,474 @@ export const RESULTS2 = [
     }
   ]
 ];
+
+let mybody = [ 
+    [
+      {
+        "EER": 14.00,
+        "AFUE": 97.2,
+        "HSPF": null,
+        "SEER": 16.00,
+        "Hcap17": null,
+        "Hcap47": null,
+        "fuelTypes": [
+            "Natural Gas",
+            "Propane Gas"
+        ],
+        "components": [
+            {
+                "description": "",
+                "title": "Performance 17S 2-STG AC",
+                "componentType": "outdoorUnit"
+            },
+            {
+                "description": "",
+                "title": "ALUMINUM HORIZ SLAB EVAN COIL PURON 3.0T",
+                "componentType": "indoorUnit"
+            },
+            {
+                "description": "",
+                "title": "97 AFUE 80k Modulating Comm ECM Furnace",
+                "componentType": "furnace"
+            }
+        ],
+        "skus":[],
+        "equipmentTags": null,
+        "AHRIReferences": [
+            "203882048",
+            "204032248"
+        ],
+        "availableRebates": null,
+        "furnaceInputBTUH": 80000,
+        "furnaceOutputBTUH": 78000,
+        "configurationOptions": [
+            {
+                "id": "Horizontal, Upflow",
+                "title": "Horizontal, Upflow",
+                "componentType": "furnaceConfiguration"
+            }
+        ],
+        "coolingCapacityRated": 24800,
+        "furnaceConfigurations": [
+            "Horizontal",
+            "Upflow"
+        ],
+        "totalAvailableRebates": 1
+      },
+      {
+          "EER": 13.00,
+          "AFUE": 97.2,
+          "HSPF": null,
+          "SEER": 16.00,
+          "Hcap17": null,
+          "Hcap47": null,
+          "fuelTypes": [
+              "Natural Gas",
+              "Propane Gas"
+          ],
+          "components": [
+              {
+                  "description": "",
+                  "title": "Performance 17S 2-STG AC",
+                  "componentType": "outdoorUnit"
+              },
+              {  
+                  "description": "",
+                  "title": "ALUMINUM HORIZ SLAB EVAN COIL PURON 2.5T",
+                  "componentType": "indoorUnit"
+              },
+              {
+                  "description": "",
+                  "title": "97 AFUE 80k Modulating Comm ECM Furnace",
+                  "componentType": "furnace"
+              }
+          ],
+          "skus":[],
+          "equipmentTags": null,
+          "AHRIReferences": [
+              "203881782",
+              "204032248"
+          ],
+          "availableRebates": null,
+          "furnaceInputBTUH": 80000,
+          "furnaceOutputBTUH": 78000,
+          "configurationOptions": [
+              {
+                  "id": "Horizontal, Upflow",
+                  "title": "Horizontal, Upflow",
+                  "componentType": "furnaceConfiguration"
+              }
+          ],
+          "coolingCapacityRated": 24600,
+          "furnaceConfigurations": [
+              "Horizontal",
+              "Upflow"
+          ],
+          "totalAvailableRebates": null
+      }
+    ], 
+    [
+      {
+        "EER": 15.00,
+        "AFUE": 97.2,
+        "HSPF": null,
+        "SEER": 16.00,
+        "Hcap17": null,
+        "Hcap47": null,
+        "fuelTypes": [
+            "Natural Gas",
+            "Propane Gas"
+        ],
+        "components": [
+            {
+                "description": "",
+                "title": "16 SEER Performance AC, SE & North Only",
+                "componentType": "outdoorUnit"
+            },
+            {
+                "description": "",
+                "title": "ALUMINUM HORIZ SLAB EVAN COIL PURON 3.5T",
+                "componentType": "indoorUnit"
+            },
+            {
+                "description": "",
+                "title": "97 AFUE 80k Modulating Comm ECM Furnace",
+                "componentType": "furnace"
+            }
+        ],
+        "skus":[],
+        "equipmentTags": null,
+        "AHRIReferences": [
+            "203603478",
+            "204032248"
+        ],
+        "availableRebates": null,
+        "furnaceInputBTUH": 80000,
+        "furnaceOutputBTUH": 78000,
+        "configurationOptions": [
+            {
+                "id": "Horizontal, Upflow",
+                "title": "Horizontal, Upflow",
+                "componentType": "furnaceConfiguration"
+            }
+        ],
+        "coolingCapacityRated": 28600,
+        "furnaceConfigurations": [
+            "Horizontal",
+            "Upflow"
+        ],
+        "totalAvailableRebates": 3
+      },
+      {
+          "EER": 13.00,
+          "AFUE": 97.2,
+          "HSPF": null,
+          "SEER": 16.00,
+          "Hcap17": null,
+          "Hcap47": null,
+          "fuelTypes": [
+              "Natural Gas",
+              "Propane Gas"
+          ],
+          "components": [
+              {
+                  "description": "",
+                  "title": "16 SEER Performance AC, SE & North Only",
+                  "componentType": "outdoorUnit"
+              },
+              {
+                  "description": "",
+                  "title": "ALUMINUM HORIZ SLAB EVAN COIL PURON 3.0T",
+                  "componentType": "indoorUnit"
+              },
+              {
+                  "description": "",
+                  "title": "97 AFUE 80k Modulating Comm ECM Furnace",
+                  "componentType": "furnace"
+              }
+          ],
+          "skus":[],
+          "equipmentTags": null,
+          "AHRIReferences": [
+              "203603416",
+              "204032248"
+          ],
+          "availableRebates": null,
+          "furnaceInputBTUH": 80000,
+          "furnaceOutputBTUH": 78000,
+          "configurationOptions": [
+              {
+                  "id": "Horizontal, Upflow",
+                  "title": "Horizontal, Upflow",
+                  "componentType": "furnaceConfiguration"
+              }
+          ],
+          "coolingCapacityRated": 28400,
+          "furnaceConfigurations": [
+              "Horizontal",
+              "Upflow"
+          ],
+          "totalAvailableRebates": 4
+      },
+      {
+          "EER": 12.50,
+          "AFUE": 97.2,
+          "HSPF": null,
+          "SEER": 15.00,
+          "Hcap17": null,
+          "Hcap47": null,
+          "fuelTypes": [
+              "Natural Gas",
+              "Propane Gas"
+          ],
+          "components": [
+              {
+                  "description": "",
+                  "title": "16 SEER Performance AC, SE & North Only",
+                  "componentType": "outdoorUnit"
+              },
+              {
+                  "description": "",
+                  "title": "ALUMINUM HORIZ SLAB EVAN COIL PURON 2.5T",
+                  "componentType": "indoorUnit"
+              },
+              {
+                  "description": "",
+                  "title": "97 AFUE 80k Modulating Comm ECM Furnace",
+                  "componentType": "furnace"
+              }
+          ],
+          "skus":[],
+          "equipmentTags": null,
+          "AHRIReferences": [
+              "203603354",
+              "204032248"
+          ],
+          "availableRebates": null,
+          "furnaceInputBTUH": 80000,
+          "furnaceOutputBTUH": 78000,
+          "configurationOptions": [
+              {
+                  "id": "Horizontal, Upflow",
+                  "title": "Horizontal, Upflow",
+                  "componentType": "furnaceConfiguration"
+              }
+          ],
+          "coolingCapacityRated": 27800,
+          "furnaceConfigurations": [
+              "Horizontal",
+              "Upflow"
+          ],
+          "totalAvailableRebates": 1
+      }
+    ], 
+    [
+      {
+        "EER": 16.00,
+        "AFUE": 97.2,
+        "HSPF": null,
+        "SEER": 16.00,
+        "Hcap17": null,
+        "Hcap47": null,
+        "fuelTypes": [
+            "Natural Gas",
+            "Propane Gas"
+        ],
+        "components": [
+            {
+                "description": "",
+                "title": "16 SEER AC, SE & North Only",
+                "componentType": "outdoorUnit"
+            },
+            {
+                "description": "",
+                "title": "ALUMINUM HORIZ SLAB EVAN COIL PURON 3.0T",
+                "componentType": "indoorUnit"
+            },
+            {
+                "description": "",
+                "title": "97 AFUE 80k Modulating Comm ECM Furnace",
+                "componentType": "furnace"
+            }
+        ],
+        "skus":[],
+        "equipmentTags": null,
+        "AHRIReferences": [
+            "203548477",
+            "204032248"
+        ],
+        "availableRebates": null,
+        "furnaceInputBTUH": 80000,
+        "furnaceOutputBTUH": 78000,
+        "configurationOptions": [
+            {
+                "id": "Horizontal, Upflow",
+                "title": "Horizontal, Upflow",
+                "componentType": "furnaceConfiguration"
+            }
+        ],
+        "coolingCapacityRated": 24600,
+        "furnaceConfigurations": [
+            "Horizontal",
+            "Upflow"
+        ],
+        "totalAvailableRebates": 6
+      },
+      {
+          "EER": 13.00,
+          "AFUE": 97.2,
+          "HSPF": null,
+          "SEER": 16.00,
+          "Hcap17": null,
+          "Hcap47": null,
+          "fuelTypes": [
+              "Natural Gas",
+              "Propane Gas"
+          ],
+          "components": [
+              {
+                  "description": "",
+                  "title": "16 SEER AC, SE & North Only",
+                  "componentType": "outdoorUnit"
+              },
+              {
+                  "description": "",
+                  "title": "ALUMINUM HORIZ SLAB EVAN COIL PURON 2.5T",
+                  "componentType": "indoorUnit"
+              },
+              {
+                  "description": "",
+                  "title": "97 AFUE 80k Modulating Comm ECM Furnace",
+                  "componentType": "furnace"
+              }
+          ],
+          "skus":[],
+          "equipmentTags": null,
+          "AHRIReferences": [
+              "203548233",
+              "204032248"
+          ],
+          "availableRebates": null,
+          "furnaceInputBTUH": 80000,
+          "furnaceOutputBTUH": 78000,
+          "configurationOptions": [
+              {
+                  "id": "Horizontal, Upflow",
+                  "title": "Horizontal, Upflow",
+                  "componentType": "furnaceConfiguration"
+              }
+          ],
+          "coolingCapacityRated": 24400,
+          "furnaceConfigurations": [
+              "Horizontal",
+              "Upflow"
+          ],
+          "totalAvailableRebates": 7
+      },
+      {
+          "EER": 13.00,
+          "AFUE": 97.2,
+          "HSPF": null,
+          "SEER": 16.00,
+          "Hcap17": null,
+          "Hcap47": null,
+          "fuelTypes": [
+              "Natural Gas",
+              "Propane Gas"
+          ],
+          "components": [
+              {
+                  "description": "",
+                  "title": "16 SEER AC, SE & North Only",
+                  "componentType": "outdoorUnit"
+              },
+              {
+                  "description": "",
+                  "title": "ALUMINUM HORIZ SLAB EVAN COIL PURON 2.0T",
+                  "componentType": "indoorUnit"
+              },
+              {
+                  "description": "",
+                  "title": "97 AFUE 80k Modulating Comm ECM Furnace",
+                  "componentType": "furnace"
+              }
+          ],
+          "skus":[],
+          "equipmentTags": null,
+          "AHRIReferences": [
+              "203547999",
+              "204032248"
+          ],
+          "availableRebates": null,
+          "furnaceInputBTUH": 80000,
+          "furnaceOutputBTUH": 78000,
+          "configurationOptions": [
+              {
+                  "id": "Horizontal, Upflow",
+                  "title": "Horizontal, Upflow",
+                  "componentType": "furnaceConfiguration"
+              }
+          ],
+          "coolingCapacityRated": 24400,
+          "furnaceConfigurations": [
+              "Horizontal",
+              "Upflow"
+          ],
+          "totalAvailableRebates": 2
+      },
+      {
+          "EER": 13.00,
+          "AFUE": 97.2,
+          "HSPF": null,
+          "SEER": 16.00,
+          "Hcap17": null,
+          "Hcap47": null,
+          "fuelTypes": [
+              "Natural Gas",
+              "Propane Gas"
+          ],
+          "components": [
+              {
+                  "description": "",
+                  "title": "16 SEER AC, SE & North Only",
+                  "componentType": "outdoorUnit"
+              },
+              {
+                  "description": "",
+                  "title": "CASED VERT N-ALUM",
+                  "componentType": "indoorUnit"
+              },
+              {
+                  "description": "",
+                  "title": "97 AFUE 80k Modulating Comm ECM Furnace",
+                  "componentType": "furnace"
+              }
+          ],
+          "skus":[],
+          "equipmentTags": null,
+          "AHRIReferences": [
+              "203546987",
+              "204032248"
+          ],
+          "availableRebates": null,
+          "furnaceInputBTUH": 80000,
+          "furnaceOutputBTUH": 78000,
+          "configurationOptions": [
+              {
+                  "id": "Horizontal, Upflow",
+                  "title": "Horizontal, Upflow",
+                  "componentType": "furnaceConfiguration"
+              }
+          ],
+          "coolingCapacityRated": 23600,
+          "furnaceConfigurations": [
+              "Horizontal",
+              "Upflow"
+          ],
+          "totalAvailableRebates": null
+      }
+    ]
+  ];
 // prueva
 
 @Component({

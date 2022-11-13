@@ -5,6 +5,14 @@ import { utilityInfo } from '../../models/hvac-inputs';
 
 import { EndPointsService } from '../../services/endPoints.service';
 import { bridgeService } from '../../services/bridge.service';
+import { useAnimation } from '@angular/animations';
+
+export const USAstates = [
+  'AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'FL', 'GA', 'HI', 'ID', 'IL', 'IN', 'IA',
+  'IA', 'KS', 'KY', 'LA', 'ME', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NE', 'NV', 
+  'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'OH', 'OK', 'OR', 'PA', 'RI', 'SC', 'SD', 'TN', 'TX',
+  'UT', 'VT', 'VA', 'WA', 'WV', 'WI', 'WY'
+]
 
 @Component({
   selector: 'app-location',
@@ -22,6 +30,7 @@ export class LocationComponent implements OnInit {
   sendGasOil: Array<any> = [];
   electricity:  Array<utilityInfo> = [];
   fossilFuel: Array<utilityInfo> = [];
+  states: string[] = USAstates;
 
   disableButton: boolean = true;
 
@@ -51,7 +60,123 @@ export class LocationComponent implements OnInit {
 
     this._endPoint.Utilities(this.stateGroup.controls['stateControl'].value).subscribe({
       next: (resp: any) => {
-        let listUtilities: Array<utilityInfo> = resp;
+        let body = [
+          {
+              "title": "Berkshire Gas",
+              "fossilFuel": true,
+              "state": [ "MA" ],
+              "description": "",
+              "electricity": false,
+              "utilityProviderId": 1
+          },
+          {
+              "title": "Cape Light Compact",
+              "fossilFuel": false,
+              "state": [ "MA" ],
+              "description": "",
+              "electricity": true,
+              "utilityProviderId": 2
+          },
+          {
+              "title": "Eversource",
+              "fossilFuel": true,
+              "state": [ "CT","MA","NH" ],
+              "description": "",
+              "electricity": true,
+              "utilityProviderId": 3
+          },
+          {
+              "title": "Liberty",
+              "fossilFuel": true,
+              "state": [ "AR","CA","GA","IL","IA","MA","KS","MO","NH","NY","OK" ],
+              "description": "",
+              "electricity": true,
+              "utilityProviderId": 4
+          },
+          {
+              "title": "National Grid",
+              "fossilFuel": true,
+              "state": [ "MA","NY" ],
+              "description": "",
+              "electricity": true,
+              "utilityProviderId": 5
+          },
+          {
+              "title": "Unitil",
+              "fossilFuel": true,
+              "state": [ "MA","ME","NH" ],
+              "description": "",
+              "electricity": true,
+              "utilityProviderId": 6
+          },
+          {
+              "title": "Marblehead Municipal Light Department",
+              "fossilFuel": false,
+              "state": [ "MA" ],
+              "description": "",
+              "electricity": true,
+              "utilityProviderId": 7
+          },
+          {
+              "title": "New Hampshire Electric Coop",
+              "fossilFuel": false,
+              "state": [ "NH" ],
+              "description": "",
+              "electricity": true,
+              "utilityProviderId": 8
+          },
+          {
+              "title": "Rhode Island Energy",
+              "fossilFuel": true,
+              "state": [ "RI" ],
+              "description": "",
+              "electricity": true,
+              "utilityProviderId": 9
+          },
+          {
+              "title": "AEP Texas Central Company",
+              "fossilFuel": false,
+              "state": ["TX"],
+              "description": "",
+              "electricity": true,
+              "utilityProviderId": 10
+          },
+          {
+              "title": "Agralite Electric Coop",
+              "fossilFuel": false,
+              "state": ["MN"],
+              "description": "",
+              "electricity": true,
+              "utilityProviderId": 11
+          },
+          {
+              "title": "Alexandria Light and Power",
+              "fossilFuel": false,
+              "state": ["MN"],
+              "description": "",
+              "electricity": true,
+              "utilityProviderId": 12
+          },
+          {
+              "title": "Alger-Delta Coop Electric Assn",
+              "fossilFuel": false,
+              "state": ["MI"],
+              "description": "",
+              "electricity": true,
+              "utilityProviderId": 13
+          },
+          {
+              "title": "Algoma Utility Comm",
+              "fossilFuel": false,
+              "state": ["WI"],
+              "description": "",
+              "electricity": true,
+              "utilityProviderId": 14
+          }
+      
+      ];
+        // let listUtilities: Array<utilityInfo> = resp;
+        let listUtilities: Array<utilityInfo> = body;
         this.GetEachUtility(listUtilities);
       },
       error: (e) => alert(e.error),
