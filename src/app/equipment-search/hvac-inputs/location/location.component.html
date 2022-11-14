@@ -1,26 +1,22 @@
 <!-- search -->
-<form (ngSubmit)="Search()" autocomplete="off">
-  <h2 class="rc-main-title">State</h2>
-  <div fxLayout fxLayoutAlign="center">
-    <div fxFlex="40" fxLayout="column" fxLayoutAlign="center stretch" fxFlex.xs="100" fxFlex.sm="70" fxFlex.md="40" fxLayoutGap="20">
-      <mat-form-field class="example-full-width" appearance="fill">
-        <mat-label>Search</mat-label>
-        <input matInput name="term" placeholder="Search info" [(ngModel)]="term" value="Sushi" class="form-control">
-      </mat-form-field>
-    </div>
+<!-- <div fxLayout fxLayoutAlign="center">
+  <div fxFlex="40" fxLayout="column" fxLayoutAlign="center stretch" fxFlex.xs="100" fxFlex.sm="70" fxFlex.md="40" fxLayoutGap="20">
+    <app-search (search)="HandleSearch($event)"></app-search>
   </div>
-</form>
+</div>  -->
+
 
 <!-- state -->
 <form [formGroup]="stateGroup">
     <h2 class="rc-main-title">State</h2>
     <div fxLayout fxLayoutAlign="center">
       <div fxFlex="40" fxLayout="column" fxLayoutAlign="center stretch" fxFlex.xs="100" fxFlex.sm="70" fxFlex.md="40" fxLayoutGap="20">
+        <app-search (search)="HandleSearch($event)"></app-search>
         <mat-form-field appearance="fill">
-          <mat-label>Electric Utility</mat-label>
+          <mat-label>State</mat-label>
           <mat-select #sGroup formControlName="stateControl" (selectionChange)="submitInputs()">
-            <mat-option *ngFor ="let state of states" value="{{state}}"  radioGroup="sGroup">
-              {{state}}
+            <mat-option *ngFor ="let state of states | search:filterTerm" value="{{state}}"  radioGroup="sGroup">
+              {{state.abbreviation}} - {{state.name}}
             </mat-option>
           </mat-select>
         </mat-form-field>

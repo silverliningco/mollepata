@@ -1,4 +1,11 @@
-export class utilityInfo {
+export class States {
+    constructor(
+        public abbreviation: string | null,
+        public name: boolean | null  
+    ) {}
+}
+
+export class UtilityInfo {
     constructor(
         public description: string | null,
         public electricity: boolean | null,

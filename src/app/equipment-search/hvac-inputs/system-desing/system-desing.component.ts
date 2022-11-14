@@ -2,8 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { bridgeService } from "../.././services/bridge.service";
 import {MatSnackBar} from '@angular/material/snack-bar';
-import { retry } from 'rxjs';
-import { Message } from '@angular/compiler/src/i18n/i18n_ast';
 
 export interface Payload {
   quantity: number;

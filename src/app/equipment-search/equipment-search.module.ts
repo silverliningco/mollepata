@@ -1,15 +1,18 @@
+// angular
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
+// for credentials
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
+// services and modules
 import { EquipmentSearchRoutingModule } from './equipment-search-routing.module';
 import { SharedModule } from '../shared/shared.module';
-
 import {HttpInterceptorService } from './services/http-interceptor.service'; 
 
+// components
 import { AhriMatchupsComponent } from './ahri-matchups/ahri-matchups.component';
 import { RebateFinderComponent } from './rebate-finder/rebate-finder.component';
 import { HvacSystemDetailComponent } from './hvac-system-detail/hvac-system-detail.component';
@@ -26,7 +29,6 @@ import { SystemDesingComponent } from './hvac-inputs/system-desing/system-desing
 import { CardComponent } from './hvac-results/card/card.component';
 import { TableComponent } from './hvac-results/table/table.component';
 import { AppliedFiltersComponent } from './hvac-inputs/filters/applied-filters/applied-filters.component';
-
 
 /* angular material */
 import {MatCardModule} from '@angular/material/card';
@@ -46,6 +48,7 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { SearchPipe } from './hvac-inputs/location/search.pipe';
 
 
 @NgModule({
@@ -65,7 +68,8 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     CardComponent,
     TableComponent,
     SystemDesingComponent,
-    AppliedFiltersComponent
+    AppliedFiltersComponent,
+    SearchPipe
   ],
   imports: [
     CommonModule,
