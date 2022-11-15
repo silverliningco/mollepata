@@ -1,7 +1,7 @@
 export class States {
     constructor(
         public abbreviation: string | null,
-        public name: boolean | null  
+        public name: string | null  
     ) {}
 }
 

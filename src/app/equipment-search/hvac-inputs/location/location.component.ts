@@ -6,206 +6,6 @@ import { States, UtilityInfo } from '../../models/hvac-inputs';
 import { EndPointsService } from '../../services/endPoints.service';
 import { bridgeService } from '../../services/bridge.service';
 
-export const USAstates = [
-  {
-    'abbreviation': 'AL',
-    'name': 'Alabama'
-  },
-  {
-    'abbreviation': 'AK',
-    'name': 'Alaska'
-  },
-  {
-    'abbreviation': 'AZ',
-    'name': 'Arizona'
-  },
-  {
-    'abbreviation': 'AR',
-    'name': 'Arkansas'
-  },
-  {
-    'abbreviation': 'CA',
-    'name': 'California'
-  },
-  {
-    'abbreviation': 'NC',
-    'name': 'North Carolina'
-  },
-  {
-    'abbreviation': 'SC',
-    'name': 'South Carolina'
-  },
-  {
-    'abbreviation': 'CO',
-    'name': 'Colorado'
-  },
-  {
-    'abbreviation': 'CT',
-    'name': 'Connecticut'
-  },
-  {
-    'abbreviation': 'ND',
-    'name': 'North Dakota'
-  },
-  {
-    'abbreviation': 'SD',
-    'name': 'South Dakota'
-  },
-  {
-    'abbreviation': 'DE',
-    'name': 'Delaware'
-  },
-  {
-    'abbreviation': 'FL',
-    'name': 'Florida'
-  },
-  {
-    'abbreviation': 'GA',
-    'name': 'State of Georgia'
-  },
-  {
-    'abbreviation': 'HI',
-    'name': 'Hawaii'
-  },
-  {
-    'abbreviation': 'ID',
-    'name': 'Idaho'
-  },
-  {
-    'abbreviation': 'IL',
-    'name': 'Illinois'
-  },
-  {
-    'abbreviation': 'IN',
-    'name': 'Indiana'
-  },
-  {
-    'abbreviation': 'IA',
-    'name': 'Iowa'
-  },
-  {
-    'abbreviation': 'KS',
-    'name': 'Kansas'
-  },
-  {
-    'abbreviation': 'KY',
-    'name': 'Kentucky'
-  },
-  {
-    'abbreviation': 'LA',
-    'name': 'Luisiana'
-  },
-  {
-    'abbreviation': 'ME',
-    'name': 'Maine'
-  },
-  {
-    'abbreviation': 'MD',
-    'name': 'Maryland'
-  },
-  {
-    'abbreviation': 'MA',
-    'name': 'Massachusetts'
-  },
-  {
-    'abbreviation': 'MI',
-    'name': 'Michigan'
-  },
-  {
-    'abbreviation': 'MS',
-    'name': 'Mississippi'
-  },
-  {
-    'abbreviation': 'MO',
-    'name': 'Missouri'
-  },
-  {
-    'abbreviation': 'MT',
-    'name': 'Montana'
-  },
-  {
-    'abbreviation': 'NE',
-    'name': 'Nebraska'
-  },
-  {
-    'abbreviation': 'NV',
-    'name': 'Nevada'
-  },
-  {
-    'abbreviation': 'NJ',
-    'name': 'New Jersey'
-  },
-  {
-    'abbreviation': 'NY',
-    'name': 'New York'
-  },
-  {
-    'abbreviation': 'NH',
-    'name': 'New Hampshire'
-  },
-  {
-    'abbreviation': 'NM',
-    'name': 'New Mexico'
-  },
-  {
-    'abbreviation': 'OH',
-    'name': 'Ohio'
-  },
-  {
-    'abbreviation': 'OK',
-    'name': 'Oklahoma'
-  },
-  {
-    'abbreviation': 'OR',
-    'name': 'Oregon'
-  },
-  {
-    'abbreviation': 'PA',
-    'name': 'Pennsylvania'
-  },
-  {
-    'abbreviation': 'RI',
-    'name': 'Rhode Island'
-  },
-  {
-    'abbreviation': 'TN',
-    'name': 'Tennessee'
-  },
-  {
-    'abbreviation': 'TX',
-    'name': 'Texas'
-  },
-  {
-    'abbreviation': 'UT',
-    'name': 'Utah'
-  },
-  {
-    'abbreviation': 'VT',
-    'name': 'Vermont'
-  },
-  {
-    'abbreviation': 'VA',
-    'name': 'Virginia'
-  },
-  {
-    'abbreviation': 'WV',
-    'name': 'West Virginia'
-  },
-  {
-    'abbreviation': 'WA',
-    'name': 'Washington'
-  },
-  {
-    'abbreviation': 'WI',
-    'name': 'Wisconsin'
-  },
-  {
-    'abbreviation': 'WY',
-    'name': 'Wyoming'
-  },
-]
-
-
 @Component({
   selector: 'app-location',
   templateUrl: './location.component.html',
@@ -225,7 +25,204 @@ export class LocationComponent implements OnInit {
   sendGasOil: Array<any> = [];
   electricity:  Array<UtilityInfo> = [];
   fossilFuel: Array<UtilityInfo> = [];
-  states: any = USAstates;
+  states: States[] = [
+    {
+      'abbreviation': 'AL',
+      'name': 'Alabama'
+    },
+    {
+      'abbreviation': 'AK',
+      'name': 'Alaska'
+    },
+    {
+      'abbreviation': 'AZ',
+      'name': 'Arizona'
+    },
+    {
+      'abbreviation': 'AR',
+      'name': 'Arkansas'
+    },
+    {
+      'abbreviation': 'CA',
+      'name': 'California'
+    },
+    {
+      'abbreviation': 'NC',
+      'name': 'North Carolina'
+    },
+    {
+      'abbreviation': 'SC',
+      'name': 'South Carolina'
+    },
+    {
+      'abbreviation': 'CO',
+      'name': 'Colorado'
+    },
+    {
+      'abbreviation': 'CT',
+      'name': 'Connecticut'
+    },
+    {
+      'abbreviation': 'ND',
+      'name': 'North Dakota'
+    },
+    {
+      'abbreviation': 'SD',
+      'name': 'South Dakota'
+    },
+    {
+      'abbreviation': 'DE',
+      'name': 'Delaware'
+    },
+    {
+      'abbreviation': 'FL',
+      'name': 'Florida'
+    },
+    {
+      'abbreviation': 'GA',
+      'name': 'State of Georgia'
+    },
+    {
+      'abbreviation': 'HI',
+      'name': 'Hawaii'
+    },
+    {
+      'abbreviation': 'ID',
+      'name': 'Idaho'
+    },
+    {
+      'abbreviation': 'IL',
+      'name': 'Illinois'
+    },
+    {
+      'abbreviation': 'IN',
+      'name': 'Indiana'
+    },
+    {
+      'abbreviation': 'IA',
+      'name': 'Iowa'
+    },
+    {
+      'abbreviation': 'KS',
+      'name': 'Kansas'
+    },
+    {
+      'abbreviation': 'KY',
+      'name': 'Kentucky'
+    },
+    {
+      'abbreviation': 'LA',
+      'name': 'Luisiana'
+    },
+    {
+      'abbreviation': 'ME',
+      'name': 'Maine'
+    },
+    {
+      'abbreviation': 'MD',
+      'name': 'Maryland'
+    },
+    {
+      'abbreviation': 'MA',
+      'name': 'Massachusetts'
+    },
+    {
+      'abbreviation': 'MI',
+      'name': 'Michigan'
+    },
+    {
+      'abbreviation': 'MS',
+      'name': 'Mississippi'
+    },
+    {
+      'abbreviation': 'MO',
+      'name': 'Missouri'
+    },
+    {
+      'abbreviation': 'MT',
+      'name': 'Montana'
+    },
+    {
+      'abbreviation': 'NE',
+      'name': 'Nebraska'
+    },
+    {
+      'abbreviation': 'NV',
+      'name': 'Nevada'
+    },
+    {
+      'abbreviation': 'NJ',
+      'name': 'New Jersey'
+    },
+    {
+      'abbreviation': 'NY',
+      'name': 'New York'
+    },
+    {
+      'abbreviation': 'NH',
+      'name': 'New Hampshire'
+    },
+    {
+      'abbreviation': 'NM',
+      'name': 'New Mexico'
+    },
+    {
+      'abbreviation': 'OH',
+      'name': 'Ohio'
+    },
+    {
+      'abbreviation': 'OK',
+      'name': 'Oklahoma'
+    },
+    {
+      'abbreviation': 'OR',
+      'name': 'Oregon'
+    },
+    {
+      'abbreviation': 'PA',
+      'name': 'Pennsylvania'
+    },
+    {
+      'abbreviation': 'RI',
+      'name': 'Rhode Island'
+    },
+    {
+      'abbreviation': 'TN',
+      'name': 'Tennessee'
+    },
+    {
+      'abbreviation': 'TX',
+      'name': 'Texas'
+    },
+    {
+      'abbreviation': 'UT',
+      'name': 'Utah'
+    },
+    {
+      'abbreviation': 'VT',
+      'name': 'Vermont'
+    },
+    {
+      'abbreviation': 'VA',
+      'name': 'Virginia'
+    },
+    {
+      'abbreviation': 'WV',
+      'name': 'West Virginia'
+    },
+    {
+      'abbreviation': 'WA',
+      'name': 'Washington'
+    },
+    {
+      'abbreviation': 'WI',
+      'name': 'Wisconsin'
+    },
+    {
+      'abbreviation': 'WY',
+      'name': 'Wyoming'
+    },
+  ]
 
   disableButton: boolean = true;
 
@@ -253,7 +250,9 @@ export class LocationComponent implements OnInit {
     this.sendGasOil = [];
     this.sendElectric = [];
 
-    this._endPoint.Utilities(this.stateGroup.controls['stateControl'].value).subscribe({
+    let myState = this.stateGroup.controls['stateControl'].value;
+
+    this._endPoint.Utilities(myState).subscribe({
       next: (resp: any) => {
         let body = [
           {
@@ -370,8 +369,8 @@ export class LocationComponent implements OnInit {
           }
       
       ];
-        // let listUtilities: Array<utilityInfo> = resp;
-        let listUtilities: Array<UtilityInfo> = body;
+        let listUtilities: Array<UtilityInfo> = resp;
+        // let listUtilities: Array<UtilityInfo> = body;
         this.GetEachUtility(listUtilities);
       },
       error: (e) => alert(e.error),
@@ -445,8 +444,6 @@ export class LocationComponent implements OnInit {
         fossilFuelUtilityId: this.utilityGroup.controls['fossilFuelUtilityIdControl'].value 
       }
     }  
-
-    console.log(payload);
 
     let stateBtt = this.ActiveContinuebutton(payload);
 
