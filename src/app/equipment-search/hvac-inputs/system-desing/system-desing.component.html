@@ -55,7 +55,20 @@
 
   <br>
 
+  <!-- number of zones -->
+  <div *ngIf="showNrbZones">
+    <br>
+    <mat-label>Select number of zones</mat-label>
+    <br>
+    <mat-radio-group formControlName="numberZonesControl" (change)="NumberZones()" aria-label="Select an option"  >
+      <mat-radio-button value="multizone"> Multizone </mat-radio-button>
+      <br>
+      <mat-radio-button  value="single_zone"> Single zone </mat-radio-button>
+    </mat-radio-group>
+  </div>
+
 </form>
+
 
 <form *ngIf="showTable" [formGroup]="indoorUnitTable">
 

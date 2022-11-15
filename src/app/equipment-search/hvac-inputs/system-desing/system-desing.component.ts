@@ -24,9 +24,10 @@ export class SystemDesingComponent implements OnInit {
 
   // FormGroup
   systemDesing!: FormGroup; 
-  indoorUnitTable!: FormGroup; 
+  indoorUnitTable!: FormGroup;
 
   // table 
+  showNrbZones: boolean = false;
   showTable: boolean = false; 
   showButtonAdd: boolean = false;
   showButtonsDelete: boolean = false;
@@ -52,12 +53,12 @@ export class SystemDesingComponent implements OnInit {
           this.nominalcoolingTons = payload.data;
         });
 
-
     this.systemDesing = this.formBuilder.group({
       outdoorControl: ['', Validators.required],
       indoorControl: ['', Validators.required],
       furnaceControl: ['', Validators.required],
       furnaceConfigurationControl: ['', Validators.required],
+      numberZonesControl: ['', Validators.required],
     });
 
     this.indoorUnitTable = this.formBuilder.group({
@@ -72,6 +73,23 @@ export class SystemDesingComponent implements OnInit {
     let getValueIndoor = this.systemDesing.controls['indoorControl'].value;
 
     if (getValueIndoor == 'Mini-split'){
+      this.showNrbZones = true;
+    } else {
+      this.showNrbZones = false;
+      this.showTable = false;
+      this.payload= [];
+      this.systemDesing.controls['numberZonesControl'].reset();
+      this.indoorUnitTable.controls['quantityControl'].reset();
+      this.indoorUnitTable.controls['unitTypeControl'].reset();
+      this.indoorUnitTable.controls['sizeControl'].reset();
+      this.submitInputs();
+    }
+  }
+
+  NumberZones(){
+    let myNbrZones = this.systemDesing.controls['numberZonesControl'].value;
+    console.log(myNbrZones);
+    if (myNbrZones == 'multizone'){
       this.showTable = true;
     } else {
       this.showTable = false;
@@ -79,6 +97,7 @@ export class SystemDesingComponent implements OnInit {
     }
   }
 
+  // button for add one row to table 
   ShowButtons(): void{
 
     let getQuantity = this.indoorUnitTable.controls['quantityControl'].value;
@@ -252,6 +271,7 @@ export class SystemDesingComponent implements OnInit {
         indoor: this.systemDesing.controls['indoorControl'].value,
         furnace: this.systemDesing.controls['furnaceControl'].value,
         furnaceConfiguration: this.systemDesing.controls['furnaceConfigurationControl'].value,
+        nrbZones: this.systemDesing.controls['numberZonesControl'].value,
         indoorUnitTable: this.payload
       } 
     } else {
