@@ -15,3 +15,11 @@ export class UtilityInfo {
         public utilityProviderId: number | null  
     ) {}
 }
+
+export class MsMultiZoneUnits {
+    constructor(
+        public qty: number | null,
+        public unitType: string | null,
+        public size: number | null,
+    ) {}
+}

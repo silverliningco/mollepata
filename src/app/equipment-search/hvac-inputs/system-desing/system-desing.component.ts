@@ -2,12 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { bridgeService } from "../.././services/bridge.service";
 import {MatSnackBar} from '@angular/material/snack-bar';
+import { MsMultiZoneUnits } from '../../models/hvac-inputs';
 
-export interface Payload {
-  quantity: number;
-  unit_type: string;
-  size: number; 
-}
 
 @Component({
   selector: 'app-system-desing',
@@ -17,8 +13,8 @@ export interface Payload {
 export class SystemDesingComponent implements OnInit {
 
   // select
-  outdoors: string[] = ['Split system', 'Mini-split', 'Single package unit'];
-  indoors: string[] = ['Fan coil', 'Mini-split', 'Furnace + Evaporator coil', 'Boiler + hydro-air coil'];
+  outdoors: string[] = ['Split System', 'Mini-Split', 'Single Packaged Products'];
+  indoors: string[] = ['Fan coil', 'Mini-split', 'Furnace + Evaporator Coil', 'Boiler + hydro-air coil'];
   furnacesType: string[] = ['New ECM furnace', 'Existing or non-ECM furnace'];
   furnacesConfiguration: string[] = ['Upflow', 'Downflow', 'Horizontal'];
 
@@ -31,10 +27,10 @@ export class SystemDesingComponent implements OnInit {
   showTable: boolean = false; 
   showButtonAdd: boolean = false;
   showButtonsDelete: boolean = false;
-  unitTipes: string[] = ['Mini-Split Air Handler (Full Size)', 'Ducted mini-split Air Handler (Slim Style)', 'Floor/Ceiling Mount', 'Cassette', 'Hi Wall', '1-Way Casette'];
+  unitTipes: string[] = ['Mini-Split Air Handler (Full Size)', 'Ducted mini-split Air Handler (Slim Style)', 'Floor/Ceiling Mount', 'Cassette', 'High wall', '1-Way Casette'];
   sizeOptions: string[] = ['6000', '9000', '12000', '18000', '24000'];
   quantity: number[] = [1, 2, 3, 4, 5];
-  payload: Payload[] = [];
+  payload: MsMultiZoneUnits[] = [];
 
   nominalcoolingTons!: number;
 
@@ -116,8 +112,8 @@ export class SystemDesingComponent implements OnInit {
     let getSize = this.indoorUnitTable.controls['sizeControl'].value;
 
     let oneRow = {
-      quantity: getQuantity,
-      unit_type: getUnitType,
+      qty: getQuantity,
+      unitType: getUnitType,
       size: getSize
     }
 
@@ -127,10 +123,10 @@ export class SystemDesingComponent implements OnInit {
   /*  quantity <= 5
       size < 135% of  (nominal cooling tons * 12, 000)
   */
-  VerifyQuantities(oneRow: Payload): void{
+  VerifyQuantities(oneRow: MsMultiZoneUnits): void{
 
    let firstVerify =  this.VerifyQty(oneRow);
-   let secondVerivy!: Payload | null;
+   let secondVerivy!: MsMultiZoneUnits | null;
 
     if (firstVerify != null){
       secondVerivy = this.VerifySize(firstVerify);
@@ -141,16 +137,16 @@ export class SystemDesingComponent implements OnInit {
     }
   }
 
-  VerifyQty(oneRow: Payload): Payload | null{
+  VerifyQty(oneRow: MsMultiZoneUnits): MsMultiZoneUnits | null{
     let arr: number[]= []; // stores the numbers to be added
     let sum: number = 0;
 
     for (let i of this.payload) {
-      let myValue: Payload = i;
-      arr.push(Number(myValue.quantity));
+      let myValue: MsMultiZoneUnits = i;
+      arr.push(Number(myValue.qty));
     }
 
-    arr.push(Number(oneRow.quantity)); 
+    arr.push(Number(oneRow.qty)); 
 
     let add = (arr: any) => arr.reduce((a: any, b: any) => a + b, 0);
     sum = add(arr);
@@ -167,14 +163,14 @@ export class SystemDesingComponent implements OnInit {
 
   }
 
-  VerifySize(oneRow: Payload): Payload | null{
+  VerifySize(oneRow: MsMultiZoneUnits): MsMultiZoneUnits | null{
 
     let arr: number[]= [];// stores the size to be added
     let sum: number = 0;
 
     for (let i of this.payload) {
-      let myValue: Payload = i;
-      let a = Number(myValue.size) * Number(myValue.quantity);
+      let myValue: MsMultiZoneUnits = i;
+      let a = Number(myValue.size) * Number(myValue.qty);
       arr.push(a);
     }
 
@@ -200,7 +196,7 @@ export class SystemDesingComponent implements OnInit {
     this._snackBar.open(mssg);
   }
 
-  AddRowToPayload(oneRow: Payload): Payload | null{
+  AddRowToPayload(oneRow: MsMultiZoneUnits): MsMultiZoneUnits | null{
 
     // verify if all of data is complete
     let incomplete = this.ActiveContinuebutton(oneRow);
@@ -267,18 +263,18 @@ export class SystemDesingComponent implements OnInit {
 
     if(myIndoor == 'Mini-split'){
       payload = {
-        outdoorControl: this.systemDesing.controls['outdoorControl'].value,
-        indoor: this.systemDesing.controls['indoorControl'].value,
-        furnace: this.systemDesing.controls['furnaceControl'].value,
+        outdoorSystemType: this.systemDesing.controls['outdoorControl'].value,
+        indoorSystemType: this.systemDesing.controls['indoorControl'].value,
+        furnaceType: this.systemDesing.controls['furnaceControl'].value,
         furnaceConfiguration: this.systemDesing.controls['furnaceConfigurationControl'].value,
-        nrbZones: this.systemDesing.controls['numberZonesControl'].value,
+        msIndoorZones: this.systemDesing.controls['numberZonesControl'].value,
         indoorUnitTable: this.payload
       } 
     } else {
       payload = {
-        outdoorControl: this.systemDesing.controls['outdoorControl'].value,
-        indoor: this.systemDesing.controls['indoorControl'].value,
-        furnace: this.systemDesing.controls['furnaceControl'].value,
+        outdoorSystemType: this.systemDesing.controls['outdoorControl'].value,
+        indoorSystemType: this.systemDesing.controls['indoorControl'].value,
+        furnaceType: this.systemDesing.controls['furnaceControl'].value,
         furnaceConfiguration: this.systemDesing.controls['furnaceConfigurationControl'].value
       } 
 

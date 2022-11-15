@@ -76,7 +76,7 @@
     <thead>
       <tr>
         <th >qty</th>
-        <th >unit_type</th>
+        <th >unit type</th>
         <th>size</th>
         <th>add</th>
         <th>delete</th>
@@ -85,8 +85,8 @@
     <tbody>
       <!-- rows added -->
       <tr  *ngFor="let pl of payload; index as i">
-        <td>{{pl.quantity}}</td>
-        <td>{{pl.unit_type}}</td>
+        <td>{{pl.qty}}</td>
+        <td>{{pl.unitType}}</td>
         <td>{{pl.size | number}}</td>
         <td></td>
         <td>
