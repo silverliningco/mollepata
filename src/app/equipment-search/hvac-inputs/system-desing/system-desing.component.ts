@@ -13,24 +13,128 @@ import { MsMultiZoneUnits } from '../../models/hvac-inputs';
 export class SystemDesingComponent implements OnInit {
 
   // select
-  outdoors: string[] = ['Split System', 'Mini-Split', 'Single Packaged Products'];
+  outdoors: string[] = ['Split System', 'Mini-Split', 'Single Packaged Products'];  
   indoors: string[] = ['Fan coil', 'Mini-split', 'Furnace + Evaporator Coil', 'Boiler + hydro-air coil'];
   furnacesType: string[] = ['New ECM furnace', 'Existing or non-ECM furnace'];
   furnacesConfiguration: string[] = ['Upflow', 'Downflow', 'Horizontal'];
+  
+  // new select
+  myOutdoors: object[] = [
+    {
+      "showUser": "Split System",
+      "vaule": "Split System"
+    },
+    {
+      "showUser": "Mini-Split",
+      "vaule": "Mini-Split"
+    },
+    {
+      "showUser": "Small packaged unit",
+      "vaule": "Small packaged unit"
+    }
+  ]
+
+  myIndoors: object[] = [
+    {
+      "showUser": "Fan coil",
+      "vaule": "Fan coil"
+    },
+    {
+      "showUser": "Mini-split",
+      "vaule": "Mini-split indoor"
+    },
+    {
+      "showUser": "Furnace + Evaporator Coil",
+      "vaule": "Evaporator coil"
+    },
+    // use in the future 
+    // {
+    //   "showUser": "Boiler + hydro-air coil",
+    //   "vaule": "Boiler + hydro-air coil"
+    // }
+  ]
+
+  myFurnaceType: object[] = [
+    //  doen´t use in sql 
+    {
+      "showUser": "New ECM furnace",
+      "vaule": "New ECM furnace"
+    },
+    {
+      "showUser": "Existing or non-ECM furnace",
+      "vaule": "Existing or non-ECM furnace"
+    },
+    {
+      "showUser": "None",
+      "vaule": "None"
+    }
+  ]
+
+  myFurnaceConfigutarion: object[] = [
+    {
+      "showUser": "Upflow",
+      "vaule": "Upflow"
+    },
+    {
+      "showUser": "Downflow",
+      "vaule": "Downflow"
+    },
+    {
+      "showUser": "Horizontal",
+      "vaule": "Horizontal"
+    }
+  ]
 
   // FormGroup
   systemDesing!: FormGroup; 
   indoorUnitTable!: FormGroup;
 
   // table 
+  payload: MsMultiZoneUnits[] = [];
   showNrbZones: boolean = false;
   showTable: boolean = false; 
   showButtonAdd: boolean = false;
   showButtonsDelete: boolean = false;
   unitTipes: string[] = ['Mini-Split Air Handler (Full Size)', 'Ducted mini-split Air Handler (Slim Style)', 'Floor/Ceiling Mount', 'Cassette', 'High wall', '1-Way Casette'];
-  sizeOptions: string[] = ['6000', '9000', '12000', '18000', '24000'];
+  sizeOptions: number[] = [6000, 9000, 12000, 18000, 24000];
   quantity: number[] = [1, 2, 3, 4, 5];
-  payload: MsMultiZoneUnits[] = [];
+  
+
+  // new select
+  /* 
+  {
+      "showUser": "",
+      "vaule": ""
+    }
+  */
+
+  myMsMultiZoneUnits: object[] = [
+    {
+      "showUser": "Mini-Split Air Handler (Full Size)",
+      "vaule": "Mini-Split Air Handler (Full Size)"
+    },
+    {
+      "showUser": "Ducted mini-split Air Handler (Slim Style)",
+      "vaule": "Ducted mini-split Air Handler (Slim Style)"
+    },
+    {
+      "showUser": "Floor/Ceiling Mount",
+      "vaule": "Floor/Ceiling Mount"
+    },
+    {
+      "showUser": "Cassette",
+      "vaule": "Cassette"
+    },
+    {
+      "showUser": "High wall",
+      "vaule": "High wall"
+    },
+    {
+      "showUser": "1-Way Casette",
+      "vaule": "1-Way Casette"
+    }
+  ]
+
 
   nominalcoolingTons!: number;
 
@@ -85,7 +189,7 @@ export class SystemDesingComponent implements OnInit {
   NumberZones(){
     let myNbrZones = this.systemDesing.controls['numberZonesControl'].value;
     console.log(myNbrZones);
-    if (myNbrZones == 'multizone'){
+    if (myNbrZones == 'Multi-zone'){
       this.showTable = true;
     } else {
       this.showTable = false;
