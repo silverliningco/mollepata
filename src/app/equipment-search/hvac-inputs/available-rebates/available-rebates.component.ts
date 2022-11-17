@@ -27,7 +27,7 @@ export class AvailableRebatesComponent implements OnInit {
     let max!: any;
 
     results.forEach((element:any) => {
-      // debuelve los resultados ordenamos del maxino al minimo
+      // returns the results ordered from maximum to minimum
       element.forEach((element2: any) => {
         max =  element2.sort( function(a: any, b:any) {
           if (a.totalAvailableRebates < b.totalAvailableRebates || a.totalAvailableRebates === null) return +1;

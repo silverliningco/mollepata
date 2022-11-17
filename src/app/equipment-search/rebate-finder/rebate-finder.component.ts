@@ -3,6 +3,7 @@ import { bridgeService } from '../services/bridge.service';
 
 import { Location, ListUtilities, DwellingInfo, HeatedCooled, Nominalsize, SystemDesing, indoorUnitTable } from '../models/rebate-finder-inputs';
 import { FormGroup } from '@angular/forms';
+import { BasicEstructureComponent } from 'src/app/basic-estructure/basic-estructure.component';
 
 // prueva
 export const RESULTS1 = [ { "id":['25VNA424A003', '25HPB630A003', '24VNA624A003']}];
@@ -977,6 +978,7 @@ export class RebateFinderComponent implements OnInit {
   myNominalSize: Nominalsize = new Nominalsize(null, null, true);
   mySystemDesing: SystemDesing = new SystemDesing(null, null, null, null, null, true);
 
+  bestOption: any[] = [];
   filters!: string[];
   filtesApplied!: string[];
 
@@ -985,9 +987,9 @@ export class RebateFinderComponent implements OnInit {
 
   outdoorGroup !: FormGroup;
 //   myResults: any[] = RESULTS1;
-  myResults: any[][] = [];
+  myResults: any[] = RESULTS2;
+//   myResults: any[][] = [];
   master = 'Master';
-  // prueva
 
   constructor(
     public _bridge: bridgeService,
@@ -1022,8 +1024,7 @@ export class RebateFinderComponent implements OnInit {
 
     this._bridge.OrderResultsRebateFinder
         .subscribe((payload: any) => {
-            this.myNominalSize = payload.data[0];
-            this.myNominalSize.desableButton = payload.data[1];
+            this.myResults = payload.data;
           }); 
 
     this._bridge.systemDesingParams
@@ -1050,7 +1051,7 @@ export class RebateFinderComponent implements OnInit {
             // this.SendFilterApplied(this.filtesApplied);
         });
     
-    
+    this.OrderCards();
   }
 
   SendListFilters(filters: string[]){
@@ -1068,11 +1069,34 @@ export class RebateFinderComponent implements OnInit {
   }  
 
   sendResults(){
-    this.myResults= RESULTS2;
+    // this.myResults= RESULTS2;
      /* sent the info to results-rebate */
      this._bridge.resultsRebateFinder.emit({
         data: [this.myResults]
       });
+  }
+
+  OrderCards(){
+    // guarda el primer elemento de cada card
+    console.log(this.myResults);
+    let first: any[] = [];
+    this.myResults.forEach(card => {
+        first.push(card[0]);
+    });
+
+    // ordena first de mayir a menor
+    let max!: any;
+        max =  first.sort( function(a: any, b:any) {
+          if (a.totalAvailableRebates < b.totalAvailableRebates || a.totalAvailableRebates === null) return +1;
+          if (a.totalAvailableRebates > b.totalAvailableRebates || b.totalAvailableRebates === null) return -1;
+          return 0;
+        });
+        this.bestOption.push( max);
+
+    console.log(max);
+
+    // 
+
   }
 
   SendFilterApplied(filtesApplied: string[]){
@@ -1081,6 +1105,5 @@ export class RebateFinderComponent implements OnInit {
     })
   }
 
-
-
+  
 }

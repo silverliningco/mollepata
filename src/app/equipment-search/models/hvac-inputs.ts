@@ -16,7 +16,7 @@ export class UtilityInfo {
     ) {}
 }
 
-export class MsMultiZoneUnits {
+export class MsUnits {
     constructor(
         public qty: number | null,
         public unitType: string | null,

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { bridgeService } from "../.././services/bridge.service";
 import {MatSnackBar} from '@angular/material/snack-bar';
-import { MsMultiZoneUnits } from '../../models/hvac-inputs';
+import { MsUnits } from '../../models/hvac-inputs';
 
 
 @Component({
@@ -12,129 +12,113 @@ import { MsMultiZoneUnits } from '../../models/hvac-inputs';
 })
 export class SystemDesingComponent implements OnInit {
 
-  // select
-  outdoors: string[] = ['Split System', 'Mini-Split', 'Single Packaged Products'];  
-  indoors: string[] = ['Fan coil', 'Mini-split', 'Furnace + Evaporator Coil', 'Boiler + hydro-air coil'];
-  furnacesType: string[] = ['New ECM furnace', 'Existing or non-ECM furnace'];
-  furnacesConfiguration: string[] = ['Upflow', 'Downflow', 'Horizontal'];
-  
-  // new select
-  myOutdoors: object[] = [
+  // select 
+  outdoors = [
     {
       "showUser": "Split System",
-      "vaule": "Split System"
+      "value": "Split System"
     },
     {
       "showUser": "Mini-Split",
-      "vaule": "Mini-Split"
+      "value": "Mini-Split"
     },
     {
       "showUser": "Small packaged unit",
-      "vaule": "Small packaged unit"
+      "value": "Small packaged unit"
     }
-  ]
+  ];
 
-  myIndoors: object[] = [
+  indoors = [
     {
       "showUser": "Fan coil",
-      "vaule": "Fan coil"
+      "value": "Fan coil"
     },
     {
       "showUser": "Mini-split",
-      "vaule": "Mini-split indoor"
+      "value": "Mini-split indoor"
     },
     {
       "showUser": "Furnace + Evaporator Coil",
-      "vaule": "Evaporator coil"
+      "value": "Evaporator coil"
     },
     // use in the future 
     // {
     //   "showUser": "Boiler + hydro-air coil",
-    //   "vaule": "Boiler + hydro-air coil"
+    //   "value": "Boiler + hydro-air coil"
     // }
-  ]
+  ];
 
-  myFurnaceType: object[] = [
+  furnacesType = [
     //  doen´t use in sql 
     {
       "showUser": "New ECM furnace",
-      "vaule": "New ECM furnace"
+      "value": "New ECM furnace"
     },
     {
       "showUser": "Existing or non-ECM furnace",
-      "vaule": "Existing or non-ECM furnace"
+      "value": "Existing or non-ECM furnace"
     },
     {
       "showUser": "None",
-      "vaule": "None"
+      "value": "None"
     }
-  ]
+  ];
 
-  myFurnaceConfigutarion: object[] = [
+  furnacesConfiguration = [
     {
       "showUser": "Upflow",
-      "vaule": "Upflow"
+      "value": "Upflow"
     },
     {
       "showUser": "Downflow",
-      "vaule": "Downflow"
+      "value": "Downflow"
     },
     {
       "showUser": "Horizontal",
-      "vaule": "Horizontal"
+      "value": "Horizontal"
     }
-  ]
+  ];
 
   // FormGroup
   systemDesing!: FormGroup; 
-  indoorUnitTable!: FormGroup;
+  msMultiZoneType!: FormGroup;
+  msIndoorUnitType!: FormGroup;
 
   // table 
-  payload: MsMultiZoneUnits[] = [];
+  payload: MsUnits[] = [];
   showNrbZones: boolean = false;
+  singleZones: boolean = false;
   showTable: boolean = false; 
   showButtonAdd: boolean = false;
   showButtonsDelete: boolean = false;
-  unitTipes: string[] = ['Mini-Split Air Handler (Full Size)', 'Ducted mini-split Air Handler (Slim Style)', 'Floor/Ceiling Mount', 'Cassette', 'High wall', '1-Way Casette'];
   sizeOptions: number[] = [6000, 9000, 12000, 18000, 24000];
   quantity: number[] = [1, 2, 3, 4, 5];
-  
-
-  // new select
-  /* 
-  {
-      "showUser": "",
-      "vaule": ""
-    }
-  */
-
-  myMsMultiZoneUnits: object[] = [
+  msUnits = [
     {
       "showUser": "Mini-Split Air Handler (Full Size)",
-      "vaule": "Mini-Split Air Handler (Full Size)"
+      "value": "Mini-Split Air Handler (Full Size)"
     },
     {
       "showUser": "Ducted mini-split Air Handler (Slim Style)",
-      "vaule": "Ducted mini-split Air Handler (Slim Style)"
+      "value": "Ducted mini-split Air Handler (Slim Style)"
     },
     {
       "showUser": "Floor/Ceiling Mount",
-      "vaule": "Floor/Ceiling Mount"
+      "value": "Floor/Ceiling Mount"
     },
     {
       "showUser": "Cassette",
-      "vaule": "Cassette"
+      "value": "Cassette"
     },
     {
       "showUser": "High wall",
-      "vaule": "High wall"
+      "value": "High wall"
     },
     {
       "showUser": "1-Way Casette",
-      "vaule": "1-Way Casette"
+      "value": "1-Way Casette"
     }
-  ]
-
+  ];
 
   nominalcoolingTons!: number;
 
@@ -161,27 +145,31 @@ export class SystemDesingComponent implements OnInit {
       numberZonesControl: ['', Validators.required],
     });
 
-    this.indoorUnitTable = this.formBuilder.group({
+    this.msMultiZoneType = this.formBuilder.group({
       quantityControl: ['', Validators.required],
       unitTypeControl: ['', Validators.required],
       sizeControl: ['', Validators.required]
     });
+
+    this.msIndoorUnitType = this.formBuilder.group({
+      msIndoorUnitTypeControl: ['', Validators.required]
+    })
   }
 
   selectIndoor(): void{
 
     let getValueIndoor = this.systemDesing.controls['indoorControl'].value;
 
-    if (getValueIndoor == 'Mini-split'){
+    if (getValueIndoor == 'Mini-split indoor'){
       this.showNrbZones = true;
     } else {
       this.showNrbZones = false;
       this.showTable = false;
       this.payload= [];
       this.systemDesing.controls['numberZonesControl'].reset();
-      this.indoorUnitTable.controls['quantityControl'].reset();
-      this.indoorUnitTable.controls['unitTypeControl'].reset();
-      this.indoorUnitTable.controls['sizeControl'].reset();
+      this.msMultiZoneType.controls['quantityControl'].reset();
+      this.msMultiZoneType.controls['unitTypeControl'].reset();
+      this.msMultiZoneType.controls['sizeControl'].reset();
       this.submitInputs();
     }
   }
@@ -191,8 +179,11 @@ export class SystemDesingComponent implements OnInit {
     console.log(myNbrZones);
     if (myNbrZones == 'Multi-zone'){
       this.showTable = true;
+      this.singleZones = false;
     } else {
+      let myNbrZones = this.msIndoorUnitType.controls['msIndoorUnitTypeControl'].value;
       this.showTable = false;
+      this.singleZones= true;
       this.submitInputs();
     }
   }
@@ -200,9 +191,9 @@ export class SystemDesingComponent implements OnInit {
   // button for add one row to table 
   ShowButtons(): void{
 
-    let getQuantity = this.indoorUnitTable.controls['quantityControl'].value;
-    let getUnitType = this.indoorUnitTable.controls['unitTypeControl'].value;
-    let getSize = this.indoorUnitTable.controls['sizeControl'].value;
+    let getQuantity = this.msMultiZoneType.controls['quantityControl'].value;
+    let getUnitType = this.msMultiZoneType.controls['unitTypeControl'].value;
+    let getSize = this.msMultiZoneType.controls['sizeControl'].value;
 
     if (getSize != null && getUnitType != null && getQuantity != null){
       this.showButtonAdd = true;
@@ -211,9 +202,9 @@ export class SystemDesingComponent implements OnInit {
 
   AddRow(){
 
-    let getQuantity = this.indoorUnitTable.controls['quantityControl'].value;
-    let getUnitType = this.indoorUnitTable.controls['unitTypeControl'].value;
-    let getSize = this.indoorUnitTable.controls['sizeControl'].value;
+    let getQuantity = this.msMultiZoneType.controls['quantityControl'].value;
+    let getUnitType = this.msMultiZoneType.controls['unitTypeControl'].value;
+    let getSize = this.msMultiZoneType.controls['sizeControl'].value;
 
     let oneRow = {
       qty: getQuantity,
@@ -227,10 +218,10 @@ export class SystemDesingComponent implements OnInit {
   /*  quantity <= 5
       size < 135% of  (nominal cooling tons * 12, 000)
   */
-  VerifyQuantities(oneRow: MsMultiZoneUnits): void{
+  VerifyQuantities(oneRow: MsUnits): void{
 
    let firstVerify =  this.VerifyQty(oneRow);
-   let secondVerivy!: MsMultiZoneUnits | null;
+   let secondVerivy!: MsUnits | null;
 
     if (firstVerify != null){
       secondVerivy = this.VerifySize(firstVerify);
@@ -241,12 +232,12 @@ export class SystemDesingComponent implements OnInit {
     }
   }
 
-  VerifyQty(oneRow: MsMultiZoneUnits): MsMultiZoneUnits | null{
+  VerifyQty(oneRow: MsUnits): MsUnits | null{
     let arr: number[]= []; // stores the numbers to be added
     let sum: number = 0;
 
     for (let i of this.payload) {
-      let myValue: MsMultiZoneUnits = i;
+      let myValue: MsUnits = i;
       arr.push(Number(myValue.qty));
     }
 
@@ -267,13 +258,13 @@ export class SystemDesingComponent implements OnInit {
 
   }
 
-  VerifySize(oneRow: MsMultiZoneUnits): MsMultiZoneUnits | null{
+  VerifySize(oneRow: MsUnits): MsUnits | null{
 
     let arr: number[]= [];// stores the size to be added
     let sum: number = 0;
 
     for (let i of this.payload) {
-      let myValue: MsMultiZoneUnits = i;
+      let myValue: MsUnits = i;
       let a = Number(myValue.size) * Number(myValue.qty);
       arr.push(a);
     }
@@ -300,15 +291,20 @@ export class SystemDesingComponent implements OnInit {
     this._snackBar.open(mssg);
   }
 
-  AddRowToPayload(oneRow: MsMultiZoneUnits): MsMultiZoneUnits | null{
+  AddRowToPayload(oneRow: MsUnits): MsUnits | null{
 
     // verify if all of data is complete
     let incomplete = this.ActiveContinuebutton(oneRow);
     if (incomplete == false){
-      this.payload.push(oneRow);
-      this.indoorUnitTable.controls['quantityControl'].reset();
-      this.indoorUnitTable.controls['unitTypeControl'].reset();
-      this.indoorUnitTable.controls['sizeControl'].reset();
+      let typeC:MsUnits  = {
+        qty: Number(oneRow.qty),
+        unitType: oneRow.unitType,
+        size: Number(oneRow.size)
+      }
+      this.payload.push(typeC);
+      this.msMultiZoneType.controls['quantityControl'].reset();
+      this.msMultiZoneType.controls['unitTypeControl'].reset();
+      this.msMultiZoneType.controls['sizeControl'].reset();
       this.submitInputs();
     } else {
       let message = 'Please, complete all the inputs.';
@@ -365,15 +361,31 @@ export class SystemDesingComponent implements OnInit {
     let payload = {}
     let stateBtt!: boolean;
 
-    if(myIndoor == 'Mini-split'){
-      payload = {
-        outdoorSystemType: this.systemDesing.controls['outdoorControl'].value,
-        indoorSystemType: this.systemDesing.controls['indoorControl'].value,
-        furnaceType: this.systemDesing.controls['furnaceControl'].value,
-        furnaceConfiguration: this.systemDesing.controls['furnaceConfigurationControl'].value,
-        msIndoorZones: this.systemDesing.controls['numberZonesControl'].value,
-        indoorUnitTable: this.payload
-      } 
+    if(myIndoor == 'Mini-split indoor'){
+
+      let numberZones = this.systemDesing.controls['numberZonesControl'].value;
+
+      if (numberZones == 'Multi-zone'){
+        payload = {
+          outdoorSystemType: this.systemDesing.controls['outdoorControl'].value,
+          indoorSystemType: this.systemDesing.controls['indoorControl'].value,
+          furnaceType: this.systemDesing.controls['furnaceControl'].value,
+          furnaceConfiguration: this.systemDesing.controls['furnaceConfigurationControl'].value,
+          msIndoorZones: this.systemDesing.controls['numberZonesControl'].value,
+          msMultiZoneType: this.payload
+        }
+      } else {
+        payload = {
+          outdoorSystemType: this.systemDesing.controls['outdoorControl'].value,
+          indoorSystemType: this.systemDesing.controls['indoorControl'].value,
+          furnaceType: this.systemDesing.controls['furnaceControl'].value,
+          furnaceConfiguration: this.systemDesing.controls['furnaceConfigurationControl'].value,
+          msIndoorZones: this.systemDesing.controls['numberZonesControl'].value,
+          msIndoorUnitType: this.msIndoorUnitType.controls['msIndoorUnitTypeControl'].value
+        }
+      }
+
+       
     } else {
       payload = {
         outdoorSystemType: this.systemDesing.controls['outdoorControl'].value,
@@ -385,6 +397,7 @@ export class SystemDesingComponent implements OnInit {
       stateBtt = true;
     }
 
+    console.log(payload);
     stateBtt = this.ActiveContinuebutton(payload);
 
     /* sent the info to results-rebate */
