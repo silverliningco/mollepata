@@ -1084,7 +1084,7 @@ export class RebateFinderComponent implements OnInit {
         first.push(card[0]);
     });
 
-    // ordena first de mayir a menor
+    // ordena first de mayor a menor
     let max!: any;
         max =  first.sort( function(a: any, b:any) {
           if (a.totalAvailableRebates < b.totalAvailableRebates || a.totalAvailableRebates === null) return +1;
@@ -1095,7 +1095,8 @@ export class RebateFinderComponent implements OnInit {
 
     console.log(max);
 
-    // 
+    // hacerlo dentro de un for?? y luego sacar el index ??
+    
 
   }
 
@@ -1105,5 +1106,4 @@ export class RebateFinderComponent implements OnInit {
     })
   }
 
-  
 }
