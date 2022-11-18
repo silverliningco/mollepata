@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { bridgeService } from '../services/bridge.service';
 
-import { Location, ListUtilities, DwellingInfo, HeatedCooled, Nominalsize, SystemDesing, indoorUnitTable } from '../models/rebate-finder-inputs';
+import { Location, ListUtilities, DwellingInfo, HeatedCooled, Nominalsize, SystemDesing } from '../models/rebate-finder-inputs';
+import { Result } from '../models/results';
 import { FormGroup } from '@angular/forms';
-import { BasicEstructureComponent } from 'src/app/basic-estructure/basic-estructure.component';
 
 // prueva
 export const RESULTS1 = [ { "id":['25VNA424A003', '25HPB630A003', '24VNA624A003']}];
@@ -1077,7 +1077,7 @@ export class RebateFinderComponent implements OnInit {
   }
 
   OrderCards(){
-    // guarda el primer elemento de cada card
+    /* // guarda el primer elemento de cada card
     console.log(this.myResults);
     let first: any[] = [];
     this.myResults.forEach(card => {
@@ -1093,10 +1093,28 @@ export class RebateFinderComponent implements OnInit {
         });
         this.bestOption.push( max);
 
-    console.log(max);
+    console.log(max); */
 
-    // hacerlo dentro de un for?? y luego sacar el index ??
-    
+    let pila = [];
+
+    for (let i = 0; i < this.myResults.length; i++) {
+        let element = this.myResults[i];
+        let bestOption = element[0];
+
+        if (i < this.myResults.length){
+            var next = this.myResults[i +1];
+            var nextBestOption = next[0];
+        }
+
+        if (bestOption.totalAvailableRebates){
+
+        }
+
+        
+
+        console.log('last:' + bestOption.totalAvailableRebates + '  ' + 'next:' + nextBestOption.totalAvailableRebates)
+        
+    }
 
   }
 
