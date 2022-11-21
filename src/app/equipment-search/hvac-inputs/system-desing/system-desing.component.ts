@@ -326,7 +326,7 @@ export class SystemDesingComponent implements OnInit {
   ShowAllResults(){
   
     this._bridge.showAllResults.emit({
-      data: true
+      data: false
     });
   }
 

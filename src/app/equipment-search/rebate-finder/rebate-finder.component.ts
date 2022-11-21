@@ -1032,12 +1032,15 @@ export class RebateFinderComponent implements OnInit {
         .subscribe((payload: any) => {
             this.mySystemDesing = payload.data[0];
             this.mySystemDesing.desableButton = payload.data[1];
+            this.showProducLines = false;
         });
 
     // from system desing 
     this._bridge.showAllResults
         .subscribe((payload: any) => {
-            this.showProducLines = payload.data;
+            this.showProducLines = true;
+            this.mySystemDesing.desableButton = payload.data;
+            console.log(payload.data);
         });
 
     this._bridge.filters
@@ -1049,7 +1052,7 @@ export class RebateFinderComponent implements OnInit {
     this._bridge.filter
         .subscribe((payload: any) => {
             this.filtesApplied = payload.data;
-            // this.SendFilterApplied(this.filtesApplied);
+            this.SendFilterApplied(this.filtesApplied);
         });
     
     this.OrderCards();
@@ -1092,10 +1095,6 @@ export class RebateFinderComponent implements OnInit {
             this.myResults[slot+1]= this.myResults[slot];
         }
         this.myResults[slot+1] = array;
-
-        console.log(tmp);
-
-        console.log(this.myResults);
     }
 
     this.myResults = this.myResults.reverse();
