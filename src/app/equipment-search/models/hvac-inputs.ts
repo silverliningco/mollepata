@@ -23,3 +23,11 @@ export class MsUnits {
         public size: number | null,
     ) {}
 }
+
+export class RebateInput {
+    constructor(
+        public options: string[] | null,
+        public id: number | null,
+        public text: string | null,
+    ) {}
+}

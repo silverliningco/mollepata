@@ -14,6 +14,16 @@ export class EndPointsService {
       private _http: HttpClient
     ) { }
 
+    // provicional
+    Rebate(body: any): Observable<any> {
+
+      let url = URL_SERVICIOS; 
+  
+      return this._http.post(url, body);
+    }
+
+    // verify
+
     ProductLines(body: any): Observable<any> {
 
       let url = URL_SERVICIOS + '/product-lines'; 
@@ -35,32 +45,32 @@ export class EndPointsService {
       return this._http.post(url, body);
     }
 
-  ElegibilityQuestions(body: any): Observable<any> {
+    ElegibilityQuestions(body: any): Observable<any> {
 
-    let url = URL_SERVICIOS + '/eligibility-criteria' 
+      let url = URL_SERVICIOS + '/eligibility-criteria' 
 
-    return this._http.post(url, body);
-  }
+      return this._http.post(url, body);
+    }
 
-  Search(body: any): Observable<any> {
+    Search(body: any): Observable<any> {
 
-    let url = URL_SERVICIOS + '/search-equipment'; 
+      let url = URL_SERVICIOS + '/search-equipment'; 
 
-    return this._http.post(url, body);
-  }
+      return this._http.post(url, body);
+    }
 
-  Utilities(state: any){
+    Utilities(state: any){
 
-    let url = URL_SERVICIOS + '/utility-providers?country=US&state='+ state;
+      let url = URL_SERVICIOS + '/utility-providers?country=US&state='+ state;
 
-    return this._http.get(url);
-    
-  }
+      return this._http.get(url);
+      
+    }
 
-  ModelNrs(body: any){
-    let url = URL_SERVICIOS + '/model-nrs'; 
+    ModelNrs(body: any){
+      let url = URL_SERVICIOS + '/model-nrs'; 
 
-    return this._http.post(url, body);
-  }
+      return this._http.post(url, body);
+    }
 
 }
