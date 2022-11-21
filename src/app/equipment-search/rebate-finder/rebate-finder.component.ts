@@ -4,6 +4,7 @@ import { bridgeService } from '../services/bridge.service';
 import { Location, ListUtilities, DwellingInfo, HeatedCooled, Nominalsize, SystemDesing } from '../models/rebate-finder-inputs';
 import { Result } from '../models/results';
 import { FormGroup } from '@angular/forms';
+import { switchMap } from 'rxjs';
 
 // prueva
 export const RESULTS1 = [ { "id":['25VNA424A003', '25HPB630A003', '24VNA624A003']}];
@@ -61,7 +62,7 @@ export const RESULTS2 = [
           "Horizontal",
           "Upflow"
       ],
-      "totalAvailableRebates": 1
+      "totalAvailableRebates": 15
     },
     {
         "EER": 13.00,
@@ -1077,45 +1078,28 @@ export class RebateFinderComponent implements OnInit {
   }
 
   OrderCards(){
-    /* // guarda el primer elemento de cada card
-    console.log(this.myResults);
-    let first: any[] = [];
-    this.myResults.forEach(card => {
-        first.push(card[0]);
-    });
 
-    // ordena first de mayor a menor
-    let max!: any;
-        max =  first.sort( function(a: any, b:any) {
-          if (a.totalAvailableRebates < b.totalAvailableRebates || a.totalAvailableRebates === null) return +1;
-          if (a.totalAvailableRebates > b.totalAvailableRebates || b.totalAvailableRebates === null) return -1;
-          return 0;
-        });
-        this.bestOption.push( max);
+    let size = this.myResults.length;
+    let slot!: any;
+    let tmp!: any;
+    let array!: any;
+    
+    for ( let item = 0; item < size; item++) {
+        tmp = this.myResults[item][0].totalAvailableRebates;
+        array = this.myResults[item];
 
-    console.log(max); */
-
-    let pila = [];
-
-    for (let i = 0; i < this.myResults.length; i++) {
-        let element = this.myResults[i];
-        let bestOption = element[0];
-
-        if (i < this.myResults.length){
-            var next = this.myResults[i +1];
-            var nextBestOption = next[0];
+        for ( slot = item -1; slot >= 0 && this.myResults[slot][0].totalAvailableRebates > tmp; slot --) {
+            this.myResults[slot+1]= this.myResults[slot];
         }
+        this.myResults[slot+1] = array;
 
-        if (bestOption.totalAvailableRebates){
+        console.log(tmp);
 
-        }
-
-        
-
-        console.log('last:' + bestOption.totalAvailableRebates + '  ' + 'next:' + nextBestOption.totalAvailableRebates)
-        
+        console.log(this.myResults);
     }
 
+    this.myResults = this.myResults.reverse();
+    
   }
 
   SendFilterApplied(filtesApplied: string[]){
