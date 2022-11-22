@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { bridgeService } from '../../services/bridge.service';
 import { EndPointsService } from '../../services/endPoints.service';
 
-import { RebateInput } from '../../models/hvac-inputs';
+import { EligibilityQuestions, EligybilityRequirement } from '../../models/hvac-inputs';
 
 @Component({
   selector: 'app-available-rebates',
@@ -12,13 +13,17 @@ import { RebateInput } from '../../models/hvac-inputs';
 })
 export class AvailableRebatesComponent implements OnInit {
 
+  rebateGroup !: FormGroup;
+
+  // order results inside cards
   results: any;
   bestOption: any[] = [];
 
-  myEligybilityRequirement: RebateInput[] = [];
-  myEligibilityQuestions: RebateInput[] = [];
+  myEligybilityRequirement: EligybilityRequirement[] = [];
+  myEligibilityQuestions: EligibilityQuestions[] = [];
 
   constructor(
+    private formBuilder: FormBuilder,
     public _bridge: bridgeService,
     private _endPoint: EndPointsService
   ) { }
@@ -30,17 +35,38 @@ export class AvailableRebatesComponent implements OnInit {
           this.selectingBestOption(this.results);
          });
 
+    this.rebateGroup = this.formBuilder.group({
+      eligibilityQuestionsControl: [ null, Validators.required],
+      eligybilityRequirementControl: [ null, Validators.required]
+    });
+
     this.GetRebates();
   }
 
-  GetRebates(){
+  PreparetoGetRebates(){
+    let body = {
+      'commerceInfo': '',
+      'utilityProviders': '',
+      'location': '',
+      'dwellingInfo': '',
+      'systemDesign': '',
+      'skus': '',
+      'nominalSize': '',
+      'mj8LoadCalculation': ''
+    }
 
-    /* this._endPoint.Rebate(body).subscribe({
+    return body
+  }
+
+  GetRebates(){
+    
+    /* this._endPoint.Rebate(this.PreparetoGetRebates()).subscribe({
       next: (resp) => {
-        
       },
       error: (e) => alert(e.error)
     }) */
+
+    // provicional
       let a = [ 
         {
           "options": ["Yes", "No"],
@@ -86,8 +112,36 @@ export class AvailableRebatesComponent implements OnInit {
         }
       ]
 
-    // this.myEligybilityRequirement = a;
-    // this.myEligibilityQuestions = b;
+    this.myEligybilityRequirement = a;
+    this.myEligibilityQuestions = b;
+  }
+
+  ProcesEligybilityQuestions(questionId: number | null){
+
+    let optionQuestion = this.rebateGroup.controls['eligibilityQuestionsControl'].value;
+    console.log(optionQuestion);
+    console.log(questionId);
+
+    let question = {
+      'questionId': questionId,
+      'optionQuestion': optionQuestion
+    }
+
+    return question;
+  }
+
+  ProcesEligybilityRequirement(requirementId: number | null){
+
+    let optionRequirement = this.rebateGroup.controls['eligybilityRequirementControl'].value;
+    console.log(optionRequirement);
+    console.log(requirementId);
+
+    let Requiremen = {
+      'requirementId': requirementId,
+      'optionRequirement': optionRequirement
+    }
+
+    return Requiremen;
   }
 
   selectingBestOption(results: any){

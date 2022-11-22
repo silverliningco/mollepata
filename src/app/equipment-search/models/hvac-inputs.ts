@@ -24,10 +24,18 @@ export class MsUnits {
     ) {}
 }
 
-export class RebateInput {
+export class EligybilityRequirement {
     constructor(
         public options: string[] | null,
-        public id: number | null,
-        public text: string | null,
+        public requirementId: number | null,
+        public requirementText: string | null,
+    ) {}
+}
+
+export class EligibilityQuestions {
+    constructor(
+        public options: string[] | null,
+        public questionId: number | null,
+        public questionText: string | null,
     ) {}
 }
