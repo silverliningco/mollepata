@@ -11,33 +11,13 @@ export class CardComponent implements OnInit {
   @Input() myResults!: any[];
   @Input('master') masterName = '';
 
-  arrayOutdoors!: boolean; // permit show multiple cards or one card for detail or i know my model nr 
   card!: any;
   outdoors: string[] = [];
   
   constructor() { }
 
   ngOnInit(): void {
-
-    /* have 2 options: 
-                    * i know my model -> return object 
-                    * rebate finder and ahri Matchups -> return array
-     */
-
-    let myLenght = this.myResults.length;
-    if (myLenght != undefined) {
-      this.arrayOutdoors = true;
-      this.ParsingResult(this.myResults)
-    } else {
-      this.arrayOutdoors = false;
-
-      for (let key in this.myResults) {
-        this.outdoors= this.myResults[key]; 
-      }
-    }
-    
-    // If length of outdoorUnits == 1, call this.selectedOutdoorUnit(outdoorUnits[0])
-    // If length of outdoorUnits > 1, nothing else is required here.
+      this.ParsingResult(this.myResults);
   }
 
  /* selectOutdoorUnit(someOutdoorUnit) {
