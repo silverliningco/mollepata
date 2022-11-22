@@ -401,7 +401,7 @@ export class SystemDesingComponent implements OnInit {
     stateBtt = this.ActiveContinuebutton(payload);
 
     /* sent the info to results-rebate */
-    this._bridge.systemDesingParams.emit({
+    this._bridge.systemDesignParams.emit({
       data: [payload, stateBtt]
     });
   }

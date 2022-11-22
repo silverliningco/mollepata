@@ -13,12 +13,12 @@ export class bridgeService {
     @Output() dwellingInfoParams: EventEmitter<any> = new EventEmitter();
     @Output() heatedCooledParams: EventEmitter<any> = new EventEmitter();
     @Output() nominalSizeParams: EventEmitter<any> = new EventEmitter();
-    @Output() systemDesingParams: EventEmitter<any> = new EventEmitter();
+    @Output() systemDesignParams: EventEmitter<any> = new EventEmitter();
     @Output() showAllResults: EventEmitter<any> = new EventEmitter();
     @Output() filters: EventEmitter<any> = new EventEmitter();  
 
     // send data hvac inputs
-    @Output() paramsRebateEligibility: EventEmitter<any> = new EventEmitter();
+    @Output() paramsRebates: EventEmitter<any> = new EventEmitter();
     @Output() paramsSystemDesing: EventEmitter<any> = new EventEmitter();
     @Output() filter: EventEmitter<any> = new EventEmitter();
 

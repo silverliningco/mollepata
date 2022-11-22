@@ -29,6 +29,12 @@ export class AvailableRebatesComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this._bridge.paramsRebates
+        .subscribe((payload: any) =>{
+          let params = payload.data;
+          this.VerifyParamsComplete(params);
+        })
+
     this._bridge.resultsRebateFinder
         .subscribe((payload: any) => {
           this.results = payload.data;
@@ -41,6 +47,46 @@ export class AvailableRebatesComponent implements OnInit {
     });
 
     this.GetRebates();
+  }
+
+  VerifyParamsComplete(params: any){
+
+    console.log(params);
+
+    let disableButton!: any;
+
+    // verify if exist some value null
+    let haveValueNull!: any;
+
+    for (let i in params) {
+      if (typeof i === 'object'){
+        this.VerifyParamsComplete(i);
+      } else {
+        haveValueNull = Object.values(i).every(x => x === null);
+      }
+    }
+
+    console.log(haveValueNull);
+
+   /*  if (haveValueNull == false){
+      let ArrayValues =  Object.values(params);
+
+      completeI: for (const value of ArrayValues) {
+        if (typeof value === 'object'){
+          this.VerifyParamsComplete(value);
+        } else {
+          if (value == null || value == undefined || value === ''){
+            disableButton = true;
+            break completeI;
+          } else {
+            disableButton = false;
+          }
+        }
+      }
+    }
+    
+    console.log(disableButton); */
+
   }
 
   PreparetoGetRebates(){

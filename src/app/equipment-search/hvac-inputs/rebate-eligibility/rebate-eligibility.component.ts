@@ -33,10 +33,10 @@ export class RebateEligibilityComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this._bridge.paramsRebateEligibility
+    /* this._bridge.paramsRebateEligibility
         .subscribe((payload: any) => {
           this.completeParams(payload.data);
-         });
+         }); */
 
     this.rebateEligibilityGroup = this.formBuilder.group({
       questions: this.formBuilder.array([])
