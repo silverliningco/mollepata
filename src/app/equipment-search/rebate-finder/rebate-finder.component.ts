@@ -1071,7 +1071,6 @@ export class RebateFinderComponent implements OnInit {
 
   ParamsRebates(){
 
-    console.log(this.myDwellingInfo);
     let payload = {
         'location': {
             'state': this.myLocation.state,
@@ -1093,9 +1092,8 @@ export class RebateFinderComponent implements OnInit {
     })
   }
 
+  
   sendResults(){
-    // this.myResults= RESULTS2;
-     /* sent the info to results-rebate */
      this._bridge.resultsRebateFinder.emit({
         data: [this.myResults]
       });

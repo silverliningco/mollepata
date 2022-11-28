@@ -51,49 +51,22 @@ export class AvailableRebatesComponent implements OnInit {
 
   VerifyParamsComplete(params: any){
 
-    // console.log(params);
+    let haveValueNull: boolean = false;
+    let {location, dwellingInfo, systemDesign} = params;
+    let myParams = [location, dwellingInfo,  systemDesign];
 
-    let disableButton!: any;
+    for (let body of myParams) {
+      console.log(Object.values(body))
 
-    // verify if exist some value null
-    let haveValueNull!: boolean;
-
-
-    for (let key in params) {
-      let value = params[key];
-      console.log(value)
-      if (typeof value == 'object'){
-        this.VerifyParamsComplete(value);
-      } else {
-        // haveValueNull = Object.values(value).some(x => x == null);
-        if(value != null) {
-          haveValueNull = false;
-        } else {
+      let values = Object.values(body);
+      for (let value of values) {
+        console.log(value);
+        if (value == null) {
           haveValueNull = true;
-        }
+        } 
       }
+      console.log(haveValueNull)
     }
-
-    console.log(haveValueNull);
-
-   /*  if (haveValueNull == false){
-      let ArrayValues =  Object.values(params);
-
-      completeI: for (const value of ArrayValues) {
-        if (typeof value === 'object'){
-          this.VerifyParamsComplete(value);
-        } else {
-          if (value == null || value == undefined || value === ''){
-            disableButton = true;
-            break completeI;
-          } else {
-            disableButton = false;
-          }
-        }
-      }
-    }
-    
-    console.log(disableButton); */
 
   }
 
