@@ -28,7 +28,7 @@ export class EligybilityRequirement {
     constructor(
         public options: string[] | null,
         public requirementId: number | null,
-        public requirementText: string | null,
+        public requirementText?: string | null,
     ) {}
 }
 
@@ -36,6 +36,6 @@ export class EligibilityQuestions {
     constructor(
         public options: string[] | null,
         public questionId: number | null,
-        public questionText: string | null,
+        public questionText?: string | null,
     ) {}
 }

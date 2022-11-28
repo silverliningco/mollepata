@@ -2,8 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { bridgeService } from '../services/bridge.service';
 
 import { Location, ListUtilities, DwellingInfo, HeatedCooled, Nominalsize, SystemDesing } from '../models/rebate-finder-inputs';
-import { FormGroup } from '@angular/forms';
-
 
 export const RESULTS2 = [ 
   [
@@ -980,8 +978,6 @@ export class RebateFinderComponent implements OnInit {
 
   showProducLines!: boolean;
 
-
-  outdoorGroup !: FormGroup;
   myResults: any[] = RESULTS2;
   master = 'Master';
 
@@ -994,13 +990,17 @@ export class RebateFinderComponent implements OnInit {
         .subscribe((payload: any) => {
           this.myLocation = payload.data[0];
           this.myLocation.desableButton = payload.data[1];
+          this.ParamsRebates();
+
+        // temporal
           this.sendResults();
          });
     
     this._bridge.dwellingInfoParams
          .subscribe((payload: any) => {
            this.myDwellingInfo = payload.data[0];
-           this.myDwellingInfo.desableButton = payload.data[1];                   
+           this.myDwellingInfo.desableButton = payload.data[1];
+           this.ParamsRebates();
           });
 
     this._bridge.heatedCooledParams
@@ -1026,6 +1026,7 @@ export class RebateFinderComponent implements OnInit {
             this.mySystemDesing = payload.data[0];
             this.mySystemDesing.desableButton = payload.data[1];
             this.showProducLines = false;
+            this.ParamsRebates();
         });
 
     // from system desing 
@@ -1064,6 +1065,29 @@ export class RebateFinderComponent implements OnInit {
         data: payload
     });
   }  
+
+  ParamsRebates(){
+
+    let payload = {
+        'location': {
+            'state': this.myLocation.state,
+            'utilityProvider': this.myLocation.utilityProviders
+        },
+        'dwellingInfo': {
+            'fuelSource': this.myDwellingInfo.fuelSource,
+            'ConstructionType': this.myDwellingInfo.constructionType
+        },
+        'systemDesign': {
+            'outdoor': this.mySystemDesing.outdoor,
+            'indoor': this.mySystemDesing.indoor,
+            'furnace': this.mySystemDesing.furnace
+        }
+    }
+
+    this._bridge.paramsRebates.emit({
+        data: payload
+    })
+  }
 
   sendResults(){
      this._bridge.resultsRebateFinder.emit({

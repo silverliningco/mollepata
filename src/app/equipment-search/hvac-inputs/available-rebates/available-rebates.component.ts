@@ -19,8 +19,13 @@ export class AvailableRebatesComponent implements OnInit {
   results: any;
   bestOption: any[] = [];
 
+  // show all the options  
   myEligybilityRequirement: EligybilityRequirement[] = [];
   myEligibilityQuestions: EligibilityQuestions[] = [];
+
+  // all the selections of user
+  selectionRequirements: EligybilityRequirement[] = [];
+  selectionQuestions: EligibilityQuestions[] = []; 
 
   constructor(
     private formBuilder: FormBuilder,
@@ -29,6 +34,12 @@ export class AvailableRebatesComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this._bridge.paramsRebates
+    .subscribe((payload: any) =>{
+      let params = payload.data;
+      this.VerifyParamsComplete(params);
+    })
+
     this._bridge.resultsRebateFinder
         .subscribe((payload: any) => {
           this.results = payload.data;
@@ -40,7 +51,21 @@ export class AvailableRebatesComponent implements OnInit {
       eligybilityRequirementControl: [ null, Validators.required]
     });
 
-    this.GetRebates();
+   
+  }
+
+  VerifyParamsComplete(params: any){
+    let haveValueNull!:boolean; 
+
+    for (let key in params) {
+        let element = params[key];
+        haveValueNull = Object.values(element).some(x => x === null);
+    }
+
+    if (haveValueNull == false){
+      this.GetRebates();
+    }
+
   }
 
   PreparetoGetRebates(){
@@ -119,13 +144,12 @@ export class AvailableRebatesComponent implements OnInit {
   ProcesEligybilityQuestions(questionId: number | null){
 
     let optionQuestion = this.rebateGroup.controls['eligibilityQuestionsControl'].value;
-    console.log(optionQuestion);
-    console.log(questionId);
 
     let question = {
       'questionId': questionId,
-      'optionQuestion': optionQuestion
+      'options': optionQuestion
     }
+
 
     return question;
   }
@@ -133,15 +157,66 @@ export class AvailableRebatesComponent implements OnInit {
   ProcesEligybilityRequirement(requirementId: number | null){
 
     let optionRequirement = this.rebateGroup.controls['eligybilityRequirementControl'].value;
-    console.log(optionRequirement);
-    console.log(requirementId);
 
     let Requiremen = {
       'requirementId': requirementId,
-      'optionRequirement': optionRequirement
+      'options': optionRequirement
+    }
+    
+    if (this.selectionRequirements.length = 0){
+      this.selectionRequirements.push(Requiremen);
+    } else {
+      let index = this.SelectionUser(this.selectionRequirements, requirementId);
+      this.selectionRequirements.splice(index, 0, Requiremen)
+    }
+  }
+
+  SelectionUser(selections: any, currentSelectionID: any){
+
+    let result: number;
+
+    found: for (let i = 0; i < selections.length; i++) {
+      let elementID = selections[i].requirementId;
+      if (elementID == currentSelectionID){
+        result = i;
+        break found;
+      }
     }
 
-    return Requiremen;
+    return result;
+
+  }
+
+  SearchInResponses (objectData:Array<any>,  combinations: Array<any>, unit: any) {
+    
+    let input = unit;
+    let result: Array<any> = [];
+  
+    
+      let b = objectData.filter((data:any) => {
+        let combinationQueries = "";
+    
+        combinations.forEach((arg:any) => {
+          combinationQueries +=
+          data.hasOwnProperty(arg) && data[arg].trim() + "";
+        });
+    
+        return Object.keys(data).some((key:any) => {
+          return(
+            (data[key] != undefined && 
+              data[key] != null && 
+              JSON.stringify(data[key]).trim().includes(input)) ||
+            combinationQueries.trim().includes(input)  
+            
+          );
+        });
+      });
+    
+      if(b.length != 0){
+        result = b
+      }
+    
+    return result;
   }
 
   selectingBestOption(results: any){

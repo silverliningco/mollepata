@@ -18,7 +18,7 @@ export class bridgeService {
     @Output() filters: EventEmitter<any> = new EventEmitter();  
 
     // send data hvac inputs
-    @Output() paramsRebateEligibility: EventEmitter<any> = new EventEmitter();
+    @Output() paramsRebates: EventEmitter<any> = new EventEmitter();
     @Output() paramsSystemDesing: EventEmitter<any> = new EventEmitter();
     @Output() filter: EventEmitter<any> = new EventEmitter();
 
