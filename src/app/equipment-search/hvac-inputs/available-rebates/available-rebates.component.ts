@@ -68,6 +68,10 @@ export class AvailableRebatesComponent implements OnInit {
       console.log(haveValueNull)
     }
 
+    if (haveValueNull == false){
+      this.PreparetoGetRebates();
+    }
+
   }
 
   PreparetoGetRebates(){
