@@ -138,21 +138,21 @@ export class SystemDesingComponent implements OnInit {
         });
 
     this.systemDesing = this.formBuilder.group({
-      outdoorControl: ['', Validators.required],
-      indoorControl: ['', Validators.required],
-      furnaceControl: ['', Validators.required],
-      furnaceConfigurationControl: ['', Validators.required],
-      numberZonesControl: ['', Validators.required],
+      outdoorControl: [null, Validators.required],
+      indoorControl: [null, Validators.required],
+      furnaceControl: [null, Validators.required],
+      furnaceConfigurationControl: [null, Validators.required],
+      numberZonesControl: [null, Validators.required],
     });
 
     this.msMultiZoneType = this.formBuilder.group({
-      quantityControl: ['', Validators.required],
-      unitTypeControl: ['', Validators.required],
-      sizeControl: ['', Validators.required]
+      quantityControl: [null, Validators.required],
+      unitTypeControl: [null, Validators.required],
+      sizeControl: [null, Validators.required]
     });
 
     this.msIndoorUnitType = this.formBuilder.group({
-      msIndoorUnitTypeControl: ['', Validators.required]
+      msIndoorUnitTypeControl: [null, Validators.required]
     })
   }
 
@@ -333,7 +333,7 @@ export class SystemDesingComponent implements OnInit {
   ActiveContinuebutton(input:any): boolean{
 
     // verify if exist some value null
-    let haveValueNull = Object.values(input).every(x => x === null);
+    let haveValueNull = Object.values(input).some(x => x === null);
 
     if (haveValueNull == false){
       let ArrayValues =  Object.values(input);

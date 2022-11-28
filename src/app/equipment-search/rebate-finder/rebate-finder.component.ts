@@ -1070,6 +1070,8 @@ export class RebateFinderComponent implements OnInit {
   }  
 
   ParamsRebates(){
+
+    console.log(this.myDwellingInfo);
     let payload = {
         'location': {
             'state': this.myLocation.state,
@@ -1077,7 +1079,7 @@ export class RebateFinderComponent implements OnInit {
         },
         'dwellingInfo': {
             'fuelSource': this.myDwellingInfo.fuelSource,
-            'ConstructionType': this.myDwellingInfo.ConstructionType
+            'ConstructionType': this.myDwellingInfo.constructionType
         },
         'systemDesign': {
             'outdoor': this.mySystemDesign.outdoor,

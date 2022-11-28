@@ -13,7 +13,7 @@ export class DwellingInfoComponent implements OnInit {
 DwellingInfoGroup !: FormGroup;
 furnaceGroup !: FormGroup;
 
-desableButton: boolean = true;
+disabled: boolean = true;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -23,39 +23,44 @@ desableButton: boolean = true;
   ngOnInit(): void {
 
     this.DwellingInfoGroup = this.formBuilder.group({
-      constructionTypeControl: [ '', Validators.required]
+      constructionTypeControl: [ null, Validators.required]
     });
 
     this.furnaceGroup = this.formBuilder.group({
-      fuelSourceControl: ['', Validators.required],
+      fuelSourceControl: [ null, Validators.required],
     });
 
   }
 
   ActiveContinuebutton(input:any): boolean{
-    
-    let ArrayValues =  Object.values(input);
 
-   completeI: for (const value of ArrayValues) {
-    if (typeof value === 'object'){
-      this.ActiveContinuebutton(value);
-    } else {
-      if (value == null || value == undefined || value === ''){
-        this.desableButton = true;
-        break completeI;
-      } else {
-        this.desableButton = false;
-      }
-    }
-   }
-    
-    return this.desableButton;
+     // verify if exist some value null
+     let haveValueNull = Object.values(input).some(x => x == null);
+
+     if (haveValueNull == false){
+       let ArrayValues =  Object.values(input);
+ 
+       completeI: for (const value of ArrayValues) {
+         if (typeof value === 'object'){
+           this.ActiveContinuebutton(value);
+         } else {
+           if (value == null || value == undefined || value === ''){
+             this.disabled = true;
+             break completeI;
+           } else {
+             this.disabled = false;
+           }
+         }
+       }
+     }
+     
+    return this.disabled;
 }
 
   submitInputs() {
 
     let payload = {
-      year: this.DwellingInfoGroup.controls['constructionTypeControl'].value,
+      constructionType: this.DwellingInfoGroup.controls['constructionTypeControl'].value,
       fuelSource: this.furnaceGroup.controls['fuelSourceControl'].value,
     }  
 

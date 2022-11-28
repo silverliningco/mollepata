@@ -42,8 +42,8 @@ export class AvailableRebatesComponent implements OnInit {
          });
 
     this.rebateGroup = this.formBuilder.group({
-      eligibilityQuestionsControl: [ null, Validators.required],
-      eligybilityRequirementControl: [ null, Validators.required]
+      eligibilityQuestionsControl: this.formBuilder.array([]),
+      eligybilityRequirementControl: this.formBuilder.array([])
     });
 
     this.GetRebates();
@@ -51,18 +51,26 @@ export class AvailableRebatesComponent implements OnInit {
 
   VerifyParamsComplete(params: any){
 
-    console.log(params);
+    // console.log(params);
 
     let disableButton!: any;
 
     // verify if exist some value null
-    let haveValueNull!: any;
+    let haveValueNull!: boolean;
 
-    for (let i in params) {
-      if (typeof i === 'object'){
-        this.VerifyParamsComplete(i);
+
+    for (let key in params) {
+      let value = params[key];
+      console.log(value)
+      if (typeof value == 'object'){
+        this.VerifyParamsComplete(value);
       } else {
-        haveValueNull = Object.values(i).every(x => x === null);
+        // haveValueNull = Object.values(value).some(x => x == null);
+        if(value != null) {
+          haveValueNull = false;
+        } else {
+          haveValueNull = true;
+        }
       }
     }
 

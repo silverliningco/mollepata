@@ -413,7 +413,7 @@ export class LocationComponent implements OnInit {
   ActiveContinuebutton(input:any): boolean{
 
     // verify if exist some value null
-    let haveValueNull = Object.values(input).every(x => x === null);
+    let haveValueNull = Object.values(input).some(x => x == null);
 
     if (haveValueNull == false){
       let ArrayValues =  Object.values(input);

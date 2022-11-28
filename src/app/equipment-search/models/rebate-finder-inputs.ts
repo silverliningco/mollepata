@@ -18,7 +18,7 @@ export class ListUtilities {
 export class DwellingInfo {
     constructor(
         public fuelSource: string | null,
-        public ConstructionType: string | null,
+        public constructionType: string | null,
         public desableButton: boolean | null
     ) {}
 }
