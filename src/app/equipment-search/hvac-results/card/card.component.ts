@@ -41,7 +41,8 @@ export class CardComponent implements OnInit {
     this.card = {
       outdoorUnit: Firstcombination[1],
       properties: Firstcombination[0],
-      options: options
+      options: options,
+      bestOption: Firstcombination[1]
     }
 
     // console.log(this.card);
