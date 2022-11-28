@@ -2,12 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { bridgeService } from '../services/bridge.service';
 
 import { Location, ListUtilities, DwellingInfo, HeatedCooled, Nominalsize, SystemDesing } from '../models/rebate-finder-inputs';
-import { Result } from '../models/results';
 import { FormGroup } from '@angular/forms';
-import { switchMap } from 'rxjs';
 
-// prueva
-export const RESULTS1 = [ { "id":['25VNA424A003', '25HPB630A003', '24VNA624A003']}];
 
 export const RESULTS2 = [ 
   [
@@ -962,7 +958,6 @@ let mybody = [
       }
     ]
   ];
-// prueva
 
 @Component({
   selector: 'app-rebate-finder',
@@ -987,9 +982,7 @@ export class RebateFinderComponent implements OnInit {
 
 
   outdoorGroup !: FormGroup;
-//   myResults: any[] = RESULTS1;
   myResults: any[] = RESULTS2;
-//   myResults: any[][] = [];
   master = 'Master';
 
   constructor(
@@ -1073,8 +1066,6 @@ export class RebateFinderComponent implements OnInit {
   }  
 
   sendResults(){
-    // this.myResults= RESULTS2;
-     /* sent the info to results-rebate */
      this._bridge.resultsRebateFinder.emit({
         data: [this.myResults]
       });

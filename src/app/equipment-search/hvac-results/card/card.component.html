@@ -1,14 +1,5 @@
-<div *ngIf="!arrayOutdoors">
-    <select name="" id="" change="selectOutdoorUnit">
-        <option  *ngFor="let outdoorUnit of outdoors">
-            {{outdoorUnit}}
-        </option>
-    </select>
-</div>
 
-
-
-<div *ngIf="arrayOutdoors">
+<div>
     <mat-card class="rc-card results">
       <!-- unit ids, amount and reset button -->
       <div fxLayout="row column" fxLayoutAlign="space-between start" fxLayoutGap="16px grid">
