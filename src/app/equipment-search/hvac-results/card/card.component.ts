@@ -1,5 +1,12 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Result, Components } from '../../models/results';
+import { MatDialog } from '@angular/material/dialog';
+import { FormBuilder } from '@angular/forms';
+
+import { Result } from '../../models/results';
+import { TableComponent } from '../table/table.component';
+
+import { EndPointsService }  from '../../services/endPoints.service';
+import { bridgeService }  from '../../services/bridge.service';
 
 @Component({
   selector: 'app-card',
@@ -10,13 +17,62 @@ export class CardComponent implements OnInit {
 
   @Input() myResults!: any[];
   @Input('master') masterName = '';
+
   card!: any;
   outdoors: string[] = [];
   
-  constructor() { }
+  constructor(
+    private formBuilder: FormBuilder,
+    public _bridge: bridgeService,
+    private _endPoint: EndPointsService,
+    private dialogRef: MatDialog
+  ) { }
 
   ngOnInit(): void {
-      this.ParsingResult(this.myResults);
+    // provicional
+    this.ParsingResult(this.myResults);
+  }
+
+  // verificar que funcione
+  VerifyParamsComplete(params: any){
+    let haveValueNull!:boolean; 
+
+    for (let key in params) {
+        let element = params[key];
+        haveValueNull = Object.values(element).some(x => x === null);
+    }
+
+    if (haveValueNull == false){
+      this.Search();
+    }
+
+  }
+
+  PreparetoGetResults(){
+
+    let body = {
+      'commerceInfo': '',
+      'nominalSize': '',
+      'fuelSource': '',
+      'levelOneSystemTypeId': '',
+      'levelTwoSystemTypeId': '',
+      'sizingConstraint': '',
+      'filters': '',
+      'availableRebates':'' 
+    }
+
+    return body
+  }
+
+  Search(){
+
+    /* this._endPoint.Search(this.PreparetoGetResults()).subscribe({
+      next: (resp) => {
+        this.ParsingResult(resp);
+      },
+      error: (e) => alert(e.error)
+    }) */
+
   }
 
   ParsingResult(results: any[]){
@@ -24,12 +80,14 @@ export class CardComponent implements OnInit {
     let options=  this.ParsingOptions(results);
     let Firstcombination = this.getFirstCombinationsData(results);
 
-
     this.card = {
       outdoorUnit: Firstcombination[1],
       properties: Firstcombination[0],
-      options: options
+      allOptions: options,
+      bestOption: ''
     }
+
+    console.log(this.card);
   }
 
   getFirstCombinationsData(results: any[]): any[]{
@@ -129,11 +187,12 @@ export class CardComponent implements OnInit {
     
   }
 
+  // open view in table 
   openDialog() {
 
-    /* this.dialogRef.open(TableViewComponent, {
-      data: { }
-    }); */
+    this.dialogRef.open(TableComponent, {
+      data: 'esto es provicional'
+    });
   }
 
 }

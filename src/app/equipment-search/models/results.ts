@@ -23,11 +23,9 @@ export class Result {
 
 export class Components {
     constructor(
-        public id: string | null,
-        public SKU: string | null,
-        public name: string | null,
-        public type: string | null
-        
+        public description: string | null,
+        public title: string | null,
+        public componentType: string | null        
     ) {}
 }
 

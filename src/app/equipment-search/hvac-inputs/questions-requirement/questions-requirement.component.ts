@@ -7,11 +7,11 @@ import { EndPointsService } from '../../services/endPoints.service';
 import { EligibilityQuestions, EligybilityRequirement } from '../../models/hvac-inputs';
 
 @Component({
-  selector: 'app-available-rebates',
-  templateUrl: './available-rebates.component.html',
-  styleUrls: ['./available-rebates.component.css']
+  selector: 'app-questions-requirement',
+  templateUrl: './questions-requirement.component.html',
+  styleUrls: ['./questions-requirement.component.css']
 })
-export class AvailableRebatesComponent implements OnInit {
+export class QuestionsRequirementComponent implements OnInit {
 
   rebateGroup !: FormGroup;
 
