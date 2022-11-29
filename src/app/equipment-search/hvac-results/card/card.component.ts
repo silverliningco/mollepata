@@ -1,5 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Result, Components } from '../../models/results';
+import { MatDialog } from '@angular/material/dialog';
+
+import { Result } from '../../models/results';
+
+import { TableComponent }  from '../table/table.component';
 
 @Component({
   selector: 'app-card',
@@ -10,10 +14,13 @@ export class CardComponent implements OnInit {
 
   @Input() myResults!: any[];
   @Input('master') masterName = '';
+
   card!: any;
   outdoors: string[] = [];
   
-  constructor() { }
+  constructor(
+    private dialogRef: MatDialog
+  ) { }
 
   ngOnInit(): void {
       this.ParsingResult(this.myResults);
@@ -28,7 +35,8 @@ export class CardComponent implements OnInit {
     this.card = {
       outdoorUnit: Firstcombination[1],
       properties: Firstcombination[0],
-      options: options
+      options: options,
+      bestOption: Firstcombination[1]
     }
   }
 
@@ -131,9 +139,9 @@ export class CardComponent implements OnInit {
 
   openDialog() {
 
-    /* this.dialogRef.open(TableViewComponent, {
-      data: { }
-    }); */
+    this.dialogRef.open(TableComponent, {
+      data: 'esto es una prueva'
+    });
   }
 
 }

@@ -21,27 +21,32 @@ export class HeatedCooledComponent implements OnInit {
 
   ngOnInit(): void {
     this.headedCooledGroup = this.formBuilder.group({
-      heatedControl: [ '', Validators.required],
-      cooledControl: [ '', Validators.required]
+      heatedControl: [ null, Validators.required],
+      cooledControl: [ null, Validators.required]
     });
   }
 
   ActiveContinuebutton(input:any): boolean{
     
-    let ArrayValues =  Object.values(input);
+    // verify if exist some value null
+    let haveValueNull = Object.values(input).some(x => x == null);
 
-   completeI: for (const value of ArrayValues) {
-    if (typeof value === 'object'){
-      this.ActiveContinuebutton(value);
-    } else {
-      if (value == null || value == undefined || value === ''){
-        this.disableButton = true;
-        break completeI;
-      } else {
-        this.disableButton = false;
+    if (haveValueNull == false){
+      let ArrayValues =  Object.values(input);
+
+      completeI: for (const value of ArrayValues) {
+        if (typeof value === 'object'){
+          this.ActiveContinuebutton(value);
+        } else {
+          if (value == null || value == undefined || value === ''){
+            this.disableButton = true;
+            break completeI;
+          } else {
+            this.disableButton = false;
+          }
+        }
       }
     }
-   }
     
     return this.disableButton;
 }

@@ -35,10 +35,10 @@ export class AvailableRebatesComponent implements OnInit {
 
   ngOnInit(): void {
     this._bridge.paramsRebates
-    .subscribe((payload: any) =>{
-      let params = payload.data;
-      this.VerifyParamsComplete(params);
-    })
+      .subscribe((payload: any) =>{
+        let params = payload.data;
+        this.VerifyParamsComplete(params);
+      })
 
     this._bridge.resultsRebateFinder
         .subscribe((payload: any) => {
@@ -47,8 +47,8 @@ export class AvailableRebatesComponent implements OnInit {
          });
 
     this.rebateGroup = this.formBuilder.group({
-      eligibilityQuestionsControl: [ null, Validators.required],
-      eligybilityRequirementControl: [ null, Validators.required]
+      eligibilityQuestionsControl: this.formBuilder.array([]),
+      eligybilityRequirementControl: this.formBuilder.array([])
     });
 
    

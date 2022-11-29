@@ -13,7 +13,6 @@ import { SharedModule } from '../shared/shared.module';
 import {HttpInterceptorService } from './services/http-interceptor.service'; 
 
 // components
-import { AhriMatchupsComponent } from './ahri-matchups/ahri-matchups.component';
 import { RebateFinderComponent } from './rebate-finder/rebate-finder.component';
 import { HvacSystemDetailComponent } from './hvac-system-detail/hvac-system-detail.component';
 import { LocationComponent } from './hvac-inputs/location/location.component';
@@ -52,7 +51,6 @@ import { SearchPipe } from './hvac-inputs/location/search.pipe';
 
 @NgModule({
   declarations: [
-    AhriMatchupsComponent,
     RebateFinderComponent,
     HvacSystemDetailComponent,
     LocationComponent,
