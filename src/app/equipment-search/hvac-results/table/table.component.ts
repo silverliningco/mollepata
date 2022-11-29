@@ -1,6 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
-
-import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-table',
@@ -9,20 +7,9 @@ import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 })
 export class TableComponent implements OnInit {
 
-  results!: string;
-
-  constructor(
-    @Inject(MAT_DIALOG_DATA) public data: any,
-    private dialogRef: MatDialog
-  ) {
-    this.results = data
-   }
+  constructor() { }
 
   ngOnInit(): void {
-  }
-
-  closeDialog() {
-    this.dialogRef.closeAll();
   }
 
 }

@@ -2,10 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { bridgeService } from '../services/bridge.service';
 
 import { Location, ListUtilities, DwellingInfo, HeatedCooled, Nominalsize, SystemDesing } from '../models/rebate-finder-inputs';
-<<<<<<< HEAD
-=======
-import { FormGroup } from '@angular/forms';
->>>>>>> 8e9ce4a119bb88c72516f3aafec14958ca61cd4a
 
 export const RESULTS2 = [ 
   [
@@ -974,13 +970,14 @@ export class RebateFinderComponent implements OnInit {
   myDwellingInfo: DwellingInfo = new DwellingInfo(null, null, true);
   myHeatedCooled: HeatedCooled = new HeatedCooled(null, null, true);
   myNominalSize: Nominalsize = new Nominalsize(null, null, true);
-  mySystemDesign: SystemDesing = new SystemDesing(null, null, null, null, null, true);
+  mySystemDesing: SystemDesing = new SystemDesing(null, null, null, null, null, true);
 
   bestOption: any[] = [];
   filters!: string[];
   filtesApplied!: string[];
 
   showProducLines!: boolean;
+
   myResults: any[] = RESULTS2;
   master = 'Master';
 
@@ -994,6 +991,8 @@ export class RebateFinderComponent implements OnInit {
           this.myLocation = payload.data[0];
           this.myLocation.desableButton = payload.data[1];
           this.ParamsRebates();
+
+        // temporal
           this.sendResults();
          });
     
@@ -1014,7 +1013,7 @@ export class RebateFinderComponent implements OnInit {
         .subscribe((payload: any) => {
             this.myNominalSize = payload.data[0];
             this.myNominalSize.desableButton = payload.data[1];
-            this.ParamsSystemDesing();
+            this.ParamsRebateSystemDesing();
           });
 
     this._bridge.OrderResultsRebateFinder
@@ -1022,10 +1021,10 @@ export class RebateFinderComponent implements OnInit {
             this.myResults = payload.data;
           }); 
 
-    this._bridge.systemDesignParams
+    this._bridge.systemDesingParams
         .subscribe((payload: any) => {
-            this.mySystemDesign = payload.data[0];
-            this.mySystemDesign.desableButton = payload.data[1];
+            this.mySystemDesing = payload.data[0];
+            this.mySystemDesing.desableButton = payload.data[1];
             this.showProducLines = false;
             this.ParamsRebates();
         });
@@ -1034,7 +1033,7 @@ export class RebateFinderComponent implements OnInit {
     this._bridge.showAllResults
         .subscribe((payload: any) => {
             this.showProducLines = true;
-            this.mySystemDesign.desableButton = payload.data;
+            this.mySystemDesing.desableButton = payload.data;
             console.log(payload.data);
         });
 
@@ -1060,9 +1059,9 @@ export class RebateFinderComponent implements OnInit {
   }
 
 
-  ParamsSystemDesing(){
+  ParamsRebateSystemDesing(){
     let payload = this.myNominalSize.coolingTons;
-    this._bridge.systemDesignParams.emit({
+    this._bridge.paramsSystemDesing.emit({
         data: payload
     });
   }  
@@ -1081,7 +1080,7 @@ export class RebateFinderComponent implements OnInit {
         'systemDesign': {
             'outdoor': this.mySystemDesing.outdoor,
             'indoor': this.mySystemDesing.indoor,
-            'furnace': this.mySystemDesing.furnace119bb88c72516f3aafec14958ca61cd4a
+            'furnace': this.mySystemDesing.furnace
         }
     }
 
@@ -1089,7 +1088,7 @@ export class RebateFinderComponent implements OnInit {
         data: payload
     })
   }
-  
+
   sendResults(){
      this._bridge.resultsRebateFinder.emit({
         data: [this.myResults]

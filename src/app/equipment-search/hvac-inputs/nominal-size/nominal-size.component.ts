@@ -22,8 +22,8 @@ export class NominalSizeComponent implements OnInit {
 
   ngOnInit(): void {
     this.nominalSizeGroup = this.formBuilder.group({
-      heatingBTUHControl: [null, [this.ValidateHeatingBTUH, this.ValidateNumber]],
-      coolingTonsControl: [null, Validators.required],
+      heatingBTUHControl: ['', [this.ValidateHeatingBTUH, this.ValidateNumber]],
+      coolingTonsControl: ['', Validators.required],
     });
   }
 
@@ -86,25 +86,20 @@ export class NominalSizeComponent implements OnInit {
 
   ActiveContinuebutton(input:any): boolean{
     
-    // verify if exist some value null
-    let haveValueNull = Object.values(input).some(x => x == null);
+    let ArrayValues =  Object.values(input);
 
-    if (haveValueNull == false){
-      let ArrayValues =  Object.values(input);
-
-      completeI: for (const value of ArrayValues) {
-        if (typeof value === 'object'){
-          this.ActiveContinuebutton(value);
-        } else {
-          if (value == null || value == undefined || value === ''){
-            this.disableButton = true;
-            break completeI;
-          } else {
-            this.disableButton = false;
-          }
-        }
+   completeI: for (const value of ArrayValues) {
+    if (typeof value === 'object'){
+      this.ActiveContinuebutton(value);
+    } else {
+      if (value == null || value == undefined || value === ''){
+        this.disableButton = true;
+        break completeI;
+      } else {
+        this.disableButton = false;
       }
     }
+   }
     
     return this.disableButton;
 }
