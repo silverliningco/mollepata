@@ -151,7 +151,20 @@ export class AvailableRebatesComponent implements OnInit {
     }
 
 
-    return question;
+    if (this.selectionQuestions.length >= 1 ){
+      let index: number | null = this.SelectionUser(this.selectionRequirements, questionId);
+      if (index == null){
+        this.selectionQuestions.push(question);
+      } else {
+        this.selectionQuestions[index] = question;
+      }
+    } else {
+      this.selectionQuestions.push(question);
+    }
+
+    console.log('.............................................');
+    console.log(this.selectionQuestions.push);
+    console.log('.............................................');
   }
 
   ProcesEligybilityRequirement(requirementId: number | null){
@@ -162,18 +175,22 @@ export class AvailableRebatesComponent implements OnInit {
       'requirementId': requirementId,
       'options': optionRequirement
     }
-    
-    if (this.selectionRequirements.length = 0){
-      this.selectionRequirements.push(Requiremen);
+
+    if (this.selectionRequirements.length >= 1 ){
+      let index: number | null = this.SelectionUser(this.selectionRequirements, requirementId);
+      if (index == null){
+        this.selectionRequirements.push(Requiremen);
+      } else {
+        this.selectionRequirements[index] = Requiremen;
+      }
     } else {
-      let index = this.SelectionUser(this.selectionRequirements, requirementId);
-      this.selectionRequirements.splice(index, 0, Requiremen)
-    }
+      this.selectionRequirements.push(Requiremen);
+    }    
   }
 
   SelectionUser(selections: any, currentSelectionID: any){
 
-    let result: number;
+    let result: number | null = null;
 
     found: for (let i = 0; i < selections.length; i++) {
       let elementID = selections[i].requirementId;
@@ -184,7 +201,6 @@ export class AvailableRebatesComponent implements OnInit {
     }
 
     return result;
-
   }
 
   SearchInResponses (objectData:Array<any>,  combinations: Array<any>, unit: any) {

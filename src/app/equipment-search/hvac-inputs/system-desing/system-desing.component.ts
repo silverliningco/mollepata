@@ -176,7 +176,7 @@ export class SystemDesingComponent implements OnInit {
 
   NumberZones(){
     let myNbrZones = this.systemDesing.controls['numberZonesControl'].value;
-    console.log(myNbrZones);
+
     if (myNbrZones == 'Multi-zone'){
       this.showTable = true;
       this.singleZones = false;
@@ -274,7 +274,6 @@ export class SystemDesingComponent implements OnInit {
     sum = add(arr);
 
     let size = this.nominalcoolingTons * 12000;
-    console.log(sum);
 
     let resul = sum * 1.5;
 
@@ -397,7 +396,6 @@ export class SystemDesingComponent implements OnInit {
       stateBtt = true;
     }
 
-    console.log(payload);
     stateBtt = this.ActiveContinuebutton(payload);
 
     /* sent the info to results-rebate */
