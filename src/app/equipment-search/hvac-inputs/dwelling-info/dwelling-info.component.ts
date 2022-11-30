@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { bridgeService } from '../../services/bridge.service';
+import { DwellingInfo } from '../../models/rebate-finder-inputs';
 
 @Component({
   selector: 'app-dwelling-info',
@@ -15,7 +16,7 @@ furnaceGroup !: FormGroup;
 
 desableButton: boolean = true;
 
-  myData: DwellingInfo
+  myData!: DwellingInfo;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -39,7 +40,7 @@ desableButton: boolean = true;
   submitInputs() {
 
     this._bridge.HVACInputs.emit({
-      data: [ "dwellingInfo", myData]
+      data: [ "dwellingInfo", this.myData]
     });
   }
 

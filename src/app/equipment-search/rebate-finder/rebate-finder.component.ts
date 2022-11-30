@@ -3,9 +3,6 @@ import { bridgeService } from '../services/bridge.service';
 
 import { Location, ListUtilities, DwellingInfo, HeatedCooled, Nominalsize, EquipmentSearch } from '../models/rebate-finder-inputs';
 
-
-  
-
 @Component({
   selector: 'app-rebate-finder',
   templateUrl: './rebate-finder.component.html',
@@ -36,35 +33,17 @@ export class RebateFinderComponent implements OnInit {
     this._bridge.HVACInputs
         .subscribe((payload: any) => {
 
-           if payload.data[0] == "dwellingInfo" {
+           /* if payload.data[0] == "dwellingInfo" {
              myData.dwellingInfo = payload.data[1]
-           }
+           } */
          });
-
-    this._bridge.filters
-        .subscribe((payload: any) => {
-            this.filters = payload.data;
-            this.SendListFilters(this.filters);
-        });
-
-    this._bridge.filter
-        .subscribe((payload: any) => {
-            this.filtesApplied = payload.data;
-            this.SendFilterApplied(this.filtesApplied);
-        });
     
     this.OrderCards();
   }
 
-  SendListFilters(filters: string[]){
-    this._bridge.filter.emit({
-        data: filters
-    })
-  }
-
 
   ParamsRebateSystemDesing(){
-    let payload = this.myNominalSize.coolingTons;
+    let payload = 'coolingTons';
     this._bridge.paramsSystemDesing.emit({
         data: payload
     });
@@ -74,29 +53,45 @@ export class RebateFinderComponent implements OnInit {
 
     let payload = {
         'location': {
-            'state': this.myLocation.state,
-            'utilityProvider': this.myLocation.utilityProviders
+            'state': '',
+            'utilityProvider': ''
         },
         'dwellingInfo': {
-            'fuelSource': this.myDwellingInfo.fuelSource,
-            'ConstructionType': this.myDwellingInfo.constructionType
+            'fuelSource': '',
+            'ConstructionType': ''
         },
         'systemDesign': {
-            'outdoor': this.mySystemDesing.outdoor,
-            'indoor': this.mySystemDesing.indoor,
-            'furnace': this.mySystemDesing.furnace
+            'outdoor': '',
+            'indoor': '',
+            'furnace': ''
         }
     }
 
-    this._bridge.paramsRebates.emit({
+    this._bridge.paramsQuestionsRequirements.emit({
         data: payload
     })
   }
 
-  sendResults(){
-     this._bridge.resultsRebateFinder.emit({
-        data: [this.myResults]
+  selectingBestOption(results: any){
+    let max!: any;
+
+    results.forEach((element:any) => {
+      // returns the results ordered from maximum to minimum
+      element.forEach((element2: any) => {
+        max =  element2.sort( function(a: any, b:any) {
+          if (a.totalAvailableRebates < b.totalAvailableRebates || a.totalAvailableRebates === null) return +1;
+          if (a.totalAvailableRebates > b.totalAvailableRebates || b.totalAvailableRebates === null) return -1;
+          return 0;
+        });
+        this.bestOption.push( max);
       });
+    }); 
+
+    // return the rebatess in order
+    this._bridge.OrderResultsRebateFinder.emit({
+      data: this.bestOption
+    });
+
   }
 
   OrderCards(){
@@ -120,18 +115,12 @@ export class RebateFinderComponent implements OnInit {
     
   }
 
-  SendFilterApplied(filtesApplied: string[]){
-    this._bridge.filters.emit({
-      data: filtesApplied  
-    })
-  }
-
   // tabChange is a callback when the progress bar step is changed.
   // If the new step is the final step in sequence, we load the equipment search results.
   tabChange(e:any){
   
     // If this is the last step in sequence, load the results (ahri combinations).
-    if(this.stepper?.steps.length -1 == e.selectedIndex) {
+    /* if(this.stepper?.steps.length -1 == e.selectedIndex) {
       
       // If system design inputs are empty, show product line menu and select the first available option.
       // Selecting a product line effectively completes the system design attributes.
@@ -163,14 +152,12 @@ export class RebateFinderComponent implements OnInit {
 
 	  },
 	  error: (e) => alert(e.error)
-	})
+	    })
 
 
-      }
+      } */
 
     }
-
-  }
  
 
 }

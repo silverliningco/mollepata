@@ -7,11 +7,11 @@ import { EndPointsService } from '../../services/endPoints.service';
 import { EligibilityQuestions, EligybilityRequirement } from '../../models/hvac-inputs';
 
 @Component({
-  selector: 'app-available-rebates',
-  templateUrl: './available-rebates.component.html',
-  styleUrls: ['./available-rebates.component.css']
+  selector: 'app-questions-requirement',
+  templateUrl: './questions-requirement.component.html',
+  styleUrls: ['./questions-requirement.component.css']
 })
-export class AvailableRebatesComponent implements OnInit {
+export class QuestionsRequirementComponent implements OnInit {
 
   rebateGroup !: FormGroup;
 
@@ -34,17 +34,11 @@ export class AvailableRebatesComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this._bridge.paramsRebates
+    this._bridge.paramsQuestionsRequirements
     .subscribe((payload: any) =>{
       let params = payload.data;
       this.VerifyParamsComplete(params);
     })
-
-    this._bridge.resultsRebateFinder
-        .subscribe((payload: any) => {
-          this.results = payload.data;
-          this.selectingBestOption(this.results);
-         });
 
     this.rebateGroup = this.formBuilder.group({
       eligibilityQuestionsControl: [ null, Validators.required],
@@ -201,60 +195,6 @@ export class AvailableRebatesComponent implements OnInit {
     }
 
     return result;
-  }
-
-  SearchInResponses (objectData:Array<any>,  combinations: Array<any>, unit: any) {
-    
-    let input = unit;
-    let result: Array<any> = [];
-  
-    
-      let b = objectData.filter((data:any) => {
-        let combinationQueries = "";
-    
-        combinations.forEach((arg:any) => {
-          combinationQueries +=
-          data.hasOwnProperty(arg) && data[arg].trim() + "";
-        });
-    
-        return Object.keys(data).some((key:any) => {
-          return(
-            (data[key] != undefined && 
-              data[key] != null && 
-              JSON.stringify(data[key]).trim().includes(input)) ||
-            combinationQueries.trim().includes(input)  
-            
-          );
-        });
-      });
-    
-      if(b.length != 0){
-        result = b
-      }
-    
-    return result;
-  }
-
-  selectingBestOption(results: any){
-    let max!: any;
-
-    results.forEach((element:any) => {
-      // returns the results ordered from maximum to minimum
-      element.forEach((element2: any) => {
-        max =  element2.sort( function(a: any, b:any) {
-          if (a.totalAvailableRebates < b.totalAvailableRebates || a.totalAvailableRebates === null) return +1;
-          if (a.totalAvailableRebates > b.totalAvailableRebates || b.totalAvailableRebates === null) return -1;
-          return 0;
-        });
-        this.bestOption.push( max);
-      });
-    }); 
-
-    // return the rebatess in order
-    this._bridge.OrderResultsRebateFinder.emit({
-      data: this.bestOption
-    });
-
   }
 
 

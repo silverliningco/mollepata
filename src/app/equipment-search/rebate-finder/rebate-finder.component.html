@@ -7,7 +7,7 @@
         <app-location></app-location>
         <!-- button -->
         <div fxLayout="column" fxLayoutAlign="center end" class="rc-stepper-buttons">
-            <button type="button" mat-raised-button color="primary" [disabled]="myLocation.desableButton" matStepperNext>
+            <button type="button" mat-raised-button color="primary"  matStepperNext>
                 Continue
                 <mat-icon>arrow_forward</mat-icon>
             </button>
@@ -20,7 +20,8 @@
         <app-dwelling-info></app-dwelling-info>
         <!-- button -->
         <div fxLayout="column" fxLayoutAlign="center end" class="rc-stepper-buttons">
-            <button type="button" mat-raised-button color="primary" [disabled]="myButtonStatus["dwellingInfo"]" matStepperNext matStepperNext>
+            <!-- <button type="button" mat-raised-button color="primary" [disabled]="myButtonStatus["dwellingInfo"]" matStepperNext> -->
+                <button type="button" mat-raised-button color="primary" matStepperNext>
                 Continue
                 <mat-icon>arrow_forward</mat-icon>
             </button>
@@ -33,7 +34,7 @@
         <app-heated-cooled></app-heated-cooled>
         <!-- button -->
         <div fxLayout="column" fxLayoutAlign="center end" class="rc-stepper-buttons">
-            <button type="button" mat-raised-button color="primary" [disabled]="myHeatedCooled.desableButton" matStepperNext matStepperNext>
+            <button type="button" mat-raised-button color="primary" matStepperNext>
                 Continue
                 <mat-icon>arrow_forward</mat-icon>
             </button>
@@ -46,7 +47,7 @@
         <app-nominal-size></app-nominal-size>
         <!-- button -->
         <div fxLayout="column" fxLayoutAlign="center end" class="rc-stepper-buttons">
-            <button type="button" mat-raised-button color="primary" [disabled]="myNominalSize.desableButton" matStepperNext matStepperNext>
+            <button type="button" mat-raised-button color="primary" matStepperNext>
                 Continue
                 <mat-icon>arrow_forward</mat-icon>
             </button>
@@ -59,7 +60,7 @@
         <app-system-desing></app-system-desing>
         <!-- button -->
         <div fxLayout="column" fxLayoutAlign="center end" class="rc-stepper-buttons">
-            <button type="button" mat-raised-button color="primary" [disabled]="mySystemDesing.desableButton" matStepperNext matStepperNext>
+            <button type="button" mat-raised-button color="primary" matStepperNext>
                 Continue
                 <mat-icon>arrow_forward</mat-icon>
             </button>
@@ -84,7 +85,7 @@
                     <!-- rebates -->
                     <mat-tab label="Rebates">
                         <div class="example-small-box mat-elevation-z4">
-                            <app-available-rebates></app-available-rebates>
+                            <app-questions-requirement></app-questions-requirement>
                         </div>
                     </mat-tab>
                     <!-- filters -->

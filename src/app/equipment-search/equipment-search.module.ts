@@ -21,10 +21,10 @@ import { DwellingInfoComponent } from './hvac-inputs/dwelling-info/dwelling-info
 import { HeatedCooledComponent } from './hvac-inputs/heated-cooled/heated-cooled.component';
 import { NominalSizeComponent } from './hvac-inputs/nominal-size/nominal-size.component';
 import { FiltersComponent } from './hvac-inputs/filters/filters.component';
-import { AvailableRebatesComponent } from './hvac-inputs/available-rebates/available-rebates.component';
+import { QuestionsRequirementComponent } from './hvac-inputs/questions-requirement/questions-requirement.component';
 import { ProductLinesComponent } from './hvac-inputs/product-lines/product-lines.component';
 import { StockStatusComponent } from './hvac-inputs/stock-status/stock-status.component';
-import { SystemDesingComponent } from './hvac-inputs/system-desing/system-desing.component';
+import { SystemDesingComponent } from './hvac-inputs/system-design/system-desing.component';
 import { CardComponent } from './hvac-results/card/card.component';
 import { TableComponent } from './hvac-results/table/table.component';
 import { AppliedFiltersComponent } from './hvac-inputs/filters/applied-filters/applied-filters.component';
@@ -60,7 +60,7 @@ import { SearchPipe } from './hvac-inputs/location/search.pipe';
     HeatedCooledComponent,
     NominalSizeComponent,
     FiltersComponent,
-    AvailableRebatesComponent,
+    QuestionsRequirementComponent,
     ProductLinesComponent,
     StockStatusComponent,
     CardComponent,

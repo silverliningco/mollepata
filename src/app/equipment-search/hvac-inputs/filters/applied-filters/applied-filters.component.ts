@@ -10,35 +10,14 @@ import { bridgeService } from '../../../services/bridge.service';
 })
 export class AppliedFiltersComponent implements OnInit {
 
-  listFilters: string[] = [];
-
-
   constructor(
     private formBuilder: FormBuilder,
     public _bridge: bridgeService,
   ) { }
 
   ngOnInit(): void {
-    this._bridge.filters
-        .subscribe((payload: any) => {
-            this.listFilters = payload.data;
-        });
   }
 
-  DeactivateFilter(filter: string){
-
-    let index = this.listFilters.indexOf(filter);
-
-    this.listFilters.splice(index, 1);
-
-    console.log(this.listFilters);
-  }
-
-  submitInputs(): void{
-    this._bridge.filter.emit({
-      data: this.listFilters
-    });
-  }
-  
+ 
 
 }
