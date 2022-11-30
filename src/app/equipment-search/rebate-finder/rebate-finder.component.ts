@@ -32,14 +32,15 @@ export class RebateFinderComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this._bridge.sentLocationParams
-        .subscribe((payload: any) => {
-          this.myLocation = payload.data[0];
-          this.myLocation.desableButton = payload.data[1];
-          this.ParamsRebates();
 
-        // temporal
-          this.sendResults();
+    this._bridge.HVACInputs
+        .subscribe((payload: any) => {
+
+           if payload.data[0] == "dwellingInfo" {
+             myData.dwellingInfo = payload.data[1]
+           }
+
+
          });
     
     this._bridge.dwellingInfoParams
@@ -169,41 +170,43 @@ export class RebateFinderComponent implements OnInit {
   }
 
   // tabChange is a callback when the progress bar step is changed.
-  // If the new step is the final step in sequence, we will load the equipment search.
+  // If the new step is the final step in sequence, we load the equipment search results.
   tabChange(e:any){
   
-    // Confirm that it's the last step (ahri combinations).
-    if(this.stepper?.steps.length -1 == e.selectedIndex){
+    // If this is the last step in sequence, load the results (ahri combinations).
+    if(this.stepper?.steps.length -1 == e.selectedIndex) {
       
-      // If system design inputs are empty, show product line menu.
+      // If system design inputs are empty, show product line menu and select the first available option.
+      // Selecting a product line effectively completes the system design attributes.
       if false {
 
           // System design inputs are empty.
           // Show product line inputs and select the first one.
           // ...
 
-      } else {
+      }
 
-          // System design inputs are not empty.
-          // First call the eligibility questions and requirements endpoint to get the default values for this search.
-          // Then call the results endpoint with the complete payload.
-	  this._endPoint.EligibilityQuestionsRequirements(payload).subscribe({
-	      next: (resp) => {
+      // First call the eligibility questions and requirements endpoint to get the default values for this search.
+      // Then call the results endpoint with the complete payload.
+      this._endPoint.EligibilityQuestionsRequirements(payload).subscribe({
+	  next: (resp) => {
 	
-                // Send default values received from server to the questions/requirements component.
-                // ...
+            // Send default values received from server to the questions/requirements component.
+            // ...
 
-                this._endPoint.Search(payload).subscribe({
-	        next: (resp) => {
-	
-	        },
-	        error: (e) => alert(e.error)
-	        })
+            this._endPoint.Search(payload).subscribe({
+	    next: (resp) => {
 
-	      },
-	      error: (e) => alert(e.error)
+              // Order results and render cards.
+              // ...
+
+	    },
+	    error: (e) => alert(e.error)
 	    })
 
+	  },
+	  error: (e) => alert(e.error)
+	})
 
 
       }
@@ -211,9 +214,6 @@ export class RebateFinderComponent implements OnInit {
     }
 
   }
-
-
-
-  
+ 
 
 }

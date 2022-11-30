@@ -9,6 +9,8 @@ import { Injectable, Output,  EventEmitter } from '@angular/core';
 export class bridgeService {
 
     // send data to app-rebate-finder
+    @Output() HVACInputs: EventEmitter<any> = new EventEmitter();
+
     @Output() sentLocationParams: EventEmitter<any> = new EventEmitter();
     @Output() dwellingInfoParams: EventEmitter<any> = new EventEmitter();
     @Output() heatedCooledParams: EventEmitter<any> = new EventEmitter();

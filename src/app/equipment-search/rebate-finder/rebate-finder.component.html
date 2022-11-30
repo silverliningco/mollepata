@@ -20,7 +20,7 @@
         <app-dwelling-info></app-dwelling-info>
         <!-- button -->
         <div fxLayout="column" fxLayoutAlign="center end" class="rc-stepper-buttons">
-            <button type="button" mat-raised-button color="primary" [disabled]="myDwellingInfo.desableButton" matStepperNext matStepperNext>
+            <button type="button" mat-raised-button color="primary" [disabled]="myButtonStatus["dwellingInfo"]" matStepperNext matStepperNext>
                 Continue
                 <mat-icon>arrow_forward</mat-icon>
             </button>

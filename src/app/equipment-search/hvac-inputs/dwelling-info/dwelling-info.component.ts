@@ -15,6 +15,8 @@ furnaceGroup !: FormGroup;
 
 desableButton: boolean = true;
 
+  myData: DwellingInfo
+
   constructor(
     private formBuilder: FormBuilder,
     public _bridge: bridgeService
@@ -32,38 +34,12 @@ desableButton: boolean = true;
 
   }
 
-  ActiveContinuebutton(input:any): boolean{
-    
-    let ArrayValues =  Object.values(input);
-
-   completeI: for (const value of ArrayValues) {
-    if (typeof value === 'object'){
-      this.ActiveContinuebutton(value);
-    } else {
-      if (value == null || value == undefined || value === ''){
-        this.desableButton = true;
-        break completeI;
-      } else {
-        this.desableButton = false;
-      }
-    }
-   }
-    
-    return this.desableButton;
-}
-
+  // submitInputs is a callback after any changes are made to the HTML inputs for this component.
+  // With any change the user makes, we send the updated data to the parent component.
   submitInputs() {
 
-    let payload = {
-      year: this.DwellingInfoGroup.controls['constructionTypeControl'].value,
-      fuelSource: this.furnaceGroup.controls['fuelSourceControl'].value,
-    }  
-
-    let stateBtt = this.ActiveContinuebutton(payload);
-
-    /* sent the info to results-rebate */
     this._bridge.dwellingInfoParams.emit({
-      data: [payload, stateBtt]
+      data: [myData]
     });
   }
 
