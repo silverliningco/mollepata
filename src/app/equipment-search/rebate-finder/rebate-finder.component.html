@@ -1,5 +1,5 @@
 
-<mat-stepper #stepper linear  >
+<mat-stepper #stepper linear (selectionChange)="tabChange($event)">
 
     <!-- step 1 location -->
     <mat-step>

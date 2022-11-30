@@ -1,9 +1,18 @@
+export class EquipmentSearch {
+    constructor(
+        public location: Location,
+	public dwellingInfo: DwellingInfo,
+	public heatedCooled: HeatedCooled,
+	public nominalsize: Nominalsize,
+	public systemDesign: SystemDesign
+    ) {}
+}
+
 // location
 export class Location {
     constructor(
         public state: string | null,
-        public utilityProviders: ListUtilities | null,
-        public desableButton: boolean | null
+        public utilityProviders: ListUtilities | null
     ) {}
 }
 
@@ -18,8 +27,7 @@ export class ListUtilities {
 export class DwellingInfo {
     constructor(
         public fuelSource: string | null,
-        public constructionType: string | null,
-        public desableButton: boolean | null
+        public constructionType: string | null
     ) {}
 }
 
@@ -27,8 +35,7 @@ export class DwellingInfo {
 export class HeatedCooled {
     constructor(
         public heated: boolean | null,
-        public cooled: boolean | null,
-        public desableButton: boolean | null
+        public cooled: boolean | null
     ) {}
 }
 
@@ -36,20 +43,18 @@ export class HeatedCooled {
 export class Nominalsize {
     constructor(
         public heatingBTUH: number | null,
-        public coolingTons: number | null,
-        public desableButton: boolean | null
+        public coolingTons: number | null
     ) {}
 }
 
-// system desing
-export class SystemDesing {
+// System design
+export class SystemDesign {
     constructor(
         public outdoor: boolean | null,
         public indoor: boolean | null,
         public furnace: boolean | null,
         public furnaceConfiguration: boolean | null,
-        public indoorUnitTable: indoorUnitTable[] | null,
-        public desableButton: boolean | null
+        public indoorUnitTable: indoorUnitTable[] | null
     ) {}
 }
 
