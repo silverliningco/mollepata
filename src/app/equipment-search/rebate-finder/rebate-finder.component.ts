@@ -516,6 +516,7 @@ export class RebateFinderComponent implements OnInit {
            this.myDwellingInfo = payload.data[0];
            this.myDwellingInfo.desableButton = payload.data[1];
            this.ParamsRebates();
+           console.log(payload.data[0]);
           });
 
     this._bridge.heatedCooledParams

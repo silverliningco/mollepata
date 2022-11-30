@@ -55,9 +55,11 @@ desableButton: boolean = true;
   submitInputs() {
 
     let payload = {
-      year: this.DwellingInfoGroup.controls['constructionTypeControl'].value,
+      constructionType: this.DwellingInfoGroup.controls['constructionTypeControl'].value,
       fuelSource: this.furnaceGroup.controls['fuelSourceControl'].value,
     }  
+
+    console.log(this.DwellingInfoGroup.controls['constructionTypeControl'].value);
 
     let stateBtt = this.ActiveContinuebutton(payload);
 
