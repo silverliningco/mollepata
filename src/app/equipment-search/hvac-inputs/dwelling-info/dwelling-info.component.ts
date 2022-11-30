@@ -38,8 +38,8 @@ desableButton: boolean = true;
   // With any change the user makes, we send the updated data to the parent component.
   submitInputs() {
 
-    this._bridge.dwellingInfoParams.emit({
-      data: [myData]
+    this._bridge.HVACInputs.emit({
+      data: [ "dwellingInfo", myData]
     });
   }
 

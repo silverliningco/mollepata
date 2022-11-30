@@ -322,13 +322,6 @@ export class SystemDesingComponent implements OnInit {
     
   }
 
-  ShowAllResults(){
-  
-    this._bridge.showAllResults.emit({
-      data: false
-    });
-  }
-
   ActiveContinuebutton(input:any): boolean{
 
     // verify if exist some value null
@@ -399,7 +392,7 @@ export class SystemDesingComponent implements OnInit {
     stateBtt = this.ActiveContinuebutton(payload);
 
     /* sent the info to results-rebate */
-    this._bridge.systemDesingParams.emit({
+    this._bridge.HVACInputs.emit({
       data: [payload, stateBtt]
     });
   }

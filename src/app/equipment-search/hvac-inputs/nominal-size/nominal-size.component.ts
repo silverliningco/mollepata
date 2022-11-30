@@ -114,7 +114,7 @@ export class NominalSizeComponent implements OnInit {
     let stateBtt = this.ActiveContinuebutton(payload);
 
     /* sent the info to results-rebate */
-    this._bridge.nominalSizeParams.emit({
+    this._bridge.HVACInputs.emit({
       data: [payload, stateBtt]
     });
   }

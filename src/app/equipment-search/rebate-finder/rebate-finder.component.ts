@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { bridgeService } from '../services/bridge.service';
 
-import { Location, ListUtilities, DwellingInfo, HeatedCooled, Nominalsize, SystemDesing } from '../models/rebate-finder-inputs';
+import { Location, ListUtilities, DwellingInfo, HeatedCooled, Nominalsize, EquipmentSearch } from '../models/rebate-finder-inputs';
 
 
   
@@ -15,7 +15,7 @@ import { Location, ListUtilities, DwellingInfo, HeatedCooled, Nominalsize, Syste
 export class RebateFinderComponent implements OnInit {
 
   // local variables save data of stepper
-  myData: EquipmentSearch;
+  myData!: EquipmentSearch;
 
 
   bestOption: any[] = [];
@@ -24,7 +24,7 @@ export class RebateFinderComponent implements OnInit {
 
   showProducLines!: boolean;
 
-  myResults: any[] = RESULTS2;
+  myResults!: any[];  
   master = 'Master';
 
   constructor(
@@ -39,50 +39,7 @@ export class RebateFinderComponent implements OnInit {
            if payload.data[0] == "dwellingInfo" {
              myData.dwellingInfo = payload.data[1]
            }
-
-
          });
-    
-    this._bridge.dwellingInfoParams
-         .subscribe((payload: any) => {
-           this.myDwellingInfo = payload.data[0];
-           this.myDwellingInfo.desableButton = payload.data[1];
-           this.ParamsRebates();
-          });
-
-    this._bridge.heatedCooledParams
-        .subscribe((payload: any) => {
-            this.myHeatedCooled = payload.data[0];
-            this.myHeatedCooled.desableButton = payload.data[1];                
-           });
-
-    this._bridge.nominalSizeParams
-        .subscribe((payload: any) => {
-            this.myNominalSize = payload.data[0];
-            this.myNominalSize.desableButton = payload.data[1];
-            this.ParamsRebateSystemDesing();
-          });
-
-    this._bridge.OrderResultsRebateFinder
-        .subscribe((payload: any) => {
-            this.myResults = payload.data;
-          }); 
-
-    this._bridge.systemDesingParams
-        .subscribe((payload: any) => {
-            this.mySystemDesing = payload.data[0];
-            this.mySystemDesing.desableButton = payload.data[1];
-            this.showProducLines = false;
-            this.ParamsRebates();
-        });
-
-    // from system desing 
-    this._bridge.showAllResults
-        .subscribe((payload: any) => {
-            this.showProducLines = true;
-            this.mySystemDesing.desableButton = payload.data;
-            console.log(payload.data);
-        });
 
     this._bridge.filters
         .subscribe((payload: any) => {

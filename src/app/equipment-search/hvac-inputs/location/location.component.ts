@@ -332,7 +332,7 @@ export class LocationComponent implements OnInit {
     let stateBtt = this.ActiveContinuebutton(payload);
 
     // sent the info to results-rebate 
-    this._bridge.sentLocationParams.emit({
+    this._bridge.HVACInputs.emit({
       data: [payload, stateBtt]
     });
   }
