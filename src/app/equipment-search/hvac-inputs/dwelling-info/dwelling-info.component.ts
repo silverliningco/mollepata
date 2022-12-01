@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
-import { bridgeService } from '../../services/bridge.service';
 import { DwellingInfo } from '../../models/rebate-finder-inputs';
+
+import { bridgeService } from '../../services/bridge.service';
 
 @Component({
   selector: 'app-dwelling-info',
@@ -16,8 +17,6 @@ furnaceGroup !: FormGroup;
 
 desableButton: boolean = true;
 
-  myData!: DwellingInfo;
-
   constructor(
     private formBuilder: FormBuilder,
     public _bridge: bridgeService
@@ -26,7 +25,8 @@ desableButton: boolean = true;
   ngOnInit(): void {
 
     this.DwellingInfoGroup = this.formBuilder.group({
-      constructionTypeControl: [ '', Validators.required]
+      constructionTypeControl: [ '', Validators.required],
+      fuelSourceControl: ['', Validators.required]
     });
 
     this.furnaceGroup = this.formBuilder.group({
@@ -35,15 +35,39 @@ desableButton: boolean = true;
 
   }
 
-  // submitInputs is a callback after any changes are made to the HTML inputs for this component.
-  // With any change the user makes, we send the updated data to the parent component.
+  ActiveContinuebutton(input:any): boolean{
+    
+    let ArrayValues =  Object.values(input);
+
+   completeI: for (const value of ArrayValues) {
+    if (typeof value === 'object'){
+      this.ActiveContinuebutton(value);
+    } else {
+      if (value == null || value == undefined || value === ''){
+        this.desableButton = true;
+        break completeI;
+      } else {
+        this.desableButton = false;
+      }
+    }
+   }
+    
+    return this.desableButton;
+}
+
   submitInputs() {
 
+    let payload: DwellingInfo = {
+      constructionType: this.DwellingInfoGroup.controls['constructionTypeControl'].value,
+      fuelSource: this.DwellingInfoGroup.controls['fuelSourceControl'].value,
+    }  
+    
+    let stateBtt = this.ActiveContinuebutton(payload);
+
+    /* sent the info to results-rebate */
     this._bridge.HVACInputs.emit({
-      data: [ "dwellingInfo", this.myData]
+      data: [payload, stateBtt]
     });
   }
 
 }
-
-

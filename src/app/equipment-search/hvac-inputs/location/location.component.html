@@ -1,6 +1,7 @@
-<!-- state -->
-<form [formGroup]="stateGroup">
-    <h2 class="rc-main-title">State</h2>
+<form [formGroup]="locationGroup">
+
+  <!-- state -->
+  <h2 class="rc-main-title">State</h2>
     <div fxLayout fxLayoutAlign="center">
       <div fxFlex="40" fxLayout="column" fxLayoutAlign="center stretch" fxFlex.xs="100" fxFlex.sm="70" fxFlex.md="40" fxLayoutGap="20">
         <app-search (search)="HandleSearch($event)"></app-search>
@@ -14,11 +15,8 @@
         </mat-form-field>
       </div>
     </div>
-  </form>
 
-
-<!-- utility provider -->
-<form [formGroup]="utilityGroup">
+    <!-- utility provider -->
     <h2 class="rc-main-title">Utility Providers</h2>
     <div fxLayout fxLayoutAlign="center">
       <!-- User input -->

@@ -1,10 +1,11 @@
+// EquipmentSearch
 export class EquipmentSearch {
     constructor(
         public location: Location,
-	public dwellingInfo: DwellingInfo,
-	public heatedCooled: HeatedCooled,
-	public nominalsize: Nominalsize,
-	public systemDesign: SystemDesign
+        public dwellingInfo: DwellingInfo,
+        public heatedCooled: HeatedCooled,
+        public nominalsize: Nominalsize,
+        public systemDesign: SystemDesign
     ) {}
 }
 
@@ -50,19 +51,19 @@ export class Nominalsize {
 // System design
 export class SystemDesign {
     constructor(
-        public outdoor: boolean | null,
-        public indoor: boolean | null,
-        public furnace: boolean | null,
+        public outdoorSystemType: boolean | null,
+        public indoorSystemType: boolean | null,
+        public furnaceType: boolean | null,
         public furnaceConfiguration: boolean | null,
-        public indoorUnitTable: indoorUnitTable[] | null
+        public msMultiZoneType?: msMultiZoneType[] | null
     ) {}
 }
 
-export class indoorUnitTable {
+export class msMultiZoneType {
     constructor(
-        public quantity: number | null,
-        public unitType: number | null,
-        public size: number | null
+        public qty: number | null,
+        public unitType: string | null,
+        public size: number | null,
     ) {}
 }
 

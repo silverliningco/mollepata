@@ -65,20 +65,7 @@
           <mat-radio-button  value="Single zone"> Single zone</mat-radio-button>
         </mat-radio-group>
       </div>
-  
     </form>
-  
-    <form *ngIf="singleZones" [formGroup]="msIndoorUnitType">
-      <mat-form-field appearance="fill">
-        <mat-label>Select</mat-label>
-        <mat-select formControlName="msIndoorUnitTypeControl" (selectionChange)="submitInputs()">
-          <mat-option *ngFor ="let unitType of msUnits" value="{{unitType.value}}">
-            {{unitType.showUser}}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-    </form>
-  </div>
 </div>
   
     <form *ngIf="showTable" [formGroup]="msMultiZoneType">

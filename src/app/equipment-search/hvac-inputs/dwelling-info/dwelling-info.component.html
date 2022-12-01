@@ -1,8 +1,7 @@
-<!-- home info -->
 <form [formGroup]="DwellingInfoGroup">
-    <!-- Name of step -->
-    <h2 class="rc-main-title">Construction type</h2>
 
+    <!-- Construction type -->
+    <h2 class="rc-main-title">Construction type</h2>
     <div fxLayout="column" fxLayout.sm="column" fxLayout.xs="column" fxLayoutAlign="center center" fxLayoutGap="32">
         <div fxFlex="25" fxLayout="column" fxLayoutAlign="left stretch" fxFlex.xs="100" fxFlex.sm="70" fxFlex.md="25">
             <mat-label>Construction type?</mat-label>
@@ -14,18 +13,11 @@
             </mat-radio-group>
         </div>
     </div>
-</form>
 
-<!-- available fossil fuel -->
-<form [formGroup]="furnaceGroup">
-    <!-- Name of step -->
-    <ng-template matStepLabel>Fossil Fuel</ng-template>
+    <!-- CFossil Fuel -->
     <h2 class="rc-main-title">Fossil Fuel</h2>
-    <!-- Content of step -->
     <div fxLayout="column" fxLayout.sm="column" fxLayout.xs="column" fxLayoutAlign="center center" fxLayoutGap="32">
-        <!-- User input -->
         <div fxFlex="25" fxLayout="column" fxLayoutAlign="left stretch" fxFlex.xs="100" fxFlex.sm="70" fxFlex.md="25">
-            <!-- radio button -->
             <mat-label>Select type of fossil fuel available at the residence.</mat-label>
             <mat-radio-group  #rGroup formControlName="fuelSourceControl" fxLayout="column" class="rc-radio-img" (change)="submitInputs()">
                 <div fxLayout="row column" fxLayoutAlign="center center" fxLayoutGap="20px grid">

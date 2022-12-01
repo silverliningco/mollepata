@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { States, UtilityInfo } from '../../models/hvac-inputs';
+import { Location } from '../../models/rebate-finder-inputs';
+
 
 import { EndPointsService } from '../../services/endPoints.service';
 import { bridgeService } from '../../services/bridge.service';
@@ -15,6 +17,7 @@ export class LocationComponent implements OnInit {
 
   stateGroup !: FormGroup;
   utilityGroup !: FormGroup;
+  locationGroup !: FormGroup;
 
   utilityOtherValue: number = 0;
 
@@ -233,11 +236,8 @@ export class LocationComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.stateGroup = this.formBuilder.group({
-      stateControl: [ null, Validators.required]
-    });
-
-    this.utilityGroup = this.formBuilder.group({
+    this.locationGroup = this.locationGroup = this.formBuilder.group({
+      stateControl: [ null, Validators.required],
       electricUtilityControl: [ null, Validators.required],
       fossilFuelUtilityIdControl: [null, Validators.required]
     });
@@ -250,7 +250,7 @@ export class LocationComponent implements OnInit {
     this.sendGasOil = [];
     this.sendElectric = [];
 
-    let myState = this.stateGroup.controls['stateControl'].value;
+    let myState = this.locationGroup.controls['stateControl'].value;
 
     this._endPoint.Utilities(myState).subscribe({
       next: (resp: any) => {
@@ -285,8 +285,8 @@ export class LocationComponent implements OnInit {
   }
 
   WriteValue(): void {
-    this.utilityGroup.controls['electricUtilityControl'].setValue('');
-    this.utilityGroup.controls['fossilFuelUtilityIdControl'].setValue('');
+    this.locationGroup.controls['electricUtilityControl'].setValue('');
+    this.locationGroup.controls['fossilFuelUtilityIdControl'].setValue('');
   }
 
    // search
@@ -321,11 +321,11 @@ export class LocationComponent implements OnInit {
 
   submitInputs(): void {
 
-    let payload = {
-      state: this.stateGroup.controls['stateControl'].value,
+    let payload: Location = {
+      state: this.locationGroup.controls['stateControl'].value,
       utilityProviders: { 
-        electricUtilityId: this.utilityGroup.controls['electricUtilityControl'].value, 
-        fossilFuelUtilityId: this.utilityGroup.controls['fossilFuelUtilityIdControl'].value 
+        electricUtilityId: this.locationGroup.controls['electricUtilityControl'].value, 
+        fossilFuelUtilityId: this.locationGroup.controls['fossilFuelUtilityIdControl'].value 
       }
     }  
 

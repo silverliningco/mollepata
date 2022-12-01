@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { bridgeService } from "../.././services/bridge.service";
 import {MatSnackBar} from '@angular/material/snack-bar';
-import { MsUnits } from '../../models/hvac-inputs';
 
+import { SystemDesign, msMultiZoneType } from '../../models/rebate-finder-inputs';
+
+import { bridgeService } from "../.././services/bridge.service";
 
 @Component({
   selector: 'app-system-desing',
@@ -85,9 +86,8 @@ export class SystemDesingComponent implements OnInit {
   msIndoorUnitType!: FormGroup;
 
   // table 
-  payload: MsUnits[] = [];
+  payload: msMultiZoneType[] = [];
   showNrbZones: boolean = false;
-  singleZones: boolean = false;
   showTable: boolean = false; 
   showButtonAdd: boolean = false;
   showButtonsDelete: boolean = false;
@@ -133,8 +133,8 @@ export class SystemDesingComponent implements OnInit {
 
   ngOnInit(): void {
     this._bridge.paramsSystemDesing
-        .subscribe((payload: any)=> {
-          this.nominalcoolingTons = payload.data;
+        .subscribe((params: any)=> {
+          this.nominalcoolingTons = params.data;
         });
 
     this.systemDesing = this.formBuilder.group({
@@ -179,11 +179,9 @@ export class SystemDesingComponent implements OnInit {
 
     if (myNbrZones == 'Multi-zone'){
       this.showTable = true;
-      this.singleZones = false;
     } else {
       let myNbrZones = this.msIndoorUnitType.controls['msIndoorUnitTypeControl'].value;
       this.showTable = false;
-      this.singleZones= true;
       this.submitInputs();
     }
   }
@@ -218,10 +216,10 @@ export class SystemDesingComponent implements OnInit {
   /*  quantity <= 5
       size < 135% of  (nominal cooling tons * 12, 000)
   */
-  VerifyQuantities(oneRow: MsUnits): void{
+  VerifyQuantities(oneRow: msMultiZoneType): void{
 
    let firstVerify =  this.VerifyQty(oneRow);
-   let secondVerivy!: MsUnits | null;
+   let secondVerivy!: msMultiZoneType | null;
 
     if (firstVerify != null){
       secondVerivy = this.VerifySize(firstVerify);
@@ -232,12 +230,12 @@ export class SystemDesingComponent implements OnInit {
     }
   }
 
-  VerifyQty(oneRow: MsUnits): MsUnits | null{
+  VerifyQty(oneRow: msMultiZoneType): msMultiZoneType | null{
     let arr: number[]= []; // stores the numbers to be added
     let sum: number = 0;
 
     for (let i of this.payload) {
-      let myValue: MsUnits = i;
+      let myValue: msMultiZoneType = i;
       arr.push(Number(myValue.qty));
     }
 
@@ -258,13 +256,13 @@ export class SystemDesingComponent implements OnInit {
 
   }
 
-  VerifySize(oneRow: MsUnits): MsUnits | null{
+  VerifySize(oneRow: msMultiZoneType): msMultiZoneType | null{
 
     let arr: number[]= [];// stores the size to be added
     let sum: number = 0;
 
     for (let i of this.payload) {
-      let myValue: MsUnits = i;
+      let myValue: msMultiZoneType = i;
       let a = Number(myValue.size) * Number(myValue.qty);
       arr.push(a);
     }
@@ -290,12 +288,12 @@ export class SystemDesingComponent implements OnInit {
     this._snackBar.open(mssg);
   }
 
-  AddRowToPayload(oneRow: MsUnits): MsUnits | null{
+  AddRowToPayload(oneRow: msMultiZoneType): msMultiZoneType | null{
 
     // verify if all of data is complete
     let incomplete = this.ActiveContinuebutton(oneRow);
     if (incomplete == false){
-      let typeC:MsUnits  = {
+      let typeC:msMultiZoneType  = {
         qty: Number(oneRow.qty),
         unitType: oneRow.unitType,
         size: Number(oneRow.size)
@@ -350,34 +348,17 @@ export class SystemDesingComponent implements OnInit {
   submitInputs(): void {
 
     let myIndoor = this.systemDesing.controls['indoorControl'].value;
-    let payload = {}
+    let payload!: SystemDesign;
     let stateBtt!: boolean;
 
     if(myIndoor == 'Mini-split indoor'){
-
-      let numberZones = this.systemDesing.controls['numberZonesControl'].value;
-
-      if (numberZones == 'Multi-zone'){
-        payload = {
+        payload= {
           outdoorSystemType: this.systemDesing.controls['outdoorControl'].value,
           indoorSystemType: this.systemDesing.controls['indoorControl'].value,
           furnaceType: this.systemDesing.controls['furnaceControl'].value,
           furnaceConfiguration: this.systemDesing.controls['furnaceConfigurationControl'].value,
-          msIndoorZones: this.systemDesing.controls['numberZonesControl'].value,
           msMultiZoneType: this.payload
         }
-      } else {
-        payload = {
-          outdoorSystemType: this.systemDesing.controls['outdoorControl'].value,
-          indoorSystemType: this.systemDesing.controls['indoorControl'].value,
-          furnaceType: this.systemDesing.controls['furnaceControl'].value,
-          furnaceConfiguration: this.systemDesing.controls['furnaceConfigurationControl'].value,
-          msIndoorZones: this.systemDesing.controls['numberZonesControl'].value,
-          msIndoorUnitType: this.msIndoorUnitType.controls['msIndoorUnitTypeControl'].value
-        }
-      }
-
-       
     } else {
       payload = {
         outdoorSystemType: this.systemDesing.controls['outdoorControl'].value,

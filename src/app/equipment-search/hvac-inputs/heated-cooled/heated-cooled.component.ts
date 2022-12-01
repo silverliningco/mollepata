@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
+import { HeatedCooled } from '../../models/rebate-finder-inputs';
+
 import { bridgeService } from '../../services/bridge.service';
 
 @Component({
@@ -48,7 +50,7 @@ export class HeatedCooledComponent implements OnInit {
 
   submitInputs() {
 
-    let payload = {
+    let payload: HeatedCooled = {
       heated: this.headedCooledGroup.controls['heatedControl'].value,
       cooled: this.headedCooledGroup.controls['cooledControl'].value,
     }  

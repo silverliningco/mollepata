@@ -16,14 +16,6 @@ export class UtilityInfo {
     ) {}
 }
 
-export class MsUnits {
-    constructor(
-        public qty: number | null,
-        public unitType: string | null,
-        public size: number | null,
-    ) {}
-}
-
 export class EligybilityRequirement {
     constructor(
         public options: string[] | null,

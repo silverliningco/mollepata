@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
+
+import { Nominalsize } from '../../models/rebate-finder-inputs';
+
 import { bridgeService } from "../.././services/bridge.service";
 
 @Component({
@@ -106,7 +109,7 @@ export class NominalSizeComponent implements OnInit {
 
   submitInputs(): void {
 
-    let payload = {
+    let payload: Nominalsize = {
       heatingBTUH: this.nominalSizeGroup.controls['heatingBTUHControl'].value,
       coolingTons: this.nominalSizeGroup.controls['coolingTonsControl'].value
     } 
