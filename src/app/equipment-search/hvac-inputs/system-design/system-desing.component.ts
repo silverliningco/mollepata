@@ -348,39 +348,31 @@ export class SystemDesingComponent implements OnInit {
   submitInputs(): void {
 
     let myIndoor = this.systemDesing.controls['indoorControl'].value;
-    let payload!: SystemDesign;
+    let mySystemDesign!: SystemDesign;
     let stateBtt!: boolean;
 
     if(myIndoor == 'Mini-split indoor'){
-      let mySystemDesign2: SystemDesign = new SystemDesign (
+      mySystemDesign = new SystemDesign (
         this.systemDesing.controls['outdoorControl'].value,
         this.systemDesing.controls['indoorControl'].value,
         this.systemDesing.controls['furnaceControl'].value,
         this.systemDesing.controls['furnaceConfigurationControl'].value,
         this.payload
       )
-
-      payload = mySystemDesign2;
     } else {
-      let mySystemDesign1: SystemDesign = new SystemDesign (
+      mySystemDesign = new SystemDesign (
         this.systemDesing.controls['outdoorControl'].value,
         this.systemDesing.controls['indoorControl'].value,
         this.systemDesing.controls['furnaceControl'].value,
         this.systemDesing.controls['furnaceConfigurationControl'].value,
       )
 
-      payload = mySystemDesign1;
     }
-
-    
-
-    
-
-    stateBtt = this.ActiveContinuebutton(payload);
+    stateBtt = this.ActiveContinuebutton(mySystemDesign);
 
     /* sent the info to results-rebate */
     this._bridge.HVACInputs.emit({
-      data: [payload, stateBtt]
+      data: [mySystemDesign, 'systemDesign',  stateBtt]
     });
   }
 
