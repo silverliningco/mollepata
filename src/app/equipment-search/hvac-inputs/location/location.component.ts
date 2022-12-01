@@ -322,10 +322,10 @@ export class LocationComponent implements OnInit {
   submitInputs(): void {
 
     let myLocation: Location = new Location(
-      this.stateGroup.controls['stateControl'].value, 
+      this.locationGroup.controls['stateControl'].value, 
       new ListUtilities(
-        this.utilityGroup.controls['electricUtilityControl'].value, 
-        this.utilityGroup.controls['fossilFuelUtilityIdControl'].value
+        this.locationGroup.controls['electricUtilityControl'].value, 
+        this.locationGroup.controls['fossilFuelUtilityIdControl'].value
         )
     );
 

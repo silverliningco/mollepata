@@ -41,7 +41,7 @@ export class RebateFinderComponent implements OnInit {
 
   assigningModels(payload: any){
 
-    /* let step: string = payload[1];
+    let step: string = payload[1];
     console.log(  payload[0] );
 
     let hvacInputs: any = {
@@ -50,7 +50,7 @@ export class RebateFinderComponent implements OnInit {
     }
 
     let a: any = hvacInputs[step];
-    console.log(a); */
+    console.log(a);
   }
 
 
