@@ -55,18 +55,18 @@ desableButton: boolean = true;
     return this.desableButton;
 }
 
-  submitInputs() {
+  submitInputs() { 
 
-    let payload: DwellingInfo = {
-      constructionType: this.DwellingInfoGroup.controls['constructionTypeControl'].value,
-      fuelSource: this.DwellingInfoGroup.controls['fuelSourceControl'].value,
-    }  
+    let myDwellingInfo: DwellingInfo = new DwellingInfo (
+      this.DwellingInfoGroup.controls['constructionTypeControl'].value,
+      this.DwellingInfoGroup.controls['fuelSourceControl'].value,
+    );
     
-    let stateBtt = this.ActiveContinuebutton(payload);
+    let stateBtt = this.ActiveContinuebutton(myDwellingInfo);
 
     /* sent the info to results-rebate */
     this._bridge.HVACInputs.emit({
-      data: [payload, stateBtt]
+      data: [myDwellingInfo, 'dwellingInfo', stateBtt]
     });
   }
 

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { States, UtilityInfo } from '../../models/hvac-inputs';
-import { Location } from '../../models/rebate-finder-inputs';
+import { Location, ListUtilities } from '../../models/rebate-finder-inputs';
 
 
 import { EndPointsService } from '../../services/endPoints.service';
@@ -321,19 +321,19 @@ export class LocationComponent implements OnInit {
 
   submitInputs(): void {
 
-    let payload: Location = {
-      state: this.locationGroup.controls['stateControl'].value,
-      utilityProviders: { 
-        electricUtilityId: this.locationGroup.controls['electricUtilityControl'].value, 
-        fossilFuelUtilityId: this.locationGroup.controls['fossilFuelUtilityIdControl'].value 
-      }
-    }  
+    let myLocation: Location = new Location(
+      this.stateGroup.controls['stateControl'].value, 
+      new ListUtilities(
+        this.utilityGroup.controls['electricUtilityControl'].value, 
+        this.utilityGroup.controls['fossilFuelUtilityIdControl'].value
+        )
+    );
 
-    let stateBtt = this.ActiveContinuebutton(payload);
+    let stateBtt = this.ActiveContinuebutton(myLocation);
 
     // sent the info to results-rebate 
     this._bridge.HVACInputs.emit({
-      data: [payload, stateBtt]
+      data: [myLocation,'location', stateBtt]
     });
   }
 

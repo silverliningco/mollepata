@@ -352,23 +352,29 @@ export class SystemDesingComponent implements OnInit {
     let stateBtt!: boolean;
 
     if(myIndoor == 'Mini-split indoor'){
-        payload= {
-          outdoorSystemType: this.systemDesing.controls['outdoorControl'].value,
-          indoorSystemType: this.systemDesing.controls['indoorControl'].value,
-          furnaceType: this.systemDesing.controls['furnaceControl'].value,
-          furnaceConfiguration: this.systemDesing.controls['furnaceConfigurationControl'].value,
-          msMultiZoneType: this.payload
-        }
-    } else {
-      payload = {
-        outdoorSystemType: this.systemDesing.controls['outdoorControl'].value,
-        indoorSystemType: this.systemDesing.controls['indoorControl'].value,
-        furnaceType: this.systemDesing.controls['furnaceControl'].value,
-        furnaceConfiguration: this.systemDesing.controls['furnaceConfigurationControl'].value
-      } 
+      let mySystemDesign2: SystemDesign = new SystemDesign (
+        this.systemDesing.controls['outdoorControl'].value,
+        this.systemDesing.controls['indoorControl'].value,
+        this.systemDesing.controls['furnaceControl'].value,
+        this.systemDesing.controls['furnaceConfigurationControl'].value,
+        this.payload
+      )
 
-      stateBtt = true;
+      payload = mySystemDesign2;
+    } else {
+      let mySystemDesign1: SystemDesign = new SystemDesign (
+        this.systemDesing.controls['outdoorControl'].value,
+        this.systemDesing.controls['indoorControl'].value,
+        this.systemDesing.controls['furnaceControl'].value,
+        this.systemDesing.controls['furnaceConfigurationControl'].value,
+      )
+
+      payload = mySystemDesign1;
     }
+
+    
+
+    
 
     stateBtt = this.ActiveContinuebutton(payload);
 

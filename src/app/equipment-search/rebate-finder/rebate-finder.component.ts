@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { bridgeService } from '../services/bridge.service';
 
-import { Location, ListUtilities, DwellingInfo, HeatedCooled, Nominalsize, EquipmentSearch } from '../models/rebate-finder-inputs';
+import { EquipmentSearch, Location, DwellingInfo } from '../models/rebate-finder-inputs';
 
 @Component({
   selector: 'app-rebate-finder',
@@ -13,6 +13,7 @@ export class RebateFinderComponent implements OnInit {
 
   // local variables save data of stepper
   myData!: EquipmentSearch;
+  myHvacInputs!: EquipmentSearch;
 
 
   bestOption: any[] = [];
@@ -32,13 +33,24 @@ export class RebateFinderComponent implements OnInit {
 
     this._bridge.HVACInputs
         .subscribe((payload: any) => {
-
-           /* if payload.data[0] == "dwellingInfo" {
-             myData.dwellingInfo = payload.data[1]
-           } */
+           this.assigningModels(payload.data);
          });
     
     this.OrderCards();
+  }
+
+  assigningModels(payload: any){
+
+    /* let step: string = payload[1];
+    console.log(  payload[0] );
+
+    let hvacInputs: any = {
+      'location': this.myHvacInputs.location = payload[0],
+      'dwellingInfo': this.myHvacInputs.dwellingInfo = payload[0],
+    }
+
+    let a: any = hvacInputs[step];
+    console.log(a); */
   }
 
 
@@ -96,7 +108,7 @@ export class RebateFinderComponent implements OnInit {
 
   OrderCards(){
 
-    let size = this.myResults.length;
+    /* let size = this.myResults.length;
     let slot!: any;
     let tmp!: any;
     let array!: any;
@@ -111,7 +123,7 @@ export class RebateFinderComponent implements OnInit {
         this.myResults[slot+1] = array;
     }
 
-    this.myResults = this.myResults.reverse();
+    this.myResults = this.myResults.reverse(); */
     
   }
 

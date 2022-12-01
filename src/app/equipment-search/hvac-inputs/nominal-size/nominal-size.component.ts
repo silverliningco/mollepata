@@ -109,16 +109,16 @@ export class NominalSizeComponent implements OnInit {
 
   submitInputs(): void {
 
-    let payload: Nominalsize = {
-      heatingBTUH: this.nominalSizeGroup.controls['heatingBTUHControl'].value,
-      coolingTons: this.nominalSizeGroup.controls['coolingTonsControl'].value
-    } 
+    let myNominalsize: Nominalsize = new Nominalsize (
+      this.nominalSizeGroup.controls['heatingBTUHControl'].value,
+      this.nominalSizeGroup.controls['coolingTonsControl'].value
+    )
 
-    let stateBtt = this.ActiveContinuebutton(payload);
+    let stateBtt = this.ActiveContinuebutton(myNominalsize);
 
     /* sent the info to results-rebate */
     this._bridge.HVACInputs.emit({
-      data: [payload, stateBtt]
+      data: [myNominalsize, 'nominalsize',stateBtt]
     });
   }
 

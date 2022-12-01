@@ -50,16 +50,16 @@ export class HeatedCooledComponent implements OnInit {
 
   submitInputs() {
 
-    let payload: HeatedCooled = {
-      heated: this.headedCooledGroup.controls['heatedControl'].value,
-      cooled: this.headedCooledGroup.controls['cooledControl'].value,
-    }  
+    let myHeatedCooled: HeatedCooled = new HeatedCooled(
+      this.headedCooledGroup.controls['heatedControl'].value,
+      this.headedCooledGroup.controls['cooledControl'].value,
+    )
 
-    let stateBtt = this.ActiveContinuebutton(payload);
+    let stateBtt = this.ActiveContinuebutton(myHeatedCooled);
 
     /* sent the info to results-rebate */
     this._bridge.HVACInputs.emit({
-      data: [payload, stateBtt]
+      data: [myHeatedCooled, 'headedCooled',  stateBtt]
     });
   }
 
