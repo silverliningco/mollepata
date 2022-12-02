@@ -227,8 +227,6 @@ export class LocationComponent implements OnInit {
     },
   ]
 
-  disableButton: boolean = true;
-
   constructor(
     private formBuilder: FormBuilder,
     public _bridge: bridgeService,
@@ -294,30 +292,6 @@ export class LocationComponent implements OnInit {
       this.filterTerm = value;
   }
 
-  ActiveContinuebutton(input:any): boolean{
-
-    // verify if exist some value null
-    let haveValueNull = Object.values(input).some(x => x === null);
-
-    if (haveValueNull == false){
-      let ArrayValues =  Object.values(input);
-
-      completeI: for (const value of ArrayValues) {
-        if (typeof value === 'object'){
-          this.ActiveContinuebutton(value);
-        } else {
-          if (value == null || value == undefined || value === ''){
-            this.disableButton = true;
-            break completeI;
-          } else {
-            this.disableButton = false;
-          }
-        }
-      }
-    }
-    
-    return this.disableButton;
-  }
 
   submitInputs(): void {
 
@@ -329,11 +303,9 @@ export class LocationComponent implements OnInit {
         )
     );
 
-    let stateBtt = this.ActiveContinuebutton(myLocation);
-
     // sent the info to results-rebate 
     this._bridge.HVACInputs.emit({
-      data: [myLocation,'location', stateBtt]
+      data: [myLocation,'location']
     });
   }
 

@@ -27,6 +27,8 @@ export class RebateFinderComponent implements OnInit {
 
   myButtonStatus: {[key: string]: boolean }= {};
 
+  disableButton: boolean = false;
+
   constructor(
     public _bridge: bridgeService,
   ) { }
@@ -36,34 +38,37 @@ export class RebateFinderComponent implements OnInit {
    
     this._bridge.HVACInputs
         .subscribe((payload: any) => {
-          let myStepName:string  =  payload.data[1]
-          let myStepPayload:any  =  payload.data[0]
-         
-         
-            this.myButtonStatus[myStepName] = true; // TODO
+            let myStepName:string  =  payload.data[1]
+            let myStepPayload:any  =  payload.data[0]
+
+            this.myButtonStatus[myStepName] = this.ActiveContinuebutton(payload.data[0]);
             this.myData[myStepName as keyof EquipmentSearch] = myStepPayload;
-         
-          
-            console.log(this.myData);
-          //this.assigningModels(payload.data);
+
+console.log(this.myData);
+
          });
     
     this.OrderCards();
   }
 
-  assigningModels(payload: any){
+  //
+  ActiveContinuebutton(input:any): boolean{
 
-    let step: string = payload[1];
-    console.log(  payload[0] );
+    Object.keys(input).forEach(key => {
+        if (input[key] == null || input[key] == undefined || input[key] === '') {
+            this.disableButton = false
+        } else {
+            this.disableButton = true
+        }
+        if (typeof input[key] === 'object' && input[key] !== null) {
+            this.ActiveContinuebutton(input[key])
+        }
+    })
 
-    let hvacInputs: any = {
-      'location': this.myHvacInputs.location = payload[0],
-      'dwellingInfo': this.myHvacInputs.dwellingInfo = payload[0],
-    }
-
-    let a: any = hvacInputs[step];
-    console.log(a);
+    return this.disableButton;
   }
+
+
 
 
   ParamsRebateSystemDesing(){
