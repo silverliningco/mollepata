@@ -55,6 +55,18 @@
 
     <!-- step 5 System desing -->
     <mat-step>
+    <!-- note for show all results -->
+    <div fxLayout fxLayoutAlign="center" fxLayoutGap="16px">
+        <div fxFlex="50" fxFlex.sm="70" fxFlex.xs="100" class="rc-note">
+            <div fxLayout="row column" fxLayoutAlign="space-between center" >
+                <p fxFlex="60" fxFlex.xs="100" fxflex.sm="80" class="rc-small"> <b>Note: </b>
+                    <br>
+                    If you want to see all the combinations </p>
+                    <button fxFlex="40" fxFlex.xs="100" fxflex.sm="80" type="button" mat-raised-button color="primary" matStepperNext matStepperNext>Click here!</button>
+            </div>
+            
+        </div>
+    </div>
         <ng-template matStepLabel>System Design</ng-template>
         <app-system-desing></app-system-desing>
         <!-- button -->

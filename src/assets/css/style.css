@@ -124,14 +124,21 @@ h1, h2, h3, h4, h5 {
     margin: .75rem auto;
   }
   .rc-page-subtitle{
-    color: var(--rc-primary-color);
-    margin-bottom: 1rem;
+    color: #434343;
+    margin-bottom: 5px !important;
+    text-align: start;
+    margin-top: 1rem;
   }
-  .rc-page-subtitle::after {
-    content: '';
-    border-bottom: solid 3px var(--rc-accent-color);
-    width: 30px;
+  .rc-indications{
+    color: #656565;
+    font-size: 14px;
+    font-style: italic;
+    margin-bottom: 8px;
+  }
+  .rc-label{
+    margin: 16px 0 8px 0;
     display: block;
+
   }
 /* End title in page*/
 
@@ -368,7 +375,7 @@ h1, h2, h3, h4, h5 {
                 -ms-flex-align: center;
                     align-items: center;
             margin: .5rem;
-            width: 100%;
+            width: 90%;
             border: none;
             padding: 0 .5rem;
         }
@@ -455,6 +462,12 @@ h1, h2, h3, h4, h5 {
     width: 100px;
     height: 100px;
   }
+  @media (min-width: 600px) and (max-width: 958px){
+    .rc-card.line img, .rc-radio-img img {
+      width: 70px;
+      height: 70px;
+    }
+  }
   .rc-card.line p, .rc-radio-img p {
     text-align: center;
     margin: 3rem 0 0 0;
@@ -501,17 +514,6 @@ h1, h2, h3, h4, h5 {
   }
 /* End Stepper styles */
 
-/* ******************************************************Estilo para eliminar al cambiar los resultados a cards*/
-/* Start Pagination */
-  .rc-pagination {
-    margin-top: 1rem;
-  }
-  .rc-nr-pages {
-    color: #939393;
-    line-height: 1rem;
-    font-size: .75rem;
-  }
-/* End Pagination */
 
 /* Start Stock status*/
   .rc-filter-stock {
@@ -756,9 +758,6 @@ h1, h2, h3, h4, h5 {
     }
     .rc-filters-selected h5{
       display: block;
-    }
-    .rc-nr-pages {
-      margin-top: 1rem;
     }
   }
 /* End filters selected */
@@ -1138,11 +1137,6 @@ color: #4c4c4c;
 
 /* End Card Result Page */
 
-
-
-/* End styles in Results Page */
-
-
 /*Change check position in the card*/
   .rc-list-accesories .mat-checkbox-layout{
     position: relative !important;
@@ -1319,4 +1313,13 @@ color: #4c4c4c;
 
 p.rc-disabled-note-rt::first-letter{
   text-transform: uppercase;
+}
+
+/* Form Styles */
+.rc-form{
+  margin-bottom: 1.5rem !important;
+  width: 100%;
+}
+.rc-form mat-form-field{
+  width: 100%;
 }

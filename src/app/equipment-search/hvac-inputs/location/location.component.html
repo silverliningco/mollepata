@@ -1,29 +1,25 @@
-<form [formGroup]="locationGroup">
+<!--Title-->
+<h2 class="rc-main-title">Location</h2>
 
-  <!-- state -->
-  <h2 class="rc-main-title">State</h2>
-    <div fxLayout fxLayoutAlign="center">
-      <div fxFlex="40" fxLayout="column" fxLayoutAlign="center stretch" fxFlex.xs="100" fxFlex.sm="70" fxFlex.md="40" fxLayoutGap="20">
-        <app-search (search)="HandleSearch($event)"></app-search>
-        <mat-form-field appearance="fill">
-          <mat-label>State</mat-label>
-          <mat-select #sGroup formControlName="stateControl" (selectionChange)="ChangeState()">
-            <mat-option *ngFor ="let state of states | search:filterTerm" value="{{state.abbreviation}}"  radioGroup="sGroup">
-              {{state.abbreviation}} - {{state.name}}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-      </div>
-    </div>
+<div fxLayout="row column" fxLayoutAlign="center">
+  <div fxFlex="25" fxLayout="column" fxLayoutAlign="center center" fxFlex.xs="100" fxFlex.sm="50" fxFlex.md="25" fxLayoutGap="20">
+    <form [formGroup]="locationGroup" class="rc-form">
+      <!-- state -->
+      <h4 class="rc-page-subtitle">State</h4>
+      <app-search (search)="HandleSearch($event)"></app-search>
+      <mat-form-field appearance="fill">
+        <mat-label>State</mat-label>
+        <mat-select #sGroup formControlName="stateControl" (selectionChange)="ChangeState()">
+          <mat-option *ngFor ="let state of states | search:filterTerm" value="{{state.abbreviation}}"  radioGroup="sGroup">
+            {{state.abbreviation}} - {{state.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
 
-    <!-- utility provider -->
-    <h2 class="rc-main-title">Utility Providers</h2>
-    <div fxLayout fxLayoutAlign="center">
-      <!-- User input -->
-      <div fxFlex="40" fxLayout="column" fxLayoutAlign="center stretch" fxFlex.xs="100" fxFlex.sm="70" fxFlex.md="40" fxLayoutGap="20">
-
-       <!-- utilities -->
-       <mat-form-field appearance="fill">
+      <!-- utility provider -->
+      <h4 class="rc-page-subtitle">Utility Providers</h4>
+      <!-- utilities -->
+      <mat-form-field appearance="fill">
         <mat-label>Electric Utility</mat-label>
         <mat-select #sGroup formControlName="electricUtilityControl" (selectionChange)="submitInputs()">
           <mat-option *ngFor ="let elec of electricity; let i = index" [value]="electricity[i].utilityProviderId"  radioGroup="sGroup">
@@ -42,6 +38,6 @@
           <mat-option   [value]="utilityOtherValue" radioGroup="sGroup">Other or N/A</mat-option>
         </mat-select>
       </mat-form-field>
-      </div>
-    </div>
-</form>
+    </form>
+  </div>
+</div>
