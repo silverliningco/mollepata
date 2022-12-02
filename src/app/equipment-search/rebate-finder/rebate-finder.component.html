@@ -7,7 +7,7 @@
         <app-location></app-location>
         <!-- button -->
         <div fxLayout="column" fxLayoutAlign="center end" class="rc-stepper-buttons">
-            <button type="button" mat-raised-button color="primary"  matStepperNext>
+            <button type="button" mat-raised-button color="primary" [disabled]="!myButtonStatus['location']" matStepperNext>
                 Continue
                 <mat-icon>arrow_forward</mat-icon>
             </button>
@@ -20,8 +20,7 @@
         <app-dwelling-info></app-dwelling-info>
         <!-- button -->
         <div fxLayout="column" fxLayoutAlign="center end" class="rc-stepper-buttons">
-            <!-- <button type="button" mat-raised-button color="primary" [disabled]="myButtonStatus["dwellingInfo"]" matStepperNext> -->
-                <button type="button" mat-raised-button color="primary" matStepperNext>
+                <button type="button" mat-raised-button color="primary" [disabled]="!myButtonStatus['dwellingInfo']" matStepperNext>
                 Continue
                 <mat-icon>arrow_forward</mat-icon>
             </button>
@@ -34,7 +33,7 @@
         <app-heated-cooled></app-heated-cooled>
         <!-- button -->
         <div fxLayout="column" fxLayoutAlign="center end" class="rc-stepper-buttons">
-            <button type="button" mat-raised-button color="primary" matStepperNext>
+            <button type="button" mat-raised-button color="primary" [disabled]="!myButtonStatus['heatedCooled']" matStepperNext>
                 Continue
                 <mat-icon>arrow_forward</mat-icon>
             </button>
@@ -43,11 +42,11 @@
 
     <!-- step 4 nominal size -->
     <mat-step>
-        <ng-template matStepLabel>Nominal Size</ng-template>
+        <ng-template matStepLabel>System Size</ng-template>
         <app-nominal-size></app-nominal-size>
         <!-- button -->
         <div fxLayout="column" fxLayoutAlign="center end" class="rc-stepper-buttons">
-            <button type="button" mat-raised-button color="primary" matStepperNext>
+            <button type="button" mat-raised-button color="primary" [disabled]="!myButtonStatus['systemSize']" matStepperNext>
                 Continue
                 <mat-icon>arrow_forward</mat-icon>
             </button>
@@ -60,7 +59,7 @@
         <app-system-desing></app-system-desing>
         <!-- button -->
         <div fxLayout="column" fxLayoutAlign="center end" class="rc-stepper-buttons">
-            <button type="button" mat-raised-button color="primary" matStepperNext>
+            <button type="button" mat-raised-button color="primary" [disabled]="!myButtonStatus['systemDesign']" matStepperNext>
                 Continue
                 <mat-icon>arrow_forward</mat-icon>
             </button>

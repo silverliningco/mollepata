@@ -1,11 +1,11 @@
 // EquipmentSearch
 export class EquipmentSearch {
     constructor(
-        public location: Location,
-        public dwellingInfo: DwellingInfo,
-        public heatedCooled: HeatedCooled,
-        public nominalsize: Nominalsize,
-        public systemDesign: SystemDesign
+        public location: Location | null,
+        public dwellingInfo: DwellingInfo | null,
+        public heatedCooled: HeatedCooled | null,
+        public nominalsize: Nominalsize | null,
+        public systemDesign: SystemDesign | null
     ) {}
 }
 

@@ -12,7 +12,7 @@ import { EquipmentSearch, Location, DwellingInfo } from '../models/rebate-finder
 export class RebateFinderComponent implements OnInit {
 
   // local variables save data of stepper
-  myData!: EquipmentSearch;
+  myData: EquipmentSearch = new EquipmentSearch(null, null, null, null, null);
   myHvacInputs!: EquipmentSearch;
 
 
@@ -25,15 +25,27 @@ export class RebateFinderComponent implements OnInit {
   myResults!: any[];  
   master = 'Master';
 
+  myButtonStatus: {[key: string]: boolean }= {};
+
   constructor(
     public _bridge: bridgeService,
   ) { }
 
   ngOnInit(): void {
 
+   
     this._bridge.HVACInputs
         .subscribe((payload: any) => {
-           this.assigningModels(payload.data);
+          let myStepName:string  =  payload.data[1]
+          let myStepPayload:any  =  payload.data[0]
+         
+         
+            this.myButtonStatus[myStepName] = true; // TODO
+            this.myData[myStepName as keyof EquipmentSearch] = myStepPayload;
+         
+          
+            console.log(this.myData);
+          //this.assigningModels(payload.data);
          });
     
     this.OrderCards();
