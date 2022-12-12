@@ -12,7 +12,7 @@ import { bridgeService } from '../../services/bridge.service';
 })
 export class DwellingInfoComponent implements OnInit {
 
-DwellingInfoGroup !: FormGroup;
+  dwellingInfoForm !: FormGroup;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -20,23 +20,16 @@ DwellingInfoGroup !: FormGroup;
   ) { }
 
   ngOnInit(): void {
-
-    this.DwellingInfoGroup = this.formBuilder.group({
-      constructionTypeControl: [ '', Validators.required],
-      fuelSourceControl: ['', Validators.required]
+    this.dwellingInfoForm = this.formBuilder.group({
+      constructionType: [ '', Validators.required],
+      fuelSource: ['', Validators.required]
     });
   }
 
   submitInputs() { 
-
-    let myDwellingInfo: DwellingInfo = new DwellingInfo (
-      this.DwellingInfoGroup.controls['constructionTypeControl'].value,
-      this.DwellingInfoGroup.controls['fuelSourceControl'].value,
-    );
-
     /* sent the info to results-rebate */
     this._bridge.HVACInputs.emit({
-      data: [myDwellingInfo, 'dwellingInfo']
+      data: [this.dwellingInfoForm.value, 'dwellingInfo']
     });
   }
 

@@ -4,47 +4,44 @@
 
 <div fxLayout fxLayoutAlign="center">
   <div fxLayout fxFlex="40" fxLayout="column" fxLayoutAlign="center center" fxFlex.xs="100" fxFlex.sm="70" fxFlex.md="40" fxLayoutGap="20">
-    <form [formGroup]="systemSizeGroup" fxLayout="column" fxFlex="100" fxLayoutAlign="center" class="rc-form">
+    <form [formGroup]="systemSizeForm" fxLayout="column" fxFlex="100" fxLayoutAlign="center" class="rc-form">
       <!-- Name of step -->
       <ng-template matStepLabel>System Size</ng-template>
       <!-- Content of step -->
       <!-- input -->
       <mat-form-field appearance="fill"  >
         <mat-label>Cooling tons</mat-label>
-        <mat-select  #sGroup formControlName="coolingTonsControl" (selectionChange)="submitInputs()">
-          <mat-option radioGroup="sGroup" value = "0.5"> < 1.0</mat-option>
-          <mat-option radioGroup="sGroup" value = "1.0">1.0</mat-option>
-          <mat-option radioGroup="sGroup" value = "1.5">1.5</mat-option>
-          <mat-option radioGroup="sGroup" value = "2.0">2.0</mat-option>
-          <mat-option radioGroup="sGroup" value = "2.5">2.5</mat-option>
-          <mat-option radioGroup="sGroup" value = "3.0">3.0</mat-option>
-          <mat-option radioGroup="sGroup" value = "3.5">3.5</mat-option>
-          <mat-option radioGroup="sGroup" value = "4.0">4.0</mat-option>
-          <mat-option radioGroup="sGroup" value = "4.5">4.5</mat-option>
-          <mat-option radioGroup="sGroup" value = "5.0">5.0</mat-option>
+        <mat-select #sGroup formControlName="coolingTons" (selectionChange)="submitInputs()">
+          <mat-option radioGroup="sGroup" [value] = "0.5"> < 1.0</mat-option>
+          <mat-option radioGroup="sGroup" [value] = "1.0">1.0</mat-option>
+          <mat-option radioGroup="sGroup" [value] = "1.5">1.5</mat-option>
+          <mat-option radioGroup="sGroup" [value] = "2.0">2.0</mat-option>
+          <mat-option radioGroup="sGroup" [value] = "2.5">2.5</mat-option>
+          <mat-option radioGroup="sGroup" [value] = "3.0">3.0</mat-option>
+          <mat-option radioGroup="sGroup" [value] = "3.5">3.5</mat-option>
+          <mat-option radioGroup="sGroup" [value] = "4.0">4.0</mat-option>
+          <mat-option radioGroup="sGroup" [value] = "4.5">4.5</mat-option>
+          <mat-option radioGroup="sGroup" [value] = "5.0">5.0</mat-option>
         </mat-select>
-        <mat-error *ngIf="systemSizeGroup.get('coolingTonsControl')?.hasError('required')">You must make a selection</mat-error>
+        <mat-error *ngIf="systemSizeForm.get('coolingTons')?.hasError('required')">You must make a selection</mat-error>
       </mat-form-field>
 
       <!-- input -->
       <mat-form-field appearance="fill">
         <mat-label>Heating BTUH</mat-label>
-        <input matInput placeholder="Heating BTUH" type="number" formControlName="heatingBTUHControl" (change)="submitInputs()" required>
+        <input matInput placeholder="Heating BTUH" type="number" formControlName="heatingBTUH" (change)="submitInputs()" required>
         
-        <!-- error -->
-        <mat-error *ngIf="systemSizeGroup.get('heatingBTUHControl')?.hasError('is_not_number') && systemSizeGroup.get('heatingBTUHControl')?.touched">
-          Heating BTUH <strong>must be a number.</strong>
-        </mat-error>
-        <mat-error *ngIf="systemSizeGroup.get('heatingBTUHControl')?.hasError('null_not_permit') && systemSizeGroup.get('heatingBTUHControl')?.touched">
+        <!-- custom error messages -->
+        <mat-error *ngIf="systemSizeForm.get('heatingBTUH')?.hasError('is_null') && systemSizeForm.get('heatingBTUH')?.touched">
           Heating BTUH is <strong>required</strong>
         </mat-error>
-        <mat-error *ngIf="systemSizeGroup.get('heatingBTUHControl')?.hasError('need_between_4_6_characters') && systemSizeGroup.get('heatingBTUHControl')?.touched">
+        <mat-error *ngIf="systemSizeForm.get('heatingBTUH')?.hasError('need_between_4_6_characters') && systemSizeForm.get('heatingBTUH')?.touched">
           Heating BTUH must be <strong>between 4 and 6 digits</strong>.
         </mat-error>
-        <mat-error *ngIf="systemSizeGroup.get('heatingBTUHControl')?.hasError('Hbtuh_invalid_value') && systemSizeGroup.get('heatingBTUHControl')?.touched">               
+        <mat-error *ngIf="systemSizeForm.get('heatingBTUH')?.hasError('is_invalid_value') && systemSizeForm.get('heatingBTUH')?.touched">               
           Heating BTUH must be a whole number <strong>between 8,000 and 135,000</strong>.
         </mat-error>
-        <mat-error *ngIf="systemSizeGroup.get('heatingBTUHControl')?.hasError('it_not_integer') && systemSizeGroup.get('heatingBTUHControl')?.touched">
+        <mat-error *ngIf="systemSizeForm.get('heatingBTUH')?.hasError('is_not_integer') && systemSizeForm.get('heatingBTUH')?.touched">
           Heating BTUH is not <strong>integer</strong>.
         </mat-error>
       </mat-form-field>

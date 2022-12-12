@@ -3,14 +3,14 @@
 
 <div fxLayout="row column" fxLayoutAlign="center">
     <div fxFlex="25" fxLayout="column" fxLayoutAlign="center center" fxFlex.xs="100" fxFlex.sm="50" fxFlex.md="25" fxLayoutGap="20">
-        <form [formGroup]="headedCooledGroup" class="rc-form">
-            <mat-radio-group formControlName="cooledControl" (change)="submitInputs()" aria-label="Select an option">
+        <form [formGroup]="heatedCooledForm" class="rc-form">
+            <mat-radio-group formControlName="cooled" (change)="submitInputs()" aria-label="Select an option">
                 <mat-label class="rc-label">Provide colling?</mat-label>
                 <mat-radio-button value="yes">Yes</mat-radio-button>
                 <br>
                 <mat-radio-button value="no">No</mat-radio-button>
             </mat-radio-group>
-            <mat-radio-group formControlName="heatedControl" (change)="submitInputs()" aria-label="Select an option">
+            <mat-radio-group formControlName="heated" (change)="submitInputs()" aria-label="Select an option">
                 <mat-label class="rc-label">Provide heating?</mat-label>
                 <mat-radio-button value="yes">Yes</mat-radio-button>
                 <br>

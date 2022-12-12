@@ -2,12 +2,12 @@
 <h2 class="rc-main-title">Dwelling Info</h2>
 <div fxLayout="row column" fxLayoutAlign="center">
     <div fxFlex="75" fxLayout="column" fxLayoutAlign="center center" fxFlex.xs="100" fxFlex.sm="50" fxFlex.md="75" fxLayoutGap="20">
-        <form [formGroup]="DwellingInfoGroup" class="rc-form">
+        <form [formGroup]="dwellingInfoForm" class="rc-form">
             <!-- Construction type -->
             <h4 class="rc-page-subtitle">Construction type</h4>
             <mat-label class="rc-indications">Select your construction type.</mat-label>
             <br>
-            <mat-radio-group formControlName="constructionTypeControl" (change)="submitInputs()">
+            <mat-radio-group formControlName="constructionType" (change)="submitInputs()">
                 <mat-radio-button value="new-construction">New construction</mat-radio-button>
                 <br>
                 <mat-radio-button value="existing-construction">Existing construction</mat-radio-button>
@@ -16,7 +16,7 @@
             <!-- Fossil Fuel -->
             <h4 class="rc-page-subtitle">Fossil Fuel</h4>
             <mat-label class="rc-indications">Select type of fossil fuel available at the residence.</mat-label>
-            <mat-radio-group  #rGroup formControlName="fuelSourceControl" fxLayout="column" class="rc-radio-img" (change)="submitInputs()">
+            <mat-radio-group  #rGroup formControlName="fuelSource" fxLayout="column" class="rc-radio-img" (change)="submitInputs()">
                 <div fxLayout="row column" fxLayoutAlign="center center" fxLayoutGap="20px grid">
                     <mat-radio-button  [value]="'Natural Gas'" radioGroup="rGroup" fxFlex.xs="80" fxFlex.sm="34">
                         <img src="../../../../assets/images/icons/natural-gas.png" alt="" class="unchecked">

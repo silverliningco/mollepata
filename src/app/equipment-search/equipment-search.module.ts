@@ -48,7 +48,6 @@ import {MatTabsModule} from '@angular/material/tabs';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
-import { SearchPipe } from './hvac-inputs/location/search.pipe';
 
 
 @NgModule({
@@ -68,7 +67,6 @@ import { SearchPipe } from './hvac-inputs/location/search.pipe';
     TableComponent,
     SystemDesingComponent,
     AppliedFiltersComponent,
-    SearchPipe
   ],
   imports: [
     CommonModule,

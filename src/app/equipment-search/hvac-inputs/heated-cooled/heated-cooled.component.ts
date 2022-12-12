@@ -12,7 +12,7 @@ import { bridgeService } from '../../services/bridge.service';
 })
 export class HeatedCooledComponent implements OnInit {
   
-  headedCooledGroup !: FormGroup;
+  heatedCooledForm !: FormGroup;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -20,22 +20,17 @@ export class HeatedCooledComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.headedCooledGroup = this.formBuilder.group({
-      heatedControl: [ '', Validators.required],
-      cooledControl: [ '', Validators.required]
+    this.heatedCooledForm = this.formBuilder.group({
+      heated: [ '', Validators.required],
+      cooled: [ '', Validators.required]
     });
   }
 
   submitInputs() {
 
-    let myHeatedCooled: HeatedCooled = new HeatedCooled(
-      this.headedCooledGroup.controls['heatedControl'].value,
-      this.headedCooledGroup.controls['cooledControl'].value,
-    )
-
     /* sent the info to results-rebate */
     this._bridge.HVACInputs.emit({
-      data: [myHeatedCooled, 'heatedCooled']
+      data: [ this.heatedCooledForm.value, 'heatedCooled']
     });
   }
 
