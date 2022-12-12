@@ -70,7 +70,7 @@ export class QuestionsRequirementComponent implements OnInit {
       'dwellingInfo': '',
       'systemDesign': '',
       'skus': '',
-      'nominalSize': '',
+      'systemSize': '',
       'mj8LoadCalculation': ''
     }
 
@@ -135,13 +135,13 @@ export class QuestionsRequirementComponent implements OnInit {
     this.myEligibilityQuestions = b;
   }
 
-  ProcesEligybilityQuestions(questionId: number | null){
+  ProcesEligybilityQuestions(questionId: number ){
 
     let optionQuestion = this.rebateGroup.controls['eligibilityQuestionsControl'].value;
 
-    let question = {
-      'questionId': questionId,
-      'options': optionQuestion
+    let question:EligibilityQuestions = {
+      questionId: questionId,
+      options: optionQuestion
     }
 
 
@@ -161,7 +161,7 @@ export class QuestionsRequirementComponent implements OnInit {
     console.log('.............................................');
   }
 
-  ProcesEligybilityRequirement(requirementId: number | null){
+  ProcesEligybilityRequirement(requirementId: number ){
 
     let optionRequirement = this.rebateGroup.controls['eligybilityRequirementControl'].value;
 

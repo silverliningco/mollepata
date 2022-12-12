@@ -3,41 +3,47 @@
 
 <div fxLayout="row column" fxLayoutAlign="center">
   <div fxFlex="25" fxLayout="column" fxLayoutAlign="center center" fxFlex.xs="100" fxFlex.sm="50" fxFlex.md="25" fxLayoutGap="20">
-    <form [formGroup]="locationGroup" class="rc-form">
+    <form [formGroup]="locationForm" class="rc-form">
       <!-- state -->
       <h4 class="rc-page-subtitle">State</h4>
-      <app-search (search)="HandleSearch($event)"></app-search>
       <mat-form-field appearance="fill">
-        <mat-label>State</mat-label>
-        <mat-select #sGroup formControlName="stateControl" (selectionChange)="ChangeState()">
-          <mat-option *ngFor ="let state of states | search:filterTerm" value="{{state.abbreviation}}"  radioGroup="sGroup">
-            {{state.abbreviation}} - {{state.name}}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
+      <input type="text"
+      matInput
+      placeholder="State"
+      formControlName="state"
+      aria-label="Number"
+      [matAutocomplete]="auto"/>
 
-      <!-- utility provider -->
+      <mat-autocomplete #auto="matAutocomplete"  [displayWith]="displayFn.bind(this)"  (optionSelected)="ChangeState()">
+        <mat-option *ngFor="let state of filteredStates | async" [value]="state.abbreviation">
+          {{state.name}}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+
+      <!-- utility providers -->
       <h4 class="rc-page-subtitle">Utility Providers</h4>
-      <!-- utilities -->
-      <mat-form-field appearance="fill">
-        <mat-label>Electric Utility</mat-label>
-        <mat-select #sGroup formControlName="electricUtilityControl" (selectionChange)="submitInputs()">
-          <mat-option *ngFor ="let elec of electricity; let i = index" [value]="electricity[i].utilityProviderId"  radioGroup="sGroup">
-            {{electricity[i].title}}
-          </mat-option>
-          <mat-option  [value]="utilityOtherValue" radioGroup="sGroup">Other or N/A</mat-option>
-        </mat-select>
-      </mat-form-field>
+      <div formGroupName="utilityProviders">
+        <mat-form-field appearance="fill">
+          <mat-label>Electric Utility</mat-label>
+          <mat-select #sGroup formControlName="electricUtilityId" (selectionChange)="submitInputs()">
+            <mat-option *ngFor ="let electricProvider of electricProviders" [value]="electricProvider.utilityProviderId" radioGroup="sGroup">
+              {{electricProvider.title}}
+            </mat-option>
+            <mat-option  value="0" radioGroup="sGroup">Other or N/A</mat-option>
+          </mat-select>
+        </mat-form-field>
 
-      <mat-form-field appearance="fill">
-        <mat-label>Gas / Oil Utility</mat-label>
-        <mat-select #sGroup formControlName="fossilFuelUtilityIdControl" (selectionChange)="submitInputs()">
-          <mat-option *ngFor ="let elec of fossilFuel; let i = index" [value]="fossilFuel[i].utilityProviderId" radioGroup="sGroup">
-            {{fossilFuel[i].title}}
-          </mat-option> 
-          <mat-option   [value]="utilityOtherValue" radioGroup="sGroup">Other or N/A</mat-option>
-        </mat-select>
-      </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Gas / Oil Utility</mat-label>
+          <mat-select #sGroup formControlName="fossilFuelUtilityId" (selectionChange)="submitInputs()">
+            <mat-option *ngFor ="let fossilFuelProvider of fossilFuelProviders" [value]="fossilFuelProvider.utilityProviderId" radioGroup="sGroup">
+              {{fossilFuelProvider.title}}
+            </mat-option> 
+            <mat-option   value="0" radioGroup="sGroup">Other or N/A</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
     </form>
   </div>
 </div>

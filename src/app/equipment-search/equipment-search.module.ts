@@ -19,7 +19,7 @@ import { HvacSystemDetailComponent } from './hvac-system-detail/hvac-system-deta
 import { LocationComponent } from './hvac-inputs/location/location.component';
 import { DwellingInfoComponent } from './hvac-inputs/dwelling-info/dwelling-info.component';
 import { HeatedCooledComponent } from './hvac-inputs/heated-cooled/heated-cooled.component';
-import { NominalSizeComponent } from './hvac-inputs/nominal-size/nominal-size.component';
+import { SystemSizeComponent } from './hvac-inputs/system-size/system-size.component';
 import { FiltersComponent } from './hvac-inputs/filters/filters.component';
 import { QuestionsRequirementComponent } from './hvac-inputs/questions-requirement/questions-requirement.component';
 import { ProductLinesComponent } from './hvac-inputs/product-lines/product-lines.component';
@@ -47,6 +47,7 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import { SearchPipe } from './hvac-inputs/location/search.pipe';
 
 
@@ -58,7 +59,7 @@ import { SearchPipe } from './hvac-inputs/location/search.pipe';
     LocationComponent,
     DwellingInfoComponent,
     HeatedCooledComponent,
-    NominalSizeComponent,
+    SystemSizeComponent,
     FiltersComponent,
     QuestionsRequirementComponent,
     ProductLinesComponent,
@@ -93,7 +94,8 @@ import { SearchPipe } from './hvac-inputs/location/search.pipe';
     MatDialogModule,
     MatTabsModule,
     MatTooltipModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatAutocompleteModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: HttpInterceptorService, multi: true }

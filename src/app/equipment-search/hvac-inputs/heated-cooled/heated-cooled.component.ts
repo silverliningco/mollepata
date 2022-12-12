@@ -14,8 +14,6 @@ export class HeatedCooledComponent implements OnInit {
   
   headedCooledGroup !: FormGroup;
 
-  disableButton: boolean = true;
-
   constructor(
     private formBuilder: FormBuilder,
     public _bridge: bridgeService,
@@ -28,26 +26,6 @@ export class HeatedCooledComponent implements OnInit {
     });
   }
 
-  ActiveContinuebutton(input:any): boolean{
-    
-    let ArrayValues =  Object.values(input);
-
-   completeI: for (const value of ArrayValues) {
-    if (typeof value === 'object'){
-      this.ActiveContinuebutton(value);
-    } else {
-      if (value == null || value == undefined || value === ''){
-        this.disableButton = true;
-        break completeI;
-      } else {
-        this.disableButton = false;
-      }
-    }
-   }
-    
-    return this.disableButton;
-}
-
   submitInputs() {
 
     let myHeatedCooled: HeatedCooled = new HeatedCooled(
@@ -55,11 +33,9 @@ export class HeatedCooledComponent implements OnInit {
       this.headedCooledGroup.controls['cooledControl'].value,
     )
 
-    let stateBtt = this.ActiveContinuebutton(myHeatedCooled);
-
     /* sent the info to results-rebate */
     this._bridge.HVACInputs.emit({
-      data: [myHeatedCooled, 'headedCooled',  stateBtt]
+      data: [myHeatedCooled, 'heatedCooled']
     });
   }
 

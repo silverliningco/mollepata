@@ -12,7 +12,7 @@ import { EquipmentSearch, Location, DwellingInfo } from '../models/rebate-finder
 export class RebateFinderComponent implements OnInit {
 
   // local variables save data of stepper
-  myData: EquipmentSearch = new EquipmentSearch(null, null, null, null, null);
+  myData =  new EquipmentSearch();
   myHvacInputs!: EquipmentSearch;
 
 
@@ -41,7 +41,7 @@ export class RebateFinderComponent implements OnInit {
             let myStepName:string  =  payload.data[1]
             let myStepPayload:any  =  payload.data[0]
 
-            this.myButtonStatus[myStepName] = this.ActiveContinuebutton(payload.data[0]);
+            this.myButtonStatus[myStepName] = true;//this.ActiveContinuebutton(payload.data[0]);
             this.myData[myStepName as keyof EquipmentSearch] = myStepPayload;
 
 console.log(this.myData);

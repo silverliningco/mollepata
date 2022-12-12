@@ -13,9 +13,6 @@ import { bridgeService } from '../../services/bridge.service';
 export class DwellingInfoComponent implements OnInit {
 
 DwellingInfoGroup !: FormGroup;
-furnaceGroup !: FormGroup;
-
-desableButton: boolean = true;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -28,32 +25,7 @@ desableButton: boolean = true;
       constructionTypeControl: [ '', Validators.required],
       fuelSourceControl: ['', Validators.required]
     });
-
-    this.furnaceGroup = this.formBuilder.group({
-      fuelSourceControl: ['', Validators.required],
-    });
-
   }
-
-  ActiveContinuebutton(input:any): boolean{
-    
-    let ArrayValues =  Object.values(input);
-
-   completeI: for (const value of ArrayValues) {
-    if (typeof value === 'object'){
-      this.ActiveContinuebutton(value);
-    } else {
-      if (value == null || value == undefined || value === ''){
-        this.desableButton = true;
-        break completeI;
-      } else {
-        this.desableButton = false;
-      }
-    }
-   }
-    
-    return this.desableButton;
-}
 
   submitInputs() { 
 
@@ -61,12 +33,10 @@ desableButton: boolean = true;
       this.DwellingInfoGroup.controls['constructionTypeControl'].value,
       this.DwellingInfoGroup.controls['fuelSourceControl'].value,
     );
-    
-    let stateBtt = this.ActiveContinuebutton(myDwellingInfo);
 
     /* sent the info to results-rebate */
     this._bridge.HVACInputs.emit({
-      data: [myDwellingInfo, 'dwellingInfo', stateBtt]
+      data: [myDwellingInfo, 'dwellingInfo']
     });
   }
 

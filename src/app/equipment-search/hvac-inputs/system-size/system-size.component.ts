@@ -1,22 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 
-import { Nominalsize } from '../../models/rebate-finder-inputs';
+import { SystemSize } from '../../models/rebate-finder-inputs';
 
 import { bridgeService } from "../.././services/bridge.service";
 
 @Component({
-  selector: 'app-nominal-size',
-  templateUrl: './nominal-size.component.html',
-  styleUrls: ['./nominal-size.component.css']
+  selector: 'app-system-size',
+  templateUrl: './system-size.component.html',
+  styleUrls: ['./system-size.component.css']
 })
-export class NominalSizeComponent implements OnInit {
-  nominalSizeGroup!: FormGroup;
-
-
-  myCoolingTons: Array<number> =  [0.5, 1.0, 1.5, 2.0, 2.5, 3.0, 3.5, 4.0, 4.5, 5.0];
-
-  disableButton: boolean = true;
+export class SystemSizeComponent implements OnInit {
+  systemSizeGroup!: FormGroup;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -24,7 +19,7 @@ export class NominalSizeComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.nominalSizeGroup = this.formBuilder.group({
+    this.systemSizeGroup = this.formBuilder.group({
       heatingBTUHControl: ['', [this.ValidateHeatingBTUH, this.ValidateNumber]],
       coolingTonsControl: ['', Validators.required],
     });
@@ -87,38 +82,16 @@ export class NominalSizeComponent implements OnInit {
 
   }
 
-  ActiveContinuebutton(input:any): boolean{
-    
-    let ArrayValues =  Object.values(input);
-
-   completeI: for (const value of ArrayValues) {
-    if (typeof value === 'object'){
-      this.ActiveContinuebutton(value);
-    } else {
-      if (value == null || value == undefined || value === ''){
-        this.disableButton = true;
-        break completeI;
-      } else {
-        this.disableButton = false;
-      }
-    }
-   }
-    
-    return this.disableButton;
-}
-
   submitInputs(): void {
 
-    let myNominalsize: Nominalsize = new Nominalsize (
-      this.nominalSizeGroup.controls['heatingBTUHControl'].value,
-      this.nominalSizeGroup.controls['coolingTonsControl'].value
+    let mySystemSize: SystemSize = new SystemSize (
+      this.systemSizeGroup.controls['heatingBTUHControl'].value,
+      this.systemSizeGroup.controls['coolingTonsControl'].value
     )
-
-    let stateBtt = this.ActiveContinuebutton(myNominalsize);
 
     /* sent the info to results-rebate */
     this._bridge.HVACInputs.emit({
-      data: [myNominalsize, 'nominalsize',stateBtt]
+      data: [mySystemSize, 'systemSize']
     });
   }
 

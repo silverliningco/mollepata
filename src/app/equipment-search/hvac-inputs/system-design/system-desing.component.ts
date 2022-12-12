@@ -291,7 +291,7 @@ export class SystemDesingComponent implements OnInit {
   AddRowToPayload(oneRow: msMultiZoneType): msMultiZoneType | null{
 
     // verify if all of data is complete
-    let incomplete = this.ActiveContinuebutton(oneRow);
+    let incomplete = false//this.ActiveContinuebutton(oneRow);
     if (incomplete == false){
       let typeC:msMultiZoneType  = {
         qty: Number(oneRow.qty),
@@ -320,36 +320,10 @@ export class SystemDesingComponent implements OnInit {
     
   }
 
-  ActiveContinuebutton(input:any): boolean{
-
-    // verify if exist some value null
-    let haveValueNull = Object.values(input).some(x => x === null);
-
-    if (haveValueNull == false){
-      let ArrayValues =  Object.values(input);
-
-      completeI: for (const value of ArrayValues) {
-        if (typeof value === 'object'){
-          this.ActiveContinuebutton(value);
-        } else {
-          if (value == null || value == undefined || value === ''){
-            this.disableButton = true;
-            break completeI;
-          } else {
-            this.disableButton = false;
-          }
-        }
-      }
-    }
-    
-    return this.disableButton;
-  }
-
   submitInputs(): void {
 
     let myIndoor = this.systemDesing.controls['indoorControl'].value;
     let mySystemDesign!: SystemDesign;
-    let stateBtt!: boolean;
 
     if(myIndoor == 'Mini-split indoor'){
       mySystemDesign = new SystemDesign (
@@ -368,11 +342,10 @@ export class SystemDesingComponent implements OnInit {
       )
 
     }
-    stateBtt = this.ActiveContinuebutton(mySystemDesign);
 
     /* sent the info to results-rebate */
     this._bridge.HVACInputs.emit({
-      data: [mySystemDesign, 'systemDesign',  stateBtt]
+      data: [mySystemDesign, 'systemDesign']
     });
   }
 

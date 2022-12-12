@@ -1,12 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
-import { States, UtilityInfo } from '../../models/hvac-inputs';
-import { Location, ListUtilities } from '../../models/rebate-finder-inputs';
+import { UtilityInfo } from '../../models/hvac-inputs';
+import { Location, UtilityProviders } from '../../models/rebate-finder-inputs';
 
 
 import { EndPointsService } from '../../services/endPoints.service';
 import { bridgeService } from '../../services/bridge.service';
+
+import { Observable } from 'rxjs';
+import { map, startWith } from 'rxjs/operators';
+
+export interface State {
+  abbreviation: string;
+  name: string;
+}
 
 @Component({
   selector: 'app-location',
@@ -15,20 +23,16 @@ import { bridgeService } from '../../services/bridge.service';
 })
 export class LocationComponent implements OnInit {
 
-  stateGroup !: FormGroup;
-  utilityGroup !: FormGroup;
-  locationGroup !: FormGroup;
+  locationForm!: FormGroup;
 
-  utilityOtherValue: number = 0;
+  location!: Location;
 
-  // serach
-  filterTerm: string ='';
+  filteredStates!: Observable<State[]>;
 
-  sendElectric: Array<any> = [];
-  sendGasOil: Array<any> = [];
-  electricity:  Array<UtilityInfo> = [];
-  fossilFuel: Array<UtilityInfo> = [];
-  states: States[] = [
+  electricProviders: Array<UtilityInfo> = [];
+  fossilFuelProviders: Array<UtilityInfo> = [];
+
+  states: State[] = [
     {
       'abbreviation': 'AL',
       'name': 'Alabama'
@@ -234,78 +238,83 @@ export class LocationComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.locationGroup = this.locationGroup = this.formBuilder.group({
-      stateControl: [ null, Validators.required],
-      electricUtilityControl: [ null, Validators.required],
-      fossilFuelUtilityIdControl: [null, Validators.required]
+
+    this.locationForm = this.formBuilder.group({
+      state: ["", Validators.required],
+      utilityProviders: this.formBuilder.group({
+        electricUtilityId: [null, Validators.required],
+        fossilFuelUtilityId: [null, Validators.required]
+      })
     });
 
+    // Function to filter states when input value changes.
+    this.filteredStates = this.locationForm.controls['state'].valueChanges.pipe(
+      startWith(''),
+      map(value => {
+        const name = typeof value === 'string' ? value : value?.name;
+        return name ? this._filterStates(name as string) : this.states.slice();
+      }),
+    );
+  }
+
+  // Function that maps an option's control value to its display value in the trigger.
+  displayFn(abbreviation: string): string {
+    if (!abbreviation) return '';
+    let index = this.states.findIndex(state => state.abbreviation === abbreviation);
+    return this.states[index].name;
+  }
+
+  private _filterStates(value: string): State[] {
+    const filterValue = value.toLowerCase();
+    return this.states.filter(option => option.name.toLowerCase().includes(filterValue));
   }
 
   // utilities
-  ChangeState():void {
+  ChangeState(): void {
 
-    this.sendGasOil = [];
-    this.sendElectric = [];
-
-    let myState = this.locationGroup.controls['stateControl'].value;
+    let myState = this.locationForm.controls['state'].value;
 
     this._endPoint.Utilities(myState).subscribe({
       next: (resp: any) => {
         let listUtilities: Array<UtilityInfo> = resp;
-        this.GetEachUtility(listUtilities);
-      },
-      error: (e) => alert(e.error),
-      complete: () => console.info('complete')
-    })
 
-    this.WriteValue();
+        this.electricProviders = [];
+        this.fossilFuelProviders = [];
+
+        listUtilities.forEach(ele => {
+          if (ele.electricity === true && ele.fossilFuel === false) {
+            this.electricProviders.push(ele);
+          } if (ele.electricity === false && ele.fossilFuel === true) {
+            this.fossilFuelProviders.push(ele);
+          } if (ele.electricity === true && ele.fossilFuel === true) {
+            this.electricProviders.push(ele);
+            this.fossilFuelProviders.push(ele);
+          }
+        });
+      },
+      error: (e) => alert(e.error)
+    })
 
     this.submitInputs();
   }
 
 
-  GetEachUtility(array: Array<UtilityInfo>): void {
-
-    this.electricity = [];
-    this.fossilFuel = [];
-
-    array.forEach(ele => {
-      if (ele.electricity === true && ele.fossilFuel === false){
-        this.electricity.push(ele);
-      } if (ele.electricity === false && ele.fossilFuel === true){
-        this.fossilFuel.push(ele);
-      } if (ele.electricity === true && ele.fossilFuel === true) {
-        this.electricity.push(ele);
-        this.fossilFuel.push(ele);
-      }
-    });
-  }
-
-  WriteValue(): void {
-    this.locationGroup.controls['electricUtilityControl'].setValue('');
-    this.locationGroup.controls['fossilFuelUtilityIdControl'].setValue('');
-  }
-
-   // search
-   HandleSearch(value: string){
-      this.filterTerm = value;
-  }
-
-
   submitInputs(): void {
 
-    let myLocation: Location = new Location(
-      this.locationGroup.controls['stateControl'].value, 
-      new ListUtilities(
-        this.locationGroup.controls['electricUtilityControl'].value, 
-        this.locationGroup.controls['fossilFuelUtilityIdControl'].value
-        )
-    );
+    //const myLocation: Location  = this.locationForm.value;
 
+  /*
+    let myLocation: Location = new Location(
+      this.locationForm.controls['state'].value,
+      new UtilityProviders(
+        this.locationForm.controls['electricUtilityId'].value,
+        this.locationForm.controls['fossilFuelUtilityId'].value
+      )
+    );
+  */
     // sent the info to results-rebate 
     this._bridge.HVACInputs.emit({
-      data: [myLocation,'location']
+      data: [this.locationForm.value, 'location']
     });
   }
 

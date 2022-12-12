@@ -1,32 +1,32 @@
 export class Result {
     constructor(
-        public EER: number | null,
-        public AFUE: number | null,
-        public HSPF: number | null,
-        public SEER: number | null,
-        public Hcap17: number | null,
-        public Hcap47: number | null,
-        public fuelTypes: string[] | null,
-        public components: Components[] | null,
-        public equipmentTags: number | null,
-        public AHRIReferences: number[] | null,
-        public availableRebates: number | null,
-        public furnaceInputBTUH: number | null,
-        public furnaceOutputBTUH: number | null,
-        public configurationOptions: object[] | null,
-        public coolingCapacityRated: number | null,
-        public furnaceConfigurations: object[] | null,
-        public totalAvailableRebates: number | null
+        public EER: number,
+        public AFUE: number,
+        public HSPF: number,
+        public SEER: number,
+        public Hcap17: number,
+        public Hcap47: number,
+        public fuelTypes: string[],
+        public components: Components[],
+        public equipmentTags: number,
+        public AHRIReferences: number[],
+        public availableRebates: number,
+        public furnaceInputBTUH: number,
+        public furnaceOutputBTUH: number,
+        public configurationOptions: object[],
+        public coolingCapacityRated: number,
+        public furnaceConfigurations: object[],
+        public totalAvailableRebates: number
         
     ) {}
 }
 
 export class Components {
     constructor(
-        public id: string | null,
-        public SKU: string | null,
-        public name: string | null,
-        public type: string | null
+        public id: string,
+        public SKU: string,
+        public name: string,
+        public type: string
         
     ) {}
 }

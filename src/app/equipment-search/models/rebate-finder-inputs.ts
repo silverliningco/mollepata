@@ -1,70 +1,95 @@
 // EquipmentSearch
 export class EquipmentSearch {
     constructor(
-        public location: Location | null,
-        public dwellingInfo: DwellingInfo | null,
-        public heatedCooled: HeatedCooled | null,
-        public nominalsize: Nominalsize | null,
-        public systemDesign: SystemDesign | null
-    ) {}
+    public location?: Location,
+    public dwellingInfo?: DwellingInfo,
+    public heatedCooled?: HeatedCooled,
+    public systemSize?: SystemSize,
+    public systemDesign?: SystemDesign
+    ) {
+
+    }
 }
 
 // location
 export class Location {
     constructor(
-        public state: string | null,
-        public utilityProviders: ListUtilities | null
-    ) {}
+        public state: string,
+        public utilityProviders: UtilityProviders
+    ) { }
 }
 
-export class ListUtilities {
+export class UtilityProviders {
     constructor(
-        public electricUtilityId: number | null,
-        public fossilFuelUtilityId: number | null
-    ) {}
+        public electricUtilityId: number,
+        public fossilFuelUtilityId: number
+    ) { }
 }
 
 // Dwelling info
 export class DwellingInfo {
     constructor(
-        public fuelSource: string | null,
-        public constructionType: string | null
-    ) {}
+        public fuelSource: string,
+        public constructionType: string
+    ) { }
 }
 
 // heated and cooled
 export class HeatedCooled {
     constructor(
-        public heated: boolean | null,
-        public cooled: boolean | null
-    ) {}
+        public heated: boolean,
+        public cooled: boolean
+    ) { }
 }
 
-// nominal size
-export class Nominalsize {
+// system size
+export class SystemSize {
     constructor(
-        public heatingBTUH: number | null,
-        public coolingTons: number | null
-    ) {}
+        public heatingBTUH: number,
+        public coolingTons: number
+    ) { }
 }
 
 // System design
 export class SystemDesign {
     constructor(
-        public outdoorSystemType: boolean | null,
-        public indoorSystemType: boolean | null,
-        public furnaceType: boolean | null,
-        public furnaceConfiguration: boolean | null,
-        public msMultiZoneType?: msMultiZoneType[] | null
-    ) {}
+        public outdoorSystemType: boolean,
+        public indoorSystemType: boolean,
+        public furnaceType: boolean,
+        public furnaceConfiguration: boolean,
+        public msMultiZoneType?: msMultiZoneType[]
+    ) { }
 }
 
 export class msMultiZoneType {
     constructor(
-        public qty: number | null,
-        public unitType: string | null,
-        public size: number | null,
-    ) {}
+        public qty: number = 0,
+        public unitType: string = '',
+        public size: number = 0
+        ) { }
+}
+
+/*
+// diferencias entre interfaces y clases
+// interface solo se usa para verficacion de tipos
+
+//clase inicializar propiedades organizar codigo, object
+
+class Employee{
+  //Attributes : variables
+
+  //metods: acciones
+  showInfo():void{
+    console.log(this.name);
+  }
+  constructor(){}
 }
 
 
+
+cons emp =new Employee();
+
+generics:
+reactive forms modern !!
+template driven forms ngModel
+*/
