@@ -4,14 +4,14 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 
 import { SystemDesign, msMultiZoneType } from '../../models/rebate-finder-inputs';
 
-import { bridgeService } from "../.././services/bridge.service";
+import { bridgeService } from "../../services/bridge.service";
 
 @Component({
-  selector: 'app-system-desing',
-  templateUrl: './system-desing.component.html',
-  styleUrls: ['./system-desing.component.css']
+  selector: 'app-system-design',
+  templateUrl: './system-design.component.html',
+  styleUrls: ['./system-design.component.css']
 })
-export class SystemDesingComponent implements OnInit {
+export class SystemDesignComponent implements OnInit {
 
   // select 
   outdoors = [
@@ -81,9 +81,8 @@ export class SystemDesingComponent implements OnInit {
   ];
 
   // FormGroup
-  systemDesing!: FormGroup; 
+  systemDesignForm!: FormGroup; 
   msMultiZoneType!: FormGroup;
-  msIndoorUnitType!: FormGroup;
 
   // table 
   payload: msMultiZoneType[] = [];
@@ -120,10 +119,7 @@ export class SystemDesingComponent implements OnInit {
     }
   ];
 
-  nominalcoolingTons!: number;
-
-  disableButton: boolean = true;
-
+  nominalCoolingTons!: number;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -132,33 +128,33 @@ export class SystemDesingComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this._bridge.paramsSystemDesing
+    this._bridge.HVACInputs
         .subscribe((params: any)=> {
-          this.nominalcoolingTons = params.data;
+          // Get nominal cooling tons from system size component.
+          if (params.data[0].coolingTons) {
+            this.nominalCoolingTons = params.data[0].coolingTons;
+          }
         });
 
-    this.systemDesing = this.formBuilder.group({
-      outdoorControl: ['', Validators.required],
-      indoorControl: ['', Validators.required],
-      furnaceControl: ['', Validators.required],
-      furnaceConfigurationControl: ['', Validators.required],
-      numberZonesControl: ['', Validators.required],
+    this.systemDesignForm = this.formBuilder.group({
+      outdoorUnitType: ['', Validators.required],
+      indoorUnitType: ['', Validators.required],
+      furnaceType: ['', Validators.required],
+      furnaceConfiguration: ['', Validators.required],
+      numberZones: ['', Validators.required],
     });
 
     this.msMultiZoneType = this.formBuilder.group({
-      quantityControl: ['', Validators.required],
-      unitTypeControl: ['', Validators.required],
-      sizeControl: ['', Validators.required]
+      quantity: ['', Validators.required],
+      unitType: ['', Validators.required],
+      size: ['', Validators.required]
     });
 
-    this.msIndoorUnitType = this.formBuilder.group({
-      msIndoorUnitTypeControl: ['', Validators.required]
-    })
   }
 
   selectIndoor(): void{
 
-    let getValueIndoor = this.systemDesing.controls['indoorControl'].value;
+    let getValueIndoor = this.systemDesignForm.controls['indoorUnitType'].value;
 
     if (getValueIndoor == 'Mini-split indoor'){
       this.showNrbZones = true;
@@ -166,21 +162,20 @@ export class SystemDesingComponent implements OnInit {
       this.showNrbZones = false;
       this.showTable = false;
       this.payload= [];
-      this.systemDesing.controls['numberZonesControl'].reset();
-      this.msMultiZoneType.controls['quantityControl'].reset();
-      this.msMultiZoneType.controls['unitTypeControl'].reset();
-      this.msMultiZoneType.controls['sizeControl'].reset();
+      this.systemDesignForm.controls['numberZones'].reset();
+      this.msMultiZoneType.controls['quantity'].reset();
+      this.msMultiZoneType.controls['unitType'].reset();
+      this.msMultiZoneType.controls['size'].reset();
       this.submitInputs();
     }
   }
 
   NumberZones(){
-    let myNbrZones = this.systemDesing.controls['numberZonesControl'].value;
+    let myNbrZones = this.systemDesignForm.controls['numberZones'].value;
 
     if (myNbrZones == 'Multi-zone'){
       this.showTable = true;
     } else {
-      let myNbrZones = this.msIndoorUnitType.controls['msIndoorUnitTypeControl'].value;
       this.showTable = false;
       this.submitInputs();
     }
@@ -189,9 +184,9 @@ export class SystemDesingComponent implements OnInit {
   // button for add one row to table 
   ShowButtons(): void{
 
-    let getQuantity = this.msMultiZoneType.controls['quantityControl'].value;
-    let getUnitType = this.msMultiZoneType.controls['unitTypeControl'].value;
-    let getSize = this.msMultiZoneType.controls['sizeControl'].value;
+    let getQuantity = this.msMultiZoneType.controls['quantity'].value;
+    let getUnitType = this.msMultiZoneType.controls['unitType'].value;
+    let getSize = this.msMultiZoneType.controls['size'].value;
 
     if (getSize != null && getUnitType != null && getQuantity != null){
       this.showButtonAdd = true;
@@ -200,9 +195,9 @@ export class SystemDesingComponent implements OnInit {
 
   AddRow(){
 
-    let getQuantity = this.msMultiZoneType.controls['quantityControl'].value;
-    let getUnitType = this.msMultiZoneType.controls['unitTypeControl'].value;
-    let getSize = this.msMultiZoneType.controls['sizeControl'].value;
+    let getQuantity = this.msMultiZoneType.controls['quantity'].value;
+    let getUnitType = this.msMultiZoneType.controls['unitType'].value;
+    let getSize = this.msMultiZoneType.controls['size'].value;
 
     let oneRow = {
       qty: getQuantity,
@@ -271,7 +266,7 @@ export class SystemDesingComponent implements OnInit {
     let add = (arr: any) => arr.reduce((a: any, b: any) => a + b, 0);
     sum = add(arr);
 
-    let size = this.nominalcoolingTons * 12000;
+    let size = this.nominalCoolingTons * 12000;
 
     let resul = sum * 1.5;
 
@@ -294,14 +289,14 @@ export class SystemDesingComponent implements OnInit {
     let incomplete = false//this.ActiveContinuebutton(oneRow);
     if (incomplete == false){
       let typeC:msMultiZoneType  = {
-        qty: Number(oneRow.qty),
+        qty: oneRow.qty,
         unitType: oneRow.unitType,
-        size: Number(oneRow.size)
+        size: oneRow.size
       }
       this.payload.push(typeC);
-      this.msMultiZoneType.controls['quantityControl'].reset();
-      this.msMultiZoneType.controls['unitTypeControl'].reset();
-      this.msMultiZoneType.controls['sizeControl'].reset();
+      this.msMultiZoneType.controls['quantity'].reset();
+      this.msMultiZoneType.controls['unitType'].reset();
+      this.msMultiZoneType.controls['size'].reset();
       this.submitInputs();
     } else {
       let message = 'Please, complete all the inputs.';
@@ -311,34 +306,31 @@ export class SystemDesingComponent implements OnInit {
     return null
   }
 
-
+  // Function that deletes an specific row by index provided. 
   DeleteRow(i: number): object[]{
-
     this.payload.splice(i-1, 1);
-
     return this.payload;
-    
   }
 
   submitInputs(): void {
 
-    let myIndoor = this.systemDesing.controls['indoorControl'].value;
+    let myIndoor = this.systemDesignForm.controls['indoorUnitType'].value;
     let mySystemDesign!: SystemDesign;
 
     if(myIndoor == 'Mini-split indoor'){
       mySystemDesign = new SystemDesign (
-        this.systemDesing.controls['outdoorControl'].value,
-        this.systemDesing.controls['indoorControl'].value,
-        this.systemDesing.controls['furnaceControl'].value,
-        this.systemDesing.controls['furnaceConfigurationControl'].value,
+        this.systemDesignForm.controls['outdoorUnitType'].value,
+        this.systemDesignForm.controls['indoorUnitType'].value,
+        this.systemDesignForm.controls['furnaceType'].value,
+        this.systemDesignForm.controls['furnaceConfiguration'].value,
         this.payload
       )
     } else {
       mySystemDesign = new SystemDesign (
-        this.systemDesing.controls['outdoorControl'].value,
-        this.systemDesing.controls['indoorControl'].value,
-        this.systemDesing.controls['furnaceControl'].value,
-        this.systemDesing.controls['furnaceConfigurationControl'].value,
+        this.systemDesignForm.controls['outdoorUnitType'].value,
+        this.systemDesignForm.controls['indoorUnitType'].value,
+        this.systemDesignForm.controls['furnaceType'].value,
+        this.systemDesignForm.controls['furnaceConfiguration'].value,
       )
 
     }

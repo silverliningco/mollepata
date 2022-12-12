@@ -5,11 +5,11 @@
   <div fxFlex="30" fxLayout="column" fxLayoutAlign="center stretch" fxFlex.xs="100" fxFlex.sm="70" fxFlex.md="30" fxLayoutGap="20">
     <!-- select spesific option  -->
     <mat-label class="rc-indications">Select the combination.</mat-label>
-    <form  [formGroup]="systemDesing" class="rc-form">
+    <form  [formGroup]="systemDesignForm" class="rc-form">
       <!-- Outdoor unit -->
       <mat-form-field appearance="fill">
         <mat-label>Outdoor unit type:</mat-label>
-        <mat-select #sGroup formControlName="outdoorControl" (selectionChange)="submitInputs()">
+        <mat-select #sGroup formControlName="outdoorUnitType" (selectionChange)="submitInputs()">
           <mat-option *ngFor ="let outdoor of outdoors" value="{{outdoor.value}}" radioGroup="sGroup">
             {{outdoor.showUser}}
           </mat-option>
@@ -21,7 +21,7 @@
       <!-- Indoor unit -->
       <mat-form-field appearance="fill">
         <mat-label>Indoor unit type:</mat-label>
-        <mat-select #sGroup formControlName="indoorControl" (selectionChange)="selectIndoor()">
+        <mat-select #sGroup formControlName="indoorUnitType" (selectionChange)="selectIndoor()">
           <mat-option *ngFor ="let indoor of indoors" value="{{indoor.value}}" radioGroup="sGroup">
             {{indoor.showUser}}
           </mat-option>
@@ -33,7 +33,7 @@
       <!-- Furnace type -->
       <mat-form-field appearance="fill">
         <mat-label>Furnace type:</mat-label>
-        <mat-select  formControlName="furnaceControl" (selectionChange)="submitInputs()">
+        <mat-select  formControlName="furnaceType" (selectionChange)="submitInputs()">
           <mat-option *ngFor ="let furnaceType of furnacesType" value="{{furnaceType.value}}" >
             {{furnaceType.showUser}}
           </mat-option>
@@ -45,7 +45,7 @@
       <!-- Furnace configuration -->
       <mat-form-field appearance="fill">
         <mat-label>Furnace configuration:</mat-label>
-        <mat-select #sGroup formControlName="furnaceConfigurationControl" (selectionChange)="submitInputs()">
+        <mat-select #sGroup formControlName="furnaceConfiguration" (selectionChange)="submitInputs()">
           <mat-option *ngFor ="let furnaceConfiguration of furnacesConfiguration" value="{{furnaceConfiguration.value}}" radioGroup="sGroup">
             {{furnaceConfiguration.showUser}}
           </mat-option>
@@ -59,7 +59,7 @@
         <br>
         <mat-label>Select number of zones</mat-label>
         <br>
-        <mat-radio-group formControlName="numberZonesControl" (change)="NumberZones()" aria-label="Select an option"  >
+        <mat-radio-group formControlName="numberZones" (change)="NumberZones()" aria-label="Select an option"  >
           <mat-radio-button value="Multi-zone"> Multi-zone </mat-radio-button>
           <br>
           <mat-radio-button  value="Single zone"> Single zone</mat-radio-button>
@@ -71,8 +71,8 @@
     <table>
       <thead>
         <tr>
-          <th >qty</th>
-          <th >unit type</th>
+          <th >Quantity</th>
+          <th >Unit type</th>
           <th>size</th>
           <th></th>
         </tr>
@@ -94,8 +94,8 @@
           <td data-title="QTY">
             <mat-form-field appearance="fill">
               <mat-label>Select</mat-label>
-              <mat-select #sGroup formControlName="quantityControl" (selectionChange)="ShowButtons()">
-                <mat-option *ngFor ="let qty of quantity" value="{{qty}}" radioGroup="sGroup">
+              <mat-select #sGroup formControlName="quantity" (selectionChange)="ShowButtons()">
+                <mat-option *ngFor ="let qty of quantity" [value]="qty" radioGroup="sGroup">
                   {{qty}}
                 </mat-option>
               </mat-select>
@@ -104,8 +104,8 @@
           <td data-title="Unit Type">
             <mat-form-field appearance="fill">
               <mat-label>Select</mat-label>
-              <mat-select formControlName="unitTypeControl" (selectionChange)="ShowButtons()">
-                <mat-option *ngFor ="let unitType of msUnits" value="{{unitType.value}}">
+              <mat-select formControlName="unitType" (selectionChange)="ShowButtons()">
+                <mat-option *ngFor ="let unitType of msUnits" [value]="unitType.value">
                   {{unitType.showUser}}
                 </mat-option>
               </mat-select>
@@ -114,8 +114,8 @@
           <td data-title="Size">
             <mat-form-field appearance="fill">
               <mat-label>Select</mat-label>
-              <mat-select formControlName="sizeControl" (selectionChange)="ShowButtons()">
-                <mat-option *ngFor ="let sizeOption of sizeOptions" value="{{sizeOption}}">
+              <mat-select formControlName="size" (selectionChange)="ShowButtons()">
+                <mat-option *ngFor ="let sizeOption of sizeOptions"  [value]="sizeOption">
                   {{sizeOption | number}}
                 </mat-option>
               </mat-select>

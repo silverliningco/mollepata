@@ -69,15 +69,6 @@ console.log(this.myData);
   }
 
 
-
-
-  ParamsRebateSystemDesing(){
-    let payload = 'coolingTons';
-    this._bridge.paramsSystemDesing.emit({
-        data: payload
-    });
-  }  
-
   ParamsRebates(){
 
     let payload = {

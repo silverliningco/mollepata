@@ -12,7 +12,6 @@ export class bridgeService {
 
     // send data hvac inputs
     @Output() paramsQuestionsRequirements: EventEmitter<any> = new EventEmitter();
-    @Output() paramsSystemDesing: EventEmitter<any> = new EventEmitter();
 
     // send data to hvac results
     @Output() resultsRebateFinder: EventEmitter<any> = new EventEmitter(); // send to order

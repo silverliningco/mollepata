@@ -24,7 +24,7 @@ import { FiltersComponent } from './hvac-inputs/filters/filters.component';
 import { QuestionsRequirementComponent } from './hvac-inputs/questions-requirement/questions-requirement.component';
 import { ProductLinesComponent } from './hvac-inputs/product-lines/product-lines.component';
 import { StockStatusComponent } from './hvac-inputs/stock-status/stock-status.component';
-import { SystemDesingComponent } from './hvac-inputs/system-design/system-desing.component';
+import { SystemDesignComponent } from './hvac-inputs/system-design/system-design.component';
 import { CardComponent } from './hvac-results/card/card.component';
 import { TableComponent } from './hvac-results/table/table.component';
 import { AppliedFiltersComponent } from './hvac-inputs/filters/applied-filters/applied-filters.component';
@@ -65,7 +65,7 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
     StockStatusComponent,
     CardComponent,
     TableComponent,
-    SystemDesingComponent,
+    SystemDesignComponent,
     AppliedFiltersComponent,
   ],
   imports: [
