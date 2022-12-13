@@ -21,7 +21,7 @@
       <!-- Indoor unit -->
       <mat-form-field appearance="fill">
         <mat-label>Indoor unit type:</mat-label>
-        <mat-select #sGroup formControlName="indoorUnitType" (selectionChange)="selectIndoor()">
+        <mat-select #sGroup formControlName="indoorUnitType">
           <mat-option *ngFor ="let indoor of indoors" value="{{indoor.value}}" radioGroup="sGroup">
             {{indoor.showUser}}
           </mat-option>
@@ -55,11 +55,11 @@
       <br>
   
       <!-- number of zones -->
-      <div *ngIf="showNrbZones">
+      <div *ngIf="systemDesignForm.get('indoorUnitType')!.value == 'Mini-split indoor'">
         <br>
         <mat-label>Select number of zones</mat-label>
         <br>
-        <mat-radio-group formControlName="numberZones" (change)="NumberZones()" aria-label="Select an option"  >
+        <mat-radio-group formControlName="numberZones" aria-label="Select an option"  >
           <mat-radio-button value="Multi-zone"> Multi-zone </mat-radio-button>
           <br>
           <mat-radio-button  value="Single zone"> Single zone</mat-radio-button>
@@ -67,7 +67,7 @@
       </div>
     </form>
   </div>
-  <form *ngIf="showTable" [formGroup]="msMultiZoneType" fxFlex="65" fxFlex.xs="100" fxFlex.sm="70" fxFlex.md="65" fxLayoutGap="20">
+  <form *ngIf="systemDesignForm.get('indoorUnitType')!.value == 'Mini-split indoor' && systemDesignForm.get('numberZones')!.value == 'Multi-zone'" [formGroup]="msMultiZoneType" fxFlex="65" fxFlex.xs="100" fxFlex.sm="70" fxFlex.md="65" fxLayoutGap="20">
     <table>
       <thead>
         <tr>
@@ -94,7 +94,7 @@
           <td data-title="QTY">
             <mat-form-field appearance="fill">
               <mat-label>Select</mat-label>
-              <mat-select #sGroup formControlName="quantity" (selectionChange)="ShowButtons()">
+              <mat-select #sGroup formControlName="quantity">
                 <mat-option *ngFor ="let qty of quantity" [value]="qty" radioGroup="sGroup">
                   {{qty}}
                 </mat-option>
@@ -104,7 +104,7 @@
           <td data-title="Unit Type">
             <mat-form-field appearance="fill">
               <mat-label>Select</mat-label>
-              <mat-select formControlName="unitType" (selectionChange)="ShowButtons()">
+              <mat-select formControlName="unitType">
                 <mat-option *ngFor ="let unitType of msUnits" [value]="unitType.value">
                   {{unitType.showUser}}
                 </mat-option>
@@ -114,7 +114,7 @@
           <td data-title="Size">
             <mat-form-field appearance="fill">
               <mat-label>Select</mat-label>
-              <mat-select formControlName="size" (selectionChange)="ShowButtons()">
+              <mat-select formControlName="size">
                 <mat-option *ngFor ="let sizeOption of sizeOptions"  [value]="sizeOption">
                   {{sizeOption | number}}
                 </mat-option>
@@ -122,7 +122,7 @@
             </mat-form-field>
           </td>
           <td>
-            <button *ngIf="showButtonAdd" (click)="AddRow()"  mat-mini-fab color="primary" aria-label="Example icon button with a menu icon">
+            <button  [disabled]="msMultiZoneType.invalid" (click)="AddRow()"  mat-mini-fab color="primary" aria-label="Example icon button with a menu icon">
               <mat-icon>check_circle</mat-icon>
             </button>
           </td>

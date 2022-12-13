@@ -86,10 +86,6 @@ export class SystemDesignComponent implements OnInit {
 
   // table 
   payload: msMultiZoneType[] = [];
-  showNrbZones: boolean = false;
-  showTable: boolean = false; 
-  showButtonAdd: boolean = false;
-  showButtonsDelete: boolean = false;
   sizeOptions: number[] = [6000, 9000, 12000, 18000, 24000];
   quantity: number[] = [1, 2, 3, 4, 5];
   msUnits = [
@@ -150,48 +146,26 @@ export class SystemDesignComponent implements OnInit {
       size: ['', Validators.required]
     });
 
+    // Subscribe to ValueChanges by the top-level form
+    this.systemDesignForm.valueChanges.subscribe(selectedValue => {
+      console.log('form value changed')
+      console.log(selectedValue)
+
+      // reset multizone type form if indoor unit is diffent to minisplit
+      if(selectedValue.indoorUnitType != 'Mini-split indoor' || selectedValue.numberZones != 'Multi-zone') {
+        this.payload = [];
+        this.msMultiZoneType.reset();
+      }
+
+      //TODO call submit inputs
+    })
+
+    this.msMultiZoneType.valueChanges.subscribe(selectedValue => {
+
+      //TODO call submit inputs
+    })
   }
 
-  selectIndoor(): void{
-
-    let getValueIndoor = this.systemDesignForm.controls['indoorUnitType'].value;
-
-    if (getValueIndoor == 'Mini-split indoor'){
-      this.showNrbZones = true;
-    } else {
-      this.showNrbZones = false;
-      this.showTable = false;
-      this.payload= [];
-      this.systemDesignForm.controls['numberZones'].reset();
-      this.msMultiZoneType.controls['quantity'].reset();
-      this.msMultiZoneType.controls['unitType'].reset();
-      this.msMultiZoneType.controls['size'].reset();
-      this.submitInputs();
-    }
-  }
-
-  NumberZones(){
-    let myNbrZones = this.systemDesignForm.controls['numberZones'].value;
-
-    if (myNbrZones == 'Multi-zone'){
-      this.showTable = true;
-    } else {
-      this.showTable = false;
-      this.submitInputs();
-    }
-  }
-
-  // button for add one row to table 
-  ShowButtons(): void{
-
-    let getQuantity = this.msMultiZoneType.controls['quantity'].value;
-    let getUnitType = this.msMultiZoneType.controls['unitType'].value;
-    let getSize = this.msMultiZoneType.controls['size'].value;
-
-    if (getSize != null && getUnitType != null && getQuantity != null){
-      this.showButtonAdd = true;
-    }
-  }
 
   AddRow(){
 
