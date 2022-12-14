@@ -5,7 +5,7 @@ import { UtilityInfo } from '../../models/hvac-inputs';
 import { Location, UtilityProviders } from '../../models/rebate-finder-inputs';
 
 
-import { EndPointsService } from '../../services/endPoints.service';
+import { EndpointsService } from '../../services/endpoints.service';
 import { bridgeService } from '../../services/bridge.service';
 
 import { Observable } from 'rxjs';
@@ -234,7 +234,7 @@ export class LocationComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     public _bridge: bridgeService,
-    private _endPoint: EndPointsService
+    private _endpoint: EndpointsService
   ) { }
 
   ngOnInit(): void {
@@ -274,7 +274,7 @@ export class LocationComponent implements OnInit {
 
     let myState = this.locationForm.controls['state'].value;
 
-    this._endPoint.Utilities(myState).subscribe({
+    this._endpoint.Utilities(myState).subscribe({
       next: (resp: any) => {
         let listUtilities: Array<UtilityInfo> = resp;
 

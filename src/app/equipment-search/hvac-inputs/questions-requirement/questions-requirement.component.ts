@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { bridgeService } from '../../services/bridge.service';
-import { EndPointsService } from '../../services/endPoints.service';
+import { EndpointsService } from '../../services/endpoints.service';
 
 import { EligibilityQuestions, EligybilityRequirement } from '../../models/hvac-inputs';
 
@@ -30,7 +30,7 @@ export class QuestionsRequirementComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     public _bridge: bridgeService,
-    private _endPoint: EndPointsService
+    private _endpoint: EndpointsService
   ) { }
 
   ngOnInit(): void {
@@ -79,7 +79,7 @@ export class QuestionsRequirementComponent implements OnInit {
 
   GetRebates(){
     
-    /* this._endPoint.Rebate(this.PreparetoGetRebates()).subscribe({
+    /* this._endpoint.Rebate(this.PreparetoGetRebates()).subscribe({
       next: (resp) => {
       },
       error: (e) => alert(e.error)

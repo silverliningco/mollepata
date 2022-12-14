@@ -8,10 +8,10 @@ import {URL_SERVICIOS}  from '../../config/config';
 @Injectable({
   providedIn: 'root'
 })
-export class EndPointsService {
+export class EndpointsService {
 
   constructor(
-      private _http: HttpClient
+      private http: HttpClient
     ) { }
 
     // provicional
@@ -19,7 +19,7 @@ export class EndPointsService {
 
       let url = URL_SERVICIOS; 
   
-      return this._http.post(url, body);
+      return this.http.post(url, body);
     }
 
     // verify
@@ -28,49 +28,49 @@ export class EndPointsService {
 
       let url = URL_SERVICIOS + '/product-lines'; 
   
-      return this._http.post(url, body);
+      return this.http.post(url, body);
     }
 
     Filters(body: any): Observable<any> {
 
       let url = URL_SERVICIOS + '/filters'; 
   
-      return this._http.post(url, body);
+      return this.http.post(url, body);
     }
 
     AvailableRebates(body: any): Observable<any> {
 
       let url = URL_SERVICIOS + '/available-rebates'; 
   
-      return this._http.post(url, body);
+      return this.http.post(url, body);
     }
 
-    ElegibilityQuestions(body: any): Observable<any> {
+    ElegibilityCriteria(body: any): Observable<any> {
 
       let url = URL_SERVICIOS + '/eligibility-criteria' 
 
-      return this._http.post(url, body);
+      return this.http.post(url, body);
     }
 
     Search(body: any): Observable<any> {
 
       let url = URL_SERVICIOS + '/search-equipment'; 
 
-      return this._http.post(url, body);
+      return this.http.post(url, body);
     }
 
     Utilities(state: any){
 
       let url = URL_SERVICIOS + '/utility-providers?country=US&state='+ state;
 
-      return this._http.get(url);
+      return this.http.get(url);
       
     }
 
     ModelNrs(body: any){
       let url = URL_SERVICIOS + '/model-nrs'; 
 
-      return this._http.post(url, body);
+      return this.http.post(url, body);
     }
 
 }

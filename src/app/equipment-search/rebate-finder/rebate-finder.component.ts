@@ -1,7 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { bridgeService } from '../services/bridge.service';
+import { EndpointsService } from '../services/endpoints.service';
 
+import { MatStepper, StepperOrientation } from '@angular/material/stepper';
 import { EquipmentSearch, Location, DwellingInfo } from '../models/rebate-finder-inputs';
+import { error } from '@angular/compiler/src/util';
 
 @Component({
   selector: 'app-rebate-finder',
@@ -10,19 +13,15 @@ import { EquipmentSearch, Location, DwellingInfo } from '../models/rebate-finder
 })
 
 export class RebateFinderComponent implements OnInit {
+  @ViewChild('stepper')
+  stepper!: MatStepper;
 
   // local variables save data of stepper
   myData =  new EquipmentSearch();
-  myHvacInputs!: EquipmentSearch;
-
-
-  bestOption: any[] = [];
-  filters!: string[];
-  filtesApplied!: string[];
+  myResults!: any[];  
 
   showProducLines!: boolean;
 
-  myResults!: any[];  
   master = 'Master';
 
   myButtonStatus: {[key: string]: boolean }= {};
@@ -31,10 +30,10 @@ export class RebateFinderComponent implements OnInit {
 
   constructor(
     public _bridge: bridgeService,
+    private _endpoint: EndpointsService
   ) { }
 
   ngOnInit(): void {
-
    
     this._bridge.HVACInputs
         .subscribe((payload: any) => {
@@ -48,7 +47,6 @@ console.log(this.myData);
 
          });
     
-    this.OrderCards();
   }
 
   //
@@ -68,83 +66,18 @@ console.log(this.myData);
     return this.disableButton;
   }
 
-
-  ParamsRebates(){
-
-    let payload = {
-        'location': {
-            'state': '',
-            'utilityProvider': ''
-        },
-        'dwellingInfo': {
-            'fuelSource': '',
-            'ConstructionType': ''
-        },
-        'systemDesign': {
-            'outdoor': '',
-            'indoor': '',
-            'furnace': ''
-        }
-    }
-
-    this._bridge.paramsQuestionsRequirements.emit({
-        data: payload
-    })
-  }
-
-  selectingBestOption(results: any){
-    let max!: any;
-
-    results.forEach((element:any) => {
-      // returns the results ordered from maximum to minimum
-      element.forEach((element2: any) => {
-        max =  element2.sort( function(a: any, b:any) {
-          if (a.totalAvailableRebates < b.totalAvailableRebates || a.totalAvailableRebates === null) return +1;
-          if (a.totalAvailableRebates > b.totalAvailableRebates || b.totalAvailableRebates === null) return -1;
-          return 0;
-        });
-        this.bestOption.push( max);
-      });
-    }); 
-
-    // return the rebatess in order
-    this._bridge.OrderResultsRebateFinder.emit({
-      data: this.bestOption
-    });
-
-  }
-
-  OrderCards(){
-
-    /* let size = this.myResults.length;
-    let slot!: any;
-    let tmp!: any;
-    let array!: any;
-    
-    for ( let item = 0; item < size; item++) {
-        tmp = this.myResults[item][0].totalAvailableRebates;
-        array = this.myResults[item];
-
-        for ( slot = item -1; slot >= 0 && this.myResults[slot][0].totalAvailableRebates > tmp; slot --) {
-            this.myResults[slot+1]= this.myResults[slot];
-        }
-        this.myResults[slot+1] = array;
-    }
-
-    this.myResults = this.myResults.reverse(); */
-    
-  }
+ 
 
   // tabChange is a callback when the progress bar step is changed.
   // If the new step is the final step in sequence, we load the equipment search results.
   tabChange(e:any){
   
     // If this is the last step in sequence, load the results (ahri combinations).
-    /* if(this.stepper?.steps.length -1 == e.selectedIndex) {
+    if(this.stepper?.steps.length -1 == e.selectedIndex) {
       
       // If system design inputs are empty, show product line menu and select the first available option.
       // Selecting a product line effectively completes the system design attributes.
-      if false {
+      if (false) {
 
           // System design inputs are empty.
           // Show product line inputs and select the first one.
@@ -154,28 +87,29 @@ console.log(this.myData);
 
       // First call the eligibility questions and requirements endpoint to get the default values for this search.
       // Then call the results endpoint with the complete payload.
-      this._endPoint.EligibilityQuestionsRequirements(payload).subscribe({
-	  next: (resp) => {
+      this._endpoint.ElegibilityCriteria(this.myData).subscribe({
+	      next: (resp:any) => {
 	
             // Send default values received from server to the questions/requirements component.
             // ...
+              console.log(resp);
 
-            this._endPoint.Search(payload).subscribe({
-	    next: (resp) => {
+          this._endpoint.Search(this.myData).subscribe({
+	          next: (respSearch:any) => {
 
               // Order results and render cards.
               // ...
+              console.log(respSearch);
+	          },
+	          error: (err1:Error) => alert(err1.message)
+	        })
 
-	    },
-	    error: (e) => alert(e.error)
-	    })
-
-	  },
-	  error: (e) => alert(e.error)
-	    })
+	      },
+        error: (err2:Error) => alert(err2.message)
+	    });
 
 
-      } */
+      } 
 
     }
  

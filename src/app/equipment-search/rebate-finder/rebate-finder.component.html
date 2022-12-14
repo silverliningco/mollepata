@@ -1,43 +1,6 @@
 
 <mat-stepper #stepper linear (selectionChange)="tabChange($event)">
 
-    <!-- step 4 system size -->
-    <mat-step>
-        <ng-template matStepLabel>System Size</ng-template>
-        <app-system-size></app-system-size>
-        <!-- button -->
-        <div fxLayout="column" fxLayoutAlign="center end" class="rc-stepper-buttons">
-            <button type="button" mat-raised-button color="primary" [disabled]="!myButtonStatus['systemSize']" matStepperNext>
-                Continue
-                <mat-icon>arrow_forward</mat-icon>
-            </button>
-        </div>
-    </mat-step>
-
-    <!-- step 5 System design -->
-    <mat-step>
-    <!-- note for show all results -->
-    <div fxLayout fxLayoutAlign="center" fxLayoutGap="16px">
-        <div fxFlex="50" fxFlex.sm="70" fxFlex.xs="100" class="rc-note">
-            <div fxLayout="row column" fxLayoutAlign="space-between center" >
-                <p fxFlex="60" fxFlex.xs="100" fxflex.sm="80" class="rc-small"> <b>Note: </b>
-                    <br>
-                    If you want to see all the combinations </p>
-                    <button fxFlex="40" fxFlex.xs="100" fxflex.sm="80" type="button" mat-raised-button color="primary" matStepperNext matStepperNext>Click here!</button>
-            </div>
-            
-        </div>
-    </div>
-        <ng-template matStepLabel>System Design</ng-template>
-        <app-system-design></app-system-design>
-        <!-- button -->
-        <div fxLayout="column" fxLayoutAlign="center end" class="rc-stepper-buttons">
-            <button type="button" mat-raised-button color="primary" [disabled]="!myButtonStatus['systemDesign']" matStepperNext>
-                Continue
-                <mat-icon>arrow_forward</mat-icon>
-            </button>
-        </div>
-    </mat-step>
     <!-- step 1 location -->
     <mat-step>
         <ng-template matStepLabel>Location</ng-template>
@@ -76,8 +39,44 @@
             </button>
         </div>
     </mat-step>
-
     
+    <!-- step 4 system size -->
+    <mat-step>
+        <ng-template matStepLabel>System Size</ng-template>
+        <app-system-size></app-system-size>
+        <!-- button -->
+        <div fxLayout="column" fxLayoutAlign="center end" class="rc-stepper-buttons">
+            <button type="button" mat-raised-button color="primary" [disabled]="!myButtonStatus['systemSize']" matStepperNext>
+                Continue
+                <mat-icon>arrow_forward</mat-icon>
+            </button>
+        </div>
+    </mat-step>
+
+    <!-- step 5 System design -->
+    <mat-step>
+    <!-- note for show all results -->
+    <div fxLayout fxLayoutAlign="center" fxLayoutGap="16px">
+        <div fxFlex="50" fxFlex.sm="70" fxFlex.xs="100" class="rc-note">
+            <div fxLayout="row column" fxLayoutAlign="space-between center" >
+                <p fxFlex="60" fxFlex.xs="100" fxflex.sm="80" class="rc-small"> <b>Note: </b>
+                    <br>
+                    If you want to see all the combinations </p>
+                    <button fxFlex="40" fxFlex.xs="100" fxflex.sm="80" type="button" mat-raised-button color="primary" matStepperNext matStepperNext>Click here!</button>
+            </div>
+            
+        </div>
+    </div>
+        <ng-template matStepLabel>System Design</ng-template>
+        <app-system-design></app-system-design>
+        <!-- button -->
+        <div fxLayout="column" fxLayoutAlign="center end" class="rc-stepper-buttons">
+            <button type="button" mat-raised-button color="primary" [disabled]="!myButtonStatus['systemDesign']" matStepperNext>
+                Continue
+                <mat-icon>arrow_forward</mat-icon>
+            </button>
+        </div>
+    </mat-step>
 
     <!-- step 6 results -->
     <mat-step>
