@@ -141,7 +141,7 @@ export class SystemDesignComponent implements OnInit {
     });
 
     this.msMultiZoneType = this.formBuilder.group({
-      quantity: ['', Validators.required],
+      qty: ['', Validators.required],
       unitType: ['', Validators.required],
       size: ['', Validators.required]
     });
@@ -158,28 +158,18 @@ export class SystemDesignComponent implements OnInit {
       }
 
       //TODO call submit inputs
+      this.submitInputs();
     })
 
     this.msMultiZoneType.valueChanges.subscribe(selectedValue => {
 
       //TODO call submit inputs
+      this.submitInputs();
     })
   }
 
-
   AddRow(){
-
-    let getQuantity = this.msMultiZoneType.controls['quantity'].value;
-    let getUnitType = this.msMultiZoneType.controls['unitType'].value;
-    let getSize = this.msMultiZoneType.controls['size'].value;
-
-    let oneRow = {
-      qty: getQuantity,
-      unitType: getUnitType,
-      size: getSize
-    }
-
-    this.VerifyQuantities( oneRow);
+    this.VerifyQuantities( this.msMultiZoneType.value);
   }
 
   /*  quantity <= 5
@@ -219,7 +209,7 @@ export class SystemDesignComponent implements OnInit {
       return oneRow;
     } else {
       let message = 'The amount must be less than 6 and not more than 135% of cooling tons';
-      this.OpenSnackBar(message);
+      this._snackBar.open(message);
       return null;
     }
 
@@ -236,7 +226,6 @@ export class SystemDesignComponent implements OnInit {
       arr.push(a);
     }
 
-
     let add = (arr: any) => arr.reduce((a: any, b: any) => a + b, 0);
     sum = add(arr);
 
@@ -248,36 +237,14 @@ export class SystemDesignComponent implements OnInit {
       return oneRow;
     } else {
       let message = 'The amount must be less than 6 and not more than 135% of cooling tons';
-      this.OpenSnackBar(message);
+      this._snackBar.open(message);
       return null;
     }
   }
 
-  OpenSnackBar(mssg: string) {
-    this._snackBar.open(mssg);
-  }
-
-  AddRowToPayload(oneRow: msMultiZoneType): msMultiZoneType | null{
-
-    // verify if all of data is complete
-    let incomplete = false//this.ActiveContinuebutton(oneRow);
-    if (incomplete == false){
-      let typeC:msMultiZoneType  = {
-        qty: oneRow.qty,
-        unitType: oneRow.unitType,
-        size: oneRow.size
-      }
-      this.payload.push(typeC);
-      this.msMultiZoneType.controls['quantity'].reset();
-      this.msMultiZoneType.controls['unitType'].reset();
-      this.msMultiZoneType.controls['size'].reset();
-      this.submitInputs();
-    } else {
-      let message = 'Please, complete all the inputs.';
-      this.OpenSnackBar(message);
-    }
-
-    return null
+  AddRowToPayload(oneRow: msMultiZoneType) {
+    this.payload.push(oneRow);
+    this.msMultiZoneType.reset();
   }
 
   // Function that deletes an specific row by index provided. 
@@ -287,31 +254,10 @@ export class SystemDesignComponent implements OnInit {
   }
 
   submitInputs(): void {
-
-    let myIndoor = this.systemDesignForm.controls['indoorUnitType'].value;
-    let mySystemDesign!: SystemDesign;
-
-    if(myIndoor == 'Mini-split indoor'){
-      mySystemDesign = new SystemDesign (
-        this.systemDesignForm.controls['outdoorUnitType'].value,
-        this.systemDesignForm.controls['indoorUnitType'].value,
-        this.systemDesignForm.controls['furnaceType'].value,
-        this.systemDesignForm.controls['furnaceConfiguration'].value,
-        this.payload
-      )
-    } else {
-      mySystemDesign = new SystemDesign (
-        this.systemDesignForm.controls['outdoorUnitType'].value,
-        this.systemDesignForm.controls['indoorUnitType'].value,
-        this.systemDesignForm.controls['furnaceType'].value,
-        this.systemDesignForm.controls['furnaceConfiguration'].value,
-      )
-
-    }
-
     /* sent the info to results-rebate */
     this._bridge.HVACInputs.emit({
-      data: [mySystemDesign, 'systemDesign']
+      data: [
+        {... this.systemDesignForm.value, ...{msMultiZoneType: this.payload}}, 'systemDesign']
     });
   }
 
