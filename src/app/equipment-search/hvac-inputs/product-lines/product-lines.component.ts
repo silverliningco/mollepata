@@ -7,7 +7,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProductLinesComponent implements OnInit {
 
-  productLines: string[] = ['P1', 'P2', 'P3', 'P4', 'P4', 'P5', 'P6', 'P7', 'P8', 'P9', 'P10'];
+  productLines= [
+    {"id": 3, "title": "HP + fan coil", "description": "", "systemDesign":{}}, 
+    {"id": 5, "title": "Mini-Split (single zone)", "description": "", "systemDesign":{}}, 
+    {"id": 4, "title": "Dual fuel systems", "description": "Heat pump combined with furnace for best efficiency during shoulder months as well as high heat capacity during cold winter days.", "systemDesign":{}},  
+    {"id": 6, "title": "Mini-Split (multi zone)", "description": "", "systemDesign":{}},  
+    {"id": 2, "title": "AC + furnace", "description": "", "systemDesign":{}}, 
+    {"id": 7, "title": "Small packaged unit", "description": "", "systemDesign":{}}
+  
+  ];
 
   constructor() { }
 

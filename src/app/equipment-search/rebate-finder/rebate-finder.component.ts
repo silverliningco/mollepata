@@ -73,12 +73,12 @@ console.log(this.myData);
   tabChange(e:any){
   
     // If this is the last step in sequence, load the results (ahri combinations).
-    if(this.stepper?.steps.length -1 == e.selectedIndex) {
+    //if(this.stepper?.steps.length -1 == e.selectedIndex) {
+    if(1 == e.selectedIndex) {
       
       // If system design inputs are empty, show product line menu and select the first available option.
       // Selecting a product line effectively completes the system design attributes.
-      if (false) {
-
+      if (!this.myData.systemDesign) {
           // System design inputs are empty.
           // Show product line inputs and select the first one.
           // ...
@@ -89,11 +89,16 @@ console.log(this.myData);
       // Then call the results endpoint with the complete payload.
       this._endpoint.ElegibilityCriteria(this.myData).subscribe({
 	      next: (resp:any) => {
-	
+          
+            /* sent payload to component to render  eligibility questions and criteria */
+            this._bridge.paramsQuestionsRequirements.emit({
+              data: resp
+            });
+
             // Send default values received from server to the questions/requirements component.
             // ...
               console.log(resp);
-
+          // Load the results (ahri combinations).
           this._endpoint.Search(this.myData).subscribe({
 	          next: (respSearch:any) => {
 

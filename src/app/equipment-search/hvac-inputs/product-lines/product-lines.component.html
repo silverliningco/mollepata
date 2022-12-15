@@ -2,8 +2,8 @@
     <div class="rc-radio-options">
       <form>
         <mat-radio-group aria-label="Select an option" >
-          <mat-radio-button *ngFor="let proLine of productLines"  value="proLine" matTooltip='{{proLine}}' aria-label="complete Product Line Name">
-            {{proLine}}
+          <mat-radio-button *ngFor="let productLine of productLines"  value="productLine.id" matTooltip='{{productLine.description}}'>
+            {{productLine.title}}
           </mat-radio-button>
         </mat-radio-group>
       </form>

@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormArray, FormControl, Validators } from '@angular/forms';
 
 import { bridgeService } from '../../services/bridge.service';
-import { EndpointsService } from '../../services/endpoints.service';
 
 import { EligibilityQuestions, EligybilityRequirement } from '../../models/hvac-inputs';
 
@@ -13,14 +12,14 @@ import { EligibilityQuestions, EligybilityRequirement } from '../../models/hvac-
 })
 export class QuestionsRequirementComponent implements OnInit {
 
-  rebateGroup !: FormGroup;
+  eligibilityForm !: FormGroup;
 
   // order results inside cards
   results: any;
   bestOption: any[] = [];
 
   // show all the options  
-  myEligybilityRequirement: EligybilityRequirement[] = [];
+  myEligibilityRequirements: EligybilityRequirement[] = [];
   myEligibilityQuestions: EligibilityQuestions[] = [];
 
   // all the selections of user
@@ -29,115 +28,65 @@ export class QuestionsRequirementComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    public _bridge: bridgeService,
-    private _endpoint: EndpointsService
+    public _bridge: bridgeService
   ) { }
 
   ngOnInit(): void {
     this._bridge.paramsQuestionsRequirements
     .subscribe((payload: any) =>{
-      let params = payload.data;
-      this.VerifyParamsComplete(params);
+      this.myEligibilityRequirements = payload.data['eligibilityRequirements'];
+      this.myEligibilityQuestions =payload.data['eligibilityQuestions'];
+      this.addInputs();
     })
 
-    this.rebateGroup = this.formBuilder.group({
-      eligibilityQuestionsControl: [ null, Validators.required],
-      eligybilityRequirementControl: [ null, Validators.required]
+    this.eligibilityForm = this.formBuilder.group({
+      eligibilityQuestions: new FormArray([]),
+      eligibilityRequirements: new FormArray([])
     });
+
+    // Subscribe to ValueChanges by the top-level form
+    this.eligibilityForm.valueChanges.subscribe(selectedValue => {
+      console.log('form value changed')
+      console.log(selectedValue)
+     
+    })
+    
+  }
+  get eligibilityQuestionsFormArray() {
+    //https://www.itsolutionstuff.com/post/angular-material-dynamic-checkbox-list-exampleexample.html
+    //https://stackoverflow.com/questions/72047103/angular-12-formgroup-dynamically-array-checkboxes-custom-validator-does-not-work
+    return this.eligibilityForm.get("eligibilityQuestions") as FormArray;
+  }
+  get eligibilityRequirementsFormArray() {
+    return this.eligibilityForm.get("eligibilityRequirements") as FormArray;
+  }
+  private addInputs() {
+
+    // when you have data accessible:
+    this.myEligibilityQuestions.forEach(value => {
+      this.eligibilityQuestionsFormArray.push(this.formBuilder.group({ 
+        /*id: value.questionId,
+        name: value.questionText,
+        options: [value.options]*/
+        question : value
+      }))
+    })
+
+    this.myEligibilityRequirements.forEach(value => {
+      this.eligibilityRequirementsFormArray.push(this.formBuilder.group({
+        isActive: false,
+        id:value.requirementId,
+        name: value.requirementText
+      }))
+    })
+console.log(this.eligibilityQuestionsFormArray);
 
    
   }
 
-  VerifyParamsComplete(params: any){
-    let haveValueNull!:boolean; 
+  ProcesEligibilityQuestions(questionId: number ){
 
-    for (let key in params) {
-        let element = params[key];
-        haveValueNull = Object.values(element).some(x => x === null);
-    }
-
-    if (haveValueNull == false){
-      this.GetRebates();
-    }
-
-  }
-
-  PreparetoGetRebates(){
-    let body = {
-      'commerceInfo': '',
-      'utilityProviders': '',
-      'location': '',
-      'dwellingInfo': '',
-      'systemDesign': '',
-      'skus': '',
-      'systemSize': '',
-      'mj8LoadCalculation': ''
-    }
-
-    return body
-  }
-
-  GetRebates(){
-    
-    /* this._endpoint.Rebate(this.PreparetoGetRebates()).subscribe({
-      next: (resp) => {
-      },
-      error: (e) => alert(e.error)
-    }) */
-
-    // provicional
-      let a = [ 
-        {
-          "options": ["Yes", "No"],
-          "requirementId": 4,
-          "requirementText": "Heat pumps must be used to supplement the pre-existing heating system during heating season."
-        },
-        {
-          "options": ["Yes", "No"],
-          "requirementId": 5,
-          "requirementText": "If pre-existing heating system is oil or propane, integrated controls must be installed."
-        },
-        {
-          "options": ["Yes", "No"],
-          "requirementId": 6,
-          "requirementText": "Heat pumps must be used as the sole source of heating during heating season."
-        },
-        {
-          "options": ["Yes", "No"],
-          "requirementId": 7,
-          "requirementText": "Mass Save whole-home verification form must be completed and signed."
-        },
-        {
-          "options": ["Yes", "No"],
-          "requirementId": 8,
-          "requirementText": "Weatherization recommendations made during a Home Energy Assessment must be complete prior to installation."
-        },
-        {
-          "options": ["Yes", "No"],
-          "requirementId": 9,
-          "requirementText": "Requires completion of a Home Energy Assessment or Special Home Visit to confirm the inefficiency of existing space heating."
-        }
-      ]
-      let b =  [
-        {
-          "options": ["Electric resistance", "Heating oil", "Natural gas", "Propane", "Other or N/A"],
-          "questionId": 1,
-          "questionText": "Existing heating system fuel source"
-        }, 
-        {
-          "options": ["Condensing", "Non-condensing", "Other or N/A"],
-          "questionId": 2,
-          "questionText": "Existing furnace or boiler type"
-        }
-      ]
-
-    this.myEligybilityRequirement = a;
-    this.myEligibilityQuestions = b;
-  }
-
-  ProcesEligybilityQuestions(questionId: number ){
-
-    let optionQuestion = this.rebateGroup.controls['eligibilityQuestionsControl'].value;
+    let optionQuestion = this.eligibilityForm.controls['eligibilityQuestionsControl'].value;
 
     let question:EligibilityQuestions = {
       questionId: questionId,
@@ -163,7 +112,7 @@ export class QuestionsRequirementComponent implements OnInit {
 
   ProcesEligybilityRequirement(requirementId: number ){
 
-    let optionRequirement = this.rebateGroup.controls['eligybilityRequirementControl'].value;
+    let optionRequirement = this.eligibilityForm.controls['eligibilityRequirements'].value;
 
     let Requiremen = {
       'requirementId': requirementId,
