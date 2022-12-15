@@ -23,5 +23,6 @@ export class EligibilityQuestions {
         public options: string[],
         public questionId: number,
         public questionText?: string,
+        public defaultValue?: string,
     ) {}
 }

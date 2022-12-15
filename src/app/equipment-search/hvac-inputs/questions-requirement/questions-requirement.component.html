@@ -1,63 +1,33 @@
-
 <form [formGroup]="eligibilityForm">
-    <!-- elegibility questions -->
-    <h2 class="rc-main-title">Eligibility questions</h2>
-    <!--<div *ngFor ="let question of myEligibilityQuestions">
-        <strong>{{question.questionText}}</strong>
-        <div class="rc-elegibility-questions">
-          <mat-radio-group formControlName="eligibilityQuestions" aria-label="Select an option" >
-            <mat-radio-button *ngFor="let myOption of question.options" [value]="myOption">
-                {{myOption}}
-            </mat-radio-button>
-          </mat-radio-group>
-        </div>
-    </div>-->
 
-    
-    <div formArrayName="eligibilityQuestions" >
-      
-      <ng-container *ngFor="let eq of eligibilityQuestionsFormArray.value; let i = index" [formGroupName]="i">
-      <strong>{{eq.question.questionText}}</strong>
+  <!-- elegibility questions -->
+  <h2 class="rc-main-title">Eligibility questions</h2>
+
+  <section formArrayName="eligibilityQuestions">
+    <ng-container *ngFor="let eq of this.myEligibilityQuestions; let i = index" [formGroupName]="i">
+      <strong>{{eq.questionText}}</strong>
       <div class="rc-elegibility-questions">
-        <mat-radio-group formControlName="question" aria-label="Select an option" >
-          <mat-radio-button *ngFor="let myOption of eq.question.options" [value]="myOption">
-              {{myOption}}
+        <mat-radio-group formControlName="answer">
+          <mat-radio-button class="example-radio-button" *ngFor="let myOption of eq.options" [value]="myOption">
+            {{myOption}}
           </mat-radio-button>
         </mat-radio-group>
       </div>
+    </ng-container>
+  </section>
 
+  <!-- elegibility requirement -->
+  <h2 class="rc-main-title">Eligibility requirements</h2>
+
+  <section formArrayName="eligibilityRequirements">
+    <h4>Select the requirements you meets:</h4>
+    <label *ngFor="let er of this.myEligibilityRequirements; let i = index">
+      <ng-container [formGroupName]="i">
+        <mat-checkbox formControlName="requirement">
+          {{ er.requirementText }}
+        </mat-checkbox>
       </ng-container>
-  <!--
-  <ng-container *ngFor="let eq of eligibilityQuestionsFormArray.controls; let i = index" [formGroupName]="i">
-    <strong>{{eq.value.name}}</strong>
-    <div class="rc-elegibility-questions">
-      <mat-radio-group  aria-label="Select an option" formControlName="id">
-        <mat-radio-button *ngFor="let myOption of eq.get('options')!.value" [value]="myOption">
-            {{myOption}}
-        </mat-radio-button>
-      </mat-radio-group>
-    </div>
-  </ng-container>-->
-    </div>
-
-    <!-- elegibility requirement -->
-    <h2 class="rc-main-title">Eligibility requirement</h2>
-
-    <section class="" formArrayName="eligibilityRequirements">
-      <h4>Select your toppings:</h4>
-      <!--<p *ngFor ="let requirement of myEligibilityRequirements"><mat-checkbox formControlName="{{requirement.requirementId}}">{{requirement.requirementText}}</mat-checkbox></p>-->
-      <label  *ngFor="let eligibilityRequirement of eligibilityRequirementsFormArray.controls; let i = index">
-        <ng-container [formGroupName]="i">
-          <mat-checkbox formControlName="isActive">
-            {{ eligibilityRequirement.get('name')!.value}}
-          </mat-checkbox>
-        </ng-container>
-        
-       
-      </label>
-
-    </section>
-    
+    </label>
+  </section>
 
 </form>
-
