@@ -3,7 +3,7 @@ import { bridgeService } from '../services/bridge.service';
 import { EndpointsService } from '../services/endpoints.service';
 
 import { MatStepper, StepperOrientation } from '@angular/material/stepper';
-import { EquipmentSearch, Location, DwellingInfo } from '../models/rebate-finder-inputs';
+import { EquipmentSearch, Location, DwellingInfo, SystemDesign } from '../models/rebate-finder-inputs';
 import { error } from '@angular/compiler/src/util';
 
 @Component({
@@ -19,11 +19,10 @@ export class RebateFinderComponent implements OnInit {
   // local variables save data of stepper
   myData =  new EquipmentSearch();
   myResults!: any[];  
-
-  showProducLines!: boolean;
-
+  showProducLines: boolean = false;
   master = 'Master';
-
+  productLineSystemDesign!: SystemDesign;
+  inLastStep: boolean = false;
   myButtonStatus: {[key: string]: boolean }= {};
 
   disableButton: boolean = false;
@@ -35,18 +34,16 @@ export class RebateFinderComponent implements OnInit {
 
   ngOnInit(): void {
    
-    this._bridge.HVACInputs
-        .subscribe((payload: any) => {
-            let myStepName:string  =  payload.data[1]
-            let myStepPayload:any  =  payload.data[0]
-
-            this.myButtonStatus[myStepName] = true;//this.ActiveContinuebutton(payload.data[0]);
-            this.myData[myStepName as keyof EquipmentSearch] = myStepPayload;
-
-console.log(this.myData);
-
-         });
-    
+    this._bridge.HVACInputs.subscribe((payload: any) => {
+      let myStepName:string = payload.data[1]
+      let myStepPayload:any = payload.data[0]
+      this.myButtonStatus[myStepName] = true;//this.ActiveContinuebutton(payload.data[0]);
+      this.myData[myStepName as keyof EquipmentSearch] = myStepPayload;
+      console.log(payload);
+      if(this.inLastStep) {
+        this.callSearch()
+      }
+    });
   }
 
   //
@@ -73,16 +70,13 @@ console.log(this.myData);
   tabChange(e:any){
   
     // If this is the last step in sequence, load the results (ahri combinations).
-    //if(this.stepper?.steps.length -1 == e.selectedIndex) {
-    if(1 == e.selectedIndex) {
+    if(this.stepper?.steps.length -1 == e.selectedIndex) {
+      this.inLastStep = true;
       
       // If system design inputs are empty, show product line menu and select the first available option.
       // Selecting a product line effectively completes the system design attributes.
       if (!this.myData.systemDesign) {
-          // System design inputs are empty.
-          // Show product line inputs and select the first one.
-          // ...
-
+        this.showProducLines = true;
       }
 
       // First call the eligibility questions and requirements endpoint to get the default values for this search.
@@ -90,33 +84,37 @@ console.log(this.myData);
       this._endpoint.ElegibilityCriteria(this.myData).subscribe({
 	      next: (resp:any) => {
           
-            /* sent payload to component to render  eligibility questions and criteria */
-            this._bridge.paramsQuestionsRequirements.emit({
-              data: resp
-            });
+          // sent payload to component to render  eligibility questions and criteria 
+          //QuestionsRequirements component sends default values received from server
+          this._bridge.paramsQuestionsRequirements.emit({
+            data: resp
+          });
 
-            // Send default values received from server to the questions/requirements component.
-            // ...
-              console.log(resp);
           // Load the results (ahri combinations).
-          this._endpoint.Search(this.myData).subscribe({
-	          next: (respSearch:any) => {
-
-              // Order results and render cards.
-              // ...
-              console.log(respSearch);
-	          },
-	          error: (err1:Error) => alert(err1.message)
-	        })
+          this.callSearch();
 
 	      },
         error: (err2:Error) => alert(err2.message)
 	    });
 
+    } else{
+        this.inLastStep = false;
+    } 
 
-      } 
+  }
 
-    }
+  callSearch() {
+    console.log("call search", this.myData);
+    this._endpoint.Search(this.myData).subscribe({
+      next: (respSearch:any) => {
+        // TODO: Order results and render cards.
+        
+        this.myResults = respSearch
+        
+      },
+      error: (err1:Error) => alert(err1.message)
+    })
+  }
  
 
 }

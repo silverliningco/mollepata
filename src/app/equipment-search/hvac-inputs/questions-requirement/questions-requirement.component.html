@@ -21,13 +21,13 @@
 
   <section formArrayName="eligibilityRequirements">
     <h4>Select the requirements you meets:</h4>
-    <label *ngFor="let er of this.myEligibilityRequirements; let i = index">
-      <ng-container [formGroupName]="i">
+   
+      <ng-container *ngFor="let er of this.myEligibilityRequirements; let i = index" [formGroupName]="i">
         <mat-checkbox formControlName="requirement">
           {{ er.requirementText }}
         </mat-checkbox>
       </ng-container>
-    </label>
+    
   </section>
 
 </form>

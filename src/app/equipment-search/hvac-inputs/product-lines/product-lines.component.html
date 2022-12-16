@@ -1,8 +1,8 @@
 <div fxLayout="row column" fxLayoutAlign="center center" fxLayoutGap="16">
     <div class="rc-radio-options">
-      <form>
-        <mat-radio-group aria-label="Select an option" >
-          <mat-radio-button *ngFor="let productLine of productLines"  value="productLine.id" matTooltip='{{productLine.description}}'>
+      <form  [formGroup]="productLinesForm">
+        <mat-radio-group aria-label="Select an option"  formControlName="productLine">
+          <mat-radio-button *ngFor="let productLine of productLines; let i = index"  [value]="productLine.id" matTooltip='{{productLine.description}}'>
             {{productLine.title}}
           </mat-radio-button>
         </mat-radio-group>

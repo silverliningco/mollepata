@@ -148,9 +148,6 @@ export class SystemDesignComponent implements OnInit {
 
     // Subscribe to ValueChanges by the top-level form
     this.systemDesignForm.valueChanges.subscribe(selectedValue => {
-      console.log('form value changed')
-      console.log(selectedValue)
-
       // reset multizone type form if indoor unit is diffent to minisplit
       if(selectedValue.indoorUnitType != 'Mini-split indoor' || selectedValue.numberZones != 'Multi-zone') {
         this.payload = [];
