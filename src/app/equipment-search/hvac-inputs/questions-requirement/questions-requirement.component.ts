@@ -37,11 +37,25 @@ export class QuestionsRequirementComponent implements OnInit {
 
     // Subscribe to ValueChanges by the top-level form
     this.eligibilityForm.valueChanges.subscribe(selectedValue => {
-      console.log('form value changed')
-      console.log(selectedValue)
+      // if user has changed the value of the form in the UI or when eligibility requirements completes to render.
+      if (this.eligibilityForm.dirty || this.eligibilityRequirementsFormArray.length ==this.myEligibilityRequirements.length) {
+        // Extract selected values from eligibility requirements checkbox.
+        let myeligibilityRequirementsParam: Array<String> = [];
+        selectedValue.eligibilityRequirements.forEach((element:any) => {
+          if(element.requirement){
+            myeligibilityRequirementsParam.push(element.id);
+          }
+        });
+        
+        /* sent the info to results-rebate */
+        this._bridge.HVACInputs.emit({
+          data: [{ eligibilityQuestions:selectedValue.eligibilityQuestions, eligibilityRequirements: myeligibilityRequirementsParam }, 'eligibilityCriteria']
+        });
+
+      }
     })
   }
-  
+
   get eligibilityQuestionsFormArray() {
     return this.eligibilityForm.get("eligibilityQuestions") as FormArray;
   }
@@ -55,8 +69,8 @@ export class QuestionsRequirementComponent implements OnInit {
     // when you have data accessible:
     this.myEligibilityQuestions.forEach(value => {
       this.eligibilityQuestionsFormArray.push(this.formBuilder.group({ 
-        id: value.questionId,
-        answer : new FormControl(value.defaultValue, [Validators.required]),
+        questionId: value.questionId,
+        selectedValue : new FormControl(value.defaultValue, [Validators.required]),
       }))
     })
 

@@ -7,7 +7,7 @@
     <ng-container *ngFor="let eq of this.myEligibilityQuestions; let i = index" [formGroupName]="i">
       <strong>{{eq.questionText}}</strong>
       <div class="rc-elegibility-questions">
-        <mat-radio-group formControlName="answer">
+        <mat-radio-group formControlName="selectedValue">
           <mat-radio-button class="example-radio-button" *ngFor="let myOption of eq.options" [value]="myOption">
             {{myOption}}
           </mat-radio-button>
