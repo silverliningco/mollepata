@@ -1,0 +1,287 @@
+<!--- Begin Material Stepper progress bar content. -->
+<mat-stepper #stepper linear (selectionChange)="tabChange($event)">
+
+    <!--- Step 1: Location. -->
+    <mat-step>
+        <ng-template matStepLabel>Location</ng-template>
+
+        <!--- Title -->
+        <h2 class="rc-main-title">Location</h2>
+
+        <div fxLayout="row column" fxLayoutAlign="center">
+            <div fxFlex="25" fxLayout="column" fxLayoutAlign="center center" fxFlex.xs="100" fxFlex.sm="50" fxFlex.md="25" fxLayoutGap="20">
+                <form [formGroup]="locationForm" class="rc-form">
+
+                    <!--- State -->
+                    <h4 class="rc-page-subtitle">State</h4>
+                    <mat-form-field appearance="fill">
+                        <input type="text" matInput placeholder="State" formControlName="state" aria-label="Number" [matAutocomplete]="auto"/>
+                        <mat-autocomplete #auto="matAutocomplete"  [displayWith]="displayFn.bind(this)"  (optionSelected)="ChangeState()">
+                            <mat-option *ngFor="let state of filteredStates | async" [value]="state.abbreviation">{{state.name}}</mat-option>
+                        </mat-autocomplete>
+                    </mat-form-field>
+
+                    <!--- Utility providers -->
+                    <h4 class="rc-page-subtitle">Utility Providers</h4>
+                    <div formGroupName="utilityProviders">
+
+                        <mat-form-field appearance="fill">
+                            <mat-label>Electric Utility</mat-label>
+                            <mat-select #sGroup formControlName="electricUtilityId" (selectionChange)="submitInputs()">
+                                <mat-option *ngFor ="let electricProvider of electricProviders" [value]="electricProvider.utilityProviderId" radioGroup="sGroup">{{electricProvider.title}}</mat-option>
+                                <mat-option value="0" radioGroup="sGroup">Other or N/A</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+
+                        <mat-form-field appearance="fill">
+                            <mat-label>Gas / Oil Utility</mat-label>
+                            <mat-select #sGroup formControlName="fossilFuelUtilityId" (selectionChange)="submitInputs()">
+                                <mat-option *ngFor ="let fossilFuelProvider of fossilFuelProviders" [value]="fossilFuelProvider.utilityProviderId" radioGroup="sGroup">{{fossilFuelProvider.title}}</mat-option>
+                                <mat-option value="0" radioGroup="sGroup">Other or N/A</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+
+                    </div>
+
+                </form>
+            </div>
+        </div>
+
+        <!-- button -->
+        <div fxLayout="column" fxLayoutAlign="center end" class="rc-stepper-buttons">
+            <button type="button" mat-raised-button color="primary" [disabled]="!myButtonStatus['location']" matStepperNext>
+                Continue
+                <mat-icon>arrow_forward</mat-icon>
+            </button>
+        </div>
+
+    </mat-step>
+   
+    <!--- Step 2: Dwelling info. -->
+    <mat-step>
+        <ng-template matStepLabel>Dwelling Info</ng-template>
+
+        <!--Title-->
+        <h2 class="rc-main-title">Dwelling Info</h2>
+
+        <div fxLayout="row column" fxLayoutAlign="center">
+            <div fxFlex="75" fxLayout="column" fxLayoutAlign="center center" fxFlex.xs="100" fxFlex.sm="50" fxFlex.md="75" fxLayoutGap="20">
+                <form [formGroup]="dwellingInfoForm" class="rc-form">
+
+                    <!-- Construction type -->
+                    <h4 class="rc-page-subtitle">Construction type</h4>
+                    <mat-label class="rc-indications">Select your construction type.</mat-label>
+                    <br>
+                    <mat-radio-group formControlName="constructionType" (change)="submitInputs()">
+                        <mat-radio-button value="new-construction">New construction</mat-radio-button>
+                        <br>
+                        <mat-radio-button value="existing-construction">Existing construction</mat-radio-button>
+                    </mat-radio-group>
+
+                    <!-- Fossil Fuel -->
+                    <h4 class="rc-page-subtitle">Fossil Fuel</h4>
+                    <mat-label class="rc-indications">Select type of fossil fuel available at the residence.</mat-label>
+                    <mat-radio-group  #rGroup formControlName="fuelSource" fxLayout="column" class="rc-radio-img" (change)="submitInputs()">
+                        <div fxLayout="row column" fxLayoutAlign="center center" fxLayoutGap="20px grid">
+                            <mat-radio-button  [value]="'Natural Gas'" radioGroup="rGroup" fxFlex.xs="80" fxFlex.sm="34">
+                                <img src="../../../../assets/images/icons/natural-gas.png" alt="" class="unchecked">
+                                <img src="../../../../assets/images/icons/natural-gas-active.png" alt="" class="checked">
+                                <p>Natural Gas</p>
+                            </mat-radio-button>
+                            <mat-radio-button  [value]="'Propane Gas'" radioGroup="rGroup" fxFlex.xs="80" fxFlex.sm="34">
+                                <img src="../../../../assets/images/icons/propane.png" alt="" class="unchecked">
+                                <img src="../../../../assets/images/icons/propane-active.png" alt="" class="checked">
+                                <p>Propane</p>
+                            </mat-radio-button>
+                            <mat-radio-button [value]="'Oil'" radioGroup="rGroup" fxFlex.xs="80" fxFlex.sm="34">
+                                <img src="../../../../assets/images/icons/heating-oil.png" alt="" class="unchecked">
+                                <img src="../../../../assets/images/icons/heating-oil-active.png" alt="" class="checked">
+                                <p>Heating Oil</p>
+                            </mat-radio-button>
+                            <mat-radio-button [value]="'None'" radioGroup="rGroup" fxFlex.xs="80" fxFlex.sm="34">
+                                <img src="../../../../assets/images/icons/none.png" alt="" class="unchecked">
+                                <img src="../../../../assets/images/icons/none-active.png" alt="" class="checked">
+                                <p>None</p>
+                            </mat-radio-button>
+                        </div>
+                    </mat-radio-group>
+
+                    <!-- note -->
+                    <div fxLayout fxLayoutAlign="center" fxLayoutGap="16px" fxLayout.sm="column" fxLayout.xs="column">
+                        <div fxFlex="100" fxFlex.sm="100" fxFlex.xs="100" class="rc-note">
+                            <p class="rc-small"> <b>Note: </b> The rebate calculator will show all possible installations, including fully electric HVAC systems.  Selecting a fossil fuel type only helps us show relevant search results but it is not required that a fossil fuel component (furnace, boiler) is part of the final HVAC system.</p>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- button -->
+        <div fxLayout="column" fxLayoutAlign="center end" class="rc-stepper-buttons">
+                <button type="button" mat-raised-button color="primary" [disabled]="!myButtonStatus['dwellingInfo']" matStepperNext>
+                Continue
+                <mat-icon>arrow_forward</mat-icon>
+            </button>
+        </div>
+    </mat-step>
+
+    <!--- Step 3: heated / cooled. -->
+    <mat-step>
+        <ng-template matStepLabel>Heated - Cooled</ng-template>
+
+        <!--Title-->
+        <h2 class="rc-main-title">Heated and cooled</h2>
+
+        <div fxLayout="row column" fxLayoutAlign="center">
+            <div fxFlex="25" fxLayout="column" fxLayoutAlign="center center" fxFlex.xs="100" fxFlex.sm="50" fxFlex.md="25" fxLayoutGap="20">
+                <form [formGroup]="heatedCooledForm" class="rc-form">
+                    <mat-radio-group formControlName="cooled" (change)="submitInputs()" aria-label="Select an option">
+                        <mat-label class="rc-label">Provide cooling?</mat-label>
+                        <mat-radio-button value="yes">Yes</mat-radio-button>
+                        <br>
+                        <mat-radio-button value="no">No</mat-radio-button>
+                    </mat-radio-group>
+                    <mat-radio-group formControlName="heated" (change)="submitInputs()" aria-label="Select an option">
+                        <mat-label class="rc-label">Provide heating?</mat-label>
+                        <mat-radio-button value="yes">Yes</mat-radio-button>
+                        <br>
+                        <mat-radio-button value="no">No</mat-radio-button>
+                    </mat-radio-group>
+                </form>
+            </div>
+        </div>
+
+        <!-- button -->
+        <div fxLayout="column" fxLayoutAlign="center end" class="rc-stepper-buttons">
+            <button type="button" mat-raised-button color="primary" [disabled]="!myButtonStatus['heatedCooled']" matStepperNext>
+                Continue
+                <mat-icon>arrow_forward</mat-icon>
+            </button>
+        </div>
+    </mat-step>
+    
+    <!--- Step 4: System size. -->
+    <mat-step>
+        <ng-template matStepLabel>System Size</ng-template>
+
+        <!--Title-->
+        <h2 class="rc-main-title">System Size</h2>
+
+        <div fxLayout fxLayoutAlign="center">
+            <div fxLayout fxFlex="40" fxLayout="column" fxLayoutAlign="center center" fxFlex.xs="100" fxFlex.sm="70" fxFlex.md="40" fxLayoutGap="20">
+                <form [formGroup]="systemSizeForm" fxLayout="column" fxFlex="100" fxLayoutAlign="center" class="rc-form">
+
+                    <!--- Cooling tons. -->
+                    <mat-form-field appearance="fill">
+                        <mat-label>Cooling tons</mat-label>
+                        <mat-select #sGroup formControlName="coolingTons" (selectionChange)="submitInputs()">
+                            <mat-option radioGroup="sGroup" [value] = "0.5"> < 1.0</mat-option>
+                            <mat-option radioGroup="sGroup" [value] = "1.0">1.0</mat-option>
+                            <mat-option radioGroup="sGroup" [value] = "1.5">1.5</mat-option>
+                            <mat-option radioGroup="sGroup" [value] = "2.0">2.0</mat-option>
+                            <mat-option radioGroup="sGroup" [value] = "2.5">2.5</mat-option>
+                            <mat-option radioGroup="sGroup" [value] = "3.0">3.0</mat-option>
+                            <mat-option radioGroup="sGroup" [value] = "3.5">3.5</mat-option>
+                            <mat-option radioGroup="sGroup" [value] = "4.0">4.0</mat-option>
+                            <mat-option radioGroup="sGroup" [value] = "4.5">4.5</mat-option>
+                            <mat-option radioGroup="sGroup" [value] = "5.0">5.0</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+
+                    <!--- Heating BTUH -->
+                    <mat-form-field appearance="fill">
+                        <mat-label>Heating BTUH</mat-label>
+                        <input matInput placeholder="Heating BTUH" type="number" formControlName="heatingBTUH" (change)="submitInputs()" required>
+                    </mat-form-field>
+
+                </form>
+            </div>
+        </div>
+
+        <!-- button -->
+        <div fxLayout="column" fxLayoutAlign="center end" class="rc-stepper-buttons">
+            <button type="button" mat-raised-button color="primary" [disabled]="!myButtonStatus['systemSize']" matStepperNext>
+                Continue
+                <mat-icon>arrow_forward</mat-icon>
+            </button>
+        </div>
+
+    </mat-step>
+
+    <!--- Step 5: System design. -->
+    <mat-step>
+
+        <ng-template matStepLabel>System Design</ng-template>
+
+        <!-- note for show all results -->
+        <div fxLayout fxLayoutAlign="center" fxLayoutGap="16px">
+            <div fxFlex="50" fxFlex.sm="70" fxFlex.xs="100" class="rc-note">
+                <div fxLayout="row column" fxLayoutAlign="space-between center" >
+                    <p fxFlex="60" fxFlex.xs="100" fxflex.sm="80" class="rc-small"> <b>Note: </b>
+                        <br>
+                        If you want to see all the combinations </p>
+                        <button fxFlex="40" fxFlex.xs="100" fxflex.sm="80" type="button" mat-raised-button color="primary" matStepperNext matStepperNext>Click here!</button>
+                </div>
+            </div>
+        </div>
+
+        <!--Title-->
+        <h2 class="rc-main-title">System design</h2>
+
+        <div fxLayout="row column" fxLayoutAlign="center" fxLayoutGap="20">
+            <div fxFlex="30" fxLayout="column" fxLayoutAlign="center stretch" fxFlex.xs="100" fxFlex.sm="70" fxFlex.md="30" fxLayoutGap="20">
+                <form [formGroup]="systemDesignForm" class="rc-form">
+
+                    <!-- Outdoor unit -->
+                    <mat-form-field appearance="fill">
+                        <mat-label>Outdoor unit type:</mat-label>
+                        <mat-select #sGroup formControlName="outdoorUnitType">
+                            <mat-option *ngFor ="let outdoor of outdoors" value="{{outdoor.value}}" radioGroup="sGroup">{{outdoor.showUser}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <br>
+  
+                    <!-- Indoor unit -->
+                    <mat-form-field appearance="fill">
+                        <mat-label>Indoor unit type:</mat-label>
+                        <mat-select #sGroup formControlName="indoorUnitType">
+                            <mat-option *ngFor ="let indoor of indoors" value="{{indoor.value}}" radioGroup="sGroup">{{indoor.showUser}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <br> 
+  
+                    <!-- Furnace type -->
+                    <mat-form-field appearance="fill">
+                        <mat-label>Furnace type:</mat-label>
+                        <mat-select formControlName="furnaceType">
+                            <mat-option *ngFor ="let furnaceType of furnacesType" value="{{furnaceType.value}}" >{{furnaceType.showUser}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+
+                </form>
+            </div>
+        </div>
+
+        <!--- If indoor unit type is mini-split, show indoor unit design table. -->
+        <!--- ... -->
+
+        <!-- button -->
+        <div fxLayout="column" fxLayoutAlign="center end" class="rc-stepper-buttons">
+            <button type="button" mat-raised-button color="primary" [disabled]="false" matStepperNext>
+                Continue
+                <mat-icon>arrow_forward</mat-icon>
+            </button>
+        </div>
+
+    </mat-step>
+
+    <!-- Step 6: Results. -->
+    <mat-step>
+
+        <ng-template matStepLabel>AHRI Combinations</ng-template>
+
+        <app-results></app-results>
+
+    </mat-step> 
+  
+</mat-stepper>
