@@ -7,20 +7,15 @@ import { EquipmentSearch, Location, DwellingInfo, SystemDesign } from '../models
 import { error } from '@angular/compiler/src/util';
 
 @Component({
-  selector: 'app-rebate-finder',
-  templateUrl: './rebate-finder.component.html',
-  styleUrls: ['./rebate-finder.component.css']
+  selector: 'app-hvac-system-search',
+  templateUrl: './app-hvac-system-search.component.html',
+  styleUrls: ['./app-hvac-system-search.component.css']
 })
 
-export class RebateFinderComponent implements OnInit {
+export class HVACSystemSearchComponent implements OnInit {
 
   @ViewChild('stepper')
   stepper!: MatStepper;
-
-  electricProviders: Array<UtilityInfo> = [];
-  fossilFuelProviders: Array<UtilityInfo> = [];
-
-  states: State[] = [];
 
   // local variables save data of stepper   ???
   myData =  new EquipmentSearch();
@@ -36,21 +31,6 @@ export class RebateFinderComponent implements OnInit {
 
     // Load JSON data/configs, maybe??
     // ...
-
-    // Location form group.
-    this.locationForm = this.formBuilder.group({
-      state: ["", Validators.required],
-      utilityProviders: this.formBuilder.group({
-        electricUtilityId: [null, Validators.required],
-        fossilFuelUtilityId: [null, Validators.required]
-      })
-    });
-
-    // Dwelling info form group.
-    this.dwellingInfoForm = this.formBuilder.group({
-      constructionType: [ '', Validators.required],
-      fuelSource: ['', Validators.required]
-    });
 
     // Heated/cooled form group.
     this.heatedCooledForm = this.formBuilder.group({
@@ -74,37 +54,6 @@ export class RebateFinderComponent implements OnInit {
     });
 
   }
-
-
-  // utilities
-  ChangeState(): void {
-
-    let myState = this.locationForm.controls['state'].value;
-
-    this._endpoint.Utilities(myState).subscribe({
-      next: (resp: any) => {
-        let listUtilities: Array<UtilityInfo> = resp;
-
-        this.electricProviders = [];
-        this.fossilFuelProviders = [];
-
-        listUtilities.forEach(ele => {
-          if (ele.electricity === true && ele.fossilFuel === false) {
-            this.electricProviders.push(ele);
-          } if (ele.electricity === false && ele.fossilFuel === true) {
-            this.fossilFuelProviders.push(ele);
-          } if (ele.electricity === true && ele.fossilFuel === true) {
-            this.electricProviders.push(ele);
-            this.fossilFuelProviders.push(ele);
-          }
-        });
-      },
-      error: (e) => alert(e.error)
-    })
-
-    this.submitInputs();
-  }
-
 
   // tabChange is a callback when the progress bar step is changed.
   // If the new step is the final step in sequence, we load the equipment search results.
