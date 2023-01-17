@@ -4,7 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { BasicEstructureComponent } from './basic-estructure.component';
 import { ReleasesComponent } from './releases/releases.component';
-import { RebateFinderComponent} from '.././equipment-search/rebate-finder/rebate-finder.component';
+import { HVACSystemSearchComponent} from './../equipment-search/hvac-system-search/hvac-system-search.component';
 
 
 const routes: Routes = [
@@ -24,7 +24,7 @@ const routes: Routes = [
       },
       {
         path: 'rebate-finder',
-        component: RebateFinderComponent
+        component: HVACSystemSearchComponent
       },
       {
         path: '**',

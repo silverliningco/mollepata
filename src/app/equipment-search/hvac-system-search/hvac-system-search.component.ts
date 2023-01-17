@@ -1,28 +1,38 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { bridgeService } from '../services/bridge.service';
 import { EndpointsService } from '../services/endpoints.service';
 
 import { MatStepper, StepperOrientation } from '@angular/material/stepper';
-import { EquipmentSearch, Location, DwellingInfo, SystemDesign } from '../models/rebate-finder-inputs';
+import { EquipmentSearch } from '../models/rebate-finder-inputs';
+//import { ResultsComponent } from '../results/results.component';
+
+
 import { error } from '@angular/compiler/src/util';
 
 @Component({
-  selector: 'app-hvac-system-search',
-  templateUrl: './app-hvac-system-search.component.html',
-  styleUrls: ['./app-hvac-system-search.component.css']
+  selector: 'hvac-system-search',
+  templateUrl: './hvac-system-search.component.html',
+  styleUrls: ['./hvac-system-search.component.css']
 })
 
 export class HVACSystemSearchComponent implements OnInit {
 
+
   @ViewChild('stepper')
   stepper!: MatStepper;
 
+  heatedCooledForm!: FormGroup;
+  systemSizeForm!: FormGroup;
+  systemDesignForm!: FormGroup;
+  
   // local variables save data of stepper   ???
   myData =  new EquipmentSearch();
   inLastStep: boolean = false;  // ????
   myButtonStatus: {[key: string]: boolean }= {};
 
   constructor(
+    private fb: FormBuilder,
     public _bridge: bridgeService,
     private _endpoint: EndpointsService
   ) { }
@@ -33,19 +43,19 @@ export class HVACSystemSearchComponent implements OnInit {
     // ...
 
     // Heated/cooled form group.
-    this.heatedCooledForm = this.formBuilder.group({
+    this.heatedCooledForm = this.fb.group({
       heated: [ '', Validators.required],
       cooled: [ '', Validators.required]
     });
 
     // System size form group.
-    this.systemSizeForm = this.formBuilder.group({
-      heatingBTUH: [null, [this.ValidateHeatingBTUH]],
+    this.systemSizeForm = this.fb.group({
+      heatingBTUH: [null, Validators.required],//[this.ValidateHeatingBTUH]],
       coolingTons: [null, Validators.required],
     });
 
     // System design form group.
-    this.systemDesignForm = this.formBuilder.group({
+    this.systemDesignForm = this.fb.group({
       outdoorUnitType: ['', Validators.required],
       indoorUnitType: ['', Validators.required],
       furnaceType: ['', Validators.required],

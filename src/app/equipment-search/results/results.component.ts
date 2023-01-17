@@ -12,10 +12,10 @@ export class ResultsComponent implements OnInit {
   ngOnInit(): void {
 
     // First load the available eligibility questions and requirements and their default values.
-    loadDefaultEligibility();
+    this.loadDefaultEligibility();
 
     // Then load the results with the given user inputs and default values for eligibility questions/requirements.
-    loadResults();
+    this.loadResults();
 
   }
 

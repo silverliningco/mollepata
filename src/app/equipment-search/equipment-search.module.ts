@@ -13,21 +13,14 @@ import { SharedModule } from '../shared/shared.module';
 import {HttpInterceptorService } from './services/http-interceptor.service'; 
 
 // components
-import { AhriMatchupsComponent } from './ahri-matchups/ahri-matchups.component';
-import { RebateFinderComponent } from './rebate-finder/rebate-finder.component';
-import { HvacSystemDetailComponent } from './hvac-system-detail/hvac-system-detail.component';
-import { LocationComponent } from './hvac-inputs/location/location.component';
-import { DwellingInfoComponent } from './hvac-inputs/dwelling-info/dwelling-info.component';
-import { HeatedCooledComponent } from './hvac-inputs/heated-cooled/heated-cooled.component';
-import { SystemSizeComponent } from './hvac-inputs/system-size/system-size.component';
-import { FiltersComponent } from './hvac-inputs/filters/filters.component';
-import { QuestionsRequirementComponent } from './hvac-inputs/questions-requirement/questions-requirement.component';
-import { ProductLinesComponent } from './hvac-inputs/product-lines/product-lines.component';
-import { StockStatusComponent } from './hvac-inputs/stock-status/stock-status.component';
-import { SystemDesignComponent } from './hvac-inputs/system-design/system-design.component';
-import { CardComponent } from './hvac-results/card/card.component';
-import { TableComponent } from './hvac-results/table/table.component';
-import { AppliedFiltersComponent } from './hvac-inputs/filters/applied-filters/applied-filters.component';
+import { LocationComponent } from './location/location.component';
+import { DwellingInfoComponent } from './dwelling-info/dwelling-info.component';
+import { UtilityProvidersComponent } from './utility-providers/utility-providers.component';
+import { HvacSystemDetailComponent } from './hvac-system-load/hvac-system-load.component';
+import { ResultsComponent } from './results/results.component';
+import { CardComponent } from './card/card.component';
+import { TableComponent } from './table/table.component';
+import { HVACSystemSearchComponent } from './hvac-system-search/hvac-system-search.component';
 
 /* angular material */
 import {MatCardModule} from '@angular/material/card';
@@ -52,21 +45,14 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
 
 @NgModule({
   declarations: [
-    AhriMatchupsComponent,
-    RebateFinderComponent,
-    HvacSystemDetailComponent,
     LocationComponent,
     DwellingInfoComponent,
-    HeatedCooledComponent,
-    SystemSizeComponent,
-    FiltersComponent,
-    QuestionsRequirementComponent,
-    ProductLinesComponent,
-    StockStatusComponent,
+    UtilityProvidersComponent,
+    HVACSystemSearchComponent,
+    ResultsComponent,
     CardComponent,
     TableComponent,
-    SystemDesignComponent,
-    AppliedFiltersComponent,
+    HvacSystemDetailComponent,
   ],
   imports: [
     CommonModule,

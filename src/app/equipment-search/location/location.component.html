@@ -7,8 +7,8 @@
 
             <mat-form-field appearance="fill">
                 <input type="text" matInput placeholder="State" formControlName="state" aria-label="Number" [matAutocomplete]="auto"/>
-                <mat-autocomplete #auto="matAutocomplete"  [displayWith]="displayFn.bind(this)"  (optionSelected)="ChangeState()">
-                    <mat-option *ngFor="let state of filteredStates | async" [value]="state.abbreviation">{{state.name}}</mat-option>
+                <mat-autocomplete #auto="matAutocomplete">
+                    <mat-option *ngFor="let element of states" [value]="element">{{element}}</mat-option>
                 </mat-autocomplete>
             </mat-form-field>
 

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms'
+import {UtilityInfo} from './../models/hvac-inputs'
 
 @Component({
   selector: 'app-utility-providers',
@@ -9,8 +11,10 @@ export class UtilityProvidersComponent implements OnInit {
 
   electricProviders: Array<UtilityInfo> = [];
   fossilFuelProviders: Array<UtilityInfo> = [];
+  
+  utilityProvidersForm!: FormGroup
 
-  constructor() { }
+  constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void {
 
@@ -18,7 +22,7 @@ export class UtilityProvidersComponent implements OnInit {
     // ...
 
     // Form group.
-    this.utilityProvidersForm = this.formBuilder.group({
+    this.utilityProvidersForm = this.fb.group({
       electricUtilityId: [ '', Validators.required],
       fossilFuelUtilityId: ['', Validators.required]
     });
