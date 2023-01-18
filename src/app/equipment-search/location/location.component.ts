@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-
+import StatesData from './../../../assets/json/states.json';
 @Component({
   selector: 'app-location',
   templateUrl: './location.component.html',
@@ -10,7 +10,7 @@ export class LocationComponent implements OnInit {
 
   locationForm!: FormGroup;
 
-  states: String[] = ["MA"];  // This should probably be an array of strings no mas.
+  states: String[] =  StatesData;  // This should probably be an array of strings no mas.
 
   constructor(private fb: FormBuilder) { }
 

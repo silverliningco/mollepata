@@ -6,12 +6,11 @@
         <form [formGroup]="locationForm" class="rc-form">
 
             <mat-form-field appearance="fill">
-                <input type="text" matInput placeholder="State" formControlName="state" aria-label="Number" [matAutocomplete]="auto"/>
-                <mat-autocomplete #auto="matAutocomplete">
-                    <mat-option *ngFor="let element of states" [value]="element">{{element}}</mat-option>
-                </mat-autocomplete>
+                <mat-label>State:</mat-label>
+                <mat-select #sGroup formControlName="state">
+                    <mat-option radioGroup="sGroup" [value] = "element" *ngFor="let element of states">{{element}}</mat-option>
+                </mat-select>
             </mat-form-field>
-
         </form>
     </div>
 </div>

@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ResultsComponent implements OnInit {
 
+  myResults!: Array<any>;
+  
   constructor() { }
 
   ngOnInit(): void {
