@@ -6,7 +6,7 @@
             <h4 class="rc-page-subtitle">Construction type</h4>
             <mat-label class="rc-indications">Select your construction type.</mat-label>
             <br>
-            <mat-radio-group formControlName="constructionType" (change)="submitInputs()">
+            <mat-radio-group formControlName="constructionType">
                 <mat-radio-button value="new-construction">New construction</mat-radio-button>
                 <br>
                 <mat-radio-button value="existing-construction">Existing construction</mat-radio-button>
@@ -15,7 +15,7 @@
             <!-- Fossil Fuel -->
             <h4 class="rc-page-subtitle">Fossil Fuel</h4>
             <mat-label class="rc-indications">Select type of fossil fuel available at the residence.</mat-label>
-            <mat-radio-group  #rGroup formControlName="fuelSource" fxLayout="column" class="rc-radio-img" (change)="submitInputs()">
+            <mat-radio-group  #rGroup formControlName="fuelSource" fxLayout="column" class="rc-radio-img">
                 <div fxLayout="row column" fxLayoutAlign="center center" fxLayoutGap="20px grid">
                     <mat-radio-button  [value]="'Natural Gas'" radioGroup="rGroup" fxFlex.xs="80" fxFlex.sm="34">
                         <img src="../../../../assets/images/icons/natural-gas.png" alt="" class="unchecked">

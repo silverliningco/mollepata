@@ -5,27 +5,26 @@
     <mat-step>
         <ng-template matStepLabel>Location</ng-template>
 
-        <app-location></app-location>
+        <app-location (stateChange)="setNewState( $event )"></app-location>
 
         <!-- button -->
         <div fxLayout="column" fxLayoutAlign="center end" class="rc-stepper-buttons">
-            <button type="button" mat-raised-button color="primary" [disabled]="!myButtonStatus['location']" matStepperNext>
+            <button type="button" mat-raised-button color="primary" [disabled]="" matStepperNext>
                 Continue
                 <mat-icon>arrow_forward</mat-icon>
             </button>
         </div>
-
     </mat-step>
  
     <!--- Step 2: Utility providers. -->
     <mat-step>
-        <ng-template matStepLabel>Location</ng-template>
+        <ng-template matStepLabel>Utility providers</ng-template>
 
-        <app-utility-providers></app-utility-providers>
+        <app-utility-providers [state]= "myData.state!" (utilityProvidersChange)="setNewUtilityProviders( $event )"></app-utility-providers>
 
         <!-- button -->
         <div fxLayout="column" fxLayoutAlign="center end" class="rc-stepper-buttons">
-            <button type="button" mat-raised-button color="primary" [disabled]="!myButtonStatus['utility-providers']" matStepperNext>
+            <button type="button" mat-raised-button color="primary" [disabled]="" matStepperNext>
                 Continue
                 <mat-icon>arrow_forward</mat-icon>
             </button>
@@ -40,11 +39,11 @@
         <!--Title-->
         <h2 class="rc-main-title">Dwelling Info</h2>
 
-        <app-dwelling-info></app-dwelling-info>
+        <app-dwelling-info (dwellignInfoChange)="setDwellignInfo( $event )"></app-dwelling-info>
 
         <!-- button -->
         <div fxLayout="column" fxLayoutAlign="center end" class="rc-stepper-buttons">
-                <button type="button" mat-raised-button color="primary" [disabled]="!myButtonStatus['dwellingInfo']" matStepperNext>
+                <button type="button" mat-raised-button color="primary" [disabled]="" matStepperNext>
                 Continue
                 <mat-icon>arrow_forward</mat-icon>
             </button>
@@ -79,7 +78,7 @@
 
         <!-- button -->
         <div fxLayout="column" fxLayoutAlign="center end" class="rc-stepper-buttons">
-            <button type="button" mat-raised-button color="primary" [disabled]="!myButtonStatus['heatedCooled']" matStepperNext>
+            <button type="button" mat-raised-button color="primary" [disabled]="" matStepperNext>
                 Continue
                 <mat-icon>arrow_forward</mat-icon>
             </button>
@@ -126,7 +125,7 @@
 
         <!-- button -->
         <div fxLayout="column" fxLayoutAlign="center end" class="rc-stepper-buttons">
-            <button type="button" mat-raised-button color="primary" [disabled]="!myButtonStatus['systemSize']" matStepperNext>
+            <button type="button" mat-raised-button color="primary" [disabled]="" matStepperNext>
                 Continue
                 <mat-icon>arrow_forward</mat-icon>
             </button>
@@ -197,7 +196,7 @@
 
         <!-- button -->
         <div fxLayout="column" fxLayoutAlign="center end" class="rc-stepper-buttons">
-            <button type="button" mat-raised-button color="primary" [disabled]="false" matStepperNext>
+            <button type="button" mat-raised-button color="primary" [disabled]="" matStepperNext>
                 Continue
                 <mat-icon>arrow_forward</mat-icon>
             </button>
@@ -215,3 +214,5 @@
     </mat-step> 
   
 </mat-stepper>
+
+{{ this.myData | json }}

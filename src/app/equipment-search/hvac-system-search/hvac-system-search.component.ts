@@ -4,7 +4,8 @@ import { bridgeService } from '../services/bridge.service';
 import { EndpointsService } from '../services/endpoints.service';
 
 import { MatStepper, StepperOrientation } from '@angular/material/stepper';
-import { EquipmentSearch } from '../models/rebate-finder-inputs';
+
+import { EquipmentSearch } from '../interfaces/equipment-search.interface'
 //import { ResultsComponent } from '../results/results.component';
 
 
@@ -18,16 +19,15 @@ import { error } from '@angular/compiler/src/util';
 
 export class HVACSystemSearchComponent implements OnInit {
 
-
   @ViewChild('stepper')
   stepper!: MatStepper;
-
   heatedCooledForm!: FormGroup;
   systemSizeForm!: FormGroup;
   systemDesignForm!: FormGroup;
   
   // local variables save data of stepper   ???
-  myData =  new EquipmentSearch();
+  myData: EquipmentSearch = {};
+
   inLastStep: boolean = false;  // ????
   myButtonStatus: {[key: string]: boolean }= {};
 
@@ -63,7 +63,32 @@ export class HVACSystemSearchComponent implements OnInit {
       numberZones: ['', Validators.required],
     });
 
+    
+    this.heatedCooledForm.valueChanges.subscribe(selectedValue => {
+      this.myData.heatedCooled = selectedValue;
+    });
+
+    this.systemSizeForm.valueChanges.subscribe(selectedValue => {
+      this.myData.systemSize = selectedValue;
+    });
+
+    this.systemDesignForm.valueChanges.subscribe(selectedValue => {
+      this.myData.systemDesign = selectedValue;
+    });
   }
+
+  setNewState(state: String){
+    this.myData.state = state
+  }
+
+  setNewUtilityProviders(utilityProviders: any){
+    this.myData.utilityProviders = utilityProviders;
+  }
+
+  setDwellignInfo(dwellignInfo: any){
+    this.myData.dwellingInfo = dwellignInfo;
+  }
+  
 
   // tabChange is a callback when the progress bar step is changed.
   // If the new step is the final step in sequence, we load the equipment search results.
@@ -71,7 +96,7 @@ export class HVACSystemSearchComponent implements OnInit {
   
     // If this is the last step in sequence, load the results (ahri combinations).
     if(this.stepper?.steps.length -1 == e.selectedIndex) {
-
+      
         // Assemble inputs and load or re-load results.
         // Need to use @Input variable in the results component or a bridge service to send user inputs to the results component.
         // ...

@@ -22,8 +22,6 @@ export class EndpointsService {
       return this.http.post(url, body);
     }
 
-    // verify
-
     ProductLines(body: any): Observable<any> {
 
       let url = URL_SERVICIOS + '/product-lines'; 
@@ -59,6 +57,7 @@ export class EndpointsService {
       return this.http.post(url, body);
     }
 
+    //Function to load utility providers by state
     Utilities(state: any){
 
       let url = URL_SERVICIOS + '/utility-providers?country=US&state='+ state;

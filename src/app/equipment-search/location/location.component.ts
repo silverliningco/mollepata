@@ -1,13 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import StatesData from './../../../assets/json/states.json';
+
 @Component({
   selector: 'app-location',
   templateUrl: './location.component.html',
   styleUrls: ['./location.component.css']
 })
 export class LocationComponent implements OnInit {
-
+  @Output()stateChange: EventEmitter<String> = new EventEmitter();
+  
   locationForm!: FormGroup;
 
   states: String[] =  StatesData;  // This should probably be an array of strings no mas.
@@ -21,6 +23,9 @@ export class LocationComponent implements OnInit {
       state: ["", Validators.required]
     });
 
+    this.locationForm.get("state")?.valueChanges.subscribe(selectedValue => {
+      this.stateChange.emit(selectedValue);
+    });
   }
 
 }
