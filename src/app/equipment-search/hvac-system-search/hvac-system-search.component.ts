@@ -5,11 +5,10 @@ import { EndpointsService } from '../services/endpoints.service';
 
 import { MatStepper, StepperOrientation } from '@angular/material/stepper';
 
-import { EquipmentSearch } from '../interfaces/equipment-search.interface'
-//import { ResultsComponent } from '../results/results.component';
+import {MatTableDataSource} from '@angular/material/table';
 
+import { EquipmentSearch, msMultiZoneType } from '../interfaces/equipment-search.interface'
 
-import { error } from '@angular/compiler/src/util';
 
 @Component({
   selector: 'hvac-system-search',
@@ -24,23 +23,26 @@ export class HVACSystemSearchComponent implements OnInit {
   heatedCooledForm!: FormGroup;
   systemSizeForm!: FormGroup;
   systemDesignForm!: FormGroup;
-  
-  // local variables save data of stepper   ???
+
+  // equipmentSearchData used for payload.
   myData: EquipmentSearch = {};
 
-  inLastStep: boolean = false;  // ????
-  myButtonStatus: {[key: string]: boolean }= {};
+  // dataSource for mini split system design table.
+  indoorUnitDataSource = new MatTableDataSource(); 
+
+  // Columns for indoor unit table.
+  indoorUnitDisplayedColumns: string[] = [    
+    'qty',    
+    'unitType',
+    'size',    
+    'delete'
+  ];
 
   constructor(
-    private fb: FormBuilder,
-    public _bridge: bridgeService,
-    private _endpoint: EndpointsService
+    private fb: FormBuilder
   ) { }
 
   ngOnInit(): void {
-
-    // Load JSON data/configs, maybe??
-    // ...
 
     // Heated/cooled form group.
     this.heatedCooledForm = this.fb.group({
@@ -50,7 +52,11 @@ export class HVACSystemSearchComponent implements OnInit {
 
     // System size form group.
     this.systemSizeForm = this.fb.group({
-      heatingBTUH: [null, Validators.required],//[this.ValidateHeatingBTUH]],
+      heatingBTUH: [null, [
+        Validators.required,
+        Validators.min(8000),
+        Validators.max(135000),
+      ]],
       coolingTons: [null, Validators.required],
     });
 
@@ -75,6 +81,7 @@ export class HVACSystemSearchComponent implements OnInit {
     this.systemDesignForm.valueChanges.subscribe(selectedValue => {
       this.myData.systemDesign = selectedValue;
     });
+   
   }
 
   setNewState(state: String){
@@ -88,7 +95,7 @@ export class HVACSystemSearchComponent implements OnInit {
   setDwellignInfo(dwellignInfo: any){
     this.myData.dwellingInfo = dwellignInfo;
   }
-  
+
 
   // tabChange is a callback when the progress bar step is changed.
   // If the new step is the final step in sequence, we load the equipment search results.
@@ -96,7 +103,7 @@ export class HVACSystemSearchComponent implements OnInit {
   
     // If this is the last step in sequence, load the results (ahri combinations).
     if(this.stepper?.steps.length -1 == e.selectedIndex) {
-      
+      alert("call results");
         // Assemble inputs and load or re-load results.
         // Need to use @Input variable in the results component or a bridge service to send user inputs to the results component.
         // ...
@@ -104,5 +111,31 @@ export class HVACSystemSearchComponent implements OnInit {
     }
 
   }
+
+
+  // function to add a row to table indoor units.
+  addIndoorUnit() {
+
+    if(!this.myData.systemDesign?.msMultiZoneType){
+      this.myData.systemDesign!.msMultiZoneType = [];
+    }
+
+    const newRow: msMultiZoneType = {
+      qty: 0,    
+      unitType: "",
+      size:0      
+    };
+
+    this.myData.systemDesign?.msMultiZoneType?.push(newRow);
+    this.indoorUnitDataSource.data = this.myData.systemDesign?.msMultiZoneType!;
+  }
+
+ 
+  // function to remove a row from table indoor units.
+  removeIndoorUnit(index: number) {
+      this.myData.systemDesign?.msMultiZoneType?.splice(index, 1);
+      this.indoorUnitDataSource.data = this.myData.systemDesign?.msMultiZoneType!;
+  }
+
 
 }

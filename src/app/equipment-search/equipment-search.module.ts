@@ -41,6 +41,7 @@ import {MatTabsModule} from '@angular/material/tabs';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import { MatTableModule } from '@angular/material/table';
 
 
 @NgModule({
@@ -61,7 +62,8 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
     ReactiveFormsModule,
     HttpClientModule,
     SharedModule,
-
+    
+    MatTableModule,
     MatCardModule,
     MatIconModule,
     MatStepperModule,
