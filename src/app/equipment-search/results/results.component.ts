@@ -1,15 +1,33 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit, OnChanges, SimpleChanges } from '@angular/core';
+
+import { EquipmentSearch } from '../interfaces/equipment-search.interface';
+
+import { EndpointsService } from '../services/endpoints.service';
 
 @Component({
   selector: 'app-results',
   templateUrl: './results.component.html',
   styleUrls: ['./results.component.css']
 })
-export class ResultsComponent implements OnInit {
+export class ResultsComponent implements OnInit, OnChanges  {
+
+
+  @Input() results: any = {}; 
 
   myResults!: Array<any>;
   
   constructor() { }
+
+  ngOnChanges(changes: SimpleChanges): void {
+
+    const results: any = changes["results"].currentValue;
+
+    if(results) { 
+      console.log("Results component: ", results);
+    }
+
+  }
+
 
   ngOnInit(): void {
 

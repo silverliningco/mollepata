@@ -27,6 +27,8 @@ export class HVACSystemSearchComponent implements OnInit {
   // equipmentSearchData used for payload.
   myData: EquipmentSearch = {};
 
+  myResults!: any;
+
   // dataSource for mini split system design table.
   indoorUnitDataSource = new MatTableDataSource(); 
 
@@ -39,7 +41,8 @@ export class HVACSystemSearchComponent implements OnInit {
   ];
 
   constructor(
-    private fb: FormBuilder
+    private fb: FormBuilder, 
+    private _endpoint: EndpointsService 
   ) { }
 
   ngOnInit(): void {
@@ -105,8 +108,13 @@ export class HVACSystemSearchComponent implements OnInit {
     if(this.stepper?.steps.length -1 == e.selectedIndex) {
       alert("call results");
         // Assemble inputs and load or re-load results.
-        // Need to use @Input variable in the results component or a bridge service to send user inputs to the results component.
-        // ...
+        // We use @Input results variable in the results component to send payload response to the results component.
+        this._endpoint.Search(this.myData).subscribe({
+          next: (resp: any) => { 
+              this.myResults = resp;
+          },
+          error: (e) => alert(e.error)
+        })
 
     }
 
