@@ -344,7 +344,7 @@ h1, h2, h3, h4, h5 {
             border: solid 1px var(--nkn-border-color);
         }
         thead th {
-            color: white;
+            color: white !important;
             font-weight: 500;
             background-color: var(--rc-primary-dark-color);;
             padding: .75rem;

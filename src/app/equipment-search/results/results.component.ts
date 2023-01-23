@@ -24,6 +24,7 @@ export class ResultsComponent implements OnInit, OnChanges  {
 
     if(results) { 
       console.log("Results component: ", results);
+      this.myResults = results;
     }
 
   }

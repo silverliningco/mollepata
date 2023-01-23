@@ -106,7 +106,7 @@ export class HVACSystemSearchComponent implements OnInit {
   
     // If this is the last step in sequence, load the results (ahri combinations).
     if(this.stepper?.steps.length -1 == e.selectedIndex) {
-      alert("call results");
+
         // Assemble inputs and load or re-load results.
         // We use @Input results variable in the results component to send payload response to the results component.
         this._endpoint.Search(this.myData).subscribe({
