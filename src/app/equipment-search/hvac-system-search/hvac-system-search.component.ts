@@ -26,8 +26,7 @@ export class HVACSystemSearchComponent implements OnInit {
 
   // equipmentSearchData used for payload.
   myData: EquipmentSearch = {};
-
-  myResults!: any;
+  payload!: EquipmentSearch;
 
   // dataSource for mini split system design table.
   indoorUnitDataSource = new MatTableDataSource(); 
@@ -108,13 +107,10 @@ export class HVACSystemSearchComponent implements OnInit {
     if(this.stepper?.steps.length -1 == e.selectedIndex) {
 
         // Assemble inputs and load or re-load results.
-        // We use @Input results variable in the results component to send payload response to the results component.
-        this._endpoint.Search(this.myData).subscribe({
-          next: (resp: any) => { 
-              this.myResults = resp;
-          },
-          error: (e) => alert(e.error)
-        })
+        // The OnChanges lifecycle hook is triggered when the @Input property value changes. In the case of an object,
+        // that value is the object reference. If the object reference does not change, OnChanges is not triggered.
+        // To force change detection is to set a new object reference after modifying the property values
+        this.payload = {...this.myData};
 
     }
 

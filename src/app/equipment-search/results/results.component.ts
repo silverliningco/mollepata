@@ -9,22 +9,31 @@ import { EndpointsService } from '../services/endpoints.service';
   templateUrl: './results.component.html',
   styleUrls: ['./results.component.css']
 })
-export class ResultsComponent implements OnInit, OnChanges  {
+export class ResultsComponent implements OnInit  {
 
 
-  @Input() results: any = {}; 
+  @Input() payload: EquipmentSearch = {}; 
 
   myResults!: Array<any>;
   
-  constructor() { }
+  constructor(private _endpoint: EndpointsService ) { }
 
   ngOnChanges(changes: SimpleChanges): void {
 
-    const results: any = changes["results"].currentValue;
+    const currentEquipmentSearch: EquipmentSearch = changes["payload"].currentValue;
+    const previousEquipmentSearch: EquipmentSearch = changes["payload"].previousValue;
 
-    if(results) { 
-      console.log("Results component: ", results);
-      this.myResults = results;
+    // Check if current value has changes from previous value to call search service.
+    if (JSON.stringify(currentEquipmentSearch) !== JSON.stringify(previousEquipmentSearch)) {  
+      console.log("call search");
+      console.log(changes);
+      this._endpoint.Search(currentEquipmentSearch).subscribe({
+        next: (resp: any) => { 
+            this.myResults = resp;
+        },
+        error: (e) => alert(e.error)
+      })
+
     }
 
   }
@@ -65,3 +74,4 @@ export class ResultsComponent implements OnInit, OnChanges  {
   }
 
 }
+
