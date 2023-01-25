@@ -11,13 +11,13 @@ import { EndpointsService } from '../services/endpoints.service';
 })
 export class ResultsComponent implements OnInit  {
 
-
   @Input() payload: EquipmentSearch = {}; 
 
   myResults!: Array<any>;
   
   constructor(private _endpoint: EndpointsService ) { }
 
+  // Lifecycle hook that is called when any data-bound property of a directive change.s
   ngOnChanges(changes: SimpleChanges): void {
 
     const currentEquipmentSearch: EquipmentSearch = changes["payload"].currentValue;
@@ -25,19 +25,39 @@ export class ResultsComponent implements OnInit  {
 
     // Check if current value has changes from previous value to call search service.
     if (JSON.stringify(currentEquipmentSearch) !== JSON.stringify(previousEquipmentSearch)) {  
-      console.log("call search");
-      console.log(changes);
+
+      // Call search service.
       this._endpoint.Search(currentEquipmentSearch).subscribe({
-        next: (resp: any) => { 
-            this.myResults = resp;
+        next: (resp: any) => {
+          // Group results by outdoor unit and asign to results variable.
+          this.myResults = this.groupByOutdoorUnit(resp);
         },
         error: (e) => alert(e.error)
       })
-
     }
-
   }
 
+  // Function to group response by outdoor unit.
+  groupByOutdoorUnit(systems: Array<any>) {
+
+    let newObj: {[index: string]:any} = {};
+    systems.forEach(sys => {
+      sys.components.forEach((comp: { componentType: string; title: any; }) => {
+        if(comp.componentType == "Outdoor unit"){
+          
+          if(!newObj.hasOwnProperty(comp.title)){
+            newObj[comp.title] = [];
+          } 
+          newObj[comp.title].push(sys);
+
+        }
+      });
+    });
+
+    // returns an array of a given object's own enumerable string-keyed property values.
+    return Object.values(newObj);
+ 
+  }
 
   ngOnInit(): void {
 

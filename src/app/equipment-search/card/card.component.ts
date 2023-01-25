@@ -1,133 +1,64 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Result, Components } from './../models/results';
+
+import { Result, Card } from '../interfaces/results.interface'
+
 
 @Component({
   selector: 'app-card',
   templateUrl: './card.component.html',
   styleUrls: ['./card.component.css']
 })
+
+
+
 export class CardComponent implements OnInit {
 
-  @Input() myResults!: any[];
-  @Input('master') masterName = '';
-  card!: any;
-  outdoors: string[] = [];
-  
+
+  @Input() myResult!: any[];
+  card!: Card; 
+  //pass Object to template, to iterate object keys using *ngFor (AHRI Ratings)
+  Object = Object;
+
   constructor() { }
 
   ngOnInit(): void {
-      this.ParsingResult(this.myResults);
+    this.loadCard();
   }
 
-  ParsingResult(results: any[]){
-
-    let options=  this.ParsingOptions(results);
-    let Firstcombination = this.getFirstCombinationsData(results);
+  loadCard(){
 
 
-    this.card = {
-      outdoorUnit: Firstcombination[1],
-      properties: Firstcombination[0],
-      options: options
-    }
-  }
-
-  getFirstCombinationsData(results: any[]): any[]{
-
-    let myResults: Result[] = results;  // for extract the properties
-    let interimStructure: object = {};
-    let prepareOutdoor!: any;
-    let myOutdoor!: string;
-
-    // extract all the properties without outdoor unit
-    first: for (let i = 0; i < myResults.length; i++) {
-      if (i == 0){
-        let {EER, AFUE, HSPF, SEER, Hcap17, Hcap47, fuelTypes, AHRIReferences, availableRebates, furnaceInputBTUH, furnaceOutputBTUH, configurationOptions, coolingCapacityRated, furnaceConfigurations, totalAvailableRebates, components} = myResults[i];
-
-        interimStructure = {
-          EER: EER,
-          AFUE: AFUE,
-          HSPF: HSPF,
-          SEER: SEER,
-          Hcap17: Hcap17,
-          Hcap47: Hcap47,
-          fuelTypes: fuelTypes,
-          AHRIReferences: AHRIReferences,
-          availableRebates: availableRebates,
-          furnaceInputBTUH: furnaceInputBTUH,
-          furnaceOutputBTUH: furnaceOutputBTUH,
-          configurationOptions: configurationOptions,
-          coolingCapacityRated: coolingCapacityRated,
-          furnaceConfigurations: furnaceConfigurations,
-          totalAvailableRebates: totalAvailableRebates
-        }
-
-        prepareOutdoor = components;
-        break first; 
-      }
-    }
-
-    // extract the outdoor unit
-    for (const iPO of prepareOutdoor) {
-      if (iPO.type == 'outdoorUnit'){
-        myOutdoor = iPO.id;
-      }
-    }
-
-    return [interimStructure, myOutdoor]
-
-  } 
-
-  ParsingOptions(results: any[]): object[] {
-    let rawOptions: any[] = []; // all the options
-    let typeOptions: string[] = []; // type of options
-    let cleanOptions: any[] = [];
-    
-    // select indoors and furnace options
-    for (let iR of results) {
-      for (let iC of iR.components) {
-        if (iC.type != 'outdoorUnit'){
-          rawOptions.push(iC);
-          typeOptions.push(iC.type);
-        }
-      }
-    }
-
-    // delete duplicate elements 
-    let myTypeOptions = new Set (typeOptions);
-
-    // separating indoors from furnace
-    myTypeOptions.forEach(type => {
-      let myRawOptions = JSON.stringify(rawOptions);
-      let a = this.selectOptions(type, myRawOptions);
-      cleanOptions.push(a);
+    //Order array of objects by availableRebateAmount  
+    this.myResult.sort((a, b) => {
+      return a.availableRebateAmount - b.availableRebateAmount;
     });
 
-    return cleanOptions;
+    // Asign first element of array to card.
+    this.card = this.myResult[0];
+    this.card.outdoorUnit = this.loadOptions("Outdoor unit")[0];
+    this.card.indoorUnits = this.loadOptions("Indoor unit");
+    this.card.furnaces = this.loadOptions("Furnace");
+    
   }
 
-
-  selectOptions(typeUnit: string, rawOptions: string): object{ 
-    let myRawOptions = JSON.parse(rawOptions); // all the options
-    let options: string[] = []; // id options by typeUnit
-    
-    for (let iRO of myRawOptions) {
-      if (typeUnit == iRO.type){
-        options.push(iRO.id);
+  // function to load component options by component type.
+  // this function is used for options in selects.
+  loadOptions(type: string)  {
+    let myComponentsOptions: any[] = []
+    this.myResult.forEach(element => {
+      let myFind = element.components.filter((item: any) => item.componentType == type);
+     
+      // If filter finds components with specific type
+      if (myFind![0]) {
+        myComponentsOptions.push(myFind![0])
       }
-    }
+    });
 
-    // delete duplicate elements
-    let myOptions = new Set(options);
+    const myUniqueOptions = [...new Map(myComponentsOptions.map((m) => [m.title, m])).values()];
 
-    let optionsByType = {
-      nameOption: typeUnit,
-      options: myOptions
-    }
-
-    return optionsByType; 
-    
+    return  myUniqueOptions;
   }
+
 
   openDialog() {
 
