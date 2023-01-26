@@ -9,7 +9,7 @@ export interface Sku {
     componentType: string;
   }
   
-  export interface Result{
+  export interface Result {
     skus: Sku[];
     components: Component[];
     configurationOptions: any[];
@@ -18,10 +18,8 @@ export interface Sku {
     availableRebateAmount: number;
   }
 
-  export interface Card extends Result{
-    outdoorUnit: Component;
-    indoorUnits: Component[];
-    furnaces: Component[];
-    configurations: any[];
+  export interface Card extends Result {
+    cardComponents: any[];
+    cardConfigurations: any[];
   }
   

@@ -31,6 +31,21 @@ export class ResultsComponent implements OnInit  {
         next: (resp: any) => {
           // Group results by outdoor unit and asign to results variable.
           this.myResults = this.groupByOutdoorUnit(resp);
+
+          // First: order insite grouped systems.
+          this.myResults.forEach(element => {
+              // Order array of objects by availableRebateAmount  
+              element.sort((a:any, b:any) => {
+              return  b.availableRebateAmount - a.availableRebateAmount;
+            });
+          });
+          // Second order grouped systems by first element from array(biggest discount)
+          this.myResults.sort((a:any, b:any) => {
+            return  b[0].availableRebateAmount - a[0].availableRebateAmount;
+          });
+        
+          //console.log("resultados ordenados");
+          //console.log(this.myResults);
         },
         error: (e) => alert(e.error)
       })

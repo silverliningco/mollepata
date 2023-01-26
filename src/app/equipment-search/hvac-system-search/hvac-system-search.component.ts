@@ -1,7 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import { bridgeService } from '../services/bridge.service';
-import { EndpointsService } from '../services/endpoints.service';
 
 import { MatStepper, StepperOrientation } from '@angular/material/stepper';
 
@@ -40,8 +38,7 @@ export class HVACSystemSearchComponent implements OnInit {
   ];
 
   constructor(
-    private fb: FormBuilder, 
-    private _endpoint: EndpointsService 
+    private fb: FormBuilder
   ) { }
 
   ngOnInit(): void {

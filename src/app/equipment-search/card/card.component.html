@@ -4,38 +4,25 @@
     <div fxFlex="70" fxFlex.sm="100" fxFlex.xs="100">
       <mat-card-header>
         <mat-card-title>
-          <h3>{{card.outdoorUnit.title}}</h3>
+          <h3>card.outdoorUnit.title</h3>
         </mat-card-title>
 
         <mat-card-subtitle>
           <!-- Indoor Units-->
           <div fxLayout="row column" fxLayoutAlign="space-between center" class="model-nrs" fxLayoutGap="4px grid">
-            <div fxFlex="100">
-              <span class="rc-small"><b>Indoor Units</b></span>
+            <div fxFlex="100" *ngFor="let cardComponent of card.cardComponents">
+              <span class="rc-small"><b>{{cardComponent[0].componentType}}</b></span>
               <mat-form-field class="rc-select-multiline">
-                <mat-select>
-                  <mat-option class="rc-select-multiline-option" *ngFor="let indoorUnit of card.indoorUnits"
-                    [value]="indoorUnit.title">
-                    <b>{{indoorUnit.title}}</b> Nice name
+                <mat-select  (selectionChange)="filterByID($event.value, cardComponent[0].componentType)">
+                  <mat-option class="rc-select-multiline-option" *ngFor="let component of cardComponent"
+                    [value]="component.title">
+                    <b>{{component.title}}</b>
                   </mat-option>
                 </mat-select>
               </mat-form-field>
             </div>
           </div>
-          <!-- Furnaces-->
-          <div fxLayout="row column" fxLayoutAlign="space-between center" class="model-nrs" fxLayoutGap="4px grid">
-            <div fxFlex="100">
-              <span class="rc-small"><b>Furnaces</b></span>
-              <mat-form-field class="rc-select-multiline">
-                <mat-select>
-                  <mat-option class="rc-select-multiline-option" *ngFor="let furnace of card.furnaces"
-                    [value]="furnace.title">
-                    <b>{{furnace.title}}</b> Nice name
-                  </mat-option>
-                </mat-select>
-              </mat-form-field>
-            </div>
-          </div>
+         
         </mat-card-subtitle>
       </mat-card-header>
     </div>
