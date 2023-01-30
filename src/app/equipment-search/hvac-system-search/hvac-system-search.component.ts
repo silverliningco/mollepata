@@ -64,8 +64,8 @@ export class HVACSystemSearchComponent implements OnInit {
       outdoorUnitType: ['', Validators.required],
       indoorUnitType: ['', Validators.required],
       furnaceType: ['', Validators.required],
-      furnaceConfiguration: ['', Validators.required],
-      numberZones: ['', Validators.required],
+      /*furnaceConfiguration: ['', Validators.required],
+      numberZones: ['', Validators.required],*/
     });
 
     

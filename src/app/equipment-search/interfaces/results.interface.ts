@@ -3,7 +3,7 @@ export interface Sku {
     sku: string;
   } 
   
-  export interface Component {
+  export interface ComponentObj {
     title: string;
     description: string;
     componentType: string;
@@ -11,16 +11,17 @@ export interface Sku {
   
   export interface Result {
     skus: Sku[];
-    components: Component[];
+    components: ComponentObj[];
     configurationOptions: any[];
     AHRIRatings: any[];
     availableRebates: any[];
     availableRebateAmount: number;
   }
 
-  export interface Card extends Result {
-    cardComponents: any[string];
-    cardConfigurations: any[];
-    userSelections: any;
+  export interface Card {
+    result?: Result;
+    cardComponents?: any[string];
+    cardConfigurations?: any[];
+    userSelections?: any;
   }
   

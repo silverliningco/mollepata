@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 
-import { Card } from '../interfaces/results.interface'
+import { Card, Result } from '../interfaces/results.interface'
 
 @Component({
   selector: 'app-card',
@@ -12,8 +12,8 @@ import { Card } from '../interfaces/results.interface'
 export class CardComponent implements OnInit {
 
 
-  @Input() mySystems!: any[];
-  card!: Card;
+  @Input() mySystems!: Result[];
+  card: Card = {}; 
 
   //pass Object to template, to iterate object keys using *ngFor (AHRI Ratings)
   Object = Object;
@@ -27,9 +27,10 @@ export class CardComponent implements OnInit {
   loadCard() {
 
     // Asign first element of array to card.
-    this.card = this.mySystems[0];
-    this.card.userSelections = { "Outdoor unit": this.card.components[0].title };
-    this.card.cardComponents = this.cardComponents()
+    console.log(this.mySystems[0]); 
+    this.card.result = this.mySystems[0];
+    this.card.userSelections = { "Outdoor unit": this.card.result.components[0].title };
+    this.card.cardComponents = this.cardComponents();
   }
 
   cardComponents() {
@@ -57,13 +58,13 @@ export class CardComponent implements OnInit {
   }
 
   selectsToUpdate(curentSelection: string) :string[] {
-    let myComponentTypes = this.card.components.map(a => a.componentType);
+    let myComponentTypes = this.card.result!.components.map(a => a.componentType);
     let toUpdate: string[] = myComponentTypes.filter(componentType => componentType !== curentSelection && componentType !== 'Outdoor unit');
     return toUpdate;
   }
 
   optionsToUpdate() {
-    let myCombinedCombinations: any[] = [];
+    let myCombinedCombinations: Result[] = [];
     this.mySystems.forEach(sys => {
       let countOks = 0;
       sys.components.forEach((component: any) => {
@@ -91,12 +92,9 @@ export class CardComponent implements OnInit {
     return components.filter((c:any) => c.componentType == componentType)[0];
   }
   
-  updateSelects(myUnitType: string, mySelectsToUpdate: string[]){
+  updateSelections( mySelectsToUpdate: string[]){
     let myUpdatedOptions: any[] = [];
     let myOptionsToUpdate = this.optionsToUpdate();
-    console.log(myUnitType);
-    console.log(mySelectsToUpdate);
-    console.log(myOptionsToUpdate);
 
     mySelectsToUpdate.forEach(selectToUpdate => {
       
@@ -104,12 +102,16 @@ export class CardComponent implements OnInit {
         myUpdatedOptions.push(this.getComponentByComponentType(optionToUpdate.components,selectToUpdate));
       });
 
-      if(myUpdatedOptions.length == 1 &&  this.Object.keys(this.card.userSelections).length == this.Object.keys(this.card.components).length) {
+      if(myUpdatedOptions.length == 1 &&  this.Object.keys(this.card.userSelections).length == this.Object.keys(this.card.result!.components).length) {
         myUpdatedOptions.push({ "title": "reset", "componentType": "reset" });
       }
 
+      console.log(myOptionsToUpdate[0]);
+    
+      this.card.result = myOptionsToUpdate[0];
       this.card.cardComponents[selectToUpdate] = myUpdatedOptions;
 
+      
     });
   }
 
@@ -126,7 +128,11 @@ export class CardComponent implements OnInit {
       mySelectsToUpdate = this.selectsToUpdate(myUnitType);
     }
 
-    this.updateSelects(myUnitType, mySelectsToUpdate);
+    //console.log(myUnitType);
+    //console.log(mySelectsToUpdate);
+    //console.log(myOptionsToUpdate);
+
+    this.updateSelections(mySelectsToUpdate);
   }
 
   openDialog() {
