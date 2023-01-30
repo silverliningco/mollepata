@@ -19,7 +19,8 @@ export interface Sku {
   }
 
   export interface Card extends Result {
-    cardComponents: any[];
+    cardComponents: any[string];
     cardConfigurations: any[];
+    userSelections: any;
   }
   

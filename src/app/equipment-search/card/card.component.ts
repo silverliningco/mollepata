@@ -1,7 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 
-import { Result, Card } from '../interfaces/results.interface'
-
+import { Card } from '../interfaces/results.interface'
 
 @Component({
   selector: 'app-card',
@@ -10,12 +9,11 @@ import { Result, Card } from '../interfaces/results.interface'
 })
 
 
-
 export class CardComponent implements OnInit {
 
 
   @Input() mySystems!: any[];
-  card!: Card; 
+  card!: Card;
 
   //pass Object to template, to iterate object keys using *ngFor (AHRI Ratings)
   Object = Object;
@@ -26,70 +24,110 @@ export class CardComponent implements OnInit {
     this.loadCard();
   }
 
-  loadCard(){
+  loadCard() {
 
     // Asign first element of array to card.
     this.card = this.mySystems[0];
-    
-    let userSelections:  Component[] = [];
-
-    this.card.cardComponents = this.cardComponents(userSelections)
-    console.log(this.card.cardComponents);
-
- 
- 
-    /*this.card.outdoorUnit = this.loadOptions("Outdoor unit")[0];
-    this.card.indoorUnits = this.loadOptions("Indoor unit");
-    this.card.furnaces = this.loadOptions("Furnace");*/
-    
+    this.card.userSelections = { "Outdoor unit": this.card.components[0].title };
+    this.card.cardComponents = this.cardComponents()
   }
 
-  cardComponents(userSelections : Component[]) {
- 
-    let newObj: {[index: string]:any} = {};
+  cardComponents() {
+    
+    let newObj: { [index: string]: any } = {};
 
     this.mySystems.forEach(sys => {
       sys.components.forEach((comp: { componentType: string; title: any; }) => {
-          
-          if(!newObj.hasOwnProperty(comp.componentType)){
-            newObj[comp.componentType] = [];
-          } 
-          newObj[comp.componentType].push(comp);
+
+        if (!newObj.hasOwnProperty(comp.componentType)) {
+          newObj[comp.componentType] = [];
+        }
+        newObj[comp.componentType].push(comp);
+
+      });
+
+    });
+    
+    this.Object.keys(newObj).forEach((element, i) => {
+      const myUniqueOptions = [...new Map(newObj[element].map((m: any) => [m.title, m])).values()];
+      newObj[element] = myUniqueOptions;
+    });
+
+    return newObj;
+  }
+
+  selectsToUpdate(curentSelection: string) :string[] {
+    let myComponentTypes = this.card.components.map(a => a.componentType);
+    let toUpdate: string[] = myComponentTypes.filter(componentType => componentType !== curentSelection && componentType !== 'Outdoor unit');
+    return toUpdate;
+  }
+
+  optionsToUpdate() {
+    let myCombinedCombinations: any[] = [];
+    this.mySystems.forEach(sys => {
+      let countOks = 0;
+      sys.components.forEach((component: any) => {
+        this.Object.keys(this.card.userSelections).forEach(selection => {
+
+          if (component.componentType == selection) {
+            if (this.card.userSelections[selection] == component.title) {
+
+              countOks++
+              if (this.Object.keys(this.card.userSelections).length == countOks) {
+                myCombinedCombinations.push(sys);
+              }
+            }
+          }
+       
+        });
       });
     });
 
-    let myArr = Object.values(newObj);
-
-    myArr.forEach((element, i) => {
-      const myUniqueOptions = [...new Map(element.map((m:any) => [m.title, m])).values()];
-      myArr[i] = myUniqueOptions;
-    });
-    return  myArr;
+    return myCombinedCombinations;
   }
+  
+  // Simple function to get component object from components by component type.
+  getComponentByComponentType(components: any[], componentType:string) {
+    return components.filter((c:any) => c.componentType == componentType)[0];
+  }
+  
+  updateSelects(myUnitType: string, mySelectsToUpdate: string[]){
+    let myUpdatedOptions: any[] = [];
+    let myOptionsToUpdate = this.optionsToUpdate();
+    console.log(myUnitType);
+    console.log(mySelectsToUpdate);
+    console.log(myOptionsToUpdate);
 
+    mySelectsToUpdate.forEach(selectToUpdate => {
+      
+      myOptionsToUpdate.forEach(optionToUpdate => {
+        myUpdatedOptions.push(this.getComponentByComponentType(optionToUpdate.components,selectToUpdate));
+      });
+
+      if(myUpdatedOptions.length == 1 &&  this.Object.keys(this.card.userSelections).length == this.Object.keys(this.card.components).length) {
+        myUpdatedOptions.push({ "title": "reset", "componentType": "reset" });
+      }
+
+      this.card.cardComponents[selectToUpdate] = myUpdatedOptions;
+
+    });
+  }
 
   filterByID(myUnitID: string, myUnitType: string) {
-    console.log(myUnitID,myUnitType)
+    
+    let mySelectsToUpdate;
+
+    if(myUnitID == "reset"){
+      delete this.card.userSelections[myUnitType];
+      mySelectsToUpdate = [myUnitType];
+    } else { 
+      // user selection
+      this.card.userSelections[myUnitType] = myUnitID;
+      mySelectsToUpdate = this.selectsToUpdate(myUnitType);
+    }
+
+    this.updateSelects(myUnitType, mySelectsToUpdate);
   }
-
-  // function to load component options by component type.
-  // this function is used for options in selects.
- /* loadOptions(type: string)  {
-    let myComponentsOptions: any[] = []
-    this.mySystems.forEach(element => {
-      let myFind = element.components.filter((item: any) => item.componentType == type);
-     
-      // If filter finds components with specific type
-      if (myFind![0]) {
-        myComponentsOptions.push(myFind![0])
-      }
-    });
-
-    const myUniqueOptions = [...new Map(myComponentsOptions.map((m) => [m.title, m])).values()];
-
-    return  myUniqueOptions;
-  }
-*/
 
   openDialog() {
 
