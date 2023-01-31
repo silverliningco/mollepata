@@ -7,7 +7,7 @@
 /bazel-out
 
 #api-key
-/src/app/config/config.ts
+#/src/app/config/config.ts
 
 # Node
 /node_modules
