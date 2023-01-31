@@ -8,7 +8,7 @@ import StatesData from './../../../assets/json/states.json';
   styleUrls: ['./location.component.css']
 })
 export class LocationComponent implements OnInit {
-  @Output()stateChange: EventEmitter<String> = new EventEmitter();
+  @Output()stateChange: EventEmitter<any> = new EventEmitter();
   
   locationForm!: FormGroup;
 
@@ -24,7 +24,7 @@ export class LocationComponent implements OnInit {
     });
 
     this.locationForm.get("state")?.valueChanges.subscribe(selectedValue => {
-      this.stateChange.emit(selectedValue);
+      this.stateChange.emit([selectedValue, !this.locationForm.valid]);
     });
   }
 

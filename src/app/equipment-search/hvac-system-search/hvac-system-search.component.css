@@ -1,4 +1,4 @@
-.demo-table {
+  .demo-table {
     width: 100%;
   }
   
@@ -17,9 +17,31 @@
   .mat-column-demo-weight {
     font-style: italic;
   }
+
+
+
   
   .mat-column-demo-symbol {
     width: 32px;
     text-align: center;
     font-weight: bold;
+  }
+  .button-add-row {
+    color: #003C8F;
+    font-size: 14px;
+    font-weight: bold;
+    float: right;   
+  }
+  .button-remove {
+    color: #FFA000;
+    font-size: 14px;
+  }
+ 
+  .button-save {
+    color: #1565C0;    
+    font-size: 14px;
+  }
+  .table-header {
+    color: white;
+    font-size: 14px;    
   }

@@ -24,7 +24,7 @@ export class DwellingInfoComponent implements OnInit {
 
     
     this.dwellingInfoForm.valueChanges.subscribe(selectedValue => {
-      this.dwellignInfoChange.emit(selectedValue);
+      this.dwellignInfoChange.emit([selectedValue, this.dwellingInfoForm.valid]);      
     });
   
 

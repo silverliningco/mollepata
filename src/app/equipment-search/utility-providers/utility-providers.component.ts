@@ -63,7 +63,7 @@ export class UtilityProvidersComponent implements OnInit, OnChanges {
     });
 
     this.utilityProvidersForm.valueChanges.subscribe(selectedValue => {
-      this.utilityProvidersChange.emit(selectedValue);
+      this.utilityProvidersChange.emit([selectedValue, this.utilityProvidersForm.valid]);      
     });
   
   }
