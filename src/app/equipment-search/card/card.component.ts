@@ -30,6 +30,7 @@ export class CardComponent implements OnInit {
     this.card.result = this.mySystems[0];
     this.card.userSelections = { "Outdoor unit": this.card.result.components[0].title };
     this.card.cardComponents = this.cardComponents();
+    this.card.cardConfigurations = this.cardConfigurations();
   }
 
   cardComponents() {
@@ -50,6 +51,30 @@ export class CardComponent implements OnInit {
     
     this.Object.keys(newObj).forEach((element, i) => {
       const myUniqueOptions = [...new Map(newObj[element].map((m: any) => [m.title, m])).values()];
+      newObj[element] = myUniqueOptions;
+    });
+
+    return newObj;
+  }
+
+  cardConfigurations() {
+    
+    let newObj: { [index: string]: any } = {};
+
+    this.mySystems.forEach(sys => {
+      sys.configurationOptions.forEach((comp: { type: string; value: any; }) => {
+
+        if (!newObj.hasOwnProperty(comp.type)) {
+          newObj[comp.type] = [];
+        }
+        newObj[comp.type].push(comp);
+
+      });
+
+    });
+    
+    this.Object.keys(newObj).forEach((element, i) => {
+      const myUniqueOptions = [...new Map(newObj[element].map((m: any) => [m.value, m])).values()];
       newObj[element] = myUniqueOptions;
     });
 

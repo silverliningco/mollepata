@@ -26,6 +26,13 @@
 
               </div>
             </div>
+
+            <!-- Configuration options -->
+            <div fxFlex="100" *ngFor="let cardConfiguration of Object.keys(card.cardConfigurations)">
+              {{card.cardConfigurations[cardConfiguration]|json}}
+
+            </div>
+
           </div>
           <mat-chip-list aria-label="Applied filters">
             <mat-chip disabled color="primary">{{this.getComponentByComponentType(card.result!.components, "Outdoor unit").title}}</mat-chip>

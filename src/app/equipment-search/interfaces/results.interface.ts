@@ -21,7 +21,7 @@ export interface Sku {
   export interface Card {
     result?: Result;
     cardComponents?: any[string];
-    cardConfigurations?: any[];
+    cardConfigurations?: any[string];
     userSelections?: any;
   }
   
