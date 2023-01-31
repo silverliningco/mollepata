@@ -430,14 +430,19 @@ h1, h2, h3, h4, h5, .bitter-font {
     color: white;
   }
   .rc-btn-secondary {
-    background-color: white;
-    border: 1px solid var(--rc-primary-color);
-    border-radius: 4px;
-    color: var(--rc-primary-color);
+    background-color: white !important;
+    border: 1px solid var(--rc-primary-color)!important;
+    border-radius: 4px!important;
+    color: var(--rc-primary-color)!important;
   }
   .rc-btn-secondary mat-icon {
     transform: scale(.75);
   }
+  .rc-btn-secondary-1 {
+    background-color: #e2f0ff  !important;
+    color: var(--rc-primary-color) !important;
+    margin-bottom: 0.5rem !important;
+}
 /* End Button styles */
 
 /* Start Card */

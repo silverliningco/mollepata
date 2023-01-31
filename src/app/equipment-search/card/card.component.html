@@ -74,8 +74,8 @@
     <!-- AHRI ratings -->
     <h4>AHRI Ratings</h4>
     <div fxLayout="row" fxLayoutAlign="start stretch" fxLayoutGap="12px grid">
-      <div fxFlex="50" *ngFor="let ratings of card.result!.AHRIRatings" class="ahri-ratings">
-        <div class="numbers">
+      <div fxFlex="50" *ngFor="let ratings of card.result!.AHRIRatings" class="">
+        <div class="ahri-ratings">
             <div *ngFor="let key of Object.keys(ratings)">
               <b style="padding-right: 8px;">{{key}} :</b>
               {{ratings[key]}}

@@ -111,8 +111,6 @@
   .rc-card.results .mat-card-content .ahri-ratings{
     background-color: #f7f7f7;  
     border-radius: 4px;
-  }
-  .rc-card.results .mat-card-content .ahri-ratings .numbers{
     margin-bottom: 1.5rem;
     padding: 10px;
   }

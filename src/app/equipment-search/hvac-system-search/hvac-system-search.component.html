@@ -192,97 +192,103 @@
             
             <!--- If indoor unit type is mini-split, show indoor unit design table. -->
 
-            <div *ngIf="systemDesignForm.get('indoorUnitType')!.value == 'Mini-split indoor'" fxFlex="65" fxFlex.xs="100" fxFlex.sm="70" fxFlex.md="65" fxLayoutGap="20">
+            <div *ngIf="systemDesignForm.get('indoorUnitType')!.value == 'Mini-split indoor'" fxFlex="65" fxFlex.xs="100" fxFlex.sm="70" fxFlex.md="65">
                 <div *ngIf="showButtonAddRow==true">    
-                    <button class="button-add-row" mat-button (click)="addIndoorUnit()">
-                        Add Row
-                    </button>                
+                    <div fxLayout="row column" fxLayoutAlign="end center">
+                        <button mat-button (click)="addIndoorUnit()" class="rc-btn rc-btn-secondary-1">
+                            <mat-icon>add</mat-icon> Add Row
+                        </button>   
+
+                    </div>             
                 </div>
-                <table mat-table [dataSource]="indoorUnitDataSource">
-                <ng-container matColumnDef="qty">
-                    <th class="table-header" mat-header-cell *matHeaderCellDef>Quantity</th>
-                    <td mat-cell *matCellDef="let row">
-                    <mat-form-field appearance="fill">
-                        <mat-label>Choose a quantity</mat-label>
-                        <mat-select (ngModelChange)="validateRowOnQty()" [(ngModel)]="row.qty">
-                            <mat-option value ="1">1</mat-option>
-                            <mat-option value ="2">2</mat-option>
-                            <mat-option value ="3">3</mat-option>
-                            <mat-option value ="4">4</mat-option>
-                            <mat-option value ="5">5</mat-option>
-                        </mat-select>
-                    </mat-form-field>
-                    </td>
-                </ng-container>       
-            
-                <ng-container matColumnDef="unitType">
-                    <th class="table-header" mat-header-cell *matHeaderCellDef>Unit type</th>
-                    <td mat-cell *matCellDef="let row">
-                    <mat-form-field appearance="fill">
-                        <mat-label>Choose an unit type</mat-label>
-                        <mat-select (ngModelChange)="validateRowOnUnitType()" [(ngModel)]="row.unitType">
 
-                            <mat-option value ="Mini-Split Air Handler (Full Size)">Mini-Split Air Handler (Full Size)</mat-option>
-                            <mat-option value ="Ducted mini-split Air Handler (Slim Style)">Ducted mini-split Air Handler (Slim Style)</mat-option>
-                            <mat-option value ="Floor/Ceiling Mount">Floor/Ceiling Mount</mat-option>
-                            <mat-option value ="Cassette">Cassette</mat-option>
-                            <mat-option value ="High wall">High wall</mat-option>
-                            <mat-option value ="1-Way Casette">1-Way Casette</mat-option>
+                <div class="table-overflow">                    
+                    <table mat-table [dataSource]="indoorUnitDataSource">
+                        <ng-container matColumnDef="qty">
+                            <th *matHeaderCellDef>Quantity</th>
+                            <td *matCellDef="let row" data-title="Quantity">
+                                <mat-form-field appearance="fill">
+                                    <mat-label>Choose a quantity</mat-label>
+                                    <mat-select (ngModelChange)="validateRowOnQty()" [(ngModel)]="row.qty">
+                                        <mat-option value ="1">1</mat-option>
+                                        <mat-option value ="2">2</mat-option>
+                                        <mat-option value ="3">3</mat-option>
+                                        <mat-option value ="4">4</mat-option>
+                                        <mat-option value ="5">5</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </td>
+                        </ng-container>       
+                    
+                        <ng-container matColumnDef="unitType">
+                            <th *matHeaderCellDef>Unit type</th>
+                            <td *matCellDef="let row" data-title="Unit type">
+                                <mat-form-field appearance="fill">
+                                    <mat-label>Choose an unit type</mat-label>
+                                    <mat-select (ngModelChange)="validateRowOnUnitType()" [(ngModel)]="row.unitType">
 
-                        </mat-select>
-                    </mat-form-field>
-                    </td>
-                </ng-container>
-                
-                <!-- Symbol Column -->
-                <ng-container matColumnDef="size">
-                    <th class="table-header" mat-header-cell *matHeaderCellDef>Size</th>
-                    <td mat-cell *matCellDef="let row">
-                    <mat-form-field appearance="fill">
-                        <mat-label>Choose a size</mat-label>
-                        <mat-select (ngModelChange)="validateRowOnSize()" [(ngModel)]="row.size">
-                            
-                            <mat-option value ="6000">6000</mat-option>
-                            <mat-option value ="9000">9000</mat-option>
-                            <mat-option value ="12000">12000</mat-option>
-                            <mat-option value ="18000">18000</mat-option>
-                            <mat-option value ="24000">24000</mat-option>
+                                        <mat-option value ="Mini-Split Air Handler (Full Size)">Mini-Split Air Handler (Full Size)</mat-option>
+                                        <mat-option value ="Ducted mini-split Air Handler (Slim Style)">Ducted mini-split Air Handler (Slim Style)</mat-option>
+                                        <mat-option value ="Floor/Ceiling Mount">Floor/Ceiling Mount</mat-option>
+                                        <mat-option value ="Cassette">Cassette</mat-option>
+                                        <mat-option value ="High wall">High wall</mat-option>
+                                        <mat-option value ="1-Way Casette">1-Way Casette</mat-option>
 
-                        </mat-select>
-                    </mat-form-field>
-                    </td>
-                </ng-container>  
-                
-                <ng-container matColumnDef="save">
-                    <th mat-header-cell *matHeaderCellDef>  </th>
-                    <td mat-cell *matCellDef="let i = index">
-                        <div *ngIf="showButtonSave==true">         
+                                    </mat-select>
+                                </mat-form-field>
+                            </td>
+                        </ng-container>
+                        
+                        <!-- Symbol Column -->
+                        <ng-container matColumnDef="size">
+                            <th *matHeaderCellDef>Size</th>
+                            <td *matCellDef="let row" data-title="Size">
+                                <mat-form-field appearance="fill">
+                                    <mat-label>Choose a size</mat-label>
+                                    <mat-select (ngModelChange)="validateRowOnSize()" [(ngModel)]="row.size">
+                                        
+                                        <mat-option value ="6000">6000</mat-option>
+                                        <mat-option value ="9000">9000</mat-option>
+                                        <mat-option value ="12000">12000</mat-option>
+                                        <mat-option value ="18000">18000</mat-option>
+                                        <mat-option value ="24000">24000</mat-option>
+
+                                    </mat-select>
+                                </mat-form-field>
+                            </td>
+                        </ng-container>  
+                        
+                        <ng-container matColumnDef="save">
+                            <th *matHeaderCellDef>  </th>
+                            <td *matCellDef="let i = index">
+                                <div *ngIf="showButtonSave==true">         
+                                    <button
+                                        mat-button
+                                        class="button-save"
+                                        (click)="saveData(i)">
+                                        <mat-icon matTooltip="Save information" matTooltipPosition="above">save</mat-icon>
+                                    </button>
+                                </div>
+                            </td>        
+                        </ng-container>
+                    
+                        <!-- Delete Column -->
+                        <ng-container matColumnDef="delete">
+                            <th *matHeaderCellDef>  </th>
+                            <td *matCellDef="let i = index">         
                             <button
                                 mat-button
-                                class="button-save"
-                                (click)="saveData(i)">
-                                Save
+                                class="button-remove"
+                                (click)="removeIndoorUnit(i)">
+                                <mat-icon matTooltip="Delete row" matTooltipPosition="above">delete</mat-icon>
                             </button>
-                        </div>
-                    </td>        
-                </ng-container>
-            
-                <!-- Delete Column -->
-                <ng-container matColumnDef="delete">
-                    <th mat-header-cell *matHeaderCellDef>  </th>
-                    <td mat-cell *matCellDef="let i = index">         
-                    <button
-                        mat-button
-                        class="button-remove"
-                        (click)="removeIndoorUnit(i)">
-                        Delete
-                    </button>
-                    </td>        
-                </ng-container>
-                
-                <tr mat-header-row *matHeaderRowDef="indoorUnitDisplayedColumns"></tr>
-                <tr mat-row *matRowDef="let row; columns: indoorUnitDisplayedColumns;"></tr>
-                </table>               
+                            </td>        
+                        </ng-container>
+                        
+                        <tr mat-header-row *matHeaderRowDef="indoorUnitDisplayedColumns"></tr>
+                        <tr mat-row *matRowDef="let row; columns: indoorUnitDisplayedColumns;"></tr>
+                    </table> 
+                </div>              
             </div>
 
         </div>
