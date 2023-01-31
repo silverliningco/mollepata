@@ -1,0 +1,260 @@
+/* Start Card Result Page */
+.rc-card.results {
+    margin-top: 1rem;
+    padding: 1.5rem !important;
+  }
+  .rc-card.results .model-nrs {
+    width: 100%;
+    padding-bottom: 6px;
+  }
+  .rc-card.results .mat-card-subtitle{
+    margin-bottom: 1.5rem !important;
+  }
+  @media only screen and (max-width: 767px){
+    .rc-card.results .mat-card-subtitle{
+      margin-bottom: .25rem !important;
+    }
+  }
+  ::ng-deep .rc-card.results .mat-card-header-text{
+    width: 100% !important;
+    margin: 0;
+    min-width: 98%;
+  }
+  .rc-card.results .mat-card-header .mat-card-title h3{
+    font-weight: bold;
+    font-size: 25px;
+    margin-bottom: 4px;
+    font-family: 'Bitter', serif;
+  }
+  .rc-card.results .mat-card-header .mat-card-title{
+    font-size: 12px;
+    padding-bottom: .5rem;
+  }
+  .rc-card.results .mat-card-header .mat-card-subtitle{
+    margin-bottom: 5px !important;
+  }
+  .rc-card.results .rebates-amount{
+    position: relative;
+    background-color: rgba(255, 160, 0, 0.1);
+    border-radius: 4px;
+    padding: 1rem 1rem 1.5rem 1rem !important;
+  }
+  .rc-card.results .available-rebates{
+    position: relative;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(255, 160, 0, 0.2);
+  }
+  .rc-card.results .available-rebates ul.rc-unlisted li{
+    font-size: 12px;
+    padding-left: 2rem;
+  }
+  .rc-card.results .rebate-price{
+    position: relative;
+    margin-top: 1rem;
+    color: var(--rc-warn-color);
+    text-align: center;
+    height: 100%;
+  }
+  .rc-card.results p.rc-small {
+    font-size: 10px;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #2f4f4f;
+  }
+  .rc-card.results p.outdoor-nb{
+    margin-bottom: 0;
+  }
+  .rc-card.results .rebate-price h1{
+    font-family: 'Bitter', serif !important;
+    font-size: 30px;
+    font-weight: bold;
+    margin-bottom: 0;
+  }
+
+  @media screen and (min-width: 960px) and (max-width: 1199px){
+  .rc-card.results .rebate-price h1{
+      font-size: 26px;
+    }
+  }
+  @media screen and (max-width: 959px){
+  .rc-card.results .rebate-price{
+      padding: 1rem;
+      margin-left: 10px;
+    }
+  .rc-card.results .rebate-price h1{
+      font-size: 26px;
+    }
+  }
+  @media screen and (max-width: 599px){
+  .rc-card.results .rebate-price{
+      margin-top: 10px;
+      margin-left: 0;
+    }
+  .rc-card.results .mat-card-header .mat-card-subtitle .model-nrs {
+      padding-top: .5rem;
+    }
+  }
+
+  /*Content*/
+  .rc-card.results .mat-card-content{
+      padding: .5rem 0;
+      margin-bottom: 0.5rem;
+  }
+  .rc-card.results .mat-card-content span.rc-small{
+      color: rgba(0,0,0,.54);
+  }
+    @media screen and (max-width: 599px){
+      .list-rebates{
+        margin: 1rem 0;
+      }
+    }
+  .rc-card.results .mat-card-content .ahri-ratings{
+    background-color: #f7f7f7;  
+    border-radius: 4px;
+  }
+  .rc-card.results .mat-card-content .ahri-ratings .numbers{
+    margin-bottom: 1.5rem;
+    padding: 10px;
+  }
+  .rc-unlisted{
+    list-style: none;
+    padding-inline-start: 0;
+  }
+  .rc-unlisted .mat-icon{
+    position: absolute;
+    left: 5px;
+    color: #02af09;
+  }
+  .list-accesories {
+    background-color: rgba(255, 149, 0, 0.07);
+    border-radius: 4px;
+    padding: 0 12px 16px 12px;
+  }
+  .list-accesories span.accesorie-price{
+    background-color: rgba(0, 114, 5, 0.09);
+    color: #007205;
+    border-radius: 4px;
+    padding: 2px 4px;
+    font-size: 11px;
+    margin-left: 5px;
+  }
+  .list-ahri-rating-item span, .list-detail-performance-item span {
+    font-weight: 600;
+    margin-right: 1rem;
+  }
+  .list-ahri-rating-item mat-icon.rc-co2-icon, .list-detail-performance-item mat-icon.rc-co2-icon{
+    font-size: 18px;
+    width: 14px;
+    height: 18px;
+    color: var(--rc-accent-color);
+  }
+
+  /*Card buttons*/
+  .rc-card.results .rc-detail-button {
+    background: var(--rc-warn-color);
+    color: white;
+  }
+  .rc-card.results .rc-card-button {
+      background: var(--rc-primary-color);
+      margin-right: 1rem;
+      color: white;
+  }
+
+  .rc-card.results .rc-reset-button {
+    background-color: black;
+    margin-right: 1rem;
+    margin-top: .5rem;
+    color: white;
+    font-size: 12px;
+  }
+
+  .rc-card.results .pdf-card-button {
+    background: var(--rc-warn-color);
+    margin-right: 1rem;
+    color: white;
+  }
+
+  .rc-card.results .rc-table-button {
+      background: var(--rc-accent-color);
+      margin-right: 1rem;
+      color: white;
+  }
+  .rc-card.results .mat-button-wrapper{
+      font-family: 'Raleway', sans-serif;
+      font-weight: bold;
+      color: white;
+  }
+  .rc-card.results .mat-button-wrapper mat-icon{
+      font-size: 20px;
+  }
+
+  /* Start Change style to input combo box */
+  ::ng-deep .rc-card.results .model-nrs mat-form-field{
+    display: block;
+  }
+
+  /*Style to select options in indoor unit and furnace*/
+  ::ng-deep .rc-select-multiline-option{
+    white-space: initial !important;
+    line-height: 22px !important;
+    height: auto !important;
+    padding: 0.15rem 0.5rem;
+  }
+  ::ng-deep .rc-select-multiline-option .mat-option-text, .rc-select-multiline .mat-select-value-text .mat-select-min-line{
+    font-size: 12px;
+    line-height: 24px;
+  }
+  ::ng-deep .rc-select-multiline-option .mat-option-text .price{
+    margin-left: 0.25rem;
+    background-color: rgba(0, 114, 5, 0.09);
+    padding: 0 0.25rem;
+    color: #007205;
+    font-weight: bold;
+  }
+  ::ng-deep .rc-select-multiline-option .mat-select-value{
+    white-space: normal;
+  }
+
+  /*Collapse style in results*/
+  .list-detail-performance mat-expansion-panel.mat-expansion-panel,
+  .list-ahri-rating mat-expansion-panel.mat-expansion-panel {
+    background-color: transparent;
+    box-shadow: none;
+  }
+  .list-detail-performance mat-expansion-panel.mat-expansion-panel mat-expansion-panel-header,
+  .list-ahri-rating mat-expansion-panel.mat-expansion-panel mat-expansion-panel-header{
+    padding: 0;
+    height: auto;
+  }
+  .list-detail-performance mat-expansion-panel.mat-expansion-panel .mat-expansion-panel-content .mat-expansion-panel-body,
+  .list-ahri-rating mat-expansion-panel.mat-expansion-panel  .mat-expansion-panel-content .mat-expansion-panel-body{
+    padding: 10px 0px 10px 16px;
+  }
+  @media screen and (max-width: 599px){
+    .list-detail-performance mat-expansion-panel.mat-expansion-panel mat-expansion-panel-header,
+    .list-ahri-rating mat-expansion-panel.mat-expansion-panel mat-expansion-panel-header{
+      border-bottom: 1px solid #d7d7d7;
+      border-radius: 0;
+      pointer-events: initial;
+      padding: 5px 10px;
+      background-color: #f8f8f8;
+      font-weight: bold;
+    }
+    .list-detail-performance mat-expansion-panel.mat-expansion-panel mat-expansion-panel-header .mat-expansion-indicator,
+    .list-ahri-rating mat-expansion-panel.mat-expansion-panel mat-expansion-panel-header .mat-expansion-indicator{
+      display: initial;
+      transition: display 1s ;
+    }
+  }
+  @media screen and (min-width: 600px){
+      .list-detail-performance mat-expansion-panel.mat-expansion-panel mat-expansion-panel-header,
+      .list-ahri-rating mat-expansion-panel.mat-expansion-panel mat-expansion-panel-header{
+        pointer-events: none;
+      }
+      .list-detail-performance mat-expansion-panel.mat-expansion-panel mat-expansion-panel-header .mat-expansion-indicator,
+      .list-ahri-rating mat-expansion-panel.mat-expansion-panel mat-expansion-panel-header .mat-expansion-indicator{
+        display: none;
+      }
+  }
+
+/* End Card Result Page */

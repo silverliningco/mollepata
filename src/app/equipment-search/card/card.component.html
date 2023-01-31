@@ -1,10 +1,13 @@
 <mat-card class="rc-card results">
 
-  <div fxLayout="row column" fxLayoutAlign="space-between start" fxLayoutGap="16px grid">
+  <div fxLayout="row column" fxLayoutAlign="center start" fxLayoutGap="16px grid">
     <div fxFlex="70" fxFlex.sm="100" fxFlex.xs="100">
       <mat-card-header>
         <mat-card-title>
           <h3>{{this.getComponentByComponentType(card.result!.components, "Outdoor unit").title}}</h3>
+                  
+          <p class="bitter-font">Outdoor unit: <b class="bitter-font"> {{this.getComponentByComponentType(card.result!.components, "Outdoor unit").title}}</b></p>  
+         
         </mat-card-title>
 
         <mat-card-subtitle>
@@ -12,9 +15,9 @@
 
             <div fxFlex="100" *ngFor="let cardComponent of Object.keys(card.cardComponents)">
               <div *ngIf="cardComponent != 'Outdoor unit'">
-                <span class="rc-small"><b>{{cardComponent}}</b></span>
-                <mat-form-field class="rc-select-multiline"> 
-                  <mat-select [value]="this.getComponentByComponentType(card.result!.components, cardComponent).title"  (selectionChange)="filterByID($event.value, cardComponent)">
+                <mat-form-field class="rc-select-multiline">
+                  <mat-select [value]="this.getComponentByComponentType(card.result!.components, cardComponent).title" (selectionChange)="filterByID($event.value, cardComponent)">
+                    <mat-option  class="rc-select-multiline-option" value="reset" disabled="true"> Plese select an option</mat-option>
                     <mat-option class="rc-select-multiline-option" *ngFor="let component of card.cardComponents[cardComponent]" [value]="component.title">
                       <b>{{component.title}}</b>
                     </mat-option>
@@ -24,36 +27,66 @@
               </div>
             </div>
           </div>
-
+          <mat-chip-list aria-label="Applied filters">
+            <mat-chip disabled color="primary">{{this.getComponentByComponentType(card.result!.components, "Outdoor unit").title}}</mat-chip>
+            <mat-chip disabled color="primary">{{this.getComponentByComponentType(card.result!.components, "Indoor unit").title}}</mat-chip>
+            <mat-chip disabled color="primary">{{this.getComponentByComponentType(card.result!.components, "Furnace").title}}</mat-chip>
+          </mat-chip-list>
         </mat-card-subtitle>
       </mat-card-header>
     </div>
-
-
-    <div fxFlex="30" fxFlex.xs="100" fxLayout="column" class="rc-show rc-hide-md rc-hide-sm">
-      <div fxFlex="100" class="rebate-price" fxLayout="row" fxLayoutAlign="center center">
-        <h5 class="rc-small">REBATES UP</h5>
-        <h1>{{(card.result!.availableRebateAmount| currency) || "$0.00"}}</h1>
+    <div fxFlex="30" fxFlex.sm="70" fxFlex.xs="100" fxLayout="column" class="rc-show rc-hide-md rc-hide-sm rebates-amount">
+      <div fxLayout="row column">
+        <div  fxFlex="100" class="available-rebates">
+          
+          <p class="rc-small"><b>AVAILABLE REBATES</b></p>
+          
+          <!--TODO: Available Rebates -->
+          <!--<div *ngFor="let rebates of card.result!.availableRebates">
+            {{rebates | json}}
+          </div>-->
+          <ul class="rc-unlisted">
+            <li class="ng-star-inserted">
+              <mat-icon role="img" class="mat-icon notranslate material-icons mat-icon-no-color" aria-hidden="true" data-mat-icon-type="font"> money</mat-icon> ACUpgraid 
+            </li>
+            <li class="ng-star-inserted">
+              <mat-icon role="img" class="mat-icon notranslate material-icons mat-icon-no-color" aria-hidden="true" data-mat-icon-type="font"> money</mat-icon> Mass Save Natural Gas Heating rebate 
+            </li>
+          </ul>
+        </div>
+        <div fxFlex="100" class="rebate-price" fxLayout="row" fxFlexAlign="center center">
+            <!--<div *ngFor="let rebates of card.availableRebates">
+              {{rebates | json}}
+            </div>-->
+              <div fxFlex="100">
+                <p class="rc-small"><b>REBATES UP</b></p>
+                <h1>{{(card.result!.availableRebateAmount| currency) || "$0.00"}}</h1>
+              </div>
+          </div>
       </div>
     </div>
-  </div>
+  </div> 
 
-  
+
+
+  <!-- Card Content -->  
   <mat-card-content>
-    <!--TODO: Available Rebates -->
-    <div *ngFor="let rebates of card.result!.availableRebates">
-      {{rebates | json}}
+    <!-- AHRI ratings -->
+    <h4>AHRI Ratings</h4>
+    <div fxLayout="row" fxLayoutAlign="start stretch" fxLayoutGap="12px grid">
+      <div fxFlex="50" *ngFor="let ratings of card.result!.AHRIRatings" class="ahri-ratings">
+        <div class="numbers">
+            <div *ngFor="let key of Object.keys(ratings)">
+              <b style="padding-right: 8px;">{{key}} :</b>
+              {{ratings[key]}}
+            </div>
+        </div>
+      </div>        
     </div>
-
-    <!--AHRI ratings-->
-    <div *ngFor="let ratings of card.result!.AHRIRatings" style="border: 1px solid red;">
-      
-      <div *ngFor="let key of Object.keys(ratings)">
-        {{key}}: {{ratings[key]}}
-      </div>
-    </div>
-
   </mat-card-content>
+  <!-- ./Card Content -->
+
+  <!-- Card Footer --> 
   <mat-card-actions>
     <div fxLayout="row column" fxLayoutAlign="end center" fxLayoutGap="16px grid">
       <div>
@@ -73,6 +106,6 @@
       </div>
     </div>
   </mat-card-actions>
-  <!--{{card | json}}-->
+  <!-- ./Card Footer --> 
 
 </mat-card>

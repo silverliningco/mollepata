@@ -27,7 +27,6 @@ export class CardComponent implements OnInit {
   loadCard() {
 
     // Asign first element of array to card.
-    console.log(this.mySystems[0]); 
     this.card.result = this.mySystems[0];
     this.card.userSelections = { "Outdoor unit": this.card.result.components[0].title };
     this.card.cardComponents = this.cardComponents();
@@ -105,12 +104,9 @@ export class CardComponent implements OnInit {
       if(myUpdatedOptions.length == 1 &&  this.Object.keys(this.card.userSelections).length == this.Object.keys(this.card.result!.components).length) {
         myUpdatedOptions.push({ "title": "reset", "componentType": "reset" });
       }
-
-      console.log(myOptionsToUpdate[0]);
     
       this.card.result = myOptionsToUpdate[0];
       this.card.cardComponents[selectToUpdate] = myUpdatedOptions;
-
       
     });
   }
@@ -118,7 +114,6 @@ export class CardComponent implements OnInit {
   filterByID(myUnitID: string, myUnitType: string) {
     
     let mySelectsToUpdate;
-
     if(myUnitID == "reset"){
       delete this.card.userSelections[myUnitType];
       mySelectsToUpdate = [myUnitType];
@@ -127,10 +122,6 @@ export class CardComponent implements OnInit {
       this.card.userSelections[myUnitType] = myUnitID;
       mySelectsToUpdate = this.selectsToUpdate(myUnitType);
     }
-
-    //console.log(myUnitType);
-    //console.log(mySelectsToUpdate);
-    //console.log(myOptionsToUpdate);
 
     this.updateSelections(mySelectsToUpdate);
   }
