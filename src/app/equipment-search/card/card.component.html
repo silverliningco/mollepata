@@ -13,10 +13,11 @@
         <mat-card-subtitle>
           <div fxLayout="row column" fxLayoutAlign="space-between center" class="model-nrs" fxLayoutGap="4px grid">
 
+            <!-- Components -->
             <div fxFlex="100" *ngFor="let cardComponent of Object.keys(card.cardComponents)">
               <div *ngIf="cardComponent != 'Outdoor unit'">
                 <mat-form-field class="rc-select-multiline">
-                  <mat-select [value]="this.getComponentByComponentType(card.result!.components, cardComponent).title" (selectionChange)="filterByID($event.value, cardComponent)">
+                  <mat-select [value]="this.getComponentByComponentType(card.result!.components, cardComponent).title" placeholder="{{cardComponent}}" (selectionChange)="filterByID($event.value, cardComponent)">
                     <mat-option  class="rc-select-multiline-option" value="reset" disabled="true"> Plese select an option</mat-option>
                     <mat-option class="rc-select-multiline-option" *ngFor="let component of card.cardComponents[cardComponent]" [value]="component.title">
                       <b>{{component.title}}</b>
@@ -30,7 +31,14 @@
             <!-- Configuration options -->
             <div fxFlex="100" *ngFor="let cardConfiguration of Object.keys(card.cardConfigurations)">
               {{card.cardConfigurations[cardConfiguration]|json}}
-
+              <mat-form-field class="rc-select-multiline">
+                <mat-select [value]="" (selectionChange)="filterByID($event.value, cardConfiguration)" placeholder="{{cardConfiguration}}">
+                  <mat-option  class="rc-select-multiline-option" value="reset" disabled="true"> Plese select an option</mat-option>
+                  <mat-option class="rc-select-multiline-option" *ngFor="let configuration of card.cardConfigurations[cardConfiguration]" [value]="configuration.value">
+                    <b>{{configuration.name}}</b>
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
             </div>
 
           </div>
