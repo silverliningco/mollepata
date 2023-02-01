@@ -1,4 +1,3 @@
-/* Start Card Result Page */
 .rc-card.results {
     margin-top: 1rem;
     padding: 1.5rem !important;
@@ -97,8 +96,8 @@
 
   /*Content*/
   .rc-card.results .mat-card-content{
-      padding: .5rem 0;
-      margin-bottom: 0.5rem;
+      padding: .5rem 0 0 0;
+      margin-bottom: 0rem;
   }
   .rc-card.results .mat-card-content span.rc-small{
       color: rgba(0,0,0,.54);
@@ -111,8 +110,8 @@
   .rc-card.results .mat-card-content .ahri-ratings{
     background-color: #f7f7f7;  
     border-radius: 4px;
-    margin-bottom: 1.5rem;
     padding: 10px;
+    height: 90%;
   }
   .rc-unlisted{
     list-style: none;
@@ -154,27 +153,12 @@
   }
   .rc-card.results .rc-card-button {
       background: var(--rc-primary-color);
-      margin-right: 1rem;
+      margin-right: .5rem;
       color: white;
-  }
-
-  .rc-card.results .rc-reset-button {
-    background-color: black;
-    margin-right: 1rem;
-    margin-top: .5rem;
-    color: white;
-    font-size: 12px;
-  }
-
-  .rc-card.results .pdf-card-button {
-    background: var(--rc-warn-color);
-    margin-right: 1rem;
-    color: white;
   }
 
   .rc-card.results .rc-table-button {
       background: var(--rc-accent-color);
-      margin-right: 1rem;
       color: white;
   }
   .rc-card.results .mat-button-wrapper{
@@ -212,47 +196,3 @@
   ::ng-deep .rc-select-multiline-option .mat-select-value{
     white-space: normal;
   }
-
-  /*Collapse style in results*/
-  .list-detail-performance mat-expansion-panel.mat-expansion-panel,
-  .list-ahri-rating mat-expansion-panel.mat-expansion-panel {
-    background-color: transparent;
-    box-shadow: none;
-  }
-  .list-detail-performance mat-expansion-panel.mat-expansion-panel mat-expansion-panel-header,
-  .list-ahri-rating mat-expansion-panel.mat-expansion-panel mat-expansion-panel-header{
-    padding: 0;
-    height: auto;
-  }
-  .list-detail-performance mat-expansion-panel.mat-expansion-panel .mat-expansion-panel-content .mat-expansion-panel-body,
-  .list-ahri-rating mat-expansion-panel.mat-expansion-panel  .mat-expansion-panel-content .mat-expansion-panel-body{
-    padding: 10px 0px 10px 16px;
-  }
-  @media screen and (max-width: 599px){
-    .list-detail-performance mat-expansion-panel.mat-expansion-panel mat-expansion-panel-header,
-    .list-ahri-rating mat-expansion-panel.mat-expansion-panel mat-expansion-panel-header{
-      border-bottom: 1px solid #d7d7d7;
-      border-radius: 0;
-      pointer-events: initial;
-      padding: 5px 10px;
-      background-color: #f8f8f8;
-      font-weight: bold;
-    }
-    .list-detail-performance mat-expansion-panel.mat-expansion-panel mat-expansion-panel-header .mat-expansion-indicator,
-    .list-ahri-rating mat-expansion-panel.mat-expansion-panel mat-expansion-panel-header .mat-expansion-indicator{
-      display: initial;
-      transition: display 1s ;
-    }
-  }
-  @media screen and (min-width: 600px){
-      .list-detail-performance mat-expansion-panel.mat-expansion-panel mat-expansion-panel-header,
-      .list-ahri-rating mat-expansion-panel.mat-expansion-panel mat-expansion-panel-header{
-        pointer-events: none;
-      }
-      .list-detail-performance mat-expansion-panel.mat-expansion-panel mat-expansion-panel-header .mat-expansion-indicator,
-      .list-ahri-rating mat-expansion-panel.mat-expansion-panel mat-expansion-panel-header .mat-expansion-indicator{
-        display: none;
-      }
-  }
-
-/* End Card Result Page */
