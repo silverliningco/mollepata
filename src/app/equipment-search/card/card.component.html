@@ -51,8 +51,8 @@
       </mat-card-header>
     </div>
     <div fxFlex="30" fxFlex.sm="70" fxFlex.xs="100" fxLayout="column" class="rc-show rc-hide-md rc-hide-sm rebates-amount">
-      <div fxLayout="row column">
-        <div  fxFlex="100" class="available-rebates">
+      <div fxLayout="column" fxLayoutAlign="space-between center" fxLayout.sm="row" fxLayoutAlign.sm="space-between center"   fxLayout.xs="column">
+        <div  fxFlex="100" fxFlex.sm="60" fxFlex.xs="100" class="available-rebates">
           
           <p class="rc-small"><b>AVAILABLE REBATES</b></p>
           
@@ -69,7 +69,7 @@
             </li>
           </ul>
         </div>
-        <div fxFlex="100" class="rebate-price" fxLayout="row" fxFlexAlign="center center">
+        <div fxFlex="100" fxFlex.sm="40" fxFlex.xs="100" class="rebate-price" fxLayout="row" fxFlexAlign="center center">
             <!--<div *ngFor="let rebates of card.availableRebates">
               {{rebates | json}}
             </div>-->
@@ -88,8 +88,8 @@
   <mat-card-content>
     <!-- AHRI ratings -->
     <h4>AHRI Ratings</h4>
-    <div fxLayout="row" fxLayoutAlign="start stretch" fxLayoutGap="12px grid">
-      <div fxFlex="50" *ngFor="let ratings of card.result!.AHRIRatings" class="">
+    <div fxLayout="row column" fxLayoutAlign="start stretch" fxLayoutAlign.sm="center stretch" fxLayoutAlign.xs="center center" fxLayoutGap="12px grid">
+      <div fxFlex="50" fxFlex.sm="50" fxFlex.xs="100" *ngFor="let ratings of card.result!.AHRIRatings" class="">
         <div class="ahri-ratings">
             <div *ngFor="let key of Object.keys(ratings)">
               <b style="padding-right: 8px;">{{key}} :</b>
@@ -103,21 +103,21 @@
 
   <!-- Card Footer --> 
   <mat-card-actions>
-    <div fxLayout="row column" fxLayoutAlign="end center" fxLayoutGap="16px grid">
+    <div fxLayout="row column" fxLayoutAlign="end center" fxLayoutAlign.xs="center center" fxLayoutGap="16px grid">
       <div>
-        <button mat-button class="rc-table-button" fxLayout fxLayoutAlign="center center" (click)="openDialog()">
+        <button mat-button class="rc-card-btn accent" fxLayout fxLayoutAlign="center center" (click)="openDialog()">
           VIEW IN TABLE
           <mat-icon> table_chart</mat-icon>
         </button>
       </div>
       <div>
-        <button mat-button class="rc-detail-button" fxLayout fxLayoutAlign="center center"  target="_blank">
+        <button mat-button class="rc-card-btn primary" fxLayout fxLayoutAlign="center center"  target="_blank">
           VIEW DETAIL
           <mat-icon>search</mat-icon>
         </button>
       </div>
       <div>
-        <button mat-button class="rc-card-button">ADD TO CART <mat-icon>add_shopping_cart</mat-icon></button>
+        <button mat-button class="rc-card-btn warn">ADD TO CART <mat-icon>add_shopping_cart</mat-icon></button>
       </div>
     </div>
   </mat-card-actions>

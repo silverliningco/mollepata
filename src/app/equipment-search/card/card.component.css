@@ -42,6 +42,13 @@
     position: relative;
     padding-bottom: 1rem;
     border-bottom: 1px solid rgba(255, 160, 0, 0.2);
+    border-right:none;
+  }
+  @media screen and (min-width: 600px) and (max-width:959px){
+    .rc-card.results .available-rebates{
+      border-bottom: none;
+      border-right: 1px solid rgba(255, 160, 0, 0.2);
+    }
   }
   .rc-card.results .available-rebates ul.rc-unlisted li{
     font-size: 12px;
@@ -98,6 +105,7 @@
   .rc-card.results .mat-card-content{
       padding: .5rem 0 0 0;
       margin-bottom: 0rem;
+      margin-top: 1rem!important;
   }
   .rc-card.results .mat-card-content span.rc-small{
       color: rgba(0,0,0,.54);
@@ -147,27 +155,21 @@
   }
 
   /*Card buttons*/
-  .rc-card.results .rc-detail-button {
-    background: var(--rc-warn-color);
+  .rc-card.results .rc-card-btn{
     color: white;
   }
-  .rc-card.results .rc-card-button {
+  .rc-card.results .rc-card-btn.warn {
+    background: var(--rc-warn-color);
+  }
+  .rc-card.results .rc-card-btn.primary {
       background: var(--rc-primary-color);
-      margin-right: .5rem;
-      color: white;
   }
-
-  .rc-card.results .rc-table-button {
+  .rc-card.results .rc-card-btn.accent {
       background: var(--rc-accent-color);
-      color: white;
   }
-  .rc-card.results .mat-button-wrapper{
-      font-family: 'Raleway', sans-serif;
-      font-weight: bold;
-      color: white;
-  }
-  .rc-card.results .mat-button-wrapper mat-icon{
-      font-size: 20px;
+  /*Card Actions*/
+  .rc-card.results mat-card-actions{
+    padding-right: .5rem;
   }
 
   /* Start Change style to input combo box */
@@ -176,6 +178,7 @@
   }
 
   /*Style to select options in indoor unit and furnace*/
+  /*no used yet*/
   ::ng-deep .rc-select-multiline-option{
     white-space: initial !important;
     line-height: 22px !important;
