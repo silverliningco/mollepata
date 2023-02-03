@@ -18,3 +18,11 @@
     color: var(--rc-primary-color);    
     font-size: 14px;
   }
+
+  
+  
+  .messageValidation {
+    color: white;
+    font-size: 14px;
+    background-color: #FFA000;
+  }

@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormGroup, Validators, FormControl, FormArray} from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { MatStepper, StepperOrientation } from '@angular/material/stepper';
@@ -8,6 +8,12 @@ import {MatTableDataSource} from '@angular/material/table';
 
 import { EquipmentSearch, msMultiZoneType } from '../interfaces/equipment-search.interface'
 
+export interface PeriodicElement {
+  qty: string;  
+  unitType: string;
+  size: string;
+  isEditable: boolean;
+}
 
 @Component({
   selector: 'hvac-system-search',
@@ -16,6 +22,15 @@ import { EquipmentSearch, msMultiZoneType } from '../interfaces/equipment-search
 })
 
 export class HVACSystemSearchComponent implements OnInit {
+
+
+  displayedColumns: string[] = ['qty', 'unitType', 'size', 'action'];
+  dataSource = new MatTableDataSource<any>();  
+
+  msMultiZoneTypeForm!: FormGroup;
+  isEditableNew: boolean = true;
+  auxArrayData: Array<any> = [];
+  validation: boolean = true;
 
   @ViewChild('stepper')
   stepper!: MatStepper;
@@ -26,30 +41,20 @@ export class HVACSystemSearchComponent implements OnInit {
   // equipmentSearchData used for payload.
   myData: EquipmentSearch = {};
   payload!: EquipmentSearch;
+  
+  MySubmitValidation: any = {location:false,utilityProviders:false,dwellingInfo:false,heatedCooled:false,systemSize:false,systemDesign:false};
+
  
-  data: any = [];
-  showButtonAddRow: boolean = true;
-  showButtonSave: boolean = false;
-  MySubmitValidation: any = {location:false,utilityProviders:false,dwellingInfo:false,heatedCooled:false,systemSize:false};
-
-  // dataSource for mini split system design table.
-  indoorUnitDataSource = new MatTableDataSource(); 
-
-  // Columns for indoor unit table.
-  indoorUnitDisplayedColumns: string[] = [    
-    'qty',    
-    'unitType',
-    'size',   
-    'save', 
-    'delete'
-  ];
-
   constructor(
     private fb: FormBuilder,
+    private _formBuilder: FormBuilder,
     private _snackBar: MatSnackBar 
   ) { }
 
   ngOnInit(): void {
+    this.msMultiZoneTypeForm = this._formBuilder.group({
+      VORows: this._formBuilder.array([])
+    });
 
     // Heated/cooled form group.
     this.heatedCooledForm = this.fb.group({
@@ -75,6 +80,8 @@ export class HVACSystemSearchComponent implements OnInit {
       /*furnaceConfiguration: ['', Validators.required],*/
     });
 
+    //add row to the beginning of the table
+    this.AddNewRow();
     
     this.heatedCooledForm.valueChanges.subscribe(selectedValue => {
       this.myData.heatedCooled = selectedValue;
@@ -87,7 +94,18 @@ export class HVACSystemSearchComponent implements OnInit {
     });
 
     this.systemDesignForm.valueChanges.subscribe(selectedValue => {
+      let mymsMultizoneType:any = [];
+      if(this.myData.systemDesign?.msMultiZoneType){
+        mymsMultizoneType = [...this.myData.systemDesign?.msMultiZoneType!];
+      }
+
       this.myData.systemDesign = selectedValue;
+
+      if(mymsMultizoneType.length > 0){
+        this.myData.systemDesign!.msMultiZoneType = mymsMultizoneType
+      }
+
+      this.MySubmitValidation["systemDesign"] = this.systemDesignForm.valid;
     });
    
   }
@@ -126,49 +144,12 @@ export class HVACSystemSearchComponent implements OnInit {
   }
 
 
-  // function to add a row to table indoor units.
-  addIndoorUnit() {
-    const newRow: msMultiZoneType = {
-      qty: 0,    
-      unitType: "",
-      size:0      
-    };
-
-    this.data.push(newRow);    
-    this.indoorUnitDataSource.data = this.data;
-
-    this.showButtonSave = false;
-    this.showButtonAddRow = false;
-  } 
-
-  //function to add row to payload
-  saveData(index: number) {      
-    if(!this.myData.systemDesign?.msMultiZoneType){
-      this.myData.systemDesign!.msMultiZoneType = [];
-    }
-
-    const newRow: msMultiZoneType = {
-      qty: this.data[index]['qty'],    
-      unitType: this.data[index]['unitType'],
-      size: this.data[index]['size']     
-    };    
-
-    //function to validate quantity and size
-    if((!this.VerifyQty()) || (!this.VerifySize())) 
-    {
-      let message = 'The amount must be less than 6 and not more than 135% of cooling tons';
-      this.OpenSnackBar(message);
-      return
-    }    
-    
-    this.myData.systemDesign?.msMultiZoneType?.push(newRow);    
-    this.indoorUnitDataSource.data = this.myData.systemDesign?.msMultiZoneType!;
-  }
-
+ 
+  //function that verify the addition of the colum quantity
   VerifyQty() {    
-    let sum = 0;
-    for(let k=0; k< this.data.length; k++){        
-      sum = sum + Number(this.data[k]['qty']);         
+    let sum = 0;    
+    for(let k=0; k< this.dataSource.data.length; k++){        
+      sum = sum + Number(this.dataSource.data[k].value['qty']);         
     }
     
     if(sum <= 5) {
@@ -180,79 +161,187 @@ export class HVACSystemSearchComponent implements OnInit {
     }    
   }
 
+  //function that verify the colum size
   VerifySize(){
     let sum = 0;
-    for(let k=0; k< this.data.length; k++){        
-      sum = sum + Number(this.data[k]['qty']) * Number(this.data[k]['size']);         
+    for(let k=0; k< this.dataSource.data.length; k++){        
+      sum = sum + Number(this.dataSource.data[k].value['qty']) * Number(this.dataSource.data[k].value['size']);         
     }    
-
-    let coolingTons = this.myData.systemSize?.coolingTons;
+    
+    let coolingTons = this.myData.systemSize?.coolingTons;    
     let product = 1.35 * Number(coolingTons) * 12000;
-    if (sum < product){
+
+    if (sum < product){      
       return true;
-    } else {
+    } else {      
       return false;
     }
-  }
-
-  validateRowOnQty() {      
-      for(let k=0; k< this.data.length; k++){        
-        if(this.data[k]['unitType']=='' || this.data[k]['size']==0)
-        {               
-          this.showButtonSave = false;               
-        }
-        else
-        {
-          this.showButtonSave = true; 
-          this.showButtonAddRow = true;                   
-        }      
-      }
-
-  }
-
-  validateRowOnUnitType() {      
-      for(let k=0; k< this.data.length; k++){        
-        if(this.data[k]['qty']==0 || this.data[k]['size']==0)
-        {               
-          this.showButtonSave = false;              
-        }
-        else
-        {
-          this.showButtonSave = true; 
-          this.showButtonAddRow = true;                   
-        }      
-      }
-
-  }
-
-  validateRowOnSize() {      
-      for(let k=0; k< this.data.length; k++){        
-        if(this.data[k]['qty']==0 || this.data[k]['unitType']=='')
-        {               
-          this.showButtonSave = false;               
-        }
-        else
-        {
-          this.showButtonSave = true; 
-          this.showButtonAddRow = true;                  
-        }      
-      }
-
-  }  
+  } 
 
   OpenSnackBar(mssg: string) {    
     this._snackBar.open(mssg, 'Ok', {
       duration: 10000
     });
+  }  
+
+  //-------------------new proyect--------------------
+  AddNewRow() {    
+    const control = this.msMultiZoneTypeForm.get('VORows') as FormArray;
+    control.insert(0,this.initiatemsMultiZoneTypeForm());
+    this.dataSource = new MatTableDataSource(control.controls);       
   }
- 
-  // function to remove a row from table indoor units.
-  removeIndoorUnit(index: number) {
-    this.data.splice(index, 1);
-    this.indoorUnitDataSource.data = this.data; 
 
-    this.myData.systemDesign?.msMultiZoneType?.splice(index, 1);    
+  SaveVO(msMultiZoneTypeFormElement:any, i:any) {  
+    //validate if the row to add has the fields filled    
+    if(msMultiZoneTypeFormElement.get('VORows').value[i]['qty'] == '' || msMultiZoneTypeFormElement.get('VORows').value[i]['unitType'] == '' || msMultiZoneTypeFormElement.get('VORows').value[i]['size'] == '')
+    {
+      this.validation = false;
+      return
+    }
+    else
+    { this.validation = true; }
+    //validate the fields qty and size
+    if((!this.VerifyQty()) || (!this.VerifySize())) 
+    {
+      let message = 'The amount must be less than 6 and not more than 135% of cooling tons';
+      this.OpenSnackBar(message);
+      return
+    }
+
+    if(!this.myData.systemDesign?.msMultiZoneType){
+      this.myData.systemDesign!.msMultiZoneType = [];
+    }
+    //put the fields not to edit
+    msMultiZoneTypeFormElement.get('VORows').at(i).get('isEditable').patchValue(true);
+    //validate if the payload is empty
+    if(this.myData.systemDesign?.msMultiZoneType.length == 0)
+    {
+      const newRow: msMultiZoneType = {
+        qty: msMultiZoneTypeFormElement.get('VORows').value[i]['qty'],    
+        unitType: msMultiZoneTypeFormElement.get('VORows').value[i]['unitType'],
+        size: msMultiZoneTypeFormElement.get('VORows').value[i]['size']         
+      };
+      
+      this.myData.systemDesign?.msMultiZoneType?.push(newRow);
+
+    }
+    //validate if the payload has elements
+    if(Number(this.myData.systemDesign?.msMultiZoneType.length) > 0)
+    {      
+      this.myData.systemDesign!.msMultiZoneType = [];      
+      for(let k=0; k< this.dataSource.data.length; k++){        
+        const newRow: msMultiZoneType = {
+          qty: msMultiZoneTypeFormElement.get('VORows').value[k]['qty'],    
+          unitType: msMultiZoneTypeFormElement.get('VORows').value[k]['unitType'],
+          size: msMultiZoneTypeFormElement.get('VORows').value[k]['size']         
+        };
+
+        this.myData.systemDesign?.msMultiZoneType?.push(newRow);
+      }      
+    }    
   }
 
+  initiatemsMultiZoneTypeForm(): FormGroup {
+    return this.fb.group({      
+      qty: new FormControl(''),
+      unitType: new FormControl(''),
+      size: new FormControl(''),
+      action: new FormControl('newRecord'),
+      isEditable: new FormControl(false),
+      isNewRow: new FormControl(true),
+    });
+  }
 
+  CancelSVO(i:any) {
+    //clean the records of the auxiliary array auxArrayData
+    this.auxArrayData = [];
+    let len = this.dataSource.data.length;    
+    for(let k=0; k< len; k++){      
+        const newRow1 = {
+            qty: this.dataSource.data[k].value['qty'],    
+            unitType: this.dataSource.data[k].value['unitType'],
+            size: this.dataSource.data[k].value['size'],  
+            action: this.dataSource.data[k].value['action'],
+            isEditable: this.dataSource.data[k].value['isEditable'],
+            isNewRow: this.dataSource.data[k].value['isNewRow'],               
+            }              
+            this.auxArrayData.push(newRow1);       
+    }
+    //delete the record of the auxiliary array auxArrayData
+    this.auxArrayData.splice(i, 1);
+    //clean the data source
+    this.dataSource.data = [];
+    //assign the elements of the array auxArrayData to the data source
+    const ELEMENT_DATA: PeriodicElement[] = this.auxArrayData;
+
+    this.msMultiZoneTypeForm = this.fb.group({
+      VORows: this.fb.array(ELEMENT_DATA.map(val => this.fb.group({        
+        qty: new FormControl(val.qty),
+        unitType: new FormControl(val.unitType),
+        size: new FormControl(val.size),
+        action: new FormControl('existingRecord'),
+        isEditable: new FormControl(val.isEditable),
+        isNewRow: new FormControl(false),
+      })
+      ))
+    });
+    this.dataSource = new MatTableDataSource((this.msMultiZoneTypeForm.get('VORows') as FormArray).controls);
+  }
+
+  EditSVO(msMultiZoneTypeFormElement:any, i:any) {    
+    msMultiZoneTypeFormElement.get('VORows').at(i).get('isEditable').patchValue(false);
+  }
+
+  RemoveVO(i:any) {      
+    //clean array records of the auxiliar auxArrayData
+    this.auxArrayData = [];
+    //pass the datasource records to the auxiliar auxArrayData
+    let len = this.dataSource.data.length;    
+    for(let k=0; k< len; k++){      
+        const newRow1 = {
+            qty: this.dataSource.data[k].value['qty'],    
+            unitType: this.dataSource.data[k].value['unitType'],
+            size: this.dataSource.data[k].value['size'], 
+            action: this.dataSource.data[k].value['action'],
+            isEditable: this.dataSource.data[k].value['isEditable'],
+            isNewRow: this.dataSource.data[k].value['isNewRow'],
+            }              
+            this.auxArrayData.push(newRow1);       
+    }       
+    //determinamos el nro de campos isEditable = false
+    let sumIsEditable = 0;
+    for(let k=0; k< this.auxArrayData.length; k++){ 
+      if(this.auxArrayData[k]['isEditable'] == false)
+      {
+        sumIsEditable = sumIsEditable + 1;
+      }
+    }
+    //remove the record of the payload according to its index
+    if(sumIsEditable == 0)
+    {
+      this.myData.systemDesign?.msMultiZoneType?.splice(i, 1);
+    }
+    else
+    {
+      this.myData.systemDesign?.msMultiZoneType?.splice(i-sumIsEditable, 1);
+    }
+    //delete the record of the auxiliar auxArrayData  aqui debemos aumentar codigo
+    this.auxArrayData.splice(i, 1); 
+    //clean the dataSource    
+    this.dataSource.data = [];  
+    //assign the elements of the array auxArrayData to the data source
+    const ELEMENT_DATA: PeriodicElement[] = this.auxArrayData;
+    this.msMultiZoneTypeForm = this.fb.group({
+      VORows: this.fb.array(ELEMENT_DATA.map(val => this.fb.group({        
+        qty: new FormControl(val.qty),
+        unitType: new FormControl(val.unitType),
+        size: new FormControl(val.size),
+        action: new FormControl('existingRecord'),        
+        isEditable: new FormControl(val.isEditable), //false
+        isNewRow: new FormControl(false),  //
+      })
+      ))
+    });
+    this.dataSource = new MatTableDataSource((this.msMultiZoneTypeForm.get('VORows') as FormArray).controls);        
+  }
 }
