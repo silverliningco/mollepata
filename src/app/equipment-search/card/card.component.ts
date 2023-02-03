@@ -1,5 +1,4 @@
 import { Component, Input, OnInit } from '@angular/core';
-
 import { Card, Result } from '../interfaces/results.interface'
 
 @Component({
@@ -15,6 +14,8 @@ export class CardComponent implements OnInit {
   @Input() mySystems!: Result[];
   card: Card = {}; 
 
+  firstSelection!: string;
+
   //pass Object to template, to iterate object keys using *ngFor (AHRI Ratings)
   Object = Object;
 
@@ -25,54 +26,78 @@ export class CardComponent implements OnInit {
   }
 
   loadCard() {
-
     // Asign first element of array to card.
     this.card.result = this.mySystems[0];
     this.card.userSelections = { "Outdoor unit": this.card.result.components[0].title };
     this.card.cardComponents = this.cardComponents();
     this.card.cardConfigurations = this.cardConfigurations();
+    console.log( this.card);
   }
 
+  // Load all aplicable components grouped by component type for card. 
   cardComponents() {
     
-    let newObj: { [index: string]: any } = {};
+    let myComponents: { [index: string]: any } = {};
 
     this.mySystems.forEach(sys => {
       sys.components.forEach((comp: { componentType: string; title: any; }) => {
 
-        if (!newObj.hasOwnProperty(comp.componentType)) {
-          newObj[comp.componentType] = [];
+        if (!myComponents.hasOwnProperty(comp.componentType)) {
+          myComponents[comp.componentType] = [];
         }
-        newObj[comp.componentType].push(comp);
+        myComponents[comp.componentType].push(comp);
 
       });
 
     });
     
-    this.Object.keys(newObj).forEach((element, i) => {
-      const myUniqueOptions = [...new Map(newObj[element].map((m: any) => [m.title, m])).values()];
-      newObj[element] = myUniqueOptions;
+    // Remove duplicated components that has same title.
+    this.Object.keys(myComponents).forEach((element, i) => {
+      const myUniqueOptions = [...new Map(myComponents[element].map((m: any) => [m.title, m])).values()];
+      myComponents[element] = myUniqueOptions;
     });
 
-    return newObj;
+    return myComponents;
   }
 
+  // Load all aplicable configuration options grouped by type for card. 
   cardConfigurations() {
     
+
     let newObj: { [index: string]: any } = {};
-
+    // buscar en el los sistemas los que tengan  los mismos componentes y  agregar los configuration options
     this.mySystems.forEach(sys => {
-      sys.configurationOptions.forEach((comp: { type: string; value: any; }) => {
+      let countOks = 0;
+      sys.components.forEach((component: any) => {
+        
+        this.card.result?.components.forEach(selection => {
 
-        if (!newObj.hasOwnProperty(comp.type)) {
-          newObj[comp.type] = [];
-        }
-        newObj[comp.type].push(comp);
+          if (component.componentType == selection.componentType) {
 
+            if (selection.title == component.title) {
+
+              countOks++
+              if (this.card.result?.components.length == countOks) {
+               
+                sys.configurationOptions.forEach((comp: { type: string; value: any; }) => {
+
+                  if (!newObj.hasOwnProperty(comp.type)) {
+                    newObj[comp.type] = [];
+                  }
+                  newObj[comp.type].push(comp);
+          
+                });
+                
+              }
+            }
+          }
+      
+        });
       });
-
     });
-    
+
+
+    // Remove duplicated configuration option that has same value.
     this.Object.keys(newObj).forEach((element, i) => {
       const myUniqueOptions = [...new Map(newObj[element].map((m: any) => [m.value, m])).values()];
       newObj[element] = myUniqueOptions;
@@ -81,24 +106,41 @@ export class CardComponent implements OnInit {
     return newObj;
   }
 
-  selectsToUpdate(curentSelection: string) :string[] {
+  // Load array of strings that are applicable to update.  
+  // load component names that are diferent to first selection and Outdoor unit.
+  selectsToUpdate() :string[] {
+ 
+    let toUpdate: string[] = [];
     let myComponentTypes = this.card.result!.components.map(a => a.componentType);
-    let toUpdate: string[] = myComponentTypes.filter(componentType => componentType !== curentSelection && componentType !== 'Outdoor unit');
+    toUpdate = myComponentTypes.filter(componentType => componentType !== this.firstSelection && componentType !== 'Outdoor unit')
+    
+    return toUpdate;
+  }
+  
+  // array of selects that the user has not selected.
+  selectsToReset(currentSelection: string){
+    let toUpdate: string[] = [];
+    let myComponentTypes = this.card.result!.components.map(a => a.componentType);
+    toUpdate = myComponentTypes.filter(componentType => componentType !== currentSelection && componentType !== 'Outdoor unit')
     return toUpdate;
   }
 
+  //  Return systems that apply  user selections
   optionsToUpdate() {
+    
     let myCombinedCombinations: Result[] = [];
+    const myUserSelections: string[] = this.Object.keys(this.card.userSelections);
+
     this.mySystems.forEach(sys => {
       let countOks = 0;
       sys.components.forEach((component: any) => {
-        this.Object.keys(this.card.userSelections).forEach(selection => {
+        myUserSelections.forEach(selection => {
 
           if (component.componentType == selection) {
             if (this.card.userSelections[selection] == component.title) {
 
               countOks++
-              if (this.Object.keys(this.card.userSelections).length == countOks) {
+              if (myUserSelections.length == countOks) {
                 myCombinedCombinations.push(sys);
               }
             }
@@ -107,7 +149,7 @@ export class CardComponent implements OnInit {
         });
       });
     });
-
+    
     return myCombinedCombinations;
   }
   
@@ -115,10 +157,26 @@ export class CardComponent implements OnInit {
   getComponentByComponentType(components: any[], componentType:string) {
     return components.filter((c:any) => c.componentType == componentType)[0];
   }
-  
-  updateSelections( mySelectsToUpdate: string[]){
+
+  updateSelections(  currentSelection :string){
+
+    let mySelectsToUpdate: string[] = this.selectsToUpdate();
     let myUpdatedOptions: any[] = [];
+
+    // Systems matching user selections
     let myOptionsToUpdate = this.optionsToUpdate();
+
+    if(myOptionsToUpdate.length == 0 ){
+
+      let selectToReset = this.selectsToReset(currentSelection)[0];// By the moment this always return the first element of array 
+      if(confirm("There are no "+selectToReset+"s that apply to your selected "+currentSelection+". \n Do you want us to look for "+selectToReset+"s that apply?")){
+        
+          delete this.card.userSelections[selectToReset]
+          mySelectsToUpdate = this.selectsToReset(currentSelection);
+   
+          myOptionsToUpdate = this.optionsToUpdate();
+      }
+    }
 
     mySelectsToUpdate.forEach(selectToUpdate => {
       
@@ -126,29 +184,24 @@ export class CardComponent implements OnInit {
         myUpdatedOptions.push(this.getComponentByComponentType(optionToUpdate.components,selectToUpdate));
       });
 
-      if(myUpdatedOptions.length == 1 &&  this.Object.keys(this.card.userSelections).length == this.Object.keys(this.card.result!.components).length) {
-        myUpdatedOptions.push({ "title": "reset", "componentType": "reset" });
-      }
-    
       this.card.result = myOptionsToUpdate[0];
       this.card.cardComponents[selectToUpdate] = myUpdatedOptions;
-      
+      this.card.cardConfigurations = this.cardConfigurations();
     });
+
   }
 
   filterByID(myUnitID: string, myUnitType: string) {
-    
-    let mySelectsToUpdate;
-    if(myUnitID == "reset"){
-      delete this.card.userSelections[myUnitType];
-      mySelectsToUpdate = [myUnitType];
-    } else { 
-      // user selection
-      this.card.userSelections[myUnitType] = myUnitID;
-      mySelectsToUpdate = this.selectsToUpdate(myUnitType);
+   
+    // update this variable only one time.
+    if(!this.firstSelection){
+      this.firstSelection = myUnitType;
     }
+    
+    // user selection
+    this.card.userSelections[myUnitType] = myUnitID;
 
-    this.updateSelections(mySelectsToUpdate);
+    this.updateSelections(myUnitType);
   }
 
   openDialog() {

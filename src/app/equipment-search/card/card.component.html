@@ -30,10 +30,8 @@
 
             <!-- Configuration options -->
             <div fxFlex="100" *ngFor="let cardConfiguration of Object.keys(card.cardConfigurations)">
-              {{card.cardConfigurations[cardConfiguration]|json}}
               <mat-form-field class="rc-select-multiline">
                 <mat-select [value]="" (selectionChange)="filterByID($event.value, cardConfiguration)" placeholder="{{cardConfiguration}}">
-                  <mat-option  class="rc-select-multiline-option" value="reset" disabled="true"> Plese select an option</mat-option>
                   <mat-option class="rc-select-multiline-option" *ngFor="let configuration of card.cardConfigurations[cardConfiguration]" [value]="configuration.value">
                     <b>{{configuration.name}}</b>
                   </mat-option>
