@@ -2,7 +2,7 @@
 <mat-stepper #stepper linear (selectionChange)="tabChange($event)">
 
     <!--- Step 1: Location. -->
-    <mat-step>
+    <mat-step [completed]="MySubmitValidation['location']">
         <ng-template matStepLabel>Location</ng-template>
 
         <app-location (stateChange)="setNewState( $event )"></app-location>
@@ -17,7 +17,7 @@
     </mat-step>
  
     <!--- Step 2: Utility providers. -->
-    <mat-step>
+    <mat-step [completed]="MySubmitValidation['utilityProviders']">
         <ng-template matStepLabel>Utility providers</ng-template>
 
         <app-utility-providers [state]= "myData.state!" (utilityProvidersChange)="setNewUtilityProviders( $event )"></app-utility-providers>
@@ -33,7 +33,7 @@
     </mat-step>
   
     <!--- Step 3: Dwelling info. -->
-    <mat-step>
+    <mat-step [completed]="MySubmitValidation['dwellingInfo']">
         <ng-template matStepLabel>Dwelling Info</ng-template>
 
         <!--Title-->
@@ -51,7 +51,7 @@
     </mat-step>
 
     <!--- Step 4: Heated / Cooled. -->
-    <mat-step>
+    <mat-step [completed]="MySubmitValidation['heatedCooled']">
         <ng-template matStepLabel>Heated - Cooled</ng-template>
 
         <!--Title-->
@@ -86,7 +86,7 @@
     </mat-step>
     
     <!--- Step 5: System size. -->
-    <mat-step>
+    <mat-step [completed]="MySubmitValidation['systemSize']">
         <ng-template matStepLabel>System Size</ng-template>
 
         <!--Title-->
@@ -134,8 +134,7 @@
     </mat-step>
 
     <!--- Step 6: System design. -->
-    <mat-step>
-
+    <mat-step [completed]="matStepSystemDesignCompleted || MySubmitValidation['systemDesign']">
         <ng-template matStepLabel>System Design</ng-template>
 
         <!-- note for show all results -->
@@ -143,7 +142,7 @@
             <div fxFlex="50" fxFlex.sm="70" fxFlex.xs="100" class="rc-note">
                 <div fxLayout="row column" fxLayoutAlign="space-between center" >
                     <p fxFlex="60" fxFlex.xs="100" fxflex.sm="80" class="rc-small"> <b>Note: </b><br>If you want to see all the combinations </p>
-                    <button fxFlex="40" fxFlex.xs="100" fxflex.sm="80" type="button" mat-raised-button color="primary" matStepperNext matStepperNext>Click here!</button>
+                    <button fxFlex="40" fxFlex.xs="100" fxflex.sm="80" mat-raised-button color="primary" (click)="allCombinations()" matStepperNext>Click here!</button>
                 </div>
             </div>
         </div>

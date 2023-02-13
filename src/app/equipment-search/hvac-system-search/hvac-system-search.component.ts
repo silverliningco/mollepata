@@ -31,6 +31,8 @@ export class HVACSystemSearchComponent implements OnInit {
   isEditableNew: boolean = true;
   auxArrayData: Array<any> = [];
   validation: boolean = true;
+  
+  matStepSystemDesignCompleted: boolean = false;
 
   @ViewChild('stepper')
   stepper!: MatStepper;
@@ -343,5 +345,24 @@ export class HVACSystemSearchComponent implements OnInit {
       ))
     });
     this.dataSource = new MatTableDataSource((this.msMultiZoneTypeForm.get('VORows') as FormArray).controls);        
+  }
+
+  allCombinations() {  
+    this.matStepSystemDesignCompleted = true;  
+    setTimeout(() => {
+      this.stepper.next(); 
+    }, 500); 
+    
+    this.systemDesignForm.reset();       
+    this.myData.systemDesign = null;     
+   
+    //clean the dataSource    
+    this.dataSource.data = [];
+    
+    this.msMultiZoneTypeForm = this._formBuilder.group({
+      VORows: this._formBuilder.array([])
+    });
+
+    this.AddNewRow();       
   }
 }

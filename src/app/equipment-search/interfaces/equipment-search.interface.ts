@@ -4,7 +4,7 @@ export interface EquipmentSearch {
     dwellingInfo?: DwellingInfo;
     heatedCooled?: HeatedCooled;
     systemSize?: SystemSize;
-    systemDesign?: SystemDesign;
+    systemDesign?: SystemDesign | null;
 }
 
 export interface UtilityProviders {
