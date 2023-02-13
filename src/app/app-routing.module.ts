@@ -4,12 +4,12 @@ import { RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
 
   {
-    path: 'home',
+    path: 'rebate-finder',
     loadChildren: () => import('./basic-estructure/basic-estructure.module').then(m => m.BasicEstructureModule)
   },
   {
     path: '**',
-    redirectTo: 'home'
+    redirectTo: 'rebate-finder'
   }
 
 ];

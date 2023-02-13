@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { HomeComponent } from './home/home.component';
 import { BasicEstructureComponent } from './basic-estructure.component';
 import { ReleasesComponent } from './releases/releases.component';
 import { HVACSystemSearchComponent} from './../equipment-search/hvac-system-search/hvac-system-search.component';
@@ -15,7 +14,7 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        component: HomeComponent,
+        component: HVACSystemSearchComponent,
 
       },
       {
@@ -28,7 +27,7 @@ const routes: Routes = [
       },
       {
         path: '**',
-        redirectTo: 'home'
+        redirectTo: 'rebate-finder'
       }
     ]
   }
