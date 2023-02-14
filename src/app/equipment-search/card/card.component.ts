@@ -31,7 +31,6 @@ export class CardComponent implements OnInit {
     this.card.userSelections = { "Outdoor unit": this.card.result.components[0].title };
     this.card.cardComponents = this.cardComponents();
     this.card.cardConfigurations = this.cardConfigurations();
-    //console.log(JSON.stringify(this.mySystems));
   }
 
   // Load all aplicable components grouped by component type for card. 
@@ -63,9 +62,8 @@ export class CardComponent implements OnInit {
   // Load all aplicable configuration options grouped by type for card. 
   cardConfigurations() {
     
-
-    let newObj: { [index: string]: any } = {};
-    // buscar en el los sistemas los que tengan  los mismos componentes y  agregar los configuration options
+    let myConfigurations: { [index: string]: any } = {};
+    // look for systems with the same components and add the configuration options
     this.mySystems.forEach(sys => {
       let countOks = 0;
       sys.components.forEach((component: any) => {
@@ -81,10 +79,10 @@ export class CardComponent implements OnInit {
                
                 sys.configurationOptions.forEach((comp: { type: string; value: any; }) => {
 
-                  if (!newObj.hasOwnProperty(comp.type)) {
-                    newObj[comp.type] = [];
+                  if (!myConfigurations.hasOwnProperty(comp.type)) {
+                    myConfigurations[comp.type] = [];
                   }
-                  newObj[comp.type].push(comp);
+                  myConfigurations[comp.type].push(comp);
           
                 });
                 
@@ -96,36 +94,39 @@ export class CardComponent implements OnInit {
       });
     });
 
-
     // Remove duplicated configuration option that has same value.
-    this.Object.keys(newObj).forEach((element, i) => {
-      const myUniqueOptions = [...new Map(newObj[element].map((m: any) => [m.value, m])).values()];
-      newObj[element] = myUniqueOptions;
+    this.Object.keys(myConfigurations).forEach((element, i) => {
+      const myUniqueOptions = [...new Map(myConfigurations[element].map((m: any) => [m.value, m])).values()];
+      myConfigurations[element] = myUniqueOptions;
     });
 
-    return newObj;
+    return myConfigurations;
   }
-
-  // Load array of strings that are applicable to update.  
-  // load component names that are diferent to first selection and Outdoor unit.
-  selectsToUpdate() :string[] {
  
+  // returns component names that are diferent to first selection and Outdoor unit.
+  selectsToUpdate() :string[] {
+
+    const myUserSelections: string[] = this.Object.keys(this.card.userSelections);
+
     let toUpdate: string[] = [];
     let myComponentTypes = this.card.result!.components.map(a => a.componentType);
-    toUpdate = myComponentTypes.filter(componentType => componentType !== this.firstSelection && componentType !== 'Outdoor unit')
-    
+
+    if(myUserSelections.length != myComponentTypes.length){
+      toUpdate = myComponentTypes.filter(componentType => componentType !== this.firstSelection && componentType !== 'Outdoor unit')
+    }
+
     return toUpdate;
   }
   
-  // array of selects that the user has not selected.
-  selectsToReset(currentSelection: string){
+  // returns component names that  are different to current selection.
+  selectsToReset(currentSelection: string) :string[] {
     let toUpdate: string[] = [];
     let myComponentTypes = this.card.result!.components.map(a => a.componentType);
     toUpdate = myComponentTypes.filter(componentType => componentType !== currentSelection && componentType !== 'Outdoor unit')
     return toUpdate;
   }
 
-  //  Return systems that apply  user selections
+  //  Return systems that apply user selections.
   optionsToUpdate() {
     
     let myCombinedCombinations: Result[] = [];
@@ -169,7 +170,7 @@ export class CardComponent implements OnInit {
     if(myOptionsToUpdate.length == 0 ){
 
       let selectToReset = this.selectsToReset(currentSelection)[0];// By the moment this always return the first element of array 
-      if(confirm("There are no "+selectToReset+"s that apply to your selected "+currentSelection+". \n Do you want us to look for "+selectToReset+"s that apply?")){
+      if(confirm("There are no " + selectToReset  + "s that apply to your selected " + currentSelection + ". \n Do you want us to look for " + selectToReset + "s that apply?")){
         
           delete this.card.userSelections[selectToReset]
           mySelectsToUpdate = this.selectsToReset(currentSelection);
@@ -188,11 +189,12 @@ export class CardComponent implements OnInit {
       const myUniqueOptions = myUpdatedOptions.filter((obj, pos, arr) => {
         return arr.map(mapObj => mapObj["title"]).indexOf(obj["title"]) === pos;
       });
- 
-      this.card.result = myOptionsToUpdate[0];
+      
       this.card.cardComponents[selectToUpdate] = myUniqueOptions;
-      this.card.cardConfigurations = this.cardConfigurations();
     });
+
+    this.card.result = myOptionsToUpdate[0];
+    this.card.cardConfigurations = this.cardConfigurations();
 
   }
 
