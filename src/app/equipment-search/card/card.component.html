@@ -12,7 +12,6 @@
 
         <mat-card-subtitle>
           <div fxLayout="row column" fxLayoutAlign="space-between center" class="model-nrs" fxLayoutGap="4px grid">
-
             <!-- Components -->
             <div fxFlex="100" *ngFor="let cardComponent of Object.keys(card.cardComponents)">
               <div *ngIf="cardComponent != 'Outdoor unit'">
@@ -31,7 +30,7 @@
             <!-- Configuration options -->
             <div fxFlex="100" *ngFor="let cardConfiguration of Object.keys(card.cardConfigurations)">
               <mat-form-field class="rc-select-multiline">
-                <mat-select [value]="" (selectionChange)="filterByID($event.value, cardConfiguration)" placeholder="{{cardConfiguration}}">
+                <mat-select [value]="" (selectionChange)="filterByConfigurationOptions($event.value, cardConfiguration)" placeholder="{{cardConfiguration}}">
                   <mat-option class="rc-select-multiline-option" *ngFor="let configuration of card.cardConfigurations[cardConfiguration]" [value]="configuration.value">
                     <b>{{configuration.name}}</b>
                   </mat-option>

@@ -31,7 +31,7 @@ export class CardComponent implements OnInit {
     this.card.userSelections = { "Outdoor unit": this.card.result.components[0].title };
     this.card.cardComponents = this.cardComponents();
     this.card.cardConfigurations = this.cardConfigurations();
-    console.log( this.card);
+    //console.log(JSON.stringify(this.mySystems));
   }
 
   // Load all aplicable components grouped by component type for card. 
@@ -184,8 +184,13 @@ export class CardComponent implements OnInit {
         myUpdatedOptions.push(this.getComponentByComponentType(optionToUpdate.components,selectToUpdate));
       });
 
+      // Remove duplicated components that has same title.
+      const myUniqueOptions = myUpdatedOptions.filter((obj, pos, arr) => {
+        return arr.map(mapObj => mapObj["title"]).indexOf(obj["title"]) === pos;
+      });
+ 
       this.card.result = myOptionsToUpdate[0];
-      this.card.cardComponents[selectToUpdate] = myUpdatedOptions;
+      this.card.cardComponents[selectToUpdate] = myUniqueOptions;
       this.card.cardConfigurations = this.cardConfigurations();
     });
 
@@ -202,6 +207,23 @@ export class CardComponent implements OnInit {
     this.card.userSelections[myUnitType] = myUnitID;
 
     this.updateSelections(myUnitType);
+  }
+
+  filterByConfigurationOptions(myUnitID: string, myUnitType: string) {
+    
+    // Systems matching user selections
+    let myOptionsToUpdate = this.optionsToUpdate();
+
+    //search by configurationOptions
+    const findResult = myOptionsToUpdate.find(result =>
+      result.configurationOptions.some(configuration => configuration.name === myUnitID && configuration.type === myUnitType)
+    );
+
+    if(findResult) {
+      this.card.result = findResult;
+    } else {
+      console.log("this never happen");
+    }
   }
 
   openDialog() {
