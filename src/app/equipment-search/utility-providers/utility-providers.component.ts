@@ -58,7 +58,7 @@ export class UtilityProvidersComponent implements OnInit, OnChanges {
 
     // Form group.
     this.utilityProvidersForm = this.fb.group({
-      electricUtilityId: [ '', Validators.required],
+      electricUtilityId: ['', Validators.required],
       fossilFuelUtilityId: ['', Validators.required]
     });
 

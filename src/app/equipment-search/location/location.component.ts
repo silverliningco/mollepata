@@ -1,6 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import StatesData from './../../../assets/json/states.json';
+//import StatesData from './../../../assets/json/states.json';
 
 @Component({
   selector: 'app-location',
@@ -12,7 +12,7 @@ export class LocationComponent implements OnInit {
   
   locationForm!: FormGroup;
 
-  states: String[] =  StatesData;  // This should probably be an array of strings no mas.
+  //states: String[] =  StatesData;
 
   constructor(private fb: FormBuilder) { }
 
@@ -20,7 +20,7 @@ export class LocationComponent implements OnInit {
 
     // Location form group.
     this.locationForm = this.fb.group({
-      state: ["", Validators.required]
+      state: ['', Validators.required]
     });
 
     this.locationForm.valueChanges.subscribe(selectedValue => {

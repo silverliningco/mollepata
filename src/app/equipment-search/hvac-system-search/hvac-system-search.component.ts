@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import {FormBuilder, FormGroup, Validators, FormControl, FormArray} from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
-import { MatStepper, StepperOrientation } from '@angular/material/stepper';
+import { MatStepper } from '@angular/material/stepper';
 
 import {MatTableDataSource} from '@angular/material/table';
 

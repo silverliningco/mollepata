@@ -18,7 +18,7 @@ export class DwellingInfoComponent implements OnInit {
 
     // Dwelling info form group.
     this.dwellingInfoForm = this.fb.group({
-      constructionType: [ '', Validators.required],
+      constructionType: ['', Validators.required],
       fuelSource: ['', Validators.required]
     });
 
