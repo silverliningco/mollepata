@@ -5,12 +5,34 @@
     <div fxFlex="25" fxLayout="column" fxLayoutAlign="center center" fxFlex.xs="100" fxFlex.sm="50" fxFlex.md="25" fxLayoutGap="20">
         <form [formGroup]="locationForm" class="rc-form">
 
-            <mat-form-field appearance="fill">
-                <mat-label>State:</mat-label>
-                <mat-select #sGroup formControlName="state">
-                    <mat-option radioGroup="sGroup" [value] = "element" *ngFor="let element of states">{{element}}</mat-option>
-                </mat-select>
-            </mat-form-field>
+            <mat-radio-group #stateIdGroup formControlName="state" class="rc-radio-img">
+                <div fxLayoutAlign="center center" fxLayoutGap="20px grid">
+                  <mat-radio-button [value]="'ME'" radioGroup="stateIdGroup" fxFlex.xs="80" fxFlex.sm="34">
+                    <div style="text-align: center;">
+                      <img src="../../../../assets/images/icons/me.png" alt="" class="unchecked">
+                      <img src="../../../../assets/images/icons/me-active.png" alt="" class="checked">
+                      <p>ME</p>
+                    </div>
+                  </mat-radio-button>
+        
+                  <mat-radio-button [value]="'NH'" radioGroup="stateIdGroup" fxFlex.xs="80" fxFlex.sm="34">
+                    <img src="../../../../assets/images/icons/nh.png" alt="" class="unchecked">
+                    <img src="../../../../assets/images/icons/nh-active.png" alt="" class="checked">
+                    <p>NH</p>
+                  </mat-radio-button>
+                  <mat-radio-button [value]="'MA'" radioGroup="stateIdGroup" fxFlex.xs="80" fxFlex.sm="34">
+                    <img src="../../../../assets/images/icons/ma.png" alt="" class="unchecked">
+                    <img src="../../../../assets/images/icons/ma-active.png" alt="" class="checked">
+                    <p>MA</p>
+                  </mat-radio-button>
+                  <mat-radio-button [value]="'RI'" radioGroup="stateIdGroup" fxFlex.xs="80" fxFlex.sm="34">
+                    <img src="../../../../assets/images/icons/ri.png" alt="" class="unchecked">
+                    <img src="../../../../assets/images/icons/ri-active.png" alt="" class="checked">
+                    <p>RI</p>
+                  </mat-radio-button>
+                </div>
+              </mat-radio-group>
         </form>
     </div>
 </div>
+
