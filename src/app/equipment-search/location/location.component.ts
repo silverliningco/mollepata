@@ -23,8 +23,8 @@ export class LocationComponent implements OnInit {
       state: ["", Validators.required]
     });
 
-    this.locationForm.get("state")?.valueChanges.subscribe(selectedValue => {
-      this.stateChange.emit([selectedValue, !this.locationForm.valid]);
+    this.locationForm.valueChanges.subscribe(selectedValue => {
+      this.stateChange.emit([selectedValue.state, this.locationForm.valid]);
     });
   }
 
