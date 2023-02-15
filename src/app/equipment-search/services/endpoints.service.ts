@@ -14,14 +14,6 @@ export class EndpointsService {
       private http: HttpClient
     ) { }
 
-    // provicional
-    Rebate(body: any): Observable<any> {
-
-      let url = environment.apiURL; 
-  
-      return this.http.post(url, body);
-    }
-
     ProductLines(body: any): Observable<any> {
 
       let url =  environment.apiURL + '/product-lines'; 
