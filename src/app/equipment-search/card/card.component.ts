@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Card, Result } from '../interfaces/results.interface'
+import { TableComponent } from '../table/table.component';
 
 @Component({
   selector: 'app-card',
@@ -19,7 +21,8 @@ export class CardComponent implements OnInit {
   //pass Object to template, to iterate object keys using *ngFor (AHRI Ratings)
   Object = Object;
 
-  constructor() { }
+  constructor(
+    private dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.loadCard();
@@ -230,9 +233,11 @@ export class CardComponent implements OnInit {
 
   openDialog() {
 
-    /* this.dialogRef.open(TableViewComponent, {
-      data: { }
-    }); */
+     this.dialog.open(TableComponent, {
+      data: {  
+        systems: this.mySystems
+      }
+    }); 
   }
 
 }
