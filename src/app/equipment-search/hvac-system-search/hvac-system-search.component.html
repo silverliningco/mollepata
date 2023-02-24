@@ -1,5 +1,5 @@
 <!--- Begin Material Stepper progress bar content. -->
-<mat-stepper #stepper linear (selectionChange)="tabChange($event)">
+<mat-stepper #stepper (selectionChange)="tabChange($event)">
 
     <!--- Step 1: Location. -->
     <mat-step [completed]="MySubmitValidation['location']">
@@ -191,114 +191,116 @@
             
             <!--- If indoor unit type is mini-split, show indoor unit design table. -->
 
-            <div *ngIf="systemDesignForm.get('indoorUnitType')!.value == 'Mini-split indoor'" fxFlex="65" fxFlex.xs="100" fxFlex.sm="70" fxFlex.md="65" fxLayoutGap="20" class="mat-elevation-z8">
-                <div class="button-add-row">
-                  <button><mat-icon (click)="AddNewRow()">add_box</mat-icon></button>
+            <div *ngIf="systemDesignForm.get('indoorUnitType')!.value == 'Mini-split indoor'" fxFlex="65" fxFlex.xs="100" fxFlex.sm="70" fxFlex.md="65">
+                <div fxLayout="row column" fxLayoutAlign="end center">
+                    <button mat-button (click)="AddNewRow()" class="rc-btn rc-btn-secondary-1">
+                        <mat-icon>add</mat-icon> Add Row
+                    </button>
                 </div>
-                <br />  
                 <form [formGroup]="msMultiZoneTypeForm" autocomplete="off">
-                  <ng-container formArrayName="VORows">
-                    <table #table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-                      <!-- Name Column -->
-                      <ng-container matColumnDef="qty">
-                        <th mat-header-cell *matHeaderCellDef> Quantity </th>
-                        <td mat-cell *matCellDef="let element; let i = index" [formGroup]="element">
-              
-                          <!-- <span [hidden]="msMultiZoneTypeForm.get('VORows').value[i].isEditable"> -->
-                            <mat-form-field style="width: 150px;" [appearance]="msMultiZoneTypeForm.get('VORows')!.value[i].isEditable? 'fill' : 'legacy'">
-                              <mat-label>Choose a quantity</mat-label>
-                              <mat-select formControlName="qty" [disabled]="msMultiZoneTypeForm.get('VORows')!.value[i].isEditable">
-                                  <mat-option value ="1">1</mat-option>
-                                  <mat-option value ="2">2</mat-option>
-                                  <mat-option value ="3">3</mat-option>
-                                  <mat-option value ="4">4</mat-option>
-                                  <mat-option value ="5">5</mat-option>
-                              </mat-select>
-                          </mat-form-field>
-                        </td>
-                      </ng-container>
-              
-                      <!-- Weight Column -->
-                      <ng-container matColumnDef="unitType">
-                        <th mat-header-cell *matHeaderCellDef> Unit Type </th>
-                        <td mat-cell *matCellDef="let element; let i = index" [formGroup]="element">            
-                            <mat-form-field style="width: 170px;"
-                            [appearance]="msMultiZoneTypeForm.get('VORows')!.value[i].isEditable? 'fill' : 'legacy'">
-                              <mat-label>Choose an unit type</mat-label>
-                              <mat-select formControlName="unitType" [disabled]="msMultiZoneTypeForm.get('VORows')!.value[i].isEditable">
-              
-                                  <mat-option value ="Mini-Split Air Handler (Full Size)">Mini-Split Air Handler (Full Size)</mat-option>
-                                  <mat-option value ="Ducted mini-split Air Handler (Slim Style)">Ducted mini-split Air Handler (Slim Style)</mat-option>
-                                  <mat-option value ="Floor/Ceiling Mount">Floor/Ceiling Mount</mat-option>
-                                  <mat-option value ="Cassette">Cassette</mat-option>
-                                  <mat-option value ="High wall">High wall</mat-option>
-                                  <mat-option value ="1-Way Casette">1-Way Casette</mat-option>
-              
-                              </mat-select>
-                          </mat-form-field>            
-                        </td>
-                      </ng-container>
-              
-                      <!-- Symbol Column -->
-                      <ng-container matColumnDef="size">
-                        <th mat-header-cell *matHeaderCellDef> Size </th>
-                        <td mat-cell *matCellDef="let element; let i = index" [formGroup]="element">
-                          <mat-form-field style="width: 150px;"
-                          [appearance]="msMultiZoneTypeForm.get('VORows')!.value[i].isEditable? 'fill' : 'legacy'">
-                              <mat-label>Choose a size</mat-label>
-                              <mat-select formControlName="size" [disabled]="msMultiZoneTypeForm.get('VORows')!.value[i].isEditable">
-                                  
-                                  <mat-option value ="6000">6000</mat-option>
-                                  <mat-option value ="9000">9000</mat-option>
-                                  <mat-option value ="12000">12000</mat-option>
-                                  <mat-option value ="18000">18000</mat-option>
-                                  <mat-option value ="24000">24000</mat-option>
-              
-                              </mat-select>
-                          </mat-form-field>            
-                        </td>
-                      </ng-container>
-              
-                      <ng-container matColumnDef="action">
-                        <th mat-header-cell *matHeaderCellDef> Action </th>
-                        <td mat-cell *matCellDef="let element; let i = index" [formGroup]="element">
-                          <button mat-icon-button class="material-icons app-toolbar-menu save-button"
-                                                  matTooltip="Save Changes" (click)="SaveVO(msMultiZoneTypeForm,i)"
-                                                  *ngIf="!msMultiZoneTypeForm.get('VORows')!.value[i].isEditable" color="primary">
-                                                  <mat-icon>check_circle</mat-icon>
-                                              </button>
-              
-                          <button mat-icon-button class="material-icons app-toolbar-menu cancel-button"
-                                                  matTooltip="Cancel Changes" color="warn"
-                                                  (click)="CancelSVO(i)"
-                                                  *ngIf="!msMultiZoneTypeForm.get('VORows')!.value[i].isEditable">
-                                                  <mat-icon>cancel</mat-icon>
-                                              </button>
-              
-                          <button mat-icon-button class="material-icons app-toolbar-menu save-button"
-                                                  *ngIf="msMultiZoneTypeForm.get('VORows')!.value[i].isEditable"
-                                                  matTooltip="Edit" color="primary" (click)="EditSVO(msMultiZoneTypeForm,i)">
-                                                  <mat-icon>edit</mat-icon>
-                                              </button>
-              
-                          <button mat-icon-button class="material-icons app-toolbar-menu delete-button"
-                                                  *ngIf="msMultiZoneTypeForm.get('VORows')!.value[i].isEditable"
-                                                  matTooltip="Delete" (click)="RemoveVO(i)" color="warn">
-                                                  <mat-icon>delete</mat-icon>
-                                              </button>
-                        </td>
-                      </ng-container>
-              
-                      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-              
-                      <!-- Row shown when there is no matching data. -->
-                      
-                    </table>
-                    <div *ngIf="validation==false" class="messageValidation">
-                        <span>Fill in all the empty fields to continue</span>
+                    <div class="table-overflow">
+                        <table mat-table [dataSource]="dataSource">
+                            <!-- Name Column -->
+                            <ng-container matColumnDef="qty">
+                              <th *matHeaderCellDef> Quantity </th>
+                              <td data-title="Quantity" *matCellDef="let element; let i = index" [formGroup]="element">
+                    
+                                <!-- <span [hidden]="msMultiZoneTypeForm.get('VORows').value[i].isEditable"> -->
+                                  <mat-form-field style="width: 150px;" [appearance]="msMultiZoneTypeForm.get('VORows')!.value[i].isEditable? 'fill' : 'legacy'">
+                                    <mat-label>Choose a quantity</mat-label>
+                                    <mat-select formControlName="qty" [disabled]="msMultiZoneTypeForm.get('VORows')!.value[i].isEditable">
+                                        <mat-option value ="1">1</mat-option>
+                                        <mat-option value ="2">2</mat-option>
+                                        <mat-option value ="3">3</mat-option>
+                                        <mat-option value ="4">4</mat-option>
+                                        <mat-option value ="5">5</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                              </td>
+                            </ng-container>
+                    
+                            <!-- Weight Column -->
+                            <ng-container matColumnDef="unitType">
+                              <th *matHeaderCellDef> Unit Type </th>
+                              <td data-title="Unit Type" *matCellDef="let element; let i = index" [formGroup]="element">            
+                                  <mat-form-field style="width: 170px;"
+                                  [appearance]="msMultiZoneTypeForm.get('VORows')!.value[i].isEditable? 'fill' : 'legacy'">
+                                    <mat-label>Choose an unit type</mat-label>
+                                    <mat-select formControlName="unitType" [disabled]="msMultiZoneTypeForm.get('VORows')!.value[i].isEditable">
+                    
+                                        <mat-option value ="Mini-Split Air Handler (Full Size)">Mini-Split Air Handler (Full Size)</mat-option>
+                                        <mat-option value ="Ducted mini-split Air Handler (Slim Style)">Ducted mini-split Air Handler (Slim Style)</mat-option>
+                                        <mat-option value ="Floor/Ceiling Mount">Floor/Ceiling Mount</mat-option>
+                                        <mat-option value ="Cassette">Cassette</mat-option>
+                                        <mat-option value ="High wall">High wall</mat-option>
+                                        <mat-option value ="1-Way Casette">1-Way Casette</mat-option>
+                    
+                                    </mat-select>
+                                </mat-form-field>
+                              </td>
+                            </ng-container>
+                    
+                            <!-- Symbol Column -->
+                            <ng-container matColumnDef="size">
+                              <th *matHeaderCellDef> Size </th>
+                              <td data-title="Size" *matCellDef="let element; let i = index" [formGroup]="element">
+                                <mat-form-field style="width: 150px;"
+                                [appearance]="msMultiZoneTypeForm.get('VORows')!.value[i].isEditable? 'fill' : 'legacy'">
+                                    <mat-label>Choose a size</mat-label>
+                                    <mat-select formControlName="size" [disabled]="msMultiZoneTypeForm.get('VORows')!.value[i].isEditable">
+                                        
+                                        <mat-option value ="6000">6000</mat-option>
+                                        <mat-option value ="9000">9000</mat-option>
+                                        <mat-option value ="12000">12000</mat-option>
+                                        <mat-option value ="18000">18000</mat-option>
+                                        <mat-option value ="24000">24000</mat-option>
+                    
+                                    </mat-select>
+                                </mat-form-field>            
+                              </td>
+                            </ng-container>
+                    
+                            <ng-container matColumnDef="action">
+                              <th *matHeaderCellDef> Action </th>
+                              <td data-title="Action" *matCellDef="let element; let i = index" [formGroup]="element">
+                                <button class="table-buttons save"
+                                                        matTooltip="Save Changes" (click)="SaveVO(msMultiZoneTypeForm,i)"
+                                                        *ngIf="!msMultiZoneTypeForm.get('VORows')!.value[i].isEditable" color="primary">
+                                                        <mat-icon>check</mat-icon>
+                                                    </button>
+                    
+                                <button class="table-buttons cancel"
+                                                        matTooltip="Cancel Changes" color="warn"
+                                                        (click)="CancelSVO(i)"
+                                                        *ngIf="!msMultiZoneTypeForm.get('VORows')!.value[i].isEditable">
+                                                        <mat-icon>close</mat-icon>
+                                                    </button>
+                    
+                                <button class="table-buttons edit"
+                                                        *ngIf="msMultiZoneTypeForm.get('VORows')!.value[i].isEditable"
+                                                        matTooltip="Edit" color="primary" (click)="EditSVO(msMultiZoneTypeForm,i)">
+                                                        <mat-icon>edit</mat-icon>
+                                                    </button>
+                    
+                                <button class="table-buttons delete"
+                                                        *ngIf="msMultiZoneTypeForm.get('VORows')!.value[i].isEditable"
+                                                        matTooltip="Delete" (click)="RemoveVO(i)" color="warn">
+                                                        <mat-icon>delete</mat-icon>
+                                                    </button>
+                              </td>
+                            </ng-container>
+                    
+                            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                    
+                            <!-- Row shown when there is no matching data. -->
+                            
+                        </table>
                     </div>
-                  </ng-container>
+
+                    <div *ngIf="validation==false" class="messageValidation">
+                        <mat-icon>warning</mat-icon><span> Fill in all the empty fields to continue</span>
+                    </div>
                 </form> 
               </div>      
 
