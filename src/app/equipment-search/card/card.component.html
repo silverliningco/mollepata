@@ -30,7 +30,7 @@
             <!-- Configuration options -->
             <div fxFlex="100" *ngFor="let cardConfiguration of Object.keys(card.cardConfigurations)">
               <mat-form-field class="rc-select-multiline">
-                <mat-select [value]="" (selectionChange)="filterByConfigurationOptions($event.value, cardConfiguration)" placeholder="{{cardConfiguration}}">
+                <mat-select [value]="card.result!.configurationOptions[0].value" (selectionChange)="filterByConfigurationOptions($event.value, cardConfiguration)" placeholder="{{cardConfiguration}}">
                   <mat-option class="rc-select-multiline-option" *ngFor="let configuration of card.cardConfigurations[cardConfiguration]" [value]="configuration.value">
                     <b>{{configuration.name}}</b>
                   </mat-option>
