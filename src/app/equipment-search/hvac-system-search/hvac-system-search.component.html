@@ -267,26 +267,19 @@
                                                         matTooltip="Save Changes" (click)="SaveVO(msMultiZoneTypeForm,i)"
                                                         *ngIf="!msMultiZoneTypeForm.get('VORows')!.value[i].isEditable" color="primary">
                                                         <mat-icon>check</mat-icon>
-                                                    </button>
-                    
-                                <button class="table-buttons cancel"
-                                                        matTooltip="Cancel Changes" color="warn"
-                                                        (click)="CancelSVO(i)"
-                                                        *ngIf="!msMultiZoneTypeForm.get('VORows')!.value[i].isEditable">
-                                                        <mat-icon>close</mat-icon>
-                                                    </button>
+                                </button>                               
                     
                                 <button class="table-buttons edit"
                                                         *ngIf="msMultiZoneTypeForm.get('VORows')!.value[i].isEditable"
                                                         matTooltip="Edit" color="primary" (click)="EditSVO(msMultiZoneTypeForm,i)">
                                                         <mat-icon>edit</mat-icon>
-                                                    </button>
+                                </button>
                     
                                 <button class="table-buttons delete"
                                                         *ngIf="msMultiZoneTypeForm.get('VORows')!.value[i].isEditable"
                                                         matTooltip="Delete" (click)="RemoveVO(i)" color="warn">
                                                         <mat-icon>delete</mat-icon>
-                                                    </button>
+                                </button>
                               </td>
                             </ng-container>
                     
@@ -309,7 +302,7 @@
 
         <!-- button -->
         <div fxLayout="column" fxLayoutAlign="center end" class="rc-stepper-buttons">
-            <button type="button" mat-raised-button color="primary" [disabled]="!MySubmitValidation['systemDesign']" matStepperNext>
+            <button type="button" mat-raised-button color="primary" [disabled]="(!MySubmitValidation['systemDesign'] || !existRecord) === true" matStepperNext>
                 Continue
                 <mat-icon>arrow_forward</mat-icon>
             </button>

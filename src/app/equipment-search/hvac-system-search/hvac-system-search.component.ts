@@ -31,6 +31,7 @@ export class HVACSystemSearchComponent implements OnInit {
   isEditableNew: boolean = true;
   auxArrayData: Array<any> = [];
   validation: boolean = true;
+  existRecord: boolean = false;
   
   matStepSystemDesignCompleted: boolean = false;
 
@@ -196,9 +197,8 @@ export class HVACSystemSearchComponent implements OnInit {
   SaveVO(msMultiZoneTypeFormElement:any, i:any) {  
     //validate if the row to add has the fields filled    
     if(msMultiZoneTypeFormElement.get('VORows').value[i]['qty'] == '' || msMultiZoneTypeFormElement.get('VORows').value[i]['unitType'] == '' || msMultiZoneTypeFormElement.get('VORows').value[i]['size'] == '')
-    {
-      this.validation = false;
-      return
+    { this.validation = false;
+      return;
     }
     else
     { this.validation = true; }
@@ -207,9 +207,8 @@ export class HVACSystemSearchComponent implements OnInit {
     {
       let message = 'The amount must be less than 6 and not more than 135% of cooling tons';
       this.OpenSnackBar(message);
-      return
+      return;
     }
-
     if(!this.myData.systemDesign?.msMultiZoneType){
       this.myData.systemDesign!.msMultiZoneType = [];
     }
@@ -218,132 +217,53 @@ export class HVACSystemSearchComponent implements OnInit {
     //validate if the payload is empty
     if(this.myData.systemDesign?.msMultiZoneType.length == 0)
     {
-      const newRow: msMultiZoneType = {
-        qty: msMultiZoneTypeFormElement.get('VORows').value[i]['qty'],    
-        unitType: msMultiZoneTypeFormElement.get('VORows').value[i]['unitType'],
-        size: msMultiZoneTypeFormElement.get('VORows').value[i]['size']         
-      };
-      
+      const newRow: msMultiZoneType = {qty: msMultiZoneTypeFormElement.get('VORows').value[i]['qty'],unitType: msMultiZoneTypeFormElement.get('VORows').value[i]['unitType'],size: msMultiZoneTypeFormElement.get('VORows').value[i]['size']};      
       this.myData.systemDesign?.msMultiZoneType?.push(newRow);
-
     }
     //validate if the payload has elements
     if(Number(this.myData.systemDesign?.msMultiZoneType.length) > 0)
     {      
-      this.myData.systemDesign!.msMultiZoneType = [];      
+      this.myData.systemDesign!.msMultiZoneType = []; 
       for(let k=0; k< this.dataSource.data.length; k++){        
-        const newRow: msMultiZoneType = {
-          qty: msMultiZoneTypeFormElement.get('VORows').value[k]['qty'],    
-          unitType: msMultiZoneTypeFormElement.get('VORows').value[k]['unitType'],
-          size: msMultiZoneTypeFormElement.get('VORows').value[k]['size']         
-        };
-
+        const newRow: msMultiZoneType = {qty: msMultiZoneTypeFormElement.get('VORows').value[k]['qty'],unitType: msMultiZoneTypeFormElement.get('VORows').value[k]['unitType'],size: msMultiZoneTypeFormElement.get('VORows').value[k]['size']};
         this.myData.systemDesign?.msMultiZoneType?.push(newRow);
-      }      
+      }
     }    
+    this.existRecord = true;      
   }
 
   initiatemsMultiZoneTypeForm(): FormGroup {
-    return this.fb.group({      
-      qty: new FormControl(''),
-      unitType: new FormControl(''),
-      size: new FormControl(''),
-      action: new FormControl('newRecord'),
-      isEditable: new FormControl(false),
-      isNewRow: new FormControl(true),
-    });
-  }
-
-  CancelSVO(i:any) {
-    //clean the records of the auxiliary array auxArrayData
-    this.auxArrayData = [];
-    let len = this.dataSource.data.length;    
-    for(let k=0; k< len; k++){      
-        const newRow1 = {
-            qty: this.dataSource.data[k].value['qty'],    
-            unitType: this.dataSource.data[k].value['unitType'],
-            size: this.dataSource.data[k].value['size'],  
-            action: this.dataSource.data[k].value['action'],
-            isEditable: this.dataSource.data[k].value['isEditable'],
-            isNewRow: this.dataSource.data[k].value['isNewRow'],               
-            }              
-            this.auxArrayData.push(newRow1);       
-    }
-    //delete the record of the auxiliary array auxArrayData
-    this.auxArrayData.splice(i, 1);
-    //clean the data source
-    this.dataSource.data = [];
-    //assign the elements of the array auxArrayData to the data source
-    const ELEMENT_DATA: PeriodicElement[] = this.auxArrayData;
-
-    this.msMultiZoneTypeForm = this.fb.group({
-      VORows: this.fb.array(ELEMENT_DATA.map(val => this.fb.group({        
-        qty: new FormControl(val.qty),
-        unitType: new FormControl(val.unitType),
-        size: new FormControl(val.size),
-        action: new FormControl('existingRecord'),
-        isEditable: new FormControl(val.isEditable),
-        isNewRow: new FormControl(false),
-      })
-      ))
-    });
-    this.dataSource = new MatTableDataSource((this.msMultiZoneTypeForm.get('VORows') as FormArray).controls);
+    return this.fb.group({ qty: new FormControl(''),unitType: new FormControl(''),size: new FormControl(''),action: new FormControl('newRecord'),isEditable: new FormControl(false),isNewRow: new FormControl(true),});
   }
 
   EditSVO(msMultiZoneTypeFormElement:any, i:any) {    
-    msMultiZoneTypeFormElement.get('VORows').at(i).get('isEditable').patchValue(false);
+    msMultiZoneTypeFormElement.get('VORows').at(i).get('isEditable').patchValue(false);    
+    this.existRecord = false;
   }
 
   RemoveVO(i:any) {      
     //clean array records of the auxiliar auxArrayData
     this.auxArrayData = [];
     //pass the datasource records to the auxiliar auxArrayData
-    let len = this.dataSource.data.length;    
-    for(let k=0; k< len; k++){      
-        const newRow1 = {
-            qty: this.dataSource.data[k].value['qty'],    
-            unitType: this.dataSource.data[k].value['unitType'],
-            size: this.dataSource.data[k].value['size'], 
-            action: this.dataSource.data[k].value['action'],
-            isEditable: this.dataSource.data[k].value['isEditable'],
-            isNewRow: this.dataSource.data[k].value['isNewRow'],
-            }              
-            this.auxArrayData.push(newRow1);       
-    }       
+    this.dataSource.data.map(x => {const newRow1 = {qty: x.value['qty'],unitType: x.value['unitType'],size: x.value['size'],action: x.value['action'],isEditable: x.value['isEditable'],isNewRow: x.value['isNewRow'],};this.auxArrayData.push(newRow1)} );
     //determinamos el nro de campos isEditable = false
     let sumIsEditable = 0;
-    for(let k=0; k< this.auxArrayData.length; k++){ 
-      if(this.auxArrayData[k]['isEditable'] == false)
-      {
-        sumIsEditable = sumIsEditable + 1;
-      }
-    }
+    this.auxArrayData.filter(x => x.isEditable === false ? sumIsEditable = sumIsEditable + 1: sumIsEditable);
     //remove the record of the payload according to its index
     if(sumIsEditable == 0)
-    {
-      this.myData.systemDesign?.msMultiZoneType?.splice(i, 1);
-    }
+    { this.myData.systemDesign?.msMultiZoneType?.splice(i, 1); }
     else
-    {
-      this.myData.systemDesign?.msMultiZoneType?.splice(i-sumIsEditable, 1);
-    }
+    { this.myData.systemDesign?.msMultiZoneType?.splice(i-sumIsEditable, 1); }
+    //update variable existRecord to active the button continue
+    if(Number(this.myData.systemDesign?.msMultiZoneType?.length) === 0)
+    { this.existRecord = false; }
     //delete the record of the auxiliar auxArrayData  aqui debemos aumentar codigo
     this.auxArrayData.splice(i, 1); 
     //clean the dataSource    
     this.dataSource.data = [];  
     //assign the elements of the array auxArrayData to the data source
     const ELEMENT_DATA: PeriodicElement[] = this.auxArrayData;
-    this.msMultiZoneTypeForm = this.fb.group({
-      VORows: this.fb.array(ELEMENT_DATA.map(val => this.fb.group({        
-        qty: new FormControl(val.qty),
-        unitType: new FormControl(val.unitType),
-        size: new FormControl(val.size),
-        action: new FormControl('existingRecord'),        
-        isEditable: new FormControl(val.isEditable), //false
-        isNewRow: new FormControl(false),  //
-      })
-      ))
-    });
+    this.msMultiZoneTypeForm = this.fb.group({ VORows: this.fb.array(ELEMENT_DATA.map(val => this.fb.group({qty: new FormControl(val.qty),unitType: new FormControl(val.unitType),size: new FormControl(val.size),action: new FormControl('existingRecord'),isEditable: new FormControl(val.isEditable),isNewRow: new FormControl(false),})))});
     this.dataSource = new MatTableDataSource((this.msMultiZoneTypeForm.get('VORows') as FormArray).controls);        
   }
 
