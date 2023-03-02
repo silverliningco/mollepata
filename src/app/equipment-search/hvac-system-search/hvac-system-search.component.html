@@ -108,17 +108,16 @@
                     <mat-form-field appearance="fill">
                         <mat-label>Cooling tons</mat-label>
                         <mat-select #sGroup formControlName="coolingTons">
-                            <mat-option radioGroup="sGroup" [value]="0.5">
-                                < 1.0</mat-option>
-                                    <mat-option radioGroup="sGroup" [value]="1.0">1.0</mat-option>
-                                    <mat-option radioGroup="sGroup" [value]="1.5">1.5</mat-option>
-                                    <mat-option radioGroup="sGroup" [value]="2.0">2.0</mat-option>
-                                    <mat-option radioGroup="sGroup" [value]="2.5">2.5</mat-option>
-                                    <mat-option radioGroup="sGroup" [value]="3.0">3.0</mat-option>
-                                    <mat-option radioGroup="sGroup" [value]="3.5">3.5</mat-option>
-                                    <mat-option radioGroup="sGroup" [value]="4.0">4.0</mat-option>
-                                    <mat-option radioGroup="sGroup" [value]="4.5">4.5</mat-option>
-                                    <mat-option radioGroup="sGroup" [value]="5.0">5.0</mat-option>
+                            <mat-option radioGroup="sGroup" [value]="0.5"> < 1.0</mat-option>
+                            <mat-option radioGroup="sGroup" [value]="1.0">1.0</mat-option>
+                            <mat-option radioGroup="sGroup" [value]="1.5">1.5</mat-option>
+                            <mat-option radioGroup="sGroup" [value]="2.0">2.0</mat-option>
+                            <mat-option radioGroup="sGroup" [value]="2.5">2.5</mat-option>
+                            <mat-option radioGroup="sGroup" [value]="3.0">3.0</mat-option>
+                            <mat-option radioGroup="sGroup" [value]="3.5">3.5</mat-option>
+                            <mat-option radioGroup="sGroup" [value]="4.0">4.0</mat-option>
+                            <mat-option radioGroup="sGroup" [value]="4.5">4.5</mat-option>
+                            <mat-option radioGroup="sGroup" [value]="5.0">5.0</mat-option>
                         </mat-select>
                     </mat-form-field>
 
@@ -183,7 +182,7 @@
                         <mat-label>Indoor unit type:</mat-label>
                         <mat-select #sGroup formControlName="indoorUnitType">
                             <mat-option radioGroup="sGroup" value="Fan coil">Fan coil</mat-option>
-                            <mat-option radioGroup="sGroup" value="Mini-split indoor">Mini-split</mat-option>
+                            <mat-option radioGroup="sGroup" value="Mini-split indoor" [disabled]="this.systemDesignForm.controls['outdoorUnitType'].value=='Split System'">Mini-split</mat-option>
                             <mat-option radioGroup="sGroup" value="Evaporator coil">Furnace + Evaporator
                                 Coil</mat-option>
                         </mat-select>
@@ -227,11 +226,11 @@
                                         <!--Quantity -->
                                         <mat-form-field appearance="fill">
                                             <mat-select formControlName="qty" placeholder="Quantity" [disabled]="false">
-                                            <mat-option value="1">1</mat-option>
-                                            <mat-option value="2">2</mat-option>
-                                            <mat-option value="3">3</mat-option>
-                                            <mat-option value="4">4</mat-option>
-                                            <mat-option value="5">5</mat-option>
+                                            <mat-option [value]="1">1</mat-option>
+                                            <mat-option [value]="2">2</mat-option>
+                                            <mat-option [value]="3">3</mat-option>
+                                            <mat-option [value]="4">4</mat-option>
+                                            <mat-option [value]="5">5</mat-option>
                                             </mat-select>
                                         </mat-form-field>
                                         </td>
@@ -254,11 +253,11 @@
                                         <!-- Size -->
                                         <mat-form-field appearance="fill">
                                             <mat-select formControlName="size" placeholder="Size" [disabled]="false">
-                                            <mat-option value="6000">6000</mat-option>
-                                            <mat-option value="9000">9000</mat-option>
-                                            <mat-option value="12000">12000</mat-option>
-                                            <mat-option value="18000">18000</mat-option>
-                                            <mat-option value="24000">24000</mat-option>
+                                            <mat-option [value]="6000">6000</mat-option>
+                                            <mat-option [value]="9000">9000</mat-option>
+                                            <mat-option [value]="12000">12000</mat-option>
+                                            <mat-option [value]="18000">18000</mat-option>
+                                            <mat-option [value]="24000">24000</mat-option>
                                             </mat-select>
                                         </mat-form-field>
                                         </td>

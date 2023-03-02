@@ -84,6 +84,8 @@ export class HVACSystemSearchComponent implements OnInit {
     });
 
     this.systemDesignForm.valueChanges.subscribe(selectedValue => {
+      // We assign the entire form with the changes made to myData.systemDesign, 
+      // in order not to lose data in msMultizoneType we copy to a variable and update the property.
       let mymsMultizoneType:any = [];
       if(this.myData.systemDesign?.msMultiZoneType){
         mymsMultizoneType = [...this.myData.systemDesign?.msMultiZoneType!];
@@ -98,6 +100,21 @@ export class HVACSystemSearchComponent implements OnInit {
       this.MySubmitValidation["systemDesign"] = this.systemDesignForm.valid;
     });
    
+    this.systemDesignForm.get("outdoorUnitType")!.valueChanges.subscribe(selectedValue => {
+      if(selectedValue == "Small packaged unit") {
+        this.systemDesignForm.controls["indoorUnitType"].disable();
+        this.systemDesignForm.controls["furnaceType"].disable();
+        this.systemDesignForm.controls["indoorUnitType"].reset();
+        this.systemDesignForm.controls["furnaceType"].reset();
+      } else {
+        this.systemDesignForm.controls["indoorUnitType"].enable();
+        this.systemDesignForm.controls["furnaceType"].enable();
+      }
+
+      if(selectedValue == "Split System") {
+        this.systemDesignForm.controls["indoorUnitType"].reset();
+      }
+    });
   }
 
   setNewState(stateData: any){
@@ -135,9 +152,9 @@ export class HVACSystemSearchComponent implements OnInit {
 
   newIndoorUnit() {
     const indoorUnitForm = this.fb.group({
-        qty: [, Validators.required],
-        unitType: [, Validators.required],
-        size: [, Validators.required],
+        qty: [0, Validators.required],
+        unitType: ["", Validators.required],
+        size: [0, Validators.required],
     });
   
     this.indoorUnits.push(indoorUnitForm);
