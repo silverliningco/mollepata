@@ -9,29 +9,32 @@
 
         <!-- button -->
         <div fxLayout="column" fxLayoutAlign="center end" class="rc-stepper-buttons">
-            <button type="button" mat-raised-button color="primary" [disabled]="!MySubmitValidation['location']" matStepperNext>
+            <button type="button" mat-raised-button color="primary" [disabled]="!MySubmitValidation['location']"
+                matStepperNext>
                 Continue
                 <mat-icon>arrow_forward</mat-icon>
             </button>
         </div>
     </mat-step>
- 
+
     <!--- Step 2: Utility providers. -->
     <mat-step [completed]="MySubmitValidation['utilityProviders']">
         <ng-template matStepLabel>Utility providers</ng-template>
 
-        <app-utility-providers [state]= "myData.state!" (utilityProvidersChange)="setNewUtilityProviders( $event )"></app-utility-providers>
+        <app-utility-providers [state]="myData.state!"
+            (utilityProvidersChange)="setNewUtilityProviders( $event )"></app-utility-providers>
 
         <!-- button -->
         <div fxLayout="column" fxLayoutAlign="center end" class="rc-stepper-buttons">
-            <button type="button" mat-raised-button color="primary" [disabled]="!MySubmitValidation['utilityProviders']" matStepperNext>
+            <button type="button" mat-raised-button color="primary" [disabled]="!MySubmitValidation['utilityProviders']"
+                matStepperNext>
                 Continue
                 <mat-icon>arrow_forward</mat-icon>
             </button>
         </div>
 
     </mat-step>
-  
+
     <!--- Step 3: Dwelling info. -->
     <mat-step [completed]="MySubmitValidation['dwellingInfo']">
         <ng-template matStepLabel>Dwelling Info</ng-template>
@@ -43,7 +46,8 @@
 
         <!-- button -->
         <div fxLayout="column" fxLayoutAlign="center end" class="rc-stepper-buttons">
-                <button type="button" mat-raised-button color="primary" [disabled]="!MySubmitValidation['dwellingInfo']" matStepperNext>
+            <button type="button" mat-raised-button color="primary" [disabled]="!MySubmitValidation['dwellingInfo']"
+                matStepperNext>
                 Continue
                 <mat-icon>arrow_forward</mat-icon>
             </button>
@@ -58,7 +62,8 @@
         <h2 class="rc-main-title">Heated and cooled</h2>
 
         <div fxLayout="row column" fxLayoutAlign="center">
-            <div fxFlex="25" fxLayout="column" fxLayoutAlign="center center" fxFlex.xs="100" fxFlex.sm="50" fxFlex.md="25" fxLayoutGap="20">
+            <div fxFlex="25" fxLayout="column" fxLayoutAlign="center center" fxFlex.xs="100" fxFlex.sm="50"
+                fxFlex.md="25" fxLayoutGap="20">
                 <form [formGroup]="heatedCooledForm" class="rc-form">
                     <mat-radio-group formControlName="cooled" aria-label="Select an option">
                         <mat-label class="rc-label">Provide cooling?</mat-label>
@@ -78,13 +83,14 @@
 
         <!-- button -->
         <div fxLayout="column" fxLayoutAlign="center end" class="rc-stepper-buttons">
-            <button type="button" mat-raised-button color="primary" [disabled]="!MySubmitValidation['heatedCooled']" matStepperNext>
+            <button type="button" mat-raised-button color="primary" [disabled]="!MySubmitValidation['heatedCooled']"
+                matStepperNext>
                 Continue
                 <mat-icon>arrow_forward</mat-icon>
             </button>
         </div>
     </mat-step>
-    
+
     <!--- Step 5: System size. -->
     <mat-step [completed]="MySubmitValidation['systemSize']">
         <ng-template matStepLabel>System Size</ng-template>
@@ -93,23 +99,26 @@
         <h2 class="rc-main-title">System Size</h2>
 
         <div fxLayout fxLayoutAlign="center">
-            <div fxLayout fxFlex="40" fxLayout="column" fxLayoutAlign="center center" fxFlex.xs="100" fxFlex.sm="70" fxFlex.md="40" fxLayoutGap="20">
-                <form [formGroup]="systemSizeForm" fxLayout="column" fxFlex="100" fxLayoutAlign="center" class="rc-form">
+            <div fxLayout fxFlex="40" fxLayout="column" fxLayoutAlign="center center" fxFlex.xs="100" fxFlex.sm="70"
+                fxFlex.md="40" fxLayoutGap="20">
+                <form [formGroup]="systemSizeForm" fxLayout="column" fxFlex="100" fxLayoutAlign="center"
+                    class="rc-form">
 
                     <!--- Cooling tons. -->
                     <mat-form-field appearance="fill">
                         <mat-label>Cooling tons</mat-label>
                         <mat-select #sGroup formControlName="coolingTons">
-                            <mat-option radioGroup="sGroup" [value] = "0.5"> < 1.0</mat-option>
-                            <mat-option radioGroup="sGroup" [value] = "1.0">1.0</mat-option>
-                            <mat-option radioGroup="sGroup" [value] = "1.5">1.5</mat-option>
-                            <mat-option radioGroup="sGroup" [value] = "2.0">2.0</mat-option>
-                            <mat-option radioGroup="sGroup" [value] = "2.5">2.5</mat-option>
-                            <mat-option radioGroup="sGroup" [value] = "3.0">3.0</mat-option>
-                            <mat-option radioGroup="sGroup" [value] = "3.5">3.5</mat-option>
-                            <mat-option radioGroup="sGroup" [value] = "4.0">4.0</mat-option>
-                            <mat-option radioGroup="sGroup" [value] = "4.5">4.5</mat-option>
-                            <mat-option radioGroup="sGroup" [value] = "5.0">5.0</mat-option>
+                            <mat-option radioGroup="sGroup" [value]="0.5">
+                                < 1.0</mat-option>
+                                    <mat-option radioGroup="sGroup" [value]="1.0">1.0</mat-option>
+                                    <mat-option radioGroup="sGroup" [value]="1.5">1.5</mat-option>
+                                    <mat-option radioGroup="sGroup" [value]="2.0">2.0</mat-option>
+                                    <mat-option radioGroup="sGroup" [value]="2.5">2.5</mat-option>
+                                    <mat-option radioGroup="sGroup" [value]="3.0">3.0</mat-option>
+                                    <mat-option radioGroup="sGroup" [value]="3.5">3.5</mat-option>
+                                    <mat-option radioGroup="sGroup" [value]="4.0">4.0</mat-option>
+                                    <mat-option radioGroup="sGroup" [value]="4.5">4.5</mat-option>
+                                    <mat-option radioGroup="sGroup" [value]="5.0">5.0</mat-option>
                         </mat-select>
                     </mat-form-field>
 
@@ -125,7 +134,8 @@
 
         <!-- button -->
         <div fxLayout="column" fxLayoutAlign="center end" class="rc-stepper-buttons">
-            <button type="button" mat-raised-button color="primary" [disabled]="!MySubmitValidation['systemSize']" matStepperNext>
+            <button type="button" mat-raised-button color="primary" [disabled]="!MySubmitValidation['systemSize']"
+                matStepperNext>
                 Continue
                 <mat-icon>arrow_forward</mat-icon>
             </button>
@@ -134,15 +144,17 @@
     </mat-step>
 
     <!--- Step 6: System design. -->
-    <mat-step [completed]="matStepSystemDesignCompleted || MySubmitValidation['systemDesign']">
+    <mat-step [completed]="matStepSystemDesignCompleted || (MySubmitValidation['systemDesign'] && systemDesignForm.get('indoorUnitType')!.value != 'Mini-split indoor') || (systemDesignForm.get('indoorUnitType')!.value == 'Mini-split indoor' && (this.myData.systemDesign?.msMultiZoneType?.length || 0) > 0)">
         <ng-template matStepLabel>System Design</ng-template>
 
         <!-- note for show all results -->
         <div fxLayout fxLayoutAlign="center" fxLayoutGap="16px">
             <div fxFlex="50" fxFlex.sm="70" fxFlex.xs="100" class="rc-note">
-                <div fxLayout="row column" fxLayoutAlign="space-between center" >
-                    <p fxFlex="60" fxFlex.xs="100" fxflex.sm="80" class="rc-small"> <b>Note: </b><br>If you want to see all the combinations </p>
-                    <button fxFlex="40" fxFlex.xs="100" fxflex.sm="80" mat-raised-button color="primary" (click)="allCombinations()" matStepperNext>Click here!</button>
+                <div fxLayout="row column" fxLayoutAlign="space-between center">
+                    <p fxFlex="60" fxFlex.xs="100" fxflex.sm="80" class="rc-small"> <b>Note: </b><br>If you want to see
+                        all the combinations </p>
+                    <button fxFlex="40" fxFlex.xs="100" fxflex.sm="80" mat-raised-button color="primary"
+                        (click)="allCombinations()" matStepperNext>Click here!</button>
                 </div>
             </div>
         </div>
@@ -151,161 +163,150 @@
         <h2 class="rc-main-title">System design</h2>
 
         <div fxLayout="row column" fxLayoutAlign="center" fxLayoutGap="20">
-            <div fxFlex="30" fxLayout="column" fxLayoutAlign="center stretch" fxFlex.xs="100" fxFlex.sm="70" fxFlex.md="30" fxLayoutGap="20">
+            <div fxFlex="30" fxLayout="column" fxLayoutAlign="center stretch" fxFlex.xs="100" fxFlex.sm="70"
+                fxFlex.md="30" fxLayoutGap="20">
                 <form [formGroup]="systemDesignForm" class="rc-form">
 
                     <!-- Outdoor unit -->
                     <mat-form-field appearance="fill">
                         <mat-label>Outdoor unit type:</mat-label>
                         <mat-select #sGroup formControlName="outdoorUnitType">
-                            <mat-option radioGroup="sGroup" value = "Split System">Split System</mat-option>
-                            <mat-option radioGroup="sGroup" value = "Mini-Split">Mini-Split</mat-option>               
-                            <mat-option radioGroup="sGroup" value = "Small packaged unit">Small packaged unit</mat-option>
+                            <mat-option radioGroup="sGroup" value="Split System">Split System</mat-option>
+                            <mat-option radioGroup="sGroup" value="Mini-Split">Mini-Split</mat-option>
+                            <mat-option radioGroup="sGroup" value="Small packaged unit">Small packaged unit</mat-option>
                         </mat-select>
                     </mat-form-field>
                     <br>
-  
+
                     <!-- Indoor unit -->
                     <mat-form-field appearance="fill">
                         <mat-label>Indoor unit type:</mat-label>
                         <mat-select #sGroup formControlName="indoorUnitType">
-                            <mat-option radioGroup="sGroup" value = "Fan coil">Fan coil</mat-option>
-                            <mat-option radioGroup="sGroup" value = "Mini-split indoor">Mini-split</mat-option>
-                            <mat-option radioGroup="sGroup" value = "Evaporator coil">Furnace + Evaporator Coil</mat-option>
+                            <mat-option radioGroup="sGroup" value="Fan coil">Fan coil</mat-option>
+                            <mat-option radioGroup="sGroup" value="Mini-split indoor">Mini-split</mat-option>
+                            <mat-option radioGroup="sGroup" value="Evaporator coil">Furnace + Evaporator
+                                Coil</mat-option>
                         </mat-select>
                     </mat-form-field>
-                    <br> 
-  
+                    <br>
+
                     <!-- Furnace type -->
                     <mat-form-field appearance="fill">
                         <mat-label>Furnace type:</mat-label>
                         <mat-select formControlName="furnaceType">
-                            <mat-option radioGroup="sGroup" value = "New ECM furnace">New ECM furnace</mat-option>
-                            <mat-option radioGroup="sGroup" value = "Existing or non-ECM furnace">Existing or non-ECM furnace</mat-option>
-                            <mat-option radioGroup="sGroup" value = "None">None</mat-option>
+                            <mat-option radioGroup="sGroup" value="New ECM furnace">New ECM furnace</mat-option>
+                            <mat-option radioGroup="sGroup" value="Existing or non-ECM furnace">Existing or non-ECM
+                                furnace</mat-option>
+                            <mat-option radioGroup="sGroup" value="None">None</mat-option>
                         </mat-select>
                     </mat-form-field>
 
                 </form>
             </div>
-            
+
             <!--- If indoor unit type is mini-split, show indoor unit design table. -->
+            <div *ngIf="systemDesignForm.get('indoorUnitType')!.value == 'Mini-split indoor'" fxFlex="65"
+                fxFlex.xs="100" fxFlex.sm="70" fxFlex.md="65">
 
-            <div *ngIf="systemDesignForm.get('indoorUnitType')!.value == 'Mini-split indoor'" fxFlex="65" fxFlex.xs="100" fxFlex.sm="70" fxFlex.md="65">
-                <div fxLayout="row column" fxLayoutAlign="end center">
-                    <button mat-button (click)="AddNewRow()" class="rc-btn rc-btn-secondary-1">
-                        <mat-icon>add</mat-icon> Add Row
-                    </button>
-                </div>
-                <form [formGroup]="msMultiZoneTypeForm" autocomplete="off">
-                    <div class="table-overflow">
-                        <table mat-table [dataSource]="dataSource">
-                            <!-- Name Column -->
-                            <ng-container matColumnDef="qty">
-                              <th *matHeaderCellDef> Quantity </th>
-                              <td data-title="Quantity" *matCellDef="let element; let i = index" [formGroup]="element">
-                    
-                                <!-- <span [hidden]="msMultiZoneTypeForm.get('VORows').value[i].isEditable"> -->
-                                  <mat-form-field style="width: 150px;" [appearance]="msMultiZoneTypeForm.get('VORows')!.value[i].isEditable? 'fill' : 'legacy'">
-                                    <mat-label>Choose a quantity</mat-label>
-                                    <mat-select formControlName="qty" [disabled]="msMultiZoneTypeForm.get('VORows')!.value[i].isEditable">
-                                        <mat-option value ="1">1</mat-option>
-                                        <mat-option value ="2">2</mat-option>
-                                        <mat-option value ="3">3</mat-option>
-                                        <mat-option value ="4">4</mat-option>
-                                        <mat-option value ="5">5</mat-option>
-                                    </mat-select>
-                                </mat-form-field>
-                              </td>
-                            </ng-container>
-                    
-                            <!-- Weight Column -->
-                            <ng-container matColumnDef="unitType">
-                              <th *matHeaderCellDef> Unit Type </th>
-                              <td data-title="Unit Type" *matCellDef="let element; let i = index" [formGroup]="element">            
-                                  <mat-form-field style="width: 170px;"
-                                  [appearance]="msMultiZoneTypeForm.get('VORows')!.value[i].isEditable? 'fill' : 'legacy'">
-                                    <mat-label>Choose an unit type</mat-label>
-                                    <mat-select formControlName="unitType" [disabled]="msMultiZoneTypeForm.get('VORows')!.value[i].isEditable">
-                    
-                                        <mat-option value ="Mini-Split Air Handler (Full Size)">Mini-Split Air Handler (Full Size)</mat-option>
-                                        <mat-option value ="Ducted mini-split Air Handler (Slim Style)">Ducted mini-split Air Handler (Slim Style)</mat-option>
-                                        <mat-option value ="Floor/Ceiling Mount">Floor/Ceiling Mount</mat-option>
-                                        <mat-option value ="Cassette">Cassette</mat-option>
-                                        <mat-option value ="High wall">High wall</mat-option>
-                                        <mat-option value ="1-Way Casette">1-Way Casette</mat-option>
-                    
-                                    </mat-select>
-                                </mat-form-field>
-                              </td>
-                            </ng-container>
-                    
-                            <!-- Symbol Column -->
-                            <ng-container matColumnDef="size">
-                              <th *matHeaderCellDef> Size </th>
-                              <td data-title="Size" *matCellDef="let element; let i = index" [formGroup]="element">
-                                <mat-form-field style="width: 150px;"
-                                [appearance]="msMultiZoneTypeForm.get('VORows')!.value[i].isEditable? 'fill' : 'legacy'">
-                                    <mat-label>Choose a size</mat-label>
-                                    <mat-select formControlName="size" [disabled]="msMultiZoneTypeForm.get('VORows')!.value[i].isEditable">
+                    <div [formGroup]="msMultiZoneTypeForm">
+      
+                        <ng-container formArrayName="indoorUnits">
+                            <div class="table-overflow">
+                                <table>
+                                    <thead>
+                                        <th>Quantity</th>
+                                        <th>Unit type</th>
+                                        <th>Size</th>
+                                        <th></th>
+                                    </thead>
+                                    <ng-container *ngFor="let indoorUnitForm of indoorUnits.controls; let i = index" class="lesson-form-row"
+                                    [formGroupName]="i">
+
+                                    <tr>
+                                        <td>
+                                        <!--Quantity -->
+                                        <mat-form-field appearance="fill">
+                                            <mat-select formControlName="qty" placeholder="Quantity" [disabled]="false">
+                                            <mat-option value="1">1</mat-option>
+                                            <mat-option value="2">2</mat-option>
+                                            <mat-option value="3">3</mat-option>
+                                            <mat-option value="4">4</mat-option>
+                                            <mat-option value="5">5</mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                        </td>
+                                        <td>
+                                        <!-- Unit type -->
+                                        <mat-form-field appearance="fill">
+                                            <mat-select formControlName="unitType" placeholder="Unit type" [disabled]="false">
+                                            <mat-option value="Mini-Split Air Handler (Full Size)">Mini-Split Air Handler (Full
+                                                Size)</mat-option>
+                                            <mat-option value="Ducted mini-split Air Handler (Slim Style)">Ducted mini-split Air Handler (Slim
+                                                Style)</mat-option>
+                                            <mat-option value="Floor/Ceiling Mount">Floor/Ceiling Mount</mat-option>
+                                            <mat-option value="Cassette">Cassette</mat-option>
+                                            <mat-option value="High wall">High wall</mat-option>
+                                            <mat-option value="1-Way Casette">1-Way Casette</mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                        </td>
+                                        <td>
+                                        <!-- Size -->
+                                        <mat-form-field appearance="fill">
+                                            <mat-select formControlName="size" placeholder="Size" [disabled]="false">
+                                            <mat-option value="6000">6000</mat-option>
+                                            <mat-option value="9000">9000</mat-option>
+                                            <mat-option value="12000">12000</mat-option>
+                                            <mat-option value="18000">18000</mat-option>
+                                            <mat-option value="24000">24000</mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                        </td>
+
+                                        <td>
+
+                                        <!-- Save button -->
+                                        <button *ngIf="!indoorUnitForm.disabled" class="table-buttons save" matTooltip="Save Changes" color="primary" (click)="addIndoorUnit(i)" [disabled]="!indoorUnitForm.valid">
+                                            <mat-icon>check</mat-icon>
+                                        </button>
                                         
-                                        <mat-option value ="6000">6000</mat-option>
-                                        <mat-option value ="9000">9000</mat-option>
-                                        <mat-option value ="12000">12000</mat-option>
-                                        <mat-option value ="18000">18000</mat-option>
-                                        <mat-option value ="24000">24000</mat-option>
-                    
-                                    </mat-select>
-                                </mat-form-field>            
-                              </td>
-                            </ng-container>
-                    
-                            <ng-container matColumnDef="action">
-                              <th *matHeaderCellDef> Action </th>
-                              <td data-title="Action" *matCellDef="let element; let i = index" [formGroup]="element">
-                                <button class="table-buttons save"
-                                                        matTooltip="Save Changes" (click)="SaveVO(msMultiZoneTypeForm,i)"
-                                                        *ngIf="!msMultiZoneTypeForm.get('VORows')!.value[i].isEditable" color="primary">
-                                                        <mat-icon>check</mat-icon>
-                                </button>                               
-                    
-                                <button class="table-buttons edit"
-                                                        *ngIf="msMultiZoneTypeForm.get('VORows')!.value[i].isEditable"
-                                                        matTooltip="Edit" color="primary" (click)="EditSVO(msMultiZoneTypeForm,i)">
-                                                        <mat-icon>edit</mat-icon>
-                                </button>
-                    
-                                <button class="table-buttons delete"
-                                                        *ngIf="msMultiZoneTypeForm.get('VORows')!.value[i].isEditable"
-                                                        matTooltip="Delete" (click)="RemoveVO(i)" color="warn">
-                                                        <mat-icon>delete</mat-icon>
-                                </button>
-                              </td>
-                            </ng-container>
-                    
-                            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-                    
-                            <!-- Row shown when there is no matching data. -->
-                            
-                        </table>
-                    </div>
+                                        <!-- Edit button -->
+                                        <button *ngIf="indoorUnitForm.disabled" class="table-buttons edit" matTooltip="Edit" color="primary" (click)="editIndoorUnit(i)">
+                                            <mat-icon>edit</mat-icon>
+                                        </button>
 
-                    <div *ngIf="validation==false" class="messageValidation">
-                        <mat-icon>warning</mat-icon><span> Fill in all the empty fields to continue</span>
+                                        <!-- Delete button -->
+                                        <button *ngIf="this.indoorUnits.value.length != 1" class="table-buttons delete" matTooltip="Delete" color="warn" (click)="deleteIndoorUnit(i)">
+                                            <mat-icon>delete</mat-icon>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    </ng-container>
+
+                                </table>
+                            </div>
+                        </ng-container>
+
+                        <div fxLayout="row column" fxLayoutAlign="end center">
+                            <button mat-button (click)="newIndoorUnit()" class="rc-btn rc-btn-secondary-1">
+                                <mat-icon>add</mat-icon> Add Row
+                            </button>
+                        </div>
+
                     </div>
-                </form> 
-              </div>      
+               
+            </div>
 
         </div>
 
-
         <!-- button -->
         <div fxLayout="column" fxLayoutAlign="center end" class="rc-stepper-buttons">
-            <button type="button" mat-raised-button color="primary" [disabled]="(!MySubmitValidation['systemDesign'] || !existRecord) === true" matStepperNext>
+            <button type="button" mat-raised-button color="primary"
+                [disabled]="!((MySubmitValidation['systemDesign'] && systemDesignForm.get('indoorUnitType')!.value != 'Mini-split indoor') || (systemDesignForm.get('indoorUnitType')!.value == 'Mini-split indoor' && (this.myData.systemDesign?.msMultiZoneType?.length || 0) > 0))" matStepperNext>
                 Continue
                 <mat-icon>arrow_forward</mat-icon>
             </button>
+             
         </div>
 
     </mat-step>
@@ -317,8 +318,8 @@
 
         <app-results [payload]="payload"></app-results>
 
-    </mat-step> 
-  
+    </mat-step>
+
 </mat-stepper>
 
 {{ this.myData | json }}

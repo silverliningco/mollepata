@@ -23,19 +23,3 @@
 .table-buttons.delete{
   background-color: var(--rc-warn-color);
 }
-  
-.messageValidation {
-  display: flex;
-  align-items: center;
-  font-size: 12px;
-  color: #856404;
-  background-color: #fff3cd;
-  padding: 2px 5px;
-}
-
-.messageValidation mat-icon{
-  font-size: 16px;
-  height: 16px;
-  width: 16px;
-  margin-right: 3px;
-}
