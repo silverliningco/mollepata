@@ -193,10 +193,10 @@
                     <mat-form-field appearance="fill">
                         <mat-label>Furnace type:</mat-label>
                         <mat-select formControlName="furnaceType">
-                            <mat-option radioGroup="sGroup" value="New ECM furnace">New ECM furnace</mat-option>
-                            <mat-option radioGroup="sGroup" value="Existing or non-ECM furnace">Existing or non-ECM
+                            <mat-option radioGroup="sGroup" value="New ECM furnace" [disabled]="this.systemDesignForm.controls['indoorUnitType'].value != 'Evaporator coil'">New ECM furnace</mat-option>
+                            <mat-option radioGroup="sGroup" value="Existing or non-ECM furnace" [disabled]="this.systemDesignForm.controls['indoorUnitType'].value != 'Evaporator coil'">Existing or non-ECM
                                 furnace</mat-option>
-                            <mat-option radioGroup="sGroup" value="None">None</mat-option>
+                            <mat-option radioGroup="sGroup" value="None" [disabled]="this.systemDesignForm.controls['indoorUnitType'].value == 'Evaporator coil'">None</mat-option>
                         </mat-select>
                     </mat-form-field>
 

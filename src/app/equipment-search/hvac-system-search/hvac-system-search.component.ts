@@ -115,6 +115,11 @@ export class HVACSystemSearchComponent implements OnInit {
         this.systemDesignForm.controls["indoorUnitType"].reset();
       }
     });
+
+    this.systemDesignForm.get("indoorUnitType")!.valueChanges.subscribe(selectedValue => {
+      this.systemDesignForm.controls["furnaceType"].reset();
+    });
+
   }
 
   setNewState(stateData: any){
