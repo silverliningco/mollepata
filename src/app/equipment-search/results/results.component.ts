@@ -1,4 +1,5 @@
 import { Component, Input, OnInit, OnChanges, SimpleChanges } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { EquipmentSearch } from '../interfaces/equipment-search.interface';
 
@@ -14,8 +15,10 @@ export class ResultsComponent implements OnInit  {
   @Input() payload: EquipmentSearch = {}; 
 
   myResults!: Array<any>;
+
+  stockStatusForm!: FormGroup;
   
-  constructor(private _endpoint: EndpointsService ) { }
+  constructor(private _endpoint: EndpointsService, private fb: FormBuilder ) { }
 
   // Lifecycle hook that is called when any data-bound property of a directive change.s
   ngOnChanges(changes: SimpleChanges): void {
@@ -75,6 +78,12 @@ export class ResultsComponent implements OnInit  {
   }
 
   ngOnInit(): void {
+
+    // Stock Status form group.
+    this.stockStatusForm = this.fb.group({
+      showAllResults: [ '', Validators.required]
+    });
+
 
     // First load the available eligibility questions and requirements and their default values.
     this.loadDefaultEligibility();

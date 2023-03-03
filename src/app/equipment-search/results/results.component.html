@@ -3,7 +3,7 @@
 
  <!-- Stock status div.fxFlex="100" -->
  <div class="rc-filter-stock">
-    <form>
+    <form [formGroup]="stockStatusForm">
       <h5 class="rc-filter-group-title">Stock status</h5>
       <mat-radio-group #rGroup formControlName="showAllResults" fxLayout="row" fxLayout.xs="column">
         <mat-radio-button [value]="false" radioGroup="rGroup">Stock items only</mat-radio-button>
@@ -71,9 +71,9 @@
                         <span>Eligibility Requirements</span>
                     </div>
                     <div class="requirement">
-                        <mat-checkbox formControlName="pepperoni">Pepperoni</mat-checkbox>
-                        <mat-checkbox formControlName="extracheese">Extra Cheese</mat-checkbox>
-                        <mat-checkbox formControlName="mushroom">Mushroom</mat-checkbox>
+                        <mat-checkbox>Pepperoni</mat-checkbox>
+                        <mat-checkbox>Extra Cheese</mat-checkbox>
+                        <mat-checkbox>Mushroom</mat-checkbox>
                     </div>
                 </div>
           
