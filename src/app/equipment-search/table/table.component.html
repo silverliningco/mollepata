@@ -10,7 +10,9 @@
           <th *ngFor="let unit of mySystems[0].components">{{unit.componentType|uppercase}}</th>
           <th>Configuration</th>
           <ng-container *ngFor="let ratings of mySystems[0].AHRIRatings">
-            <th *ngFor="let key of Object.keys(ratings)">{{key}}</th>
+            <ng-container *ngFor="let key of Object.keys(ratings)">
+              <th *ngIf="this.isVisible(key)">{{key}}</th>
+            </ng-container>
           </ng-container>
           <th>TOTAL AVAILABLE REBATES</th>
           <th></th>
@@ -20,8 +22,8 @@
         <tr *ngFor="let ahriCombination of mySystems; index as i">
           <td data-title="n°">{{i+1}}</td>
 
-          <td data-title="{{unit.componentType}}" *ngFor="let unit of ahriCombination.components"
-            data-title="{{unit.componentType}}" matTooltip="{{unit.title}}" matTooltipPosition="right">{{unit.title}}
+          <td [attr.data-title]="unit.componentType" *ngFor="let unit of ahriCombination.components"
+           matTooltip="{{unit.title}}" matTooltipPosition="right">{{unit.title}}
           </td>
 
           <td data-title="configuration" *ngIf="ahriCombination.configurationOptions" data-title="Configuration">
@@ -30,7 +32,9 @@
             </ul>
           </td>
           <ng-container *ngFor="let ratings of mySystems[0].AHRIRatings">
-            <td *ngFor="let key of Object.keys(ratings)">{{ratings[key]}}</td>
+            <ng-container *ngFor="let key of Object.keys(ratings)">
+              <td [attr.data-title]="key" *ngIf="this.isVisible(key)">{{ratings[key]}}</td>
+            </ng-container>
           </ng-container>
 
           <td data-title="Total rebate">{{ahriCombination.availableRebateAmount | currency:"USD":"symbol" : '1.0-0'}}

@@ -28,6 +28,17 @@ export class TableComponent implements OnInit {
     this.dialog.closeAll();
   }
  
+  // Function to show if a field in table will be visible or not.
+  isVisible(param:string) {
+    let myVisibles = ["EER", "SEER","HSPF","AFUE"];
+    
+    if (myVisibles.includes(param)) {
+      return true;
+    } 
+
+    return false;
+  }
+
   // Simple function to get component object from components by component type.
   getComponentByComponentType(components: any[], componentType:string) {
     return components.filter((c:any) => c.componentType == componentType)[0];
