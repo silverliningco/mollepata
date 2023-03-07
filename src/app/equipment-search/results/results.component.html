@@ -3,9 +3,9 @@
 
  <!-- Stock status div.fxFlex="100" -->
  <div class="rc-filter-stock">
-    <form [formGroup]="stockStatusForm">
+    <form [formGroup]="commerceInfoForm">
       <h5 class="rc-filter-group-title">Stock status</h5>
-      <mat-radio-group #rGroup formControlName="showAllResults" fxLayout="row" fxLayout.xs="column">
+      <mat-radio-group #rGroup formControlName="stockStatus" fxLayout="row" fxLayout.xs="column" (change)="loadResults()">
         <mat-radio-button [value]="false" radioGroup="rGroup">Stock items only</mat-radio-button>
         <mat-radio-button [value]="true" radioGroup="rGroup">Show all</mat-radio-button>
       </mat-radio-group>
@@ -47,20 +47,15 @@
                         <mat-icon>help</mat-icon> 
                         <span>Eligibility Questions</span>
                     </div>
-                    <div class="question">
-                        <label id="question-1">Pick your favorite season</label>
-                        <mat-radio-group aria-labelledby="question-1">
-                            <mat-radio-button value="1">Option 1</mat-radio-button>
-                            <mat-radio-button value="2">Option 2</mat-radio-button>
+
+                    <div class="question" *ngFor="let question of myEligibilityCriteria?.eligibilityQuestions">
+                        <label id="{{question.questionId}}">{{question.questionText}}</label>
+                        <mat-radio-group [attr.aria-labelledby]="question.questionId">
+                            <mat-radio-button value="{{option}}"*ngFor="let option of question.options">{{option}}</mat-radio-button>
+
                         </mat-radio-group>
                     </div>
-                    <div class="question">
-                      <label id="question-2">Pick your favorite season</label>
-                      <mat-radio-group aria-labelledby="question-2">
-                          <mat-radio-button value="1">Option 1</mat-radio-button>
-                          <mat-radio-button value="2">Option 2</mat-radio-button>
-                      </mat-radio-group>
-                  </div>
+                   
                 </div>
 
 
@@ -71,9 +66,7 @@
                         <span>Eligibility Requirements</span>
                     </div>
                     <div class="requirement">
-                        <mat-checkbox>Pepperoni</mat-checkbox>
-                        <mat-checkbox>Extra Cheese</mat-checkbox>
-                        <mat-checkbox>Mushroom</mat-checkbox>
+                        <mat-checkbox [id]="requirement.requirementId" *ngFor="let requirement of myEligibilityCriteria?.eligibilityRequirements">{{requirement.requirementText}}</mat-checkbox>
                     </div>
                 </div>
           
@@ -84,25 +77,16 @@
 
     <!-- Search results -->
     <div fxFlex="70"  fxFlex.xs="100" fxFlex.sm="90">
+
         <!-- Product line menu, if applicable. div.fxFlex="100" (encompass the results) -->
-        <mat-tab-group>
-          <mat-tab>
-            <ng-template mat-tab-label>Primero</ng-template>
-            <!-- Search results grouped by outdoor unit in "card" type displays. -->
-            <app-card *ngFor="let myResult of myResults" [mySystems]="myResult">
-            </app-card>
-          </mat-tab>
-          <mat-tab>
-            <ng-template mat-tab-label>Segundo</ng-template>
-            Contendido 2
-          </mat-tab>
-          <mat-tab>
-            <ng-template mat-tab-label>Tercero</ng-template>
-            Contendido 2
-          </mat-tab>
+        <mat-tab-group  (focusChange)="systemDesignChange($event.index)">
+          <mat-tab *ngFor="let productLine of this.productLines" label="{{productLine.option}}"></mat-tab>
+           
         </mat-tab-group>
-        <!-- ... -->
     
+        <!-- Search results grouped by outdoor unit in "card" type displays. -->
+        <app-card *ngFor="let myResult of myResults" [mySystems]="myResult">
+        </app-card>
         
     </div>
     <!-- ./Search results grouped by outdoor unit in "card" type displays. -->

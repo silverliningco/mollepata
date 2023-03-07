@@ -1,0 +1,64 @@
+[
+    {
+        "option": "Small packaged unit",
+        "value": {
+            "outdoorUnitType": "Small packaged unit"
+        }
+    },
+    {
+        "option": "Split system + fan coil",
+        "value": {
+            "outdoorUnitType": "Split System",
+            "indoorUnitType": "Fan coil",
+            "furnaceType": "None"
+        }
+    },
+    {
+        "option": "Split system + New furnace",
+        "value": {
+            "outdoorUnitType": "Split System",
+            "indoorUnitType": "Evaporator coil",
+            "furnaceType": "New ECM furnace"
+        }
+    },
+    {
+        "option": "Split system + Existing or non ecm furnace",
+        "value": {
+            "outdoorUnitType": "Split System",
+            "indoorUnitType": "Evaporator coil",
+            "furnaceType": "Existing or non-ECM furnace"
+        }
+    },
+    {
+        "option": "Mini split + mini split",
+        "value": {
+            "outdoorUnitType": "Mini-Split",
+            "indoorUnitType": "Mini-split indoor",
+            "furnaceType": "None"
+        }
+    },
+    {
+        "option": "Mini split + fan coil",
+        "value": {
+            "outdoorUnitType": "Mini-Split",
+            "indoorUnitType": "Fan coil",
+            "furnaceType": "None"
+        }
+    },
+    {
+        "option": "Mini split + New furnace",
+        "value": {
+            "outdoorUnitType": "Mini-Split",
+            "indoorUnitType": "Evaporator coil",
+            "furnaceType": "New ECM furnace"
+        }
+    },
+    {
+        "option": "Mini split + Existing or non ecm furnace",
+        "value": {
+            "outdoorUnitType": "Mini-Split",
+            "indoorUnitType": "Evaporator coil",
+            "furnaceType": "Existing or non-ECM furnace"
+        }
+    }
+]

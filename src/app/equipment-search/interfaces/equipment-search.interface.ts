@@ -5,6 +5,7 @@ export interface EquipmentSearch {
     heatedCooled?: HeatedCooled;
     systemSize?: SystemSize;
     systemDesign?: SystemDesign | null;
+    commerceInfo?: CommerceInfo;
 }
 
 export interface UtilityProviders {
@@ -39,4 +40,10 @@ export interface msMultiZoneType {
     qty: number;
     unitType: string;
     size: number;   
+}
+
+export interface CommerceInfo {
+    eCommerceGatewayId: string;
+    storeId: number; 
+    stockStatus: string;
 }
