@@ -1,5 +1,6 @@
-import { Component, Input, OnInit, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+
 
 import { EquipmentSearch } from '../interfaces/equipment-search.interface';
 
@@ -16,7 +17,6 @@ export class ResultsComponent implements OnInit {
 
   @Input() payload: EquipmentSearch = {};
 
-  myEligibilityCriteria!: any;
   myResults!: Array<any>;
   commerceInfoForm!: FormGroup;
   productLines: any[] = [];
@@ -53,7 +53,7 @@ export class ResultsComponent implements OnInit {
       }
 
       // First load the available eligibility questions and requirements and their default values.
-      this.loadDefaultEligibility();
+      //this.loadDefaultEligibility();
 
       // Then load the results with the given user inputs and default values for eligibility questions/requirements.
       this.loadResults();
@@ -88,15 +88,8 @@ export class ResultsComponent implements OnInit {
 
   }
 
-  // loadDefaultEligibility loads the available eligibility questions and requirements and their default values.
-  loadDefaultEligibility() {
-    this._endpoint.ElegibilityCriteria(this.currentEquipmentSearch).subscribe({
-      next: (resp: any) => {
-        this.myEligibilityCriteria = resp;
-      },
-      error: (e) => alert(e.error)
-    })
-  }
+ 
+
 
   // loadResults loads the AHRI combinations for the given input params and rebate eligibility details.
   loadResults() {
@@ -107,6 +100,8 @@ export class ResultsComponent implements OnInit {
       this.currentEquipmentSearch.systemDesign = this.productLines[this.selectedProductLineIndex].value;
     }
     
+    // update eligibility questions and requirements.
+ //   this.currentEquipmentSearch.eligibilityQuestions = this.eligibilityQuestionsForm.value.questions;
     console.log(this.currentEquipmentSearch);
 
     // May have to group or order the results here.
@@ -140,4 +135,13 @@ export class ResultsComponent implements OnInit {
 
   }
 
+
+
+
+  setEligibilityQuestionsProviders(eligibilityQuestionsData: any){
+    console.log(eligibilityQuestionsData);
+  }
+  eligibilityRequirementsProviders(eligibilityRequirementsData: any){
+    console.log(eligibilityRequirementsData);
+  }
 }

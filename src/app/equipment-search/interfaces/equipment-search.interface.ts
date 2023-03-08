@@ -6,6 +6,8 @@ export interface EquipmentSearch {
     systemSize?: SystemSize;
     systemDesign?: SystemDesign | null;
     commerceInfo?: CommerceInfo;
+    eligibilityQuestions?: EligibilityQuestion[];
+    eligibilityRequirements?: number[];
 }
 
 export interface UtilityProviders {
@@ -47,3 +49,8 @@ export interface CommerceInfo {
     storeId: number; 
     stockStatus: string;
 }
+export interface EligibilityQuestion{
+    questionId: number;
+    selectedValue: string;
+}
+

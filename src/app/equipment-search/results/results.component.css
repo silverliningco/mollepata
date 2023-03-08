@@ -28,61 +28,6 @@
             font-size: 17px;
             color: #606060;
         }
-    /*  Result panel body
-        ---- Subtitle for section
-    */
-        .results .lateral-panel .mat-expansion-panel .rc-questions .subtitle,
-        .results .lateral-panel .mat-expansion-panel .rc-requirements .subtitle{
-            position: relative;
-            display: flex;
-            align-items: center;
-            margin-bottom: .5rem;
-        }
-        .results .lateral-panel .mat-expansion-panel .rc-questions .subtitle span,
-        .results .lateral-panel .mat-expansion-panel .rc-requirements .subtitle span {
-            font-size: 16px;
-            color: var(--rc-primary-color);
-            font-weight: 500;
-            z-index: 1;
-        }
-        .results .lateral-panel .mat-expansion-panel .rc-questions .subtitle mat-icon,
-        .results .lateral-panel .mat-expansion-panel .rc-requirements .subtitle mat-icon{
-            position: absolute;
-            z-index: 0;
-            height: 32px;
-            width: 32px;
-            font-size: 32px;
-            color: rgba(255, 188, 89, 0.20);
-            left: -15px;
-        }
-        .results .lateral-panel .mat-expansion-panel .rc-questions,
-        .results .lateral-panel .mat-expansion-panel .rc-requirements{
-            padding-top: 1rem;
-        }
-        /* ---- Question style */
-            .results .lateral-panel .mat-expansion-panel .rc-questions .question label{
-                font-weight: bold;
-                color: #606060;
-                padding: 5px;
-                background-color: rgba(50, 120, 192, 0.05);
-                border-radius: 5px;
-                display: block;
-                margin: 1rem 0 .5rem 0;
-
-            }
-            .rc-questions .question mat-radio-group{
-                line-height: 1.5rem;
-            }
-            .results .lateral-panel .mat-expansion-panel .rc-questions .question mat-radio-group mat-radio-button,
-            .results .lateral-panel .mat-expansion-panel .rc-requirements .requirement mat-checkbox{
-                display: block;
-                padding-left: 12px;
-            }
-        /* ---- requirement style */
-            .results .lateral-panel .mat-expansion-panel .rc-requirements .requirement mat-checkbox{
-                line-height: 2rem;
-            }
-/* ./ Result panel*/
 
 /* Result tabs */
 .results mat-tab-group.mat-tab-group{

@@ -1,43 +1,21 @@
-/*panel*/
-.mat-expansion-panel{
-    margin-bottom: 0.5rem !important;
-}
-/*panel header*/
-.mat-expansion-panel .mat-expansion-panel-header{
-    padding: 12px 24px;
-    height: auto !important;
-    border-bottom: 1px solid #e4e4e4;
-    border-radius: 0;
-    background-color: transparent!important;
-}
-.mat-expansion-panel .mat-expansion-panel-header-title{
-    place-content: center space-around;
-}
-.mat-accordion mat-panel-title {
-    font-weight: bold;
-    text-transform: uppercase;
-    font-size: 17px;
-    color: #606060;
-}
-/*panel body
-  Subtitle for section
-*/
-.mat-expansion-panel .rc-questions .subtitle,
-.mat-expansion-panel .rc-requirements .subtitle{
+.rc-questions .subtitle,
+.rc-requirements .subtitle {
     position: relative;
     display: flex;
     align-items: center;
     margin-bottom: .5rem;
 }
-.mat-expansion-panel .rc-questions .subtitle span,
-.mat-expansion-panel .rc-requirements .subtitle span {
+
+.rc-questions .subtitle span,
+.rc-requirements .subtitle span {
     font-size: 16px;
     color: var(--rc-primary-color);
     font-weight: 500;
     z-index: 1;
 }
-.mat-expansion-panel .rc-questions .subtitle mat-icon,
-.mat-expansion-panel .rc-requirements .subtitle mat-icon{
+
+.rc-questions .subtitle mat-icon,
+.rc-requirements .subtitle mat-icon {
     position: absolute;
     z-index: 0;
     height: 32px;
@@ -46,12 +24,14 @@
     color: rgba(255, 188, 89, 0.20);
     left: -15px;
 }
-.mat-expansion-panel .rc-questions,
-.mat-expansion-panel .rc-requirements{
+
+.rc-questions,
+.rc-requirements {
     padding-top: 1rem;
 }
+
 /* ---- Question style */
-.mat-expansion-panel .rc-questions .question label{
+.rc-questions .question label {
     font-weight: bold;
     color: #606060;
     padding: 5px;
@@ -61,15 +41,18 @@
     margin: 1rem 0 .5rem 0;
 
 }
-.rc-questions .question mat-radio-group{
+
+.rc-questions .question mat-radio-group {
     line-height: 1.5rem;
 }
-.mat-expansion-panel .rc-questions .question mat-radio-group mat-radio-button,
-.mat-expansion-panel .rc-requirements .requirement mat-checkbox{
+
+.rc-questions .question mat-radio-group mat-radio-button,
+.rc-requirements .requirement mat-checkbox {
     display: block;
     padding-left: 12px;
 }
+
 /* ---- requirement style */
-.mat-expansion-panel .rc-requirements .requirement mat-checkbox{
+.rc-requirements .requirement mat-checkbox {
     line-height: 2rem;
 }
