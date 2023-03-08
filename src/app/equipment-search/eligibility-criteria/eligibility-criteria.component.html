@@ -1,0 +1,46 @@
+<!--<p>eligibility-criteria works!</p>-->
+<mat-accordion>
+    <mat-expansion-panel [expanded]="true">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+            Eligibility Criteria
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <!-- Questions -->
+        <div class="rc-questions rc-mb-large">
+            <div class="subtitle">
+                <mat-icon>help</mat-icon> 
+                <span>Eligibility Questions</span>
+            </div>
+            <div class="question">
+                <label id="question-1">Pick your favorite season</label>
+                <mat-radio-group aria-labelledby="question-1">
+                    <mat-radio-button value="1">Option 1</mat-radio-button>
+                    <mat-radio-button value="2">Option 2</mat-radio-button>
+                </mat-radio-group>
+            </div>
+            <div class="question">
+              <label id="question-2">Pick your favorite season</label>
+              <mat-radio-group aria-labelledby="question-2">
+                  <mat-radio-button value="1">Option 1</mat-radio-button>
+                  <mat-radio-button value="2">Option 2</mat-radio-button>
+              </mat-radio-group>
+          </div>
+        </div>
+
+
+        <!-- Requirements -->
+        <div class="rc-requirements rc-mb-large">
+            <div class="subtitle">
+                <mat-icon>check_circle</mat-icon> 
+                <span>Eligibility Requirements</span>
+            </div>
+            <div class="requirement">
+                <mat-checkbox>Pepperoni</mat-checkbox>
+                <mat-checkbox>Extra Cheese</mat-checkbox>
+                <mat-checkbox>Mushroom</mat-checkbox>
+            </div>
+        </div>
+  
+    </mat-expansion-panel>
+  </mat-accordion>
