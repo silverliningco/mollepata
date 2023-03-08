@@ -5,7 +5,14 @@
     <mat-step [completed]="MySubmitValidation['location']">
         <ng-template matStepLabel>Location</ng-template>
 
-        <app-location (stateChange)="setNewState( $event )"></app-location>
+        <h2 class="rc-main-title">Location</h2>
+
+        <div fxLayout="row column" fxLayoutAlign="center">
+            <div fxFlex="25" fxLayout="column" fxLayoutAlign="center center" fxFlex.xs="100" fxFlex.sm="50" fxFlex.md="25" fxLayoutGap="20">
+                
+                <app-location (stateChange)="setNewState( $event )"></app-location>
+            </div>
+        </div>
 
         <!-- button -->
         <div fxLayout="column" fxLayoutAlign="center end" class="rc-stepper-buttons">
@@ -20,10 +27,18 @@
     <!--- Step 2: Utility providers. -->
     <mat-step [completed]="MySubmitValidation['utilityProviders']">
         <ng-template matStepLabel>Utility providers</ng-template>
+       
+        <h2 class="rc-main-title">Utility providers</h2>
 
-        <app-utility-providers [state]="myData.state!"
-            (utilityProvidersChange)="setNewUtilityProviders( $event )"></app-utility-providers>
+        <div fxLayout="row column" fxLayoutAlign="center">
+            <div fxFlex="25" fxLayout="column" fxLayoutAlign="center center" fxFlex.xs="100" fxFlex.sm="50" fxFlex.md="25" fxLayoutGap="20">
+            
+                <app-utility-providers [state]="myData.state!"
+                    (utilityProvidersChange)="setNewUtilityProviders( $event )"></app-utility-providers>
 
+            </div>
+        </div>
+    
         <!-- button -->
         <div fxLayout="column" fxLayoutAlign="center end" class="rc-stepper-buttons">
             <button type="button" mat-raised-button color="primary" [disabled]="!MySubmitValidation['utilityProviders']"
@@ -39,11 +54,15 @@
     <mat-step [completed]="MySubmitValidation['dwellingInfo']">
         <ng-template matStepLabel>Dwelling Info</ng-template>
 
-        <!--Title-->
         <h2 class="rc-main-title">Dwelling Info</h2>
+        
+        <div fxLayout="row column" fxLayoutAlign="center">
+            <div fxFlex="75" fxLayout="column" fxLayoutAlign="center center" fxFlex.xs="100" fxFlex.sm="75" fxFlex.md="75" fxLayoutGap="20">
+                
+                <app-dwelling-info (dwellignInfoChange)="setDwellignInfo( $event )"></app-dwelling-info>
 
-        <app-dwelling-info (dwellignInfoChange)="setDwellignInfo( $event )"></app-dwelling-info>
-
+            </div>
+        </div>
         <!-- button -->
         <div fxLayout="column" fxLayoutAlign="center end" class="rc-stepper-buttons">
             <button type="button" mat-raised-button color="primary" [disabled]="!MySubmitValidation['dwellingInfo']"

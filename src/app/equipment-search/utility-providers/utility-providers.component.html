@@ -1,26 +1,19 @@
-<!--- Title -->
-<h2 class="rc-main-title">Utility providers</h2>
+ <form [formGroup]="utilityProvidersForm" class="rc-form">
 
-<div fxLayout="row column" fxLayoutAlign="center">
-    <div fxFlex="25" fxLayout="column" fxLayoutAlign="center center" fxFlex.xs="100" fxFlex.sm="50" fxFlex.md="25" fxLayoutGap="20">
-        <form [formGroup]="utilityProvidersForm" class="rc-form">
+    <mat-form-field appearance="fill">
+        <mat-label>Electric Utility</mat-label>
+        <mat-select #sGroup formControlName="electricUtilityId">
+            <mat-option *ngFor ="let electricProvider of electricProviders" [value]="electricProvider.utilityProviderId" radioGroup="sGroup">{{electricProvider.title}}</mat-option>
+            <mat-option value="0" radioGroup="sGroup">Other or N/A</mat-option>
+        </mat-select>
+    </mat-form-field>
 
-            <mat-form-field appearance="fill">
-                <mat-label>Electric Utility</mat-label>
-                <mat-select #sGroup formControlName="electricUtilityId">
-                    <mat-option *ngFor ="let electricProvider of electricProviders" [value]="electricProvider.utilityProviderId" radioGroup="sGroup">{{electricProvider.title}}</mat-option>
-                    <mat-option value="0" radioGroup="sGroup">Other or N/A</mat-option>
-                </mat-select>
-            </mat-form-field>
+    <mat-form-field appearance="fill">
+        <mat-label>Gas / Oil Utility</mat-label>
+        <mat-select #sGroup formControlName="fossilFuelUtilityId" >
+            <mat-option *ngFor ="let fossilFuelProvider of fossilFuelProviders" [value]="fossilFuelProvider.utilityProviderId" radioGroup="sGroup">{{fossilFuelProvider.title}}</mat-option>
+            <mat-option value="0" radioGroup="sGroup">Other or N/A</mat-option>
+        </mat-select>
+    </mat-form-field>
 
-            <mat-form-field appearance="fill">
-                <mat-label>Gas / Oil Utility</mat-label>
-                <mat-select #sGroup formControlName="fossilFuelUtilityId" >
-                    <mat-option *ngFor ="let fossilFuelProvider of fossilFuelProviders" [value]="fossilFuelProvider.utilityProviderId" radioGroup="sGroup">{{fossilFuelProvider.title}}</mat-option>
-                    <mat-option value="0" radioGroup="sGroup">Other or N/A</mat-option>
-                </mat-select>
-            </mat-form-field>
-
-        </form>
-    </div>
-</div>
+</form>
