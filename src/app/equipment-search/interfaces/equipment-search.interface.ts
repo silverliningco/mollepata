@@ -1,10 +1,9 @@
 export interface EquipmentSearch {
     state?: String;
     utilityProviders?: UtilityProviders;
-    dwellingInfo?: DwellingInfo;
-    heatedCooled?: HeatedCooled;
-    systemSize?: SystemSize;
+    dwellingInfo?: DwellingInfo;    
     systemDesign?: SystemDesign | null;
+    systemSize?: SystemSize;    
     commerceInfo?: CommerceInfo;
     eligibilityQuestions?: EligibilityQuestion[];
     eligibilityRequirements?: number[];
@@ -18,16 +17,6 @@ export interface UtilityProviders {
 export interface DwellingInfo {
     fuelSource: string;
     constructionType: string; 
-}
-
-export interface HeatedCooled {
-    heated: boolean;
-    cooled: boolean; 
-}
-
-export interface SystemSize {
-    heatingBTUH: number;
-    coolingTons: number; 
 }
 
 export interface SystemDesign {
@@ -44,11 +33,17 @@ export interface msMultiZoneType {
     size: number;   
 }
 
+export interface SystemSize {
+    heatingBTUH: number;
+    coolingTons: number; 
+}
+
 export interface CommerceInfo {
     eCommerceGatewayId: string;
     storeId: number; 
     stockStatus: string;
 }
+
 export interface EligibilityQuestion{
     questionId: number;
     selectedValue: string;

@@ -18,8 +18,7 @@ export class HVACSystemSearchComponent implements OnInit {
   matStepSystemDesignCompleted: boolean = false;
 
   @ViewChild('stepper')
-  stepper!: MatStepper;
-  heatedCooledForm!: FormGroup;
+  stepper!: MatStepper;  
   systemSizeForm!: FormGroup;
   systemDesignForm!: FormGroup;
   
@@ -29,7 +28,7 @@ export class HVACSystemSearchComponent implements OnInit {
   myData: EquipmentSearch = {};
   payload!: EquipmentSearch;
   
-  MySubmitValidation: any = {location:false,utilityProviders:false,dwellingInfo:false,heatedCooled:false,systemSize:false,systemDesign:false};
+  MySubmitValidation: any = {location:false,utilityProviders:false,dwellingInfo:false,systemSize:false,systemDesign:false};
 
   constructor(
     private fb: FormBuilder,
@@ -44,13 +43,7 @@ export class HVACSystemSearchComponent implements OnInit {
  
     this.msMultiZoneTypeForm = this.fb.group({
       indoorUnits: this.fb.array([])
-    });
-  
-    // Heated/cooled form group.
-    this.heatedCooledForm = this.fb.group({
-      heated: [ '', Validators.required],
-      cooled: [ '', Validators.required]
-    });
+    });    
 
     // System size form group.
     this.systemSizeForm = this.fb.group({
@@ -71,12 +64,7 @@ export class HVACSystemSearchComponent implements OnInit {
     });
 
     //add row to the beginning of the table
-    this.newIndoorUnit();
-    
-    this.heatedCooledForm.valueChanges.subscribe(selectedValue => {
-      this.myData.heatedCooled = selectedValue;
-      this.MySubmitValidation["heatedCooled"] = this.heatedCooledForm.valid;
-    });
+    this.newIndoorUnit();    
 
     this.systemSizeForm.valueChanges.subscribe(selectedValue => {
       this.myData.systemSize = selectedValue;

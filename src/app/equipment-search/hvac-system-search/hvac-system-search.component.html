@@ -71,97 +71,9 @@
                 <mat-icon>arrow_forward</mat-icon>
             </button>
         </div>
-    </mat-step>
+    </mat-step>       
 
-    <!--- Step 4: Heated / Cooled. -->
-    <mat-step [completed]="MySubmitValidation['heatedCooled']">
-        <ng-template matStepLabel>Heated - Cooled</ng-template>
-
-        <!--Title-->
-        <h2 class="rc-main-title">Heated and cooled</h2>
-
-        <div fxLayout="row column" fxLayoutAlign="center">
-            <div fxFlex="25" fxLayout="column" fxLayoutAlign="center center" fxFlex.xs="100" fxFlex.sm="50"
-                fxFlex.md="25" fxLayoutGap="20">
-                <form [formGroup]="heatedCooledForm" class="rc-form">
-                    <mat-radio-group formControlName="cooled" aria-label="Select an option">
-                        <mat-label class="rc-label">Provide cooling?</mat-label>
-                        <mat-radio-button value="yes">Yes</mat-radio-button>
-                        <br>
-                        <mat-radio-button value="no">No</mat-radio-button>
-                    </mat-radio-group>
-                    <mat-radio-group formControlName="heated" aria-label="Select an option">
-                        <mat-label class="rc-label">Provide heating?</mat-label>
-                        <mat-radio-button value="yes">Yes</mat-radio-button>
-                        <br>
-                        <mat-radio-button value="no">No</mat-radio-button>
-                    </mat-radio-group>
-                </form>
-            </div>
-        </div>
-
-        <!-- button -->
-        <div fxLayout="column" fxLayoutAlign="center end" class="rc-stepper-buttons">
-            <button type="button" mat-raised-button color="primary" [disabled]="!MySubmitValidation['heatedCooled']"
-                matStepperNext>
-                Continue
-                <mat-icon>arrow_forward</mat-icon>
-            </button>
-        </div>
-    </mat-step>
-
-    <!--- Step 5: System size. -->
-    <mat-step [completed]="MySubmitValidation['systemSize']">
-        <ng-template matStepLabel>System Size</ng-template>
-
-        <!--Title-->
-        <h2 class="rc-main-title">System Size</h2>
-
-        <div fxLayout fxLayoutAlign="center">
-            <div fxLayout fxFlex="40" fxLayout="column" fxLayoutAlign="center center" fxFlex.xs="100" fxFlex.sm="70"
-                fxFlex.md="40" fxLayoutGap="20">
-                <form [formGroup]="systemSizeForm" fxLayout="column" fxFlex="100" fxLayoutAlign="center"
-                    class="rc-form">
-
-                    <!--- Cooling tons. -->
-                    <mat-form-field appearance="fill">
-                        <mat-label>Cooling tons</mat-label>
-                        <mat-select #sGroup formControlName="coolingTons">
-                            <mat-option radioGroup="sGroup" [value]="0.5"> < 1.0</mat-option>
-                            <mat-option radioGroup="sGroup" [value]="1.0">1.0</mat-option>
-                            <mat-option radioGroup="sGroup" [value]="1.5">1.5</mat-option>
-                            <mat-option radioGroup="sGroup" [value]="2.0">2.0</mat-option>
-                            <mat-option radioGroup="sGroup" [value]="2.5">2.5</mat-option>
-                            <mat-option radioGroup="sGroup" [value]="3.0">3.0</mat-option>
-                            <mat-option radioGroup="sGroup" [value]="3.5">3.5</mat-option>
-                            <mat-option radioGroup="sGroup" [value]="4.0">4.0</mat-option>
-                            <mat-option radioGroup="sGroup" [value]="4.5">4.5</mat-option>
-                            <mat-option radioGroup="sGroup" [value]="5.0">5.0</mat-option>
-                        </mat-select>
-                    </mat-form-field>
-
-                    <!--- Heating BTUH -->
-                    <mat-form-field appearance="fill">
-                        <mat-label>Heating BTUH</mat-label>
-                        <input matInput placeholder="Heating BTUH" type="number" formControlName="heatingBTUH" required>
-                    </mat-form-field>
-
-                </form>
-            </div>
-        </div>
-
-        <!-- button -->
-        <div fxLayout="column" fxLayoutAlign="center end" class="rc-stepper-buttons">
-            <button type="button" mat-raised-button color="primary" [disabled]="!MySubmitValidation['systemSize']"
-                matStepperNext>
-                Continue
-                <mat-icon>arrow_forward</mat-icon>
-            </button>
-        </div>
-
-    </mat-step>
-
-    <!--- Step 6: System design. -->
+    <!--- Step 4: System design. -->
     <mat-step [completed]="matStepSystemDesignCompleted || (MySubmitValidation['systemDesign'] && systemDesignForm.get('indoorUnitType')!.value != 'Mini-split indoor') || (systemDesignForm.get('indoorUnitType')!.value == 'Mini-split indoor' && (this.myData.systemDesign?.msMultiZoneType?.length || 0) > 0)">
         <ng-template matStepLabel>System Design</ng-template>
 
@@ -329,7 +241,58 @@
 
     </mat-step>
 
-    <!-- Step 7: Results. -->
+    <!--- Step 5: System size. -->
+    <mat-step [completed]="MySubmitValidation['systemSize']">
+        <ng-template matStepLabel>System Size</ng-template>
+
+        <!--Title-->
+        <h2 class="rc-main-title">System Size</h2>
+
+        <div fxLayout fxLayoutAlign="center">
+            <div fxLayout fxFlex="40" fxLayout="column" fxLayoutAlign="center center" fxFlex.xs="100" fxFlex.sm="70"
+                fxFlex.md="40" fxLayoutGap="20">
+                <form [formGroup]="systemSizeForm" fxLayout="column" fxFlex="100" fxLayoutAlign="center"
+                    class="rc-form">
+
+                    <!--- Cooling tons. -->
+                    <mat-form-field appearance="fill">
+                        <mat-label>Cooling tons</mat-label>
+                        <mat-select #sGroup formControlName="coolingTons">
+                            <mat-option radioGroup="sGroup" [value]="0.5"> < 1.0</mat-option>
+                            <mat-option radioGroup="sGroup" [value]="1.0">1.0</mat-option>
+                            <mat-option radioGroup="sGroup" [value]="1.5">1.5</mat-option>
+                            <mat-option radioGroup="sGroup" [value]="2.0">2.0</mat-option>
+                            <mat-option radioGroup="sGroup" [value]="2.5">2.5</mat-option>
+                            <mat-option radioGroup="sGroup" [value]="3.0">3.0</mat-option>
+                            <mat-option radioGroup="sGroup" [value]="3.5">3.5</mat-option>
+                            <mat-option radioGroup="sGroup" [value]="4.0">4.0</mat-option>
+                            <mat-option radioGroup="sGroup" [value]="4.5">4.5</mat-option>
+                            <mat-option radioGroup="sGroup" [value]="5.0">5.0</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+
+                    <!--- Heating BTUH -->
+                    <mat-form-field appearance="fill">
+                        <mat-label>Heating BTUH</mat-label>
+                        <input matInput placeholder="Heating BTUH" type="number" formControlName="heatingBTUH" required>
+                    </mat-form-field>
+
+                </form>
+            </div>
+        </div>
+
+        <!-- button -->
+        <div fxLayout="column" fxLayoutAlign="center end" class="rc-stepper-buttons">
+            <button type="button" mat-raised-button color="primary" [disabled]="!MySubmitValidation['systemSize']"
+                matStepperNext>
+                Continue
+                <mat-icon>arrow_forward</mat-icon>
+            </button>
+        </div>
+
+    </mat-step>
+
+    <!-- Step 6: Results. -->
     <mat-step>
 
         <ng-template matStepLabel>AHRI Combinations</ng-template>
