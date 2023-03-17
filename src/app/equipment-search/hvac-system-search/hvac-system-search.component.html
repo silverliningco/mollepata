@@ -76,64 +76,92 @@
     <!--- Step 4: System design. -->
     <mat-step [completed]="matStepSystemDesignCompleted || (MySubmitValidation['systemDesign'] && systemDesignForm.get('indoorUnitType')!.value != 'Mini-split indoor') || (systemDesignForm.get('indoorUnitType')!.value == 'Mini-split indoor' && (this.myData.systemDesign?.msMultiZoneType?.length || 0) > 0)">
         <ng-template matStepLabel>System Design</ng-template>
-
-        <!-- note for show all results -->
-        <div fxLayout fxLayoutAlign="center" fxLayoutGap="16px">
-            <div fxFlex="50" fxFlex.sm="70" fxFlex.xs="100" class="rc-note">
-                <div fxLayout="row column" fxLayoutAlign="space-between center">
-                    <p fxFlex="60" fxFlex.xs="100" fxflex.sm="80" class="rc-small"> <b>Note: </b><br>If you want to see
-                        all the combinations </p>
-                    <button fxFlex="40" fxFlex.xs="100" fxflex.sm="80" mat-raised-button color="primary"
-                        (click)="allCombinations()" matStepperNext>Click here!</button>
-                </div>
-            </div>
-        </div>
-
+        
         <!--Title-->
         <h2 class="rc-main-title">System design</h2>
 
-        <div fxLayout="row column" fxLayoutAlign="center" fxLayoutGap="20">
-            <div fxFlex="30" fxLayout="column" fxLayoutAlign="center stretch" fxFlex.xs="100" fxFlex.sm="70"
-                fxFlex.md="30" fxLayoutGap="20">
-                <form [formGroup]="systemDesignForm" class="rc-form">
-
-                    <!-- Outdoor unit -->
-                    <mat-form-field appearance="fill">
-                        <mat-label>Outdoor unit type:</mat-label>
-                        <mat-select #sGroup formControlName="outdoorUnitType">
-                            <mat-option radioGroup="sGroup" value="Split System">Split System</mat-option>
-                            <mat-option radioGroup="sGroup" value="Mini-Split">Mini-Split</mat-option>
-                            <mat-option radioGroup="sGroup" value="Small packaged unit">Small packaged unit</mat-option>
-                        </mat-select>
-                    </mat-form-field>
-                    <br>
-
-                    <!-- Indoor unit -->
-                    <mat-form-field appearance="fill">
-                        <mat-label>Indoor unit type:</mat-label>
-                        <mat-select #sGroup formControlName="indoorUnitType">
-                            <mat-option radioGroup="sGroup" value="Fan coil">Fan coil</mat-option>
-                            <mat-option radioGroup="sGroup" value="Mini-split indoor" [disabled]="this.systemDesignForm.controls['outdoorUnitType'].value=='Split System'">Mini-split</mat-option>
-                            <mat-option radioGroup="sGroup" value="Evaporator coil">Furnace + Evaporator
-                                Coil</mat-option>
-                        </mat-select>
-                    </mat-form-field>
-                    <br>
-
-                    <!-- Furnace type -->
-                    <mat-form-field appearance="fill">
-                        <mat-label>Furnace type:</mat-label>
-                        <mat-select formControlName="furnaceType">
-                            <mat-option radioGroup="sGroup" value="New ECM furnace" [disabled]="this.systemDesignForm.controls['indoorUnitType'].value != 'Evaporator coil'">New ECM furnace</mat-option>
-                            <mat-option radioGroup="sGroup" value="Existing or non-ECM furnace" [disabled]="this.systemDesignForm.controls['indoorUnitType'].value != 'Evaporator coil'">Existing or non-ECM
-                                furnace</mat-option>
-                            <mat-option radioGroup="sGroup" value="None" [disabled]="this.systemDesignForm.controls['indoorUnitType'].value == 'Evaporator coil'">None</mat-option>
-                        </mat-select>
-                    </mat-form-field>
-
-                </form>
+        <div fxLayout="row column" fxLayoutAlign="center" fxLayoutGap="8px grid">
+            <div fxFlex="25" fxLayout="column" fxLayoutAlign="center stretch" fxFlex.xs="100" fxFlex.sm="70"
+                fxFlex.md="25" fxLayoutGap="16">
+                <div class="rc-hvac-unit-card">
+                    <div class="icon">
+                        <img src="../../../../assets/images/icons/outdoor_icon.png" alt="" class="unchecked">
+                    </div>
+                    <div class="information">
+                        <div class="item">
+                            <span>Unit Type</span>
+                            <p>Outdoor Unit</p>
+                        </div>
+                        <div class="item">
+                            <span>System Type</span>
+                            <p>Split System</p>
+                        </div>
+                        <div class="item">
+                            <span>HVAC Type</span>
+                            <p>HP</p>
+                        </div>
+                        <div class="item">
+                            <span>HP Heating Capacity</span>
+                            <p>30000</p>
+                        </div>
+                    </div>  
+                </div>
             </div>
-
+            <div fxFlex="25" fxLayout="column" fxLayoutAlign="center stretch" fxFlex.xs="100" fxFlex.sm="70" fxFlex.md="25">
+                <div class="rc-hvac-unit-card">
+                    <div class="icon">
+                        <img src="../../../../assets/images/icons/indoor_icon.png" alt="" class="unchecked">
+                    </div>
+                    <div class="information">
+                        <div class="item">
+                            <span>Unit Type</span>
+                            <p>Indoor Unit</p>
+                        </div>
+                        <div class="item">
+                            <span>System Type</span>
+                            <p>Mini-split</p>
+                        </div>
+                        <div class="item">
+                            <span>msUnit Type</span>
+                            <p>Cassete</p>
+                        </div>
+                        <div class="item">
+                            <span>Cooling Capacity</span>
+                            <p>6000</p>
+                        </div>
+                        <div class="item">
+                            <span>Quantity</span>
+                            <p>2</p>
+                        </div>
+                    </div>  
+                </div>
+            </div>
+            <div fxFlex="25" fxLayout="column" fxLayoutAlign="center stretch" fxFlex.xs="100" fxFlex.sm="70"
+                fxFlex.md="25">
+                <div class="rc-hvac-unit-card">
+                    <div class="icon">
+                        <img src="../../../../assets/images/icons/furnace_icon.png" alt="" class="unchecked">
+                    </div>
+                    <div class="information">
+                        <div class="item">
+                            <span>Unit Type</span>
+                            <p>Furnace</p>
+                        </div>
+                        <div class="item">
+                            <span>System Type</span>
+                            <p>New</p>
+                        </div>
+                    </div>  
+                </div>
+            </div>
+            <div fxFlex="25" fxLayout="column" fxLayoutAlign="center stretch" fxFlex.xs="100" fxFlex.sm="70" fxFlex.md="25">
+                <button class="rc-hvac-unit-add">
+                    <div class="icon">
+                        <mat-icon>add</mat-icon>
+                    </div>
+                    <span>ADD NEW</span>    
+                </button>
+            </div>
             <!--- If indoor unit type is mini-split, show indoor unit design table. -->
             <div *ngIf="systemDesignForm.get('indoorUnitType')!.value == 'Mini-split indoor'" fxFlex="65"
                 fxFlex.xs="100" fxFlex.sm="70" fxFlex.md="65">

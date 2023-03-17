@@ -1,76 +1,91 @@
-.rc-card.results {
+/* ::ng-deep used to force a style down to child components*/
+::ng-deep .results .rc-card {
     margin-bottom: 1rem;
     padding: 1.5rem !important;
+    box-shadow: none;
+    border: 1px solid #c5c5c5;
+    background-color: #ffffff;
   }
-  .rc-card.results .model-nrs {
+  
+/*header card*/
+.results .rc-card .mat-card-title span{
+  font-size: 20px;
+  font-weight: bold;
+  color: var(--rc-text-color)
+}
+
+
+
+  ::ng-deep .results .rc-card .model-nrs {
     width: 100%;
     padding-bottom: 6px;
   }
-  .rc-card.results .mat-card-subtitle{
+  
+  ::ng-deep .results .rc-card .mat-card-subtitle{
     margin-bottom: 1.5rem !important;
   }
   @media only screen and (max-width: 767px){
-    .rc-card.results .mat-card-subtitle{
+    
+    ::ng-deep .results .rc-card .mat-card-subtitle{
       margin-bottom: .25rem !important;
     }
   }
-  ::ng-deep .rc-card.results .mat-card-header-text{
+  ::ng-deep .results .rc-card .mat-card-header-text{
     width: 100% !important;
     margin: 0;
     min-width: 98%;
   }
-  .rc-card.results .mat-card-header .mat-card-title h3{
-    font-weight: bold;
-    font-size: 25px;
-    margin-bottom: 4px;
-    font-family: 'Bitter', serif;
-  }
-  .rc-card.results .mat-card-header .mat-card-title{
-    font-size: 12px;
-    padding-bottom: .5rem;
-  }
-  .rc-card.results .mat-card-header .mat-card-subtitle{
+  
+  ::ng-deep .results .rc-card .mat-card-header .mat-card-subtitle{
     margin-bottom: 5px !important;
   }
-  .rc-card.results .rebates-amount{
+  
+  ::ng-deep .results .rc-card .rebates-amount{
     position: relative;
     background-color: rgba(255, 160, 0, 0.1);
     border-radius: 4px;
     padding: 1rem 1rem 1.5rem 1rem !important;
   }
-  .rc-card.results .available-rebates{
+  
+  ::ng-deep .results .rc-card .available-rebates{
     position: relative;
     padding-bottom: 1rem;
     border-bottom: 1px solid rgba(255, 160, 0, 0.2);
     border-right:none;
   }
   @media screen and (min-width: 600px) and (max-width:959px){
-    .rc-card.results .available-rebates{
+    
+    ::ng-deep .results .rc-card .available-rebates{
       border-bottom: none;
       border-right: 1px solid rgba(255, 160, 0, 0.2);
     }
   }
-  .rc-card.results .available-rebates ul.rc-unlisted li{
+  
+  ::ng-deep .results .rc-card .available-rebates ul.rc-unlisted li{
     font-size: 12px;
     padding-left: 2rem;
   }
-  .rc-card.results .rebate-price{
+  
+  ::ng-deep .results .rc-card .rebate-price{
     position: relative;
     margin-top: 1rem;
     color: var(--rc-warn-color);
     text-align: center;
     height: 100%;
   }
-  .rc-card.results p.rc-small {
+  
+  ::ng-deep .results .rc-card p.rc-small {
     font-size: 10px;
     font-weight: bold;
     margin-bottom: 5px;
     color: #2f4f4f;
   }
-  .rc-card.results p.outdoor-nb{
+  
+  ::ng-deep .results .rc-card p.outdoor-nb{
     margin-bottom: 0;
   }
-  .rc-card.results .rebate-price h1{
+  
+  ::ng-deep .results .rc-card .rebate-price h1{
     font-family: 'Bitter', serif !important;
     font-size: 30px;
     font-weight: bold;
@@ -78,36 +93,43 @@
   }
 
   @media screen and (min-width: 960px) and (max-width: 1199px){
-  .rc-card.results .rebate-price h1{
+  
+    ::ng-deep .results .rc-card .rebate-price h1{
       font-size: 26px;
     }
   }
   @media screen and (max-width: 959px){
-  .rc-card.results .rebate-price{
+  
+    ::ng-deep .results .rc-card .rebate-price{
       padding: 1rem;
       margin-left: 10px;
     }
-  .rc-card.results .rebate-price h1{
+  
+    ::ng-deep .results .rc-card .rebate-price h1{
       font-size: 26px;
     }
   }
   @media screen and (max-width: 599px){
-  .rc-card.results .rebate-price{
+  
+    ::ng-deep .results .rc-card .rebate-price{
       margin-top: 10px;
       margin-left: 0;
     }
-  .rc-card.results .mat-card-header .mat-card-subtitle .model-nrs {
+  
+    ::ng-deep .results .rc-card .mat-card-header .mat-card-subtitle .model-nrs {
       padding-top: .5rem;
     }
   }
 
   /*Content*/
-  .rc-card.results .mat-card-content{
+  
+  ::ng-deep .results .rc-card .mat-card-content{
       padding: .5rem 0 0 0;
       margin-bottom: 0rem;
       margin-top: 1rem!important;
   }
-  .rc-card.results .mat-card-content span.rc-small{
+  
+  ::ng-deep .results .rc-card .mat-card-content span.rc-small{
       color: rgba(0,0,0,.54);
   }
     @media screen and (max-width: 599px){
@@ -115,8 +137,9 @@
         margin: 1rem 0;
       }
     }
-  .rc-card.results .mat-card-content .ahri-ratings{
-    background-color: #f7f7f7;  
+  
+    ::ng-deep .results .rc-card .mat-card-content .ahri-ratings{
+    background-color: #fafafa;  
     border-radius: 4px;
     padding: 10px;
     height: 90%;
@@ -155,25 +178,30 @@
   }
 
   /*Card buttons*/
-  .rc-card.results .rc-card-btn{
+  
+  ::ng-deep .results .rc-card .rc-card-btn{
     color: white;
   }
-  .rc-card.results .rc-card-btn.warn {
+  
+  ::ng-deep .results .rc-card .rc-card-btn.warn {
     background: var(--rc-warn-color);
   }
-  .rc-card.results .rc-card-btn.primary {
+  
+  ::ng-deep .results .rc-card .rc-card-btn.primary {
       background: var(--rc-primary-color);
   }
-  .rc-card.results .rc-card-btn.accent {
+  
+  ::ng-deep .results .rc-card .rc-card-btn.accent {
       background: var(--rc-accent-color);
   }
   /*Card Actions*/
-  .rc-card.results mat-card-actions{
+  
+  ::ng-deep .results .rc-card mat-card-actions{
     padding-right: .5rem;
   }
 
   /* Start Change style to input combo box */
-  ::ng-deep .rc-card.results .model-nrs mat-form-field{
+  ::ng-deep .results .rc-card .model-nrs mat-form-field{
     display: block;
   }
 
