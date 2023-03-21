@@ -5,37 +5,27 @@
             <mat-form-field appearance="fill">
                 <mat-label>Unit Type</mat-label>
                 <mat-select formControlName="unitType">                
-                    <mat-option radioGroup="sGroup" [value]="'Outdoor unit'">Outdoor unit</mat-option>
-                    <mat-option radioGroup="sGroup" [value]="'Indoor unit'">Indoor unit</mat-option>
-                    <mat-option radioGroup="sGroup" [value]="'Furnace'">Furnace</mat-option>
+                    <mat-option radioGroup="sGroup" value="Outdoor unit">Outdoor unit</mat-option>
+                    <mat-option radioGroup="sGroup" value="Indoor unit">Indoor unit</mat-option>
+                    <mat-option radioGroup="sGroup" value="Furnace">Furnace</mat-option>
                 </mat-select> 
             </mat-form-field>   
-        </div>
-
-        <div *ngIf="systemForm.get('unitType')!.value == null">
-            <mat-form-field appearance="fill">
-                <mat-label>System Type</mat-label>
-                <mat-select formControlName="systemType">                 
-                    <mat-option radioGroup="sGroup" [value]="'Split system'">Split system</mat-option>
-                    <mat-option radioGroup="sGroup" [value]="'Mini-Split'">Mini-Split</mat-option>                
-                </mat-select> 
-            </mat-form-field> 
         </div>
 
         <div *ngIf="systemForm.get('unitType')!.value == 'Outdoor unit'">
             <mat-form-field appearance="fill">
                 <mat-label>System Type</mat-label>
                 <mat-select formControlName="systemType">                 
-                    <mat-option radioGroup="sGroup" [value]="'Split system'">Split system</mat-option>
-                    <mat-option radioGroup="sGroup" [value]="'Mini-Split'">Mini-Split</mat-option>                
+                    <mat-option radioGroup="sGroup" value="Split system">Split system</mat-option>
+                    <mat-option radioGroup="sGroup" value="Mini-Split">Mini-Split</mat-option>                
                 </mat-select> 
             </mat-form-field> 
 
             <mat-form-field appearance="fill">
                 <mat-label>HVAC System Type</mat-label>
                 <mat-select formControlName="HVACType">                
-                    <mat-option radioGroup="sGroup" [value]="'HP'">HP</mat-option>
-                    <mat-option radioGroup="sGroup" [value]="'AC'">AC</mat-option>  
+                    <mat-option radioGroup="sGroup" value="HP">HP</mat-option>
+                    <mat-option radioGroup="sGroup" value="AC">AC</mat-option>  
                 </mat-select> 
             </mat-form-field>
         </div>
@@ -44,31 +34,23 @@
             <mat-form-field appearance="fill">
                 <mat-label>System Type</mat-label>
                 <mat-select formControlName="systemType">                 
-                    <mat-option radioGroup="sGroup" [value]="'Fan coil'">Fan coil</mat-option>
-                    <mat-option radioGroup="sGroup" [value]="'Furnace + Evaporator Coil'">Furnace + Evaporator Coil</mat-option>
-                    <mat-option radioGroup="sGroup" [value]="'Mini-Split indoor'">Mini-Split indoor</mat-option>                
+                    <mat-option radioGroup="sGroup" value="Fan coil">Fan coil</mat-option>
+                    <mat-option radioGroup="sGroup" value="Furnace + Evaporator Coil">Furnace + Evaporator Coil</mat-option>
+                    <mat-option radioGroup="sGroup" value="Mini-Split indoor">Mini-Split indoor</mat-option>                
                 </mat-select> 
             </mat-form-field> 
         </div>
 
         <div *ngIf="(systemForm.get('unitType')!.value == 'Indoor unit') && (systemForm.get('systemType')!.value == 'Mini-Split indoor')">
             <mat-form-field appearance="fill">
-                <mat-label>Energy Distribution</mat-label>
-                <mat-select formControlName="energyDistribution">                 
-                    <mat-option radioGroup="sGroup" [value]="'Ductless'">Ductless</mat-option>
-                    <mat-option radioGroup="sGroup" [value]="'Ducted'">Ducted</mat-option>                    
-                </mat-select> 
-            </mat-form-field> 
-
-            <mat-form-field appearance="fill">
-                <mat-label>Ms Unit Type</mat-label>
-                <mat-select formControlName="msUnitType">                 
-                    <mat-option radioGroup="sGroup" [value]="'Mini-Split Air Handler (Full Size)'">Mini-Split Air Handler (Full Size)</mat-option>
-                    <mat-option radioGroup="sGroup" [value]="'Ducted mini-split Air Handler (Slim Style)'">Ducted mini-split Air Handler (Slim Style)</mat-option>
-                    <mat-option radioGroup="sGroup" [value]="'Floor/Ceiling Mount'">Floor/Ceiling Mount</mat-option>
-                    <mat-option radioGroup="sGroup" [value]="'Cassette'">Cassette</mat-option>
-                    <mat-option radioGroup="sGroup" [value]="'High wall'">High wall</mat-option>
-                    <mat-option radioGroup="sGroup" [value]="'1-Way Casette'">1-Way Casette</mat-option>                    
+                <mat-label>Ms Unit Type Style</mat-label>
+                <mat-select formControlName="msIndoorUnitStyle">                 
+                    <mat-option radioGroup="sGroup" value="Mini-Split Air Handler (Full Size)">Mini-Split Air Handler (Full Size)</mat-option>
+                    <mat-option radioGroup="sGroup" value="Ducted mini-split Air Handler (Slim Style)">Ducted mini-split Air Handler (Slim Style)</mat-option>
+                    <mat-option radioGroup="sGroup" value="Floor/Ceiling Mount">Floor/Ceiling Mount</mat-option>
+                    <mat-option radioGroup="sGroup" value="Cassette">Cassette</mat-option>
+                    <mat-option radioGroup="sGroup" value="High wall">High wall</mat-option>
+                    <mat-option radioGroup="sGroup" value="1-Way Casette">1-Way Casette</mat-option>                    
                 </mat-select> 
             </mat-form-field> 
 
@@ -99,21 +81,11 @@
             <mat-form-field appearance="fill">
                 <mat-label>System Type</mat-label>
                 <mat-select formControlName="systemType">                 
-                    <mat-option radioGroup="sGroup" [value]="'New ECM furnace'">New ECM furnace</mat-option>
-                    <mat-option radioGroup="sGroup" [value]="'Existing or non-ECM furnace'">Existing or non-ECM furnace</mat-option>
-                    <mat-option radioGroup="sGroup" [value]="'None'">None</mat-option>                
+                    <mat-option radioGroup="sGroup" value="New ECM furnace">New ECM furnace</mat-option>
+                    <mat-option radioGroup="sGroup" value="Existing or non-ECM furnace">Existing or non-ECM furnace</mat-option>
+                    <mat-option radioGroup="sGroup" value="None">None</mat-option>                
                 </mat-select> 
             </mat-form-field> 
-        </div>
-
-        <div *ngIf="systemForm.get('unitType')!.value == null">
-            <mat-form-field appearance="fill">
-                <mat-label>HVAC System Type</mat-label>
-                <mat-select formControlName="HVACType">                
-                    <mat-option radioGroup="sGroup" [value]="'HP'">HP</mat-option>
-                    <mat-option radioGroup="sGroup" [value]="'AC'">AC</mat-option>  
-                </mat-select> 
-            </mat-form-field>
         </div>
     </form>    
 

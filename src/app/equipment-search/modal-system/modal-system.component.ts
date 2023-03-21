@@ -4,6 +4,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 import { SystemDesign } from '../interfaces/equipment-search.interface'
 
+
 @Component({
   selector: 'app-modal-system',
   templateUrl: './modal-system.component.html',
@@ -19,14 +20,14 @@ export class ModalSystemComponent implements OnInit {
 
   ngOnInit(): void {
     this.systemForm = this.formBuilder.group({
-      unitType: ['', Validators.required],
-      systemType: ['', Validators.required],
-      HVACType: ['', Validators.required],
+      unitType: [null, Validators.required],
+      systemType: [null, Validators.required],
+      HVACType: [null, Validators.required],
 
-      energyDistribution: ['', Validators.required],   
-      msUnitType: ['', Validators.required],
-      coolingCapacity: ['', Validators.required],
-      quantity: ['', Validators.required],       
+      energyDistribution: [null, Validators.required],   
+      msIndoorUnitStyle: [null, Validators.required],
+      coolingCapacity: [null, Validators.required],
+      quantity: [null, Validators.required],       
     });
 
    
@@ -39,12 +40,20 @@ export class ModalSystemComponent implements OnInit {
       this.systemForm.controls['HVACType'].setValue(this.editData.link);     
     }*/
   }
+
   addEditSystem() {
-    console.log('aquí...');
-    console.log(this.systemForm.get('unitType')!.value);
-    console.log(this.systemForm.get('systemType')!.value);
-    console.log(this.systemForm.get('HVACType')!.value);
-    
+
+    // Exclude empty fields on form submit.
+    let myFormValue = { ...this.systemForm.value };
+
+    for (let prop in myFormValue) {
+      if (!myFormValue[prop]) {
+        delete myFormValue[prop];
+      }
+    }
+
+    console.log(myFormValue);
+  
   }
 
 }

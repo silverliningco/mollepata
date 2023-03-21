@@ -13,17 +13,11 @@ import { EquipmentSearch } from '../interfaces/equipment-search.interface'
 })
 
 export class HVACSystemSearchComponent implements OnInit {
-  
-  existRecord: boolean = true;
-  matStepSystemDesignCompleted: boolean = false;
 
   @ViewChild('stepper')
   stepper!: MatStepper;  
   systemSizeForm!: FormGroup;
   
-  
-  msMultiZoneTypeForm!: FormGroup;
-
   // equipmentSearchData used for payload.
   myData: EquipmentSearch = {};
   payload!: EquipmentSearch;
@@ -35,16 +29,8 @@ export class HVACSystemSearchComponent implements OnInit {
     private _snackBar: MatSnackBar 
   ) { }
    
-  get indoorUnits() {
-    return this.msMultiZoneTypeForm.controls["indoorUnits"] as FormArray;
-  }
-
   ngOnInit(): void {
  
-    this.msMultiZoneTypeForm = this.fb.group({
-      indoorUnits: this.fb.array([])
-    });    
-
     // System size form group.
     this.systemSizeForm = this.fb.group({
       heatingBTUH: [null, [
@@ -54,9 +40,6 @@ export class HVACSystemSearchComponent implements OnInit {
       ]],
       coolingTons: [null, Validators.required],
     });    
-
-    //add row to the beginning of the table
-    this.newIndoorUnit();    
 
     this.systemSizeForm.valueChanges.subscribe(selectedValue => {
       this.myData.systemSize = selectedValue;
@@ -80,7 +63,6 @@ export class HVACSystemSearchComponent implements OnInit {
     this.MySubmitValidation["dwellingInfo"] = dwellignInfoData[1];    
   }
 
-
   // tabChange is a callback when the progress bar step is changed.
   // If the new step is the final step in sequence, we load the equipment search results.
   tabChange(e:any){
@@ -98,93 +80,4 @@ export class HVACSystemSearchComponent implements OnInit {
 
   }
 
-  newIndoorUnit() {
-    const indoorUnitForm = this.fb.group({
-        qty: [0, Validators.required],
-        unitType: ["", Validators.required],
-        size: [0, Validators.required],
-    });
-  
-    this.indoorUnits.push(indoorUnitForm);
-  }
- 
-  addIndoorUnit(lessonIndex: number) {
-
-    const myRows =  this.indoorUnits.getRawValue();
-    
-    //validate the fields qty and size
-    if(!this.VerifyQty(myRows) || !this.VerifySize(myRows)) {
-      let message = 'The amount must be less than 6 and not more than 135% of cooling tons';
-      
-      this._snackBar.open(message, 'Ok', {
-        duration: 10000
-      });
-      return;
-    }
-    
-    // after adding, disable controls
-    this.indoorUnits.controls[lessonIndex].disable();
-
-    // Update payload
-    //this.myData.systemDesign!.msMultiZoneType = this.indoorUnits.getRawValue();
-    
-    this.existRecord = true;
-  }
-
-  editIndoorUnit(lessonIndex: number){
-    this.indoorUnits.controls[lessonIndex].enable();
-
-    //TODO: desabilitar boton continue..
-    this.existRecord = false;
-  }
-
-  deleteIndoorUnit(lessonIndex: number) {
-    this.indoorUnits.removeAt(lessonIndex);
-
-    // Update payload
-    //this.myData.systemDesign!.msMultiZoneType = this.indoorUnits.getRawValue();
-  }
-
-  
-  // function that verify the addition of the colum quantity.
-  VerifyQty(myRows: any[]) {    
-    let sum = 0;    
-    for(let k=0; k < myRows.length; k++) {        
-      sum += Number(myRows[k].qty);         
-    }
-
-    if(sum <= 5) {
-      return true;
-    }
-    else {
-      return false;
-    }    
-  }
-
-  // function that verify the colum size.
-  VerifySize(myRows: any[]){
-    let sum = 0;
-    for(let k=0; k< myRows.length; k++){        
-      sum = sum + Number(myRows[k].qty) * Number(myRows[k].size);         
-    }    
-   
-    let coolingTons = this.myData.systemSize?.coolingTons;    
-    let product = 1.35 * Number(coolingTons) * 12000;
-
-    if (sum < product){      
-      return true;
-    } else {      
-      return false;
-    }
-  }  
-
-  allCombinations() {  
-    this.matStepSystemDesignCompleted = true;  
-    setTimeout(() => {
-      this.stepper.next(); 
-    }, 500); 
-    
-    //this.systemDesignForm.reset();       
-    this.myData.systemDesign = null;     
-  }
 }
