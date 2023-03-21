@@ -19,14 +19,14 @@ export class ModalSystemComponent implements OnInit {
 
   ngOnInit(): void {
     this.systemForm = this.formBuilder.group({
-      unitType: [null, Validators.required],
-      systemType: [null, Validators.required],
-      HVACType: [null, Validators.required],
+      unitType: ['', Validators.required],
+      systemType: ['', Validators.required],
+      HVACType: ['', Validators.required],
 
       energyDistribution: ['', Validators.required],   
-      msUnitType: [null, Validators.required],
-      coolingCapacity: [null, Validators.required],
-      quantity: [null, Validators.required],       
+      msUnitType: ['', Validators.required],
+      coolingCapacity: ['', Validators.required],
+      quantity: ['', Validators.required],       
     });
 
    
