@@ -5,6 +5,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatStepper } from '@angular/material/stepper';
 
 import { EquipmentSearch } from '../interfaces/equipment-search.interface'
+import {MatDialog} from '@angular/material/dialog';
+import { ModalSystemComponent } from '../modal-system/modal-system.component';
 
 @Component({
   selector: 'hvac-system-search',
@@ -26,7 +28,8 @@ export class HVACSystemSearchComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private _snackBar: MatSnackBar 
+    private _snackBar: MatSnackBar,
+    private dialog: MatDialog 
   ) { }
    
   ngOnInit(): void {
@@ -61,6 +64,17 @@ export class HVACSystemSearchComponent implements OnInit {
   setDwellignInfo(dwellignInfoData: any){
     this.myData.dwellingInfo = dwellignInfoData[0];
     this.MySubmitValidation["dwellingInfo"] = dwellignInfoData[1];    
+  }
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(ModalSystemComponent, {
+      width: '30%',      
+      data: ''
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(result);
+    });
   }
 
   // tabChange is a callback when the progress bar step is changed.
