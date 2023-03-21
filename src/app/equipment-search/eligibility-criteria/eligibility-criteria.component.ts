@@ -30,7 +30,6 @@ export class EligibilityCriteriaComponent implements OnInit, OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
 
     const currentState: any = changes["myParams"].currentValue;
-console.log(currentState);
     if(currentState) {
       this.loadDefaultEligibility(null);
      }

@@ -80,7 +80,6 @@
         <!--Title-->
         <h2 class="rc-main-title">System design</h2> 
                                       
-        <!--<app-system-design></app-system-design>--> 
         <!--system_design
             <div fxFlex="25" fxLayout="column" fxLayoutAlign="center stretch" fxFlex.xs="100" fxFlex.sm="70"
                 fxFlex.md="25" fxLayoutGap="16">
@@ -108,37 +107,25 @@
                     </div>  
                 </div>
             </div>
-            
-            <div fxFlex="25" fxLayout="column" fxLayoutAlign="center stretch" fxFlex.xs="100" fxFlex.sm="70" fxFlex.md="25">
-                <div class="rc-hvac-unit-card">
+                 -->
+
+                 
+            <div *ngFor="let sys of systems; index as i"  fxFlex="25" fxLayout="column" fxLayoutAlign="center stretch" fxFlex.xs="100" fxFlex.sm="70" fxFlex.md="25">
+                <div class="rc-hvac-unit-card" (click)="openDialog('edit', i)">
                     <div class="icon">
                         <img src="../../../../assets/images/icons/indoor_icon.png" alt="" class="unchecked">
                     </div>
                     <div class="information">
-                        <div class="item">
-                            <span>Unit Type</span>
-                            <p>Indoor Unit</p>
+
+                        <div class="item" *ngFor="let key of Object.keys(sys)">
+                            <span>{{key}}</span>
+                            <p>{{sys[key]}}</p>
                         </div>
-                        <div class="item">
-                            <span>System Type</span>
-                            <p>Mini-split</p>
-                        </div>
-                        <div class="item">
-                            <span>msUnit Type</span>
-                            <p>Cassete</p>
-                        </div>
-                        <div class="item">
-                            <span>Cooling Capacity</span>
-                            <p>6000</p>
-                        </div>
-                        <div class="item">
-                            <span>Quantity</span>
-                            <p>2</p>
-                        </div>
+
                     </div>  
                 </div>
             </div>
-            
+       <!--
             <div fxFlex="25" fxLayout="column" fxLayoutAlign="center stretch" fxFlex.xs="100" fxFlex.sm="70"
                 fxFlex.md="25">
                 <div class="rc-hvac-unit-card">
@@ -159,7 +146,7 @@
             </div>-->
             <!--Add new-->
             <div fxFlex="25" fxLayout="column" fxLayoutAlign="center stretch" fxFlex.xs="100" fxFlex.sm="70" fxFlex.md="25">
-                <button class="rc-hvac-unit-add" (click)="openDialog()">
+                <button class="rc-hvac-unit-add" (click)="openDialog('add')">
                     <div class="icon">
                         <mat-icon>add</mat-icon>
                     </div>
