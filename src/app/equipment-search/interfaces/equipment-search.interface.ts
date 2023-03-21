@@ -19,13 +19,25 @@ export interface DwellingInfo {
     constructionType: string; 
 }
 
-export interface SystemDesign {
+/*export interface SystemDesign {
     outdoorSystemType: boolean;
     indoorSystemType: boolean;
     furnaceType: boolean;
     furnaceConfiguration: boolean;
     msMultiZoneType?: msMultiZoneType[];
+}*/
+
+export interface SystemDesign extends Array<any>{
+    unitType: string;
+    systemType: string;
+    HVACType: string;
+    energyDistribution: string;
+    msUnitType: string;
+    coolingCapacity: number;
+    quantity:number;
 }
+
+//extends Array<MyType>
 
 export interface msMultiZoneType {
     qty: number;

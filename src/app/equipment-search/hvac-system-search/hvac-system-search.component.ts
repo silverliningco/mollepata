@@ -20,7 +20,7 @@ export class HVACSystemSearchComponent implements OnInit {
   @ViewChild('stepper')
   stepper!: MatStepper;  
   systemSizeForm!: FormGroup;
-  systemDesignForm!: FormGroup;
+  
   
   msMultiZoneTypeForm!: FormGroup;
 
@@ -53,15 +53,7 @@ export class HVACSystemSearchComponent implements OnInit {
         Validators.max(135000),
       ]],
       coolingTons: [null, Validators.required],
-    });
-
-    // System design form group.
-    this.systemDesignForm = this.fb.group({
-      outdoorUnitType: ['', Validators.required],
-      indoorUnitType: ['', Validators.required],
-      furnaceType: ['', Validators.required],
-      /*furnaceConfiguration: ['', Validators.required],*/
-    });
+    });    
 
     //add row to the beginning of the table
     this.newIndoorUnit();    
@@ -69,44 +61,7 @@ export class HVACSystemSearchComponent implements OnInit {
     this.systemSizeForm.valueChanges.subscribe(selectedValue => {
       this.myData.systemSize = selectedValue;
       this.MySubmitValidation["systemSize"] = this.systemSizeForm.valid;
-    });
-
-    this.systemDesignForm.valueChanges.subscribe(selectedValue => {
-      // We assign the entire form with the changes made to myData.systemDesign, 
-      // in order not to lose data in msMultizoneType we copy to a variable and update the property.
-      let mymsMultizoneType:any = [];
-      if(this.myData.systemDesign?.msMultiZoneType){
-        mymsMultizoneType = [...this.myData.systemDesign?.msMultiZoneType!];
-      }
-
-      this.myData.systemDesign = selectedValue;
-
-      if(mymsMultizoneType.length > 0){
-        this.myData.systemDesign!.msMultiZoneType = mymsMultizoneType
-      }
-
-      this.MySubmitValidation["systemDesign"] = this.systemDesignForm.valid;
-    });
-   
-    this.systemDesignForm.get("outdoorUnitType")!.valueChanges.subscribe(selectedValue => {
-      if(selectedValue == "Small packaged unit") {
-        this.systemDesignForm.controls["indoorUnitType"].disable();
-        this.systemDesignForm.controls["furnaceType"].disable();
-        this.systemDesignForm.controls["indoorUnitType"].reset();
-        this.systemDesignForm.controls["furnaceType"].reset();
-      } else {
-        this.systemDesignForm.controls["indoorUnitType"].enable();
-        this.systemDesignForm.controls["furnaceType"].enable();
-      }
-
-      if(selectedValue == "Split System") {
-        this.systemDesignForm.controls["indoorUnitType"].reset();
-      }
-    });
-
-    this.systemDesignForm.get("indoorUnitType")!.valueChanges.subscribe(selectedValue => {
-      this.systemDesignForm.controls["furnaceType"].reset();
-    });
+    });   
 
   }
 
@@ -171,7 +126,7 @@ export class HVACSystemSearchComponent implements OnInit {
     this.indoorUnits.controls[lessonIndex].disable();
 
     // Update payload
-    this.myData.systemDesign!.msMultiZoneType = this.indoorUnits.getRawValue();
+    //this.myData.systemDesign!.msMultiZoneType = this.indoorUnits.getRawValue();
     
     this.existRecord = true;
   }
@@ -187,7 +142,7 @@ export class HVACSystemSearchComponent implements OnInit {
     this.indoorUnits.removeAt(lessonIndex);
 
     // Update payload
-    this.myData.systemDesign!.msMultiZoneType = this.indoorUnits.getRawValue();
+    //this.myData.systemDesign!.msMultiZoneType = this.indoorUnits.getRawValue();
   }
 
   
@@ -229,7 +184,7 @@ export class HVACSystemSearchComponent implements OnInit {
       this.stepper.next(); 
     }, 500); 
     
-    this.systemDesignForm.reset();       
+    //this.systemDesignForm.reset();       
     this.myData.systemDesign = null;     
   }
 }

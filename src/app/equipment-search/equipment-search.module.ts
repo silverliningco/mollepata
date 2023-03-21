@@ -22,6 +22,8 @@ import { CardComponent } from './card/card.component';
 import { TableComponent } from './table/table.component';
 import { HVACSystemSearchComponent } from './hvac-system-search/hvac-system-search.component';
 import { EligibilityCriteriaComponent } from './eligibility-criteria/eligibility-criteria.component';
+import { ModalSystemComponent } from './modal-system/modal-system.component';
+import { SystemDesignComponent } from './system-design/system-design.component';
 
 /* angular material */
 import {MatCardModule} from '@angular/material/card';
@@ -56,6 +58,8 @@ import { MatTableModule } from '@angular/material/table';
     TableComponent,
     HvacSystemDetailComponent,
     EligibilityCriteriaComponent,
+    SystemDesignComponent,
+    ModalSystemComponent,
   ],
   imports: [
     CommonModule,
