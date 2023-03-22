@@ -23,22 +23,19 @@
 .table-buttons.delete{
   background-color: var(--rc-warn-color);
 }
-/* <a> like pointer */
-.link {
-  cursor: pointer;  
-}
 /* Button Add hvac unit */
 .rc-hvac-unit-add, 
 .rc-hvac-unit-card{
+  position: relative;
   padding: 50px;
   background-color: white;
   border: 1px solid #D7D7D7;
   border-radius: 4px;
   height: 100%;
 }
-.rc-hvac-unit-add:hover{
+.rc-hvac-unit-add:hover,
+.rc-hvac-unit-card:hover{
   cursor: pointer;
-
 }
 .rc-hvac-unit-add .icon{
   background-color: rgba(21, 101, 192, 0.15);
@@ -82,4 +79,12 @@
   font-weight: 500;
   line-height: 1.6;
 }
-
+.rc-hvac-unit-card .delete{
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  color: #bfbfbf;
+}
+.rc-hvac-unit-card .delete:hover{
+  color: black;
+}
