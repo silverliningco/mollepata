@@ -23,6 +23,10 @@
 .table-buttons.delete{
   background-color: var(--rc-warn-color);
 }
+/* <a> like pointer */
+.link {
+  cursor: pointer;  
+}
 /* Button Add hvac unit */
 .rc-hvac-unit-add, 
 .rc-hvac-unit-card{

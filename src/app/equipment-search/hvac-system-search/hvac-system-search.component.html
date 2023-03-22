@@ -111,29 +111,31 @@
 
                  
             <div *ngFor="let sys of systems; index as i"  fxFlex="25" fxLayout="column" fxLayoutAlign="center stretch" fxFlex.xs="100" fxFlex.sm="70" fxFlex.md="25">
-                <div class="rc-hvac-unit-card" (click)="openDialog('edit', i)">
+                <a class="link">
+                    <div class="rc-hvac-unit-card" (click)="openDialog('edit', i)">
 
-                    <div class="icon" *ngFor="let key of Object.keys(sys)">
-                        <div *ngIf="sys[key]=='Indoor unit'">
-                            <img src="../../../../assets/images/icons/indoor_icon.png" alt="" class="unchecked">
-                        </div>  
-                        <div *ngIf="sys[key]=='Outdoor unit'">
-                            <img src="../../../../assets/images/icons/outdoor_icon.png" alt="" class="unchecked">
-                        </div>  
-                        <div *ngIf="sys[key]=='Furnace'">
-                            <img src="../../../../assets/images/icons/furnace_icon.png" alt="" class="unchecked">
+                        <div class="icon" *ngFor="let key of Object.keys(sys)">
+                            <div *ngIf="sys[key]=='Indoor unit'">
+                                <img src="../../../../assets/images/icons/indoor_icon.png" alt="" class="unchecked">
+                            </div>  
+                            <div *ngIf="sys[key]=='Outdoor unit'">
+                                <img src="../../../../assets/images/icons/outdoor_icon.png" alt="" class="unchecked">
+                            </div>  
+                            <div *ngIf="sys[key]=='Furnace'">
+                                <img src="../../../../assets/images/icons/furnace_icon.png" alt="" class="unchecked">
+                            </div>
                         </div>
+
+                        <div class="information">
+
+                            <div class="item" *ngFor="let key of Object.keys(sys)">
+                                <span>{{key}}</span>
+                                <p>{{sys[key]}}</p>
+                            </div>
+
+                        </div>  
                     </div>
-
-                    <div class="information">
-
-                        <div class="item" *ngFor="let key of Object.keys(sys)">
-                            <span>{{key}}</span>
-                            <p>{{sys[key]}}</p>
-                        </div>
-
-                    </div>  
-                </div>
+                </a>
             </div>
        <!--
             <div fxFlex="25" fxLayout="column" fxLayoutAlign="center stretch" fxFlex.xs="100" fxFlex.sm="70"
