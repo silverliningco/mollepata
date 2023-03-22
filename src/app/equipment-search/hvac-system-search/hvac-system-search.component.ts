@@ -71,6 +71,7 @@ export class HVACSystemSearchComponent implements OnInit {
     this.MySubmitValidation["dwellingInfo"] = dwellignInfoData[1];
   }
 
+  // Open dialog 
   openDialog(method: string, i?: number): void {
 
     let myData = {}
@@ -106,6 +107,14 @@ export class HVACSystemSearchComponent implements OnInit {
 
       this.myData.systemDesign = this.systems;
     });
+  }
+
+  // Delete system
+  deleteSystem(i: number){
+    if(confirm("Are you sure that you want to delete the system?")) {
+        this.systems.splice(i, 1);
+        this.myData.systemDesign = this.systems;
+    }
   }
 
   // tabChange is a callback when the progress bar step is changed.
