@@ -110,11 +110,12 @@ export class HVACSystemSearchComponent implements OnInit {
   }
 
   // Delete system
-  deleteSystem(i: number){
+  deleteSystem(i: number,e: Event){
     if(confirm("Are you sure that you want to delete the system?")) {
         this.systems.splice(i, 1);
         this.myData.systemDesign = this.systems;
     }
+    e.stopPropagation()
   }
 
   // tabChange is a callback when the progress bar step is changed.
