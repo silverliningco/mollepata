@@ -8,18 +8,22 @@
   }
   
 /*header card*/
-.results .rc-card .mat-card-title span{
+::ng-deep .results .rc-card .mat-card-title{
+  margin-bottom: 1rem;
+  border-bottom: 1px solid #F2F2F2;
+  padding-bottom: 8px;
+}
+::ng-deep .results .rc-card .mat-card-title span{
   font-size: 20px;
   font-weight: bold;
-  color: var(--rc-text-color)
+  color: var(--rc-text-color);
 }
 
-
-
-  ::ng-deep .results .rc-card .model-nrs {
-    width: 100%;
-    padding-bottom: 6px;
-  }
+/*Revisar esta clase*/
+::ng-deep .results .rc-card .model-nrs {
+  width: 100%;
+  padding-bottom: 6px;
+}
   
   ::ng-deep .results .rc-card .mat-card-subtitle{
     margin-bottom: 1.5rem !important;

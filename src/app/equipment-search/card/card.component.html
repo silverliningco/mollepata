@@ -4,39 +4,31 @@
     <div fxFlex="70" fxFlex.sm="100" fxFlex.xs="100">
       <mat-card-header>
         <mat-card-title>
-          <span class="title">{{this.getComponentByComponentType(card.result!.components, "Outdoor unit").title}}</span>        
+          <span class="title">{{this.getComponentByComponentType(card.result!.components, "Outdoor unit").title}}</span>
         </mat-card-title>
-
+        <!-- Outdoor, indoor, furnace, furnace confguration -->
         <mat-card-subtitle>
           <div fxLayout="row column" fxLayoutAlign="space-between center" class="model-nrs" fxLayoutGap="4px grid">
-            <!-- Components -->
-            <div fxFlex="50" *ngFor="let cardComponent of Object.keys(card.cardComponents)">
-              <div *ngIf="cardComponent != 'Outdoor unit'">
-                <mat-form-field class="rc-select-multiline">
-                  <mat-select [value]="this.getComponentByComponentType(card.result!.components, cardComponent).title" placeholder="{{cardComponent}}" (selectionChange)="filterByID($event.value, cardComponent)">
-                    <mat-option  class="rc-select-multiline-option" value="reset" disabled="true"> Plese select an option</mat-option>
-                    <mat-option class="rc-select-multiline-option" *ngFor="let component of card.cardComponents[cardComponent]" [value]="component.title">
-                      <b>{{component.title}}</b>
-                    </mat-option>
-                  </mat-select>
-                </mat-form-field>
-
-              </div>
+            <div fxFlex="33">
+              <mat-form-field class="example-full-width">
+                <mat-label>Outdoor</mat-label>
+                <input matInput value="25HBC524AP03" readonly="">
+              </mat-form-field>
             </div>
-
-            <!-- Configuration options -->
-            <div fxFlex="50" *ngFor="let cardConfiguration of Object.keys(card.cardConfigurations)">
-              <mat-form-field class="rc-select-multiline">
-                <mat-select [value]="card.result!.configurationOptions[0].value" (selectionChange)="filterByConfigurationOptions($event.value, cardConfiguration)" placeholder="{{cardConfiguration}}">
-                  <mat-option class="rc-select-multiline-option" *ngFor="let configuration of card.cardConfigurations[cardConfiguration]" [value]="configuration.value">
-                    <b>{{configuration.name}}</b>
-                  </mat-option>
+            <div fxFlex="33">
+              <mat-form-field appearance="fill">
+                <mat-label>Indoor Unit</mat-label>
+                <mat-select>
+                  <mat-option value="1"><b>FE4ANB003L00</b> FAN COIL VS MODULAR ALUM 3T </mat-option>
+                  <mat-option value="2"><b>FE4ANB003L00</b> FAN COIL VS MODULAR ALUM 3T </mat-option>
+                  <mat-option value="3"><b>FE4ANB003L00</b> FAN COIL VS MODULAR ALUM 3T </mat-option>
+                  <mat-option value="4"><b>FE4ANB003L00</b> FAN COIL VS MODULAR ALUM 3T </mat-option>
                 </mat-select>
               </mat-form-field>
-
-
             </div>
-
+            <div fxFlex="33">
+              Furnace
+            </div>
           </div>
         </mat-card-subtitle>
       </mat-card-header>
