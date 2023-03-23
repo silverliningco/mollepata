@@ -1,74 +1,116 @@
 <mat-card class="rc-card results">
-
-  <div fxLayout="row column" fxLayoutAlign="center start" fxLayoutGap="16px grid">
+  <div fxLayout="row column" fxLayoutAlign="center center" class="rc-card-header">
+    <!-- Card title -->
     <div fxFlex="70" fxFlex.sm="100" fxFlex.xs="100">
       <mat-card-header>
         <mat-card-title>
           <span class="title">{{this.getComponentByComponentType(card.result!.components, "Outdoor unit").title}}</span>
         </mat-card-title>
-        <!-- Outdoor, indoor, furnace, furnace confguration -->
-        <mat-card-subtitle>
-          <div fxLayout="row column" fxLayoutAlign="space-between center" class="model-nrs" fxLayoutGap="4px grid">
-            <div fxFlex="33">
-              <mat-form-field class="example-full-width">
-                <mat-label>Outdoor</mat-label>
-                <input matInput value="25HBC524AP03" readonly="">
-              </mat-form-field>
-            </div>
-            <div fxFlex="33">
-              <mat-form-field appearance="fill">
-                <mat-label>Indoor Unit</mat-label>
-                <mat-select>
-                  <mat-option value="1"><b>FE4ANB003L00</b> FAN COIL VS MODULAR ALUM 3T </mat-option>
-                  <mat-option value="2"><b>FE4ANB003L00</b> FAN COIL VS MODULAR ALUM 3T </mat-option>
-                  <mat-option value="3"><b>FE4ANB003L00</b> FAN COIL VS MODULAR ALUM 3T </mat-option>
-                  <mat-option value="4"><b>FE4ANB003L00</b> FAN COIL VS MODULAR ALUM 3T </mat-option>
-                </mat-select>
-              </mat-form-field>
-            </div>
-            <div fxFlex="33">
-              Furnace
-            </div>
-          </div>
-        </mat-card-subtitle>
       </mat-card-header>
     </div>
-    <div fxFlex="30" fxFlex.sm="70" fxFlex.xs="100" fxLayout="column" class="rc-show rc-hide-md rc-hide-sm rebates-amount">
+    <!-- Rebate Amount -->
+    <div fxFlex="30" fxFlex.sm="70" fxFlex.xs="100" fxLayout="column" class="rebates-amount">
       <div fxLayout="column" fxLayoutAlign="space-between center" fxLayout.sm="row" fxLayoutAlign.sm="space-between center"   fxLayout.xs="column">
-        <div  fxFlex="100" fxFlex.sm="60" fxFlex.xs="100" class="available-rebates">
-          
-          <p class="rc-small"><b>AVAILABLE REBATES</b></p>
-          
-          <!--TODO: Available Rebates -->
-        </div>
-        <div fxFlex="100" fxFlex.sm="40" fxFlex.xs="100" class="rebate-price" fxLayout="row" fxFlexAlign="center center">
-            <!--<div *ngFor="let rebates of card.availableRebates">
-              {{rebates | json}}
-            </div>-->
+        <div fxFlex="100" fxFlex.sm="40" fxFlex.xs="100" class="rebate-price" fxLayout="row" fxFlexAlign="center center">            
               <div fxFlex="100">
                 <h1>{{(card.result!.availableRebateAmount| currency) || "$0.00"}}</h1>
               </div>
           </div>
       </div>
     </div>
-  </div> 
-
-
+  </div>
+  <div fxLayout="row column" fxLayoutAlign="center start">
+    <!-- Outdoor, indoor, furnace, furnace confguration -->
+    <div fxFlex="100" fxLayout="column">
+      <mat-card-subtitle>
+        <div fxLayout="row column" fxLayoutAlign="space-between center" class="model-nrs" fxLayoutGap="16px grid">
+          <div fxFlex="25">
+            <mat-form-field class="example-full-width">
+              <mat-label>Outdoor</mat-label>
+              <input matInput value="25HBC524AP03" readonly="">
+            </mat-form-field>
+          </div>
+          <div fxFlex="25" *ngFor="let cardComponent of Object.keys(card.cardComponents)">
+            <mat-form-field class="rc-select-multiline">
+              <mat-select [value]="this.getComponentByComponentType(card.result!.components, cardComponent).title" placeholder="{{cardComponent}}" (selectionChange)="filterByID($event.value, cardComponent)">
+                <mat-option  class="rc-select-multiline-option" value="reset" disabled="true"> Plese select an option</mat-option>
+                <mat-option class="rc-select-multiline-option" *ngFor="let component of card.cardComponents[cardComponent]" [value]="component.title">
+                  <b>{{component.title}}</b>
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+      </mat-card-subtitle>
+    </div>
+  </div>
 
   <!-- Card Content -->  
   <mat-card-content>
-    <!-- AHRI ratings -->
-    <h4>AHRI Ratings</h4>
-    <div fxLayout="row column" fxLayoutAlign="start stretch" fxLayoutAlign.sm="center stretch" fxLayoutAlign.xs="center center" fxLayoutGap="12px grid">
-      <div fxFlex="50" fxFlex.sm="50" fxFlex.xs="100" *ngFor="let ratings of card.result!.AHRIRatings" class="">
-        <div class="ahri-ratings">
-            <div *ngFor="let key of Object.keys(ratings)">
-              <b style="padding-right: 8px;">{{key}} :</b>
-              {{ratings[key]}}
+    <div fxLayout="row column" fxLayoutAlign="start" fxLayoutGap="16px grid">
+      <!-- AHRI ratings -->
+      <div fxFlex="60" fxLayout="column">
+        <h4 class="section-title">AHRI Ratings</h4>
+        <div fxLayout="row column" fxLayoutAlign="start stretch" fxLayoutAlign.sm="center stretch" fxLayoutAlign.xs="center center" fxLayoutGap="12px grid">
+          <div fxFlex="50" fxFlex.sm="50" fxFlex.xs="100" *ngFor="let ratings of card.result!.AHRIRatings" class="">
+            <div class="ahri-ratings">
+                <div *ngFor="let key of Object.keys(ratings)">
+                  <span class="key">{{key}} :</span>
+                  <span class="rating">{{ratings[key]}}</span>
+                </div>
             </div>
+          </div>        
         </div>
-      </div>        
+      </div>
+      <div fxFlex="40" fxLayout="column" class="rc-rebates-list">
+        <h4 class="section-title">Rebates</h4>
+        <mat-accordion>
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                <mat-icon> money</mat-icon>
+                Mass Save Partial Heat Pump Rebates Partial Heat Pump Rebates
+              </mat-panel-title>
+              <mat-panel-description>
+                $4,500.00
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+            <p class="description">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde, quam. Nam magni, doloribus, nobis, vitae officia
+            </p>
+            <ul class="rc-unlisted link-rebates">
+              <li><a href=""><mat-icon>link</mat-icon> Rebate program details</a></li>
+              <li><a href=""><mat-icon>link</mat-icon> Mass Save HP FAQs</a></li>
+              <li><a href=""><mat-icon>link</mat-icon> Aplication Form</a></li>
+              <li><a href=""><mat-icon>link</mat-icon> Online application</a></li>
+            </ul>
+          </mat-expansion-panel>
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                <mat-icon> money</mat-icon>
+                Mass Save Partial Heat Pump Rebates Partial Heat Pump Rebates
+              </mat-panel-title>
+              <mat-panel-description>
+                $4,500.00
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+            <p class="description">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde, quam. Nam magni, doloribus, nobis, vitae officia
+            </p>
+            <ul class="rc-unlisted link-rebates">
+              <li><a href=""><mat-icon>link</mat-icon> Rebate program details</a></li>
+              <li><a href=""><mat-icon>link</mat-icon> Mass Save HP FAQs</a></li>
+              <li><a href=""><mat-icon>link</mat-icon> Aplication Form</a></li>
+              <li><a href=""><mat-icon>link</mat-icon> Online application</a></li>
+            </ul>
+          </mat-expansion-panel>
+        </mat-accordion>
+      </div>
     </div>
+
+
+
   </mat-card-content>
   <!-- ./Card Content -->
 

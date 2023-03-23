@@ -9,14 +9,15 @@
   
 /*header card*/
 ::ng-deep .results .rc-card .mat-card-title{
-  margin-bottom: 1rem;
-  border-bottom: 1px solid #F2F2F2;
-  padding-bottom: 8px;
+  margin-bottom: 0;
 }
 ::ng-deep .results .rc-card .mat-card-title span{
   font-size: 20px;
   font-weight: bold;
   color: var(--rc-text-color);
+}
+::ng-deep .results .rc-card .rc-card-header{
+  padding-bottom: .5rem;
 }
 
 /*Revisar esta clase*/
@@ -24,10 +25,12 @@
   width: 100%;
   padding-bottom: 6px;
 }
-  
-  ::ng-deep .results .rc-card .mat-card-subtitle{
-    margin-bottom: 1.5rem !important;
-  }
+::ng-deep .results .rc-card .mat-card-subtitle{
+  padding-top: 1.25em!important;
+  padding-bottom: 0 !important;
+  border-bottom: 1px solid #F2F2F2;
+  border-top: 1px solid #F2F2F2;
+}
   @media only screen and (max-width: 767px){
     
     ::ng-deep .results .rc-card .mat-card-subtitle{
@@ -48,7 +51,6 @@
     position: relative;
     background-color: rgba(255, 160, 0, 0.1);
     border-radius: 4px;
-    padding: 1rem 1rem 1.5rem 1rem !important;
   }
   
   ::ng-deep .results .rc-card .available-rebates{
@@ -72,10 +74,11 @@
   
   ::ng-deep .results .rc-card .rebate-price{
     position: relative;
-    margin-top: 1rem;
-    color: var(--rc-warn-color);
+    margin: .75rem;
+    color: var(--rc-accent-color);
     text-align: center;
     height: 100%;
+    font-size: 24px;
   }
   
   ::ng-deep .results .rc-card p.rc-small {
@@ -99,7 +102,7 @@
   @media screen and (min-width: 960px) and (max-width: 1199px){
   
     ::ng-deep .results .rc-card .rebate-price h1{
-      font-size: 26px;
+      font-size: 24px;
     }
   }
   @media screen and (max-width: 959px){
@@ -126,11 +129,8 @@
   }
 
   /*Content*/
-  
   ::ng-deep .results .rc-card .mat-card-content{
-      padding: .5rem 0 0 0;
-      margin-bottom: 0rem;
-      margin-top: 1rem!important;
+    margin: 0.25rem 0!important;
   }
   
   ::ng-deep .results .rc-card .mat-card-content span.rc-small{
@@ -141,21 +141,25 @@
         margin: 1rem 0;
       }
     }
-  
-    ::ng-deep .results .rc-card .mat-card-content .ahri-ratings{
-    background-color: #fafafa;  
-    border-radius: 4px;
+  ::ng-deep .results .rc-card .mat-card-content .ahri-ratings{
     padding: 10px;
     height: 90%;
+  }
+  .ahri-ratings .key{
+    color: #999999;
+  }
+  .ahri-ratings .rating{
+    color: var(--rc-text-light-color);
+    font-weight: 600;    
+    padding-left: 0.5rem;
+  }
+  ::ng-deep .results .rc-card .mat-card-content .section-title {
+    color: #999999;
+    font-weight: 400;
   }
   .rc-unlisted{
     list-style: none;
     padding-inline-start: 0;
-  }
-  .rc-unlisted .mat-icon{
-    position: absolute;
-    left: 5px;
-    color: #02af09;
   }
   .list-accesories {
     background-color: rgba(255, 149, 0, 0.07);
@@ -181,25 +185,67 @@
     color: var(--rc-accent-color);
   }
 
+
+  /*Rebates List*/
+  ::ng-deep .results .rc-card .mat-card-content .mat-expansion-panel{
+    background: #F8F8F8;
+    margin-bottom: 0.75rem !important;
+    box-shadow: none !important;
+    border-radius: 0px !important;
+  }
+  ::ng-deep .results .rc-card .mat-card-content .mat-expansion-panel .mat-expansion-panel-header{
+    padding: 1rem;
+    height: auto;
+  }
+  ::ng-deep .results .rc-card .mat-card-content .mat-expansion-panel .mat-expansion-panel-header .mat-icon{
+    font-size: 20px;
+    margin-right: 0.3rem;
+    color: #007205;
+  }
+  ::ng-deep .results .rc-card .mat-card-content .mat-expansion-panel .mat-expansion-panel-header.mat-expanded{
+    border-bottom: 1px solid #D7D7D7;
+    height: auto;
+  }
+  ::ng-deep .results .rc-card .mat-card-content .mat-expansion-panel .mat-expansion-panel-header .mat-expansion-panel-header-description{
+    background-color: #E1ECF8;
+    border-radius: 4px;
+    color:var(--rc-primary-color);
+    padding: 0 0.5rem;
+    font-weight: bold;
+  }  
+  ::ng-deep .results .rc-card .mat-card-content .mat-expansion-panel .mat-expansion-panel-body{
+    padding: 1rem;
+  }
+  ::ng-deep .results .rc-card .mat-card-content .mat-expansion-panel .mat-expansion-panel-body p.description{
+    color: #606060;
+    margin-bottom: .5rem;
+  }
+  .rc-unlisted.link-rebates a{
+    padding-left: 1rem;
+    color: var(--rc-primary-color);
+  }
+  .rc-unlisted.link-rebates .mat-icon{
+    position: absolute;
+    left: 1rem;
+    transform: rotate(315deg);
+    font-size: 1.1rem;
+  }
+
   /*Card buttons*/
-  
   ::ng-deep .results .rc-card .rc-card-btn{
     color: white;
-  }
-  
+  }  
   ::ng-deep .results .rc-card .rc-card-btn.warn {
     background: var(--rc-warn-color);
   }
-  
   ::ng-deep .results .rc-card .rc-card-btn.primary {
       background: var(--rc-primary-color);
-  }
-  
+  }  
   ::ng-deep .results .rc-card .rc-card-btn.accent {
       background: var(--rc-accent-color);
   }
-  /*Card Actions*/
-  
+
+  /*Card Actions*/  
   ::ng-deep .results .rc-card mat-card-actions{
     padding-right: .5rem;
   }
