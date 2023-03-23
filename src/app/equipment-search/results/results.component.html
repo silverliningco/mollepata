@@ -35,7 +35,7 @@
         -->
 
     <!-- Panel for Eligibility Criteria -->
-    <mat-accordion>
+    <!--<mat-accordion>
       <mat-expansion-panel [expanded]="true">
         <mat-expansion-panel-header>
           <mat-panel-title>
@@ -48,18 +48,18 @@
           (eligibilityRequirementsChange)="eligibilityRequirementsProviders( $event )"></app-eligibility-criteria>
 
       </mat-expansion-panel>
-    </mat-accordion>
+    </mat-accordion>-->
   </div>
   <!-- ./Rebate eligibility questions, requirements and filters -->
 
   <!-- Search results -->
-  <div fxFlex="70" fxFlex.xs="100" fxFlex.sm="90">
+  <div fxFlex="100" fxFlex.xs="100" fxFlex.sm="90">
 
     <!-- Product line menu, if applicable. div.fxFlex="100" (encompass the results) -->
-    <mat-tab-group (focusChange)="systemDesignChange($event.index)">
+    <!--<mat-tab-group (focusChange)="systemDesignChange($event.index)">
       <mat-tab *ngFor="let productLine of this.productLines" label="{{productLine.option}}"></mat-tab>
 
-    </mat-tab-group>
+    </mat-tab-group>-->
 
     <!-- Search results grouped by outdoor unit in "card" type displays. -->
     <app-card *ngFor="let myResult of myResults" [mySystems]="myResult">
