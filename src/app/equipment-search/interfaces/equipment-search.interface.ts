@@ -1,5 +1,5 @@
 export interface EquipmentSearch {
-    state?: String;
+    location?: Location;
     utilityProviders?: UtilityProviders;
     dwellingInfo?: DwellingInfo;    
     systemDesign?: Array<any>;
@@ -7,6 +7,10 @@ export interface EquipmentSearch {
     commerceInfo?: CommerceInfo;
     eligibilityQuestions?: EligibilityQuestion[];
     eligibilityRequirements?: number[];
+}
+
+export interface Location {
+    state?: String;
 }
 
 export interface UtilityProviders {

@@ -8,7 +8,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
   styleUrls: ['./location.component.css']
 })
 export class LocationComponent implements OnInit {
-  @Output()stateChange: EventEmitter<any> = new EventEmitter();
+  @Output()locationChange: EventEmitter<any> = new EventEmitter();
   
   locationForm!: FormGroup;
 
@@ -24,7 +24,7 @@ export class LocationComponent implements OnInit {
     });
 
     this.locationForm.valueChanges.subscribe(selectedValue => {
-      this.stateChange.emit([selectedValue.state, this.locationForm.valid]);
+      this.locationChange.emit([selectedValue, this.locationForm.valid]);
     });
   }
 

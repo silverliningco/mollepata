@@ -3,6 +3,9 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms'
 import {UtilityProviders} from './../interfaces/utility-providers.interface'
 import { EndpointsService } from '../services/endpoints.service';
 
+import { Location } from '../interfaces/equipment-search.interface';
+
+
 @Component({
   selector: 'app-utility-providers',
   templateUrl: './utility-providers.component.html',
@@ -10,7 +13,7 @@ import { EndpointsService } from '../services/endpoints.service';
 })
 export class UtilityProvidersComponent implements OnInit, OnChanges {
 
-  @Input() state: String = 'MA'; 
+  @Input() location: Location = {}; 
   @Output()utilityProvidersChange: EventEmitter<any> = new EventEmitter();
 
   electricProviders: Array<UtilityProviders> = [];
@@ -25,11 +28,11 @@ export class UtilityProvidersComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
 
-    const currentState: String = changes["state"].currentValue;
+    const currentLocation: Location = changes["location"].currentValue;
 
-    if(currentState) { 
+    if(currentLocation) { 
       // This component needs to take a location as input and load the default utilities for that location.
-      this._endpoint.Utilities(currentState).subscribe({
+      this._endpoint.Utilities(currentLocation.state).subscribe({
         next: (resp: any) => { 
           
           let listUtilities: Array<UtilityProviders> = resp;

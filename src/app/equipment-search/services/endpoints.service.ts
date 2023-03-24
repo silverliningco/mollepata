@@ -13,29 +13,15 @@ export class EndpointsService {
   constructor(
       private http: HttpClient
     ) { }
-
-    ProductLines(body: any): Observable<any> {
-
-      let url =  environment.apiURL + '/product-lines'; 
-  
-      return this.http.post(url, body);
-    }
-
-    Filters(body: any): Observable<any> {
+/*
+   Filters(body: any): Observable<any> {
 
       let url = environment.apiURL + '/filters'; 
   
       return this.http.post(url, body);
     }
-
-    AvailableRebates(body: any): Observable<any> {
-
-      let url = environment.apiURL + '/available-rebates'; 
-  
-      return this.http.post(url, body);
-    }
-
-    ElegibilityCriteria(body: any): Observable<any> {
+*/
+   ElegibilityCriteria(body: any): Observable<any> {
 
       let url = environment.apiURL + '/eligibility-criteria' 
 
@@ -44,7 +30,7 @@ export class EndpointsService {
 
     Search(body: any): Observable<any> {
 
-      let url = environment.apiURL + '/search-equipment'; 
+      let url = environment.apiURL + '/search-hvac-systems'; 
 
       return this.http.post(url, body);
     }
@@ -56,12 +42,6 @@ export class EndpointsService {
 
       return this.http.get(url);
       
-    }
-
-    ModelNrs(body: any){
-      let url = environment.apiURL + '/model-nrs'; 
-
-      return this.http.post(url, body);
     }
 
 }

@@ -10,7 +10,7 @@
         <div fxLayout="row column" fxLayoutAlign="center">
             <div fxFlex="25" fxLayout="column" fxLayoutAlign="center center" fxFlex.xs="100" fxFlex.sm="50" fxFlex.md="25" fxLayoutGap="20">
                 
-                <app-location (stateChange)="setNewState( $event )"></app-location>
+                <app-location (locationChange)="setNewLocation( $event )"></app-location>
             </div>
         </div>
 
@@ -33,7 +33,7 @@
         <div fxLayout="row column" fxLayoutAlign="center">
             <div fxFlex="25" fxLayout="column" fxLayoutAlign="center center" fxFlex.xs="100" fxFlex.sm="50" fxFlex.md="25" fxLayoutGap="20">
             
-                <app-utility-providers [state]="myData.state!"
+                <app-utility-providers [location]="myData.location!"
                     (utilityProvidersChange)="setNewUtilityProviders( $event )"></app-utility-providers>
 
             </div>
@@ -74,7 +74,7 @@
     </mat-step>       
 
     <!--- Step 4: System design. -->
-    <mat-step [completed]="MySubmitValidation['systemDesign']">
+    <mat-step [completed]="this.systems.length > 0">
         <ng-template matStepLabel>System Design</ng-template>
         
         <!--Title-->
@@ -120,7 +120,7 @@
         <!-- button -->
         <div fxLayout="column" fxLayoutAlign="center end" class="rc-stepper-buttons">
             <button type="button" mat-raised-button color="primary"
-                [disabled]="!MySubmitValidation['systemDesign']" matStepperNext>
+                [disabled]="this.systems.length == 0" matStepperNext>
                 Continue
                 <mat-icon>arrow_forward</mat-icon>
             </button>

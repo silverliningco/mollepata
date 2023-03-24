@@ -56,9 +56,9 @@ export class HVACSystemSearchComponent implements OnInit {
 
   }
 
-  setNewState(stateData: any) {
-    this.myData.state = stateData[0];
-    this.MySubmitValidation["location"] = stateData[1];
+  setNewLocation(locationData: any) {
+    this.myData.location = locationData[0];
+    this.MySubmitValidation["location"] = locationData[1];
   }
 
   setNewUtilityProviders(utilityProvidersData: any) {

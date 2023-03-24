@@ -29,9 +29,9 @@ export class ResultsComponent implements OnInit {
 
     // Stock Status form group.
     this.commerceInfoForm = this.fb.group({
-      ecommerce_gateway_id: 1,
-      storeId: null,
-      stockStatus: false
+      ecommerceGatewayId: 1,
+      //storeId: null,
+      stockStatus: 'Stock'
     });
 
   }
