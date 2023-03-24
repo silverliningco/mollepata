@@ -57,7 +57,7 @@
         <h2 class="rc-main-title">Dwelling Info</h2>
         
         <div fxLayout="row column" fxLayoutAlign="center">
-            <div fxFlex="75" fxLayout="column" fxLayoutAlign="center center" fxFlex.xs="100" fxFlex.sm="75" fxFlex.md="75" fxLayoutGap="20">
+            <div fxFlex="50" fxLayout="column" fxLayoutAlign="center center" fxFlex.xs="100" fxFlex.sm="75" fxFlex.md="75" fxLayoutGap="20">
                 
                 <app-dwelling-info (dwellignInfoChange)="setDwellignInfo( $event )"></app-dwelling-info>
 
@@ -85,13 +85,16 @@
                 <div class="rc-hvac-unit-card" (click)="openDialog('edit', i)">
                     <div class="icon" *ngFor="let key of Object.keys(sys)">
                         <div *ngIf="sys[key]=='Indoor unit'">
-                            <img src="../../../../assets/images/icons/indoor_icon.png" alt="" class="unchecked">
+                            <img src="../../../../assets/images/icons/indoor_icon.png" alt="" class="no-active unchecked">
+                            <img src="../../../../assets/images/icons/indoor_icon_active.png" alt="" class="active unchecked">
                         </div>  
                         <div *ngIf="sys[key]=='Outdoor unit'">
-                            <img src="../../../../assets/images/icons/outdoor_icon.png" alt="" class="unchecked">
+                            <img src="../../../../assets/images/icons/outdoor_icon.png" alt="" class="no-active unchecked">
+                            <img src="../../../../assets/images/icons/outdoor_icon_active.png" alt="" class="active unchecked">
                         </div>  
                         <div *ngIf="sys[key]=='Furnace'">
-                            <img src="../../../../assets/images/icons/furnace_icon.png" alt="" class="unchecked">
+                            <img src="../../../../assets/images/icons/furnace_icon.png" alt="" class="no-active unchecked">
+                            <img src="../../../../assets/images/icons/furnace_icon_active.png" alt="" class="active unchecked">
                         </div>
                     </div>
                     <div class="information">

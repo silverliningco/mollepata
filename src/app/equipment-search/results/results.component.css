@@ -1,4 +1,4 @@
-/*Style for stock status container*/
+/* Stock status container */
 .rc-filter-stock {
     background-color: #ffffff;
     border-radius: 4px;
@@ -6,34 +6,37 @@
     margin-bottom: 0.75rem;
     padding: 15px 10px;
 }
+/* End Stock status container */
 
-/*Result panel*/
-    .results .lateral-panel .mat-expansion-panel{
-        margin-bottom: 0.5rem !important;
-    }
-    /*Result panel header*/
-        .results .lateral-panel .mat-expansion-panel .mat-expansion-panel-header{
-            padding: 12px 24px;
-            height: auto !important;
-            border-bottom: 1px solid #e4e4e4;
-            border-radius: 0;
-            background-color: transparent!important;
-        }
-        .results .lateral-panel .mat-expansion-panel .mat-expansion-panel-header-title{
-            place-content: center space-around;
-        }
-        .results .lateral-panel mat-accordion mat-panel-title {
-            font-weight: bold;
-            text-transform: uppercase;
-            font-size: 17px;
-            color: #606060;
-        }
+/* Result panel */
+.results .lateral-panel .mat-expansion-panel{
+    margin-bottom: 0.5rem !important;
+}
+.results .lateral-panel .mat-expansion-panel .mat-expansion-panel-header{
+    padding: 12px 24px;
+    height: auto !important;
+    border-bottom: 1px solid #e4e4e4;
+    border-radius: 0;
+    background-color: transparent!important;
+}
+.results .lateral-panel .mat-expansion-panel .mat-expansion-panel-header-title{
+    place-content: center space-around;
+}
+.results .lateral-panel mat-accordion mat-panel-title {
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 17px;
+    color: #606060;
+}
+/* End Result panel */
 
-/* Result tabs */
-.results mat-tab-group.mat-tab-group{
-    background-color: #ffffff;
-    margin-bottom: 0.5rem;
+/* ToolTip */
+.cdk-overlay-pane.mat-tooltip-panel .mat-tooltip {
+    color: var(--rc-text-color);
+    background-color: white;
+    border: 1px solid #474747;
+    border-radius: 3px;
+    font-size: 12px;
+    padding: .5rem 1rem;
 }
-.results .mat-tab-group .mat-tab-body-wrapper{
-    padding: 1rem;
-}
+/* End ToolTip */

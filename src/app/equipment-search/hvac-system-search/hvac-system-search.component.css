@@ -1,29 +1,5 @@
-/*Buttons in table*/
-.table-buttons {
-  margin-right: 4px;
-  border: none;  
-  padding: 5px;
-  border-radius: 2px;
-}
-.table-buttons mat-icon{
-  font-size: 16px;
-  height: 16px;
-  width: 16px;
-  color: white;
-}
-.table-buttons.save{
-  background-color: rgb(17, 109, 17);
-}
-.table-buttons.edit{
-  background-color: var(--rc-primary-color);
-}
-.table-buttons.cancel{
-  background-color: var(--rc-warn-color);
-}
-.table-buttons.delete{
-  background-color: var(--rc-warn-color);
-}
-/* Button Add hvac unit */
+/* Step 4: System Design */
+/* --- Add hvac unit Button --- */
 .rc-hvac-unit-add, 
 .rc-hvac-unit-card{
   position: relative;
@@ -36,6 +12,10 @@
 .rc-hvac-unit-add:hover,
 .rc-hvac-unit-card:hover{
   cursor: pointer;
+  box-shadow: 0px 0px 2px 1px #d9d9d9;
+}
+.rc-hvac-unit-add:hover span{
+  color: var(--rc-accent-color);
 }
 .rc-hvac-unit-add .icon{
   background-color: rgba(21, 101, 192, 0.15);
@@ -52,10 +32,12 @@
   font-size: 18px;
   display: block;
   font-weight: 600;
-    color: var(--rc-text-color);
-    margin-top: 20px;
+  color: var(--rc-text-color);
+  margin-top: 20px;
+  -webkit-transition: color 1s;
+  transition: color 1s; 
 }
-/* HVAC unit list */
+/* HVAC unit list in cards */
 .rc-hvac-unit-card{
   padding: 30px;
 }
@@ -87,4 +69,11 @@
 }
 .rc-hvac-unit-card .delete:hover{
   color: black;
+}
+.rc-hvac-unit-card:hover img.no-active,
+.rc-hvac-unit-card img.active{
+  display: none;
+}
+.rc-hvac-unit-card:hover img.active{
+  display: inline-block;
 }
