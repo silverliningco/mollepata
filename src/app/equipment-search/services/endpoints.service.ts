@@ -21,12 +21,6 @@ export class EndpointsService {
       return this.http.post(url, body);
     }
 */
-   ElegibilityCriteria(body: any): Observable<any> {
-
-      let url = environment.apiURL + '/eligibility-criteria' 
-
-      return this.http.post(url, body);
-    }
 
     Search(body: any): Observable<any> {
 

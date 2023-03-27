@@ -5,8 +5,6 @@ export interface EquipmentSearch {
     systemDesign?: Array<any>;
     systemSize?: SystemSize;    
     commerceInfo?: CommerceInfo;
-    eligibilityQuestions?: EligibilityQuestion[];
-    eligibilityRequirements?: number[];
 }
 
 export interface Location {
@@ -34,8 +32,4 @@ export interface CommerceInfo {
     stockStatus: string;
 }
 
-export interface EligibilityQuestion{
-    questionId: number;
-    selectedValue: string;
-}
 

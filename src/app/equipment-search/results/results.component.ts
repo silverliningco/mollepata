@@ -19,9 +19,7 @@ export class ResultsComponent implements OnInit {
 
   myResults!: Array<any>;
   commerceInfoForm!: FormGroup;
-  productLines: any[] = [];
   currentEquipmentSearch!: EquipmentSearch;
-  selectedProductLineIndex: number = 0;
 
   constructor(private _endpoint: EndpointsService, private fb: FormBuilder) { }
 
@@ -45,25 +43,9 @@ export class ResultsComponent implements OnInit {
     // Check if current value has changes from previous value to call search service.
     if (JSON.stringify(this.currentEquipmentSearch) !== JSON.stringify(previousEquipmentSearch)) {
 
-      // Load  product lines if systemDesign is null.
-      if (!this.currentEquipmentSearch.systemDesign) {
-        this.productLines = ProductLinesData;
-      } else {
-        this.productLines = [];
-      }
-
-      // First load the available eligibility questions and requirements and their default values.
-      //this.loadDefaultEligibility();
-
-      // Then load the results with the given user inputs and default values for eligibility questions/requirements.
+      // Then load the results with the given user inputs.
       this.loadResults();
     }
-  }
-
-  // Function to set system design for selected product line index.
-  systemDesignChange(index: number) {
-    this.selectedProductLineIndex = index;
-    this.loadResults();
   }
 
   // Function to group response by outdoor unit.
@@ -88,21 +70,12 @@ export class ResultsComponent implements OnInit {
 
   }
 
- 
 
-
-  // loadResults loads the AHRI combinations for the given input params and rebate eligibility details.
+  // loadResults loads the AHRI combinations for the given input params.
   loadResults() {
 
-    // Update commerce info and system design.
+    // Update commerce info.
     this.currentEquipmentSearch.commerceInfo = this.commerceInfoForm.value;
-    if(this.productLines.length > 0){
-      this.currentEquipmentSearch.systemDesign = this.productLines[this.selectedProductLineIndex].value;
-    }
-    
-    // update eligibility questions and requirements.
- //   this.currentEquipmentSearch.eligibilityQuestions = this.eligibilityQuestionsForm.value.questions;
-    console.log(this.currentEquipmentSearch);
 
     // May have to group or order the results here.
     this._endpoint.Search(this.currentEquipmentSearch).subscribe({
@@ -128,20 +101,4 @@ export class ResultsComponent implements OnInit {
     })
   }
 
-  // updateResults is a callback when the user changes rebate eligibility inputs.
-  updateResults() {
-
-    this.loadResults()
-
-  }
-
-
-
-
-  setEligibilityQuestionsProviders(eligibilityQuestionsData: any){
-    console.log(eligibilityQuestionsData);
-  }
-  eligibilityRequirementsProviders(eligibilityRequirementsData: any){
-    console.log(eligibilityRequirementsData);
-  }
 }

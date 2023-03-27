@@ -15,51 +15,10 @@
 
 <div fxLayout="row column" fxLayoutAlign="space-around start" fxLayoutAlign.sm="center start"
   fxLayoutAlign.xs="center start" fxLayoutGap="10px grid" class="results">
-  <!-- Rebate eligibility questions, requirements and filters -->
-  <div fxFlex="30" fxFlex.xs="100" fxFlex.sm="90" class="lateral-panel">
-    <!-- Filters
-            <mat-accordion>
-            <mat-expansion-panel class="rc-mb-large">
-              <mat-expansion-panel-header>
-                <mat-panel-title>
-                  Filters
-                </mat-panel-title>
-              </mat-expansion-panel-header>
-          
-              <p>
-                Here is the structure of the filters
-              </p>
-          
-            </mat-expansion-panel>
-          </mat-accordion>
-        -->
-
-    <!-- Panel for Eligibility Criteria -->
-    <!--<mat-accordion>
-      <mat-expansion-panel [expanded]="true">
-        <mat-expansion-panel-header>
-          <mat-panel-title>
-            Eligibility Criteria
-          </mat-panel-title>
-        </mat-expansion-panel-header>
-
-        <app-eligibility-criteria [myParams]="this.currentEquipmentSearch"
-          (eligibilityQuestionsChange)="setEligibilityQuestionsProviders( $event )"
-          (eligibilityRequirementsChange)="eligibilityRequirementsProviders( $event )"></app-eligibility-criteria>
-
-      </mat-expansion-panel>
-    </mat-accordion>-->
-  </div>
-  <!-- ./Rebate eligibility questions, requirements and filters -->
-
+  
   <!-- Search results -->
   <div fxFlex="100" fxFlex.xs="100" fxFlex.sm="90">
 
-    <!-- Product line menu, if applicable. div.fxFlex="100" (encompass the results) -->
-    <!--<mat-tab-group (focusChange)="systemDesignChange($event.index)">
-      <mat-tab *ngFor="let productLine of this.productLines" label="{{productLine.option}}"></mat-tab>
-
-    </mat-tab-group>-->
 
     <!-- Search results grouped by outdoor unit in "card" type displays. -->
     <app-card *ngFor="let myResult of myResults" [mySystems]="myResult">
