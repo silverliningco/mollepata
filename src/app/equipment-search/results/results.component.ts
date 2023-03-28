@@ -1,12 +1,10 @@
 import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 
 
 import { EquipmentSearch } from '../interfaces/equipment-search.interface';
 
 import { EndpointsService } from '../services/endpoints.service';
-
-import ProductLinesData from './../../../assets/json/product_lines.json';
 
 @Component({
   selector: 'app-results',
@@ -19,17 +17,32 @@ export class ResultsComponent implements OnInit {
 
   myResults!: Array<any>;
   commerceInfoForm!: FormGroup;
+  eligibleRebatesForm!: FormGroup;
   currentEquipmentSearch!: EquipmentSearch;
 
   constructor(private _endpoint: EndpointsService, private fb: FormBuilder) { }
 
+
+  get elibibleRebates(){
+    return this.eligibleRebatesForm.get('elibibleRebates') as FormArray;
+  }
+
   ngOnInit(): void {
+
+    this.eligibleRebatesForm = this.fb.group({  
+      elibibleRebates: this.fb.array([])
+    });
 
     // Stock Status form group.
     this.commerceInfoForm = this.fb.group({
       ecommerceGatewayId: 1,
       //storeId: null,
       stockStatus: 'Stock'
+    });
+
+    this.eligibleRebatesForm.valueChanges.subscribe(selectedValue => {
+      console.log(selectedValue);
+      // TODO hide cards that dont apply to selected elibible rebates
     });
 
   }
@@ -70,6 +83,27 @@ export class ResultsComponent implements OnInit {
 
   }
 
+  // loadEligibileRebates load rebates based on systems param. and update rebateEligible Form array.
+  loadEligibileRebates(mySystems: Array<any>) {
+    // Loop through the "availableRebates" field of all rows in the results received from the server 
+    // and compile a list of distinct rebates.
+    let myRebateEligibilityArr: string[] = [];
+    mySystems.forEach((el:any) => {
+      el.rebateEligibility.forEach((el2:any) => {
+        myRebateEligibilityArr = [...new Set([...myRebateEligibilityArr, el2.title])];
+        
+      });
+    });
+
+    // when you have data accessible:
+    myRebateEligibilityArr.forEach(value => {
+      this.elibibleRebates.push(this.fb.group({
+        isActive: false,//value.IsActive,
+        name: value
+      }))
+    })
+
+  }
 
   // loadResults loads the AHRI combinations for the given input params.
   loadResults() {
@@ -83,18 +117,8 @@ export class ResultsComponent implements OnInit {
         // Group results by outdoor unit and asign to results variable.
         this.myResults = this.groupByOutdoorUnit(resp);
 
-        // First: order insite grouped systems.
-        this.myResults.forEach(element => {
-          // Order array of objects by availableRebateAmount  
-          element.sort((a: any, b: any) => {
-            return b.availableRebateAmount - a.availableRebateAmount;
-          });
-        });
-
-        // Second order grouped systems by first element from array(biggest discount)
-        this.myResults.sort((a: any, b: any) => {
-          return b[0].availableRebateAmount - a[0].availableRebateAmount;
-        });
+        // Render eligible rebates.
+        this.loadEligibileRebates(resp);
 
       },
       error: (e) => alert(e.error)

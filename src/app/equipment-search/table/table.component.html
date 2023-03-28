@@ -14,7 +14,6 @@
               <th *ngIf="this.isVisible(key)">{{key}}</th>
             </ng-container>
           </ng-container>
-          <th>TOTAL AVAILABLE REBATES</th>
           <th></th>
         </tr>
       </thead>
@@ -31,14 +30,12 @@
               <li>{{configuration.name }}</li>
             </ul>
           </td>
-          <ng-container *ngFor="let ratings of mySystems[0].AHRIRatings">
+          <ng-container *ngFor="let ratings of ahriCombination.AHRIRatings">
             <ng-container *ngFor="let key of Object.keys(ratings)">
               <td [attr.data-title]="key" *ngIf="this.isVisible(key)">{{ratings[key]}}</td>
             </ng-container>
           </ng-container>
 
-          <td data-title="Total rebate">{{ahriCombination.availableRebateAmount | currency:"USD":"symbol" : '1.0-0'}}
-          </td>
           <td data-title="Details">
             <button class="rc-btn rc-btn-secondary" (click)="sendModelNrs(ahriCombination)">
               <mat-icon>search</mat-icon>

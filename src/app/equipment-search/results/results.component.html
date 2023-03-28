@@ -26,11 +26,17 @@
             <h4>Filter by Eligible Rebate</h4>
           </mat-panel-title>
         </mat-expansion-panel-header>
-        <section class="example-section">
-          <p><mat-checkbox formControlName="pepperoni">Mass Save Partial Heat Pump Rebates</mat-checkbox></p>
-          <p><mat-checkbox formControlName="extracheese">Mass Save Gas Heating</mat-checkbox></p>
-          <p><mat-checkbox formControlName="mushroom">Carrier Cool Cash</mat-checkbox></p>
-        </section>
+        <form [formGroup]="eligibleRebatesForm">
+          
+          <section class="example-section" formArrayName="elibibleRebates">
+              <ng-container *ngFor="let rebate of elibibleRebates.controls;let i=index" [formGroupName]="i">
+                <mat-checkbox  formControlName="isActive">
+                  {{rebate.get('name')!.value}}
+                </mat-checkbox>
+              </ng-container>
+          </section>
+
+      </form>
       </mat-expansion-panel>
     </mat-accordion>
   </div>

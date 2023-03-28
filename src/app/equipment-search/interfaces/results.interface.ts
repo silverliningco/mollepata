@@ -14,8 +14,7 @@ export interface Sku {
     components: ComponentObj[];
     configurationOptions: any[];
     AHRIRatings: any[];
-    availableRebates: any[];
-    availableRebateAmount: number;
+    rebateEligibility: any[];
   }
 
   export interface Card {

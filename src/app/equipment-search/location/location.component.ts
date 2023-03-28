@@ -20,7 +20,8 @@ export class LocationComponent implements OnInit {
 
     // Location form group.
     this.locationForm = this.fb.group({
-      state: ['', Validators.required]
+      state: ['', Validators.required],
+      country: 'US'
     });
 
     this.locationForm.valueChanges.subscribe(selectedValue => {

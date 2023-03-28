@@ -9,6 +9,7 @@ export interface EquipmentSearch {
 
 export interface Location {
     state?: String;
+    country?: String;
 }
 
 export interface UtilityProviders {

@@ -53,8 +53,7 @@ export class TableComponent implements OnInit {
 
     let body = {
       //commerceInfo: this.commerceInfo,
-      skus: myAHRIs,
-      //availableRebates: this.availableRebates
+      skus: myAHRIs
     }
     let url = '/home/detail/' + JSON.stringify(body);
     window.open(url)

@@ -158,8 +158,13 @@ export class CardComponent implements OnInit {
   }
   
   // Simple function to get component object from components by component type.
+  // if doesn't find a component with that type return 0.
   getComponentByComponentType(components: any[], componentType:string) {
-    return components.filter((c:any) => c.componentType == componentType)[0];
+    let myComponentByType = components.filter((c:any) => c.componentType == componentType);
+    if(myComponentByType.length > 0){
+      return myComponentByType[0];
+    }
+    return 0;
   }
 
   updateSelections(  currentSelection :string){
@@ -185,7 +190,7 @@ export class CardComponent implements OnInit {
     mySelectsToUpdate.forEach(selectToUpdate => {
       
       myOptionsToUpdate.forEach(optionToUpdate => {
-        myUpdatedOptions.push(this.getComponentByComponentType(optionToUpdate.components,selectToUpdate));
+          myUpdatedOptions.push(this.getComponentByComponentType(optionToUpdate.components,selectToUpdate));
       });
 
       // Remove duplicated components that has same title.
