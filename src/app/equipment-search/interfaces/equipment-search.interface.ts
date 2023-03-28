@@ -27,8 +27,7 @@ export interface SystemSize {
 }
 
 export interface CommerceInfo {
-    eCommerceGatewayId: string;
-    storeId: number; 
+    eCommerceGatewayId: number;
     stockStatus: string;
 }
 
