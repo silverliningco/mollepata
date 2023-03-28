@@ -92,8 +92,8 @@
     
 
 <div mat-dialog-actions [align]="'end'">    
-    <button mat-raised-button color="warn" mat-dialog-close>CLOSE</button>
-    <button style="margin-left: 8px;" mat-raised-button color="primary" (click)="addEditSystem()">{{this.myData.method| uppercase}}</button>
+    <button mat-raised-button mat-dialog-close class="rc-btn">CLOSE</button>
+    <button style="margin-left: 8px;" mat-raised-button  (click)="addEditSystem()" class="rc-btn-primary">{{this.myData.method| uppercase}}</button>
 </div>
 
 

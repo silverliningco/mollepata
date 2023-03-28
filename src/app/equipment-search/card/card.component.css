@@ -1,12 +1,12 @@
 /* ::ng-deep used to force a style down to child components*/
 ::ng-deep .results .rc-card {
-    margin-bottom: 1rem;
-    padding: 1.5rem !important;
-    box-shadow: none;
-    border: 1px solid #c5c5c5;
-    background-color: #ffffff;
-  }
-  
+  margin-bottom: 1rem;
+  padding: 1.5rem !important;
+  box-shadow: none;
+  border: 1px solid #c5c5c5;
+  background-color: #ffffff;
+}
+
 /*header card*/
 ::ng-deep .results .rc-card .mat-card-title{
   margin-bottom: 0;
@@ -31,249 +31,181 @@
   border-bottom: 1px solid #F2F2F2;
   border-top: 1px solid #F2F2F2;
 }
-  @media only screen and (max-width: 767px){
-    
-    ::ng-deep .results .rc-card .mat-card-subtitle{
-      margin-bottom: .25rem !important;
-    }
-  }
-  ::ng-deep .results .rc-card .mat-card-header-text{
-    width: 100% !important;
-    margin: 0;
-    min-width: 98%;
-  }
+@media only screen and (max-width: 767px){
   
-  ::ng-deep .results .rc-card .mat-card-header .mat-card-subtitle{
-    margin-bottom: 5px !important;
+  ::ng-deep .results .rc-card .mat-card-subtitle{
+    margin-bottom: .25rem !important;
   }
-  
-  ::ng-deep .results .rc-card .rebates-amount{
-    position: relative;
-    background-color: rgba(255, 160, 0, 0.1);
-    border-radius: 4px;
-  }
-  
-  ::ng-deep .results .rc-card .available-rebates{
-    position: relative;
-    padding-bottom: 1rem;
-    border-bottom: 1px solid rgba(255, 160, 0, 0.2);
-    border-right:none;
-  }
-  @media screen and (min-width: 600px) and (max-width:959px){
-    
-    ::ng-deep .results .rc-card .available-rebates{
-      border-bottom: none;
-      border-right: 1px solid rgba(255, 160, 0, 0.2);
-    }
-  }
-  
-  ::ng-deep .results .rc-card .available-rebates ul.rc-unlisted li{
-    font-size: 12px;
-    padding-left: 2rem;
-  }
-  
-  ::ng-deep .results .rc-card .rebate-price{
-    position: relative;
-    margin: .75rem;
-    color: var(--rc-accent-color);
-    text-align: center;
-    height: 100%;
+}
+::ng-deep .results .rc-card .mat-card-header-text{
+  width: 100% !important;
+  margin: 0;
+  min-width: 98%;
+}  
+::ng-deep .results .rc-card .mat-card-header .mat-card-subtitle{
+  margin-bottom: 5px !important;
+}  
+::ng-deep .results .rc-card .available-rebates ul.rc-unlisted li{
+  font-size: 12px;
+  padding-left: 2rem;
+}
+::ng-deep .results .rc-card .rebate-price{
+  position: relative;
+  margin: .75rem;
+  color: var(--rc-accent-color);
+  text-align: center;
+  height: 100%;
+  font-size: 24px;
+}
+::ng-deep .results .rc-card p.rc-small {
+  font-size: 10px;
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: #2f4f4f;
+}
+::ng-deep .results .rc-card p.outdoor-nb{
+  margin-bottom: 0;
+}
+::ng-deep .results .rc-card .rebate-price h1{
+  font-family: 'Bitter', serif !important;
+  font-size: 30px;
+  font-weight: bold;
+  margin-bottom: 0;
+}
+
+@media screen and (min-width: 960px) and (max-width: 1199px){
+  ::ng-deep .results .rc-card .rebate-price h1{
     font-size: 24px;
   }
-  
-  ::ng-deep .results .rc-card p.rc-small {
-    font-size: 10px;
-    font-weight: bold;
-    margin-bottom: 5px;
-    color: #2f4f4f;
+}
+@media screen and (max-width: 959px){
+  ::ng-deep .results .rc-card .rebate-price{
+    padding: 1rem;
+    margin-left: 10px;
   }
-  
-  ::ng-deep .results .rc-card p.outdoor-nb{
-    margin-bottom: 0;
-  }
-  
   ::ng-deep .results .rc-card .rebate-price h1{
-    font-family: 'Bitter', serif !important;
-    font-size: 30px;
-    font-weight: bold;
-    margin-bottom: 0;
+    font-size: 26px;
   }
+}
+@media screen and (max-width: 599px){
+  ::ng-deep .results .rc-card .rebate-price{
+    margin-top: 10px;
+    margin-left: 0;
+  }
+  ::ng-deep .results .rc-card .mat-card-header .mat-card-subtitle .model-nrs {
+    padding-top: .5rem;
+  }
+}
 
-  @media screen and (min-width: 960px) and (max-width: 1199px){
-  
-    ::ng-deep .results .rc-card .rebate-price h1{
-      font-size: 24px;
-    }
+/*Content*/
+::ng-deep .results .rc-card .mat-card-content{
+  margin: 0.25rem 0!important;
+}
+::ng-deep .results .rc-card .mat-card-content span.rc-small{
+    color: rgba(0,0,0,.54);
+}
+@media screen and (max-width: 599px){
+  .list-rebates{
+    margin: 1rem 0;
   }
-  @media screen and (max-width: 959px){
-  
-    ::ng-deep .results .rc-card .rebate-price{
-      padding: 1rem;
-      margin-left: 10px;
-    }
-  
-    ::ng-deep .results .rc-card .rebate-price h1{
-      font-size: 26px;
-    }
-  }
-  @media screen and (max-width: 599px){
-  
-    ::ng-deep .results .rc-card .rebate-price{
-      margin-top: 10px;
-      margin-left: 0;
-    }
-  
-    ::ng-deep .results .rc-card .mat-card-header .mat-card-subtitle .model-nrs {
-      padding-top: .5rem;
-    }
-  }
+}
+::ng-deep .results .rc-card .mat-card-content .ahri-ratings{
+  padding: 10px;
+  height: 90%;
+}
+.ahri-ratings .key{
+  color: #999999;
+}
+.ahri-ratings .rating{
+  color: var(--rc-text-light-color);
+  font-weight: 600;    
+  padding-left: 0.5rem;
+}
+::ng-deep .results .rc-card .mat-card-content .section-title {
+  color: #999999;
+  font-weight: 400;
+}
 
-  /*Content*/
-  ::ng-deep .results .rc-card .mat-card-content{
-    margin: 0.25rem 0!important;
-  }
-  
-  ::ng-deep .results .rc-card .mat-card-content span.rc-small{
-      color: rgba(0,0,0,.54);
-  }
-    @media screen and (max-width: 599px){
-      .list-rebates{
-        margin: 1rem 0;
-      }
-    }
-  ::ng-deep .results .rc-card .mat-card-content .ahri-ratings{
-    padding: 10px;
-    height: 90%;
-  }
-  .ahri-ratings .key{
-    color: #999999;
-  }
-  .ahri-ratings .rating{
-    color: var(--rc-text-light-color);
-    font-weight: 600;    
-    padding-left: 0.5rem;
-  }
-  ::ng-deep .results .rc-card .mat-card-content .section-title {
-    color: #999999;
-    font-weight: 400;
-  }
-  .rc-unlisted{
-    list-style: none;
-    padding-inline-start: 0;
-  }
-  .list-accesories {
-    background-color: rgba(255, 149, 0, 0.07);
-    border-radius: 4px;
-    padding: 0 12px 16px 12px;
-  }
-  .list-accesories span.accesorie-price{
-    background-color: rgba(0, 114, 5, 0.09);
-    color: #007205;
-    border-radius: 4px;
-    padding: 2px 4px;
-    font-size: 11px;
-    margin-left: 5px;
-  }
-  .list-ahri-rating-item span, .list-detail-performance-item span {
-    font-weight: 600;
-    margin-right: 1rem;
-  }
-  .list-ahri-rating-item mat-icon.rc-co2-icon, .list-detail-performance-item mat-icon.rc-co2-icon{
-    font-size: 18px;
-    width: 14px;
-    height: 18px;
-    color: var(--rc-accent-color);
-  }
+/* Rebate List */
+.rc-rebates {
+  padding: 5px;
+  border-radius: 4px;
+  border: 1px solid #f8f8f8;
+  background-color: #fbfbfb;
+}
+.rc-rebates .list{
 
-
-  /*Rebates List*/
-  ::ng-deep .results .rc-card .mat-card-content .mat-expansion-panel{
-    background: #F8F8F8;
-    margin-bottom: 0.75rem !important;
-    box-shadow: none !important;
-    border-radius: 0px !important;
-  }
-  ::ng-deep .results .rc-card .mat-card-content .mat-expansion-panel .mat-expansion-panel-header{
-    padding: 1rem;
-    height: auto;
-  }
-  ::ng-deep .results .rc-card .mat-card-content .mat-expansion-panel .mat-expansion-panel-header .mat-icon{
-    font-size: 20px;
-    margin-right: 0.3rem;
-    color: #007205;
-  }
-  ::ng-deep .results .rc-card .mat-card-content .mat-expansion-panel .mat-expansion-panel-header.mat-expanded{
-    border-bottom: 1px solid #D7D7D7;
-    height: auto;
-  }
-  ::ng-deep .results .rc-card .mat-card-content .mat-expansion-panel .mat-expansion-panel-header .mat-expansion-panel-header-description{
-    background-color: #E1ECF8;
-    border-radius: 4px;
-    color:var(--rc-primary-color);
-    padding: 0 0.5rem;
-    font-weight: bold;
-  }  
-  ::ng-deep .results .rc-card .mat-card-content .mat-expansion-panel .mat-expansion-panel-body{
-    padding: 1rem;
-  }
-  ::ng-deep .results .rc-card .mat-card-content .mat-expansion-panel .mat-expansion-panel-body p.description{
-    color: #606060;
-    margin-bottom: .5rem;
-  }
-  .rc-unlisted.link-rebates a{
-    padding-left: 1rem;
+}
+.rc-rebates .list .mat-icon{
+    font-size: 16px;
+    height: 16px;
+    width: 20px;
+    color: #c5c5c5;
+}
+.rc-rebates .list .mat-icon.available{
     color: var(--rc-primary-color);
-  }
-  .rc-unlisted.link-rebates .mat-icon{
-    position: absolute;
-    left: 1rem;
-    transform: rotate(315deg);
-    font-size: 1.1rem;
-  }
+}
+.rc-rebates .list li{
+  margin-bottom: .5rem;  
+}
+.rc-rebates .list span.title{
+  font-weight: 500;
+  padding-right: 5px;
+  display: flex;
+  align-items: center;
+}
+.rc-rebates .list span.description{
+  font-size: 12px;
+  display: block;
+  padding-left: 20px;
+  line-height: 16px;
+  color: #999999;
+}
 
-  /*Card buttons*/
-  ::ng-deep .results .rc-card .rc-card-btn{
-    color: white;
-  }  
-  ::ng-deep .results .rc-card .rc-card-btn.warn {
-    background: var(--rc-warn-color);
-  }
-  ::ng-deep .results .rc-card .rc-card-btn.primary {
-      background: var(--rc-primary-color);
-  }  
-  ::ng-deep .results .rc-card .rc-card-btn.accent {
-      background: var(--rc-accent-color);
-  }
 
-  /*Card Actions*/  
-  ::ng-deep .results .rc-card mat-card-actions{
-    padding-right: .5rem;
-  }
+/*Card buttons*/
+::ng-deep .results .rc-card .rc-card-btn{
+  color: white;
+}  
+::ng-deep .results .rc-card .rc-card-btn.warn {
+  background: var(--rc-warn-color);
+}
+::ng-deep .results .rc-card .rc-card-btn.primary {
+    background: var(--rc-primary-color);
+}  
+::ng-deep .results .rc-card .rc-card-btn.accent {
+    background: var(--rc-accent-color);
+}
 
-  /* Start Change style to input combo box */
-  ::ng-deep .results .rc-card .model-nrs mat-form-field{
-    display: block;
-  }
+/*Card Actions*/  
+::ng-deep .results .rc-card mat-card-actions{
+  padding-right: .5rem;
+}
 
-  /*Style to select options in indoor unit and furnace*/
-  /*no used yet*/
-  ::ng-deep .rc-select-multiline-option{
-    white-space: initial !important;
-    line-height: 22px !important;
-    height: auto !important;
-    padding: 0.15rem 0.5rem;
-  }
-  ::ng-deep .rc-select-multiline-option .mat-option-text, .rc-select-multiline .mat-select-value-text .mat-select-min-line{
-    font-size: 12px;
-    line-height: 24px;
-  }
-  ::ng-deep .rc-select-multiline-option .mat-option-text .price{
-    margin-left: 0.25rem;
-    background-color: rgba(0, 114, 5, 0.09);
-    padding: 0 0.25rem;
-    color: #007205;
-    font-weight: bold;
-  }
-  ::ng-deep .rc-select-multiline-option .mat-select-value{
-    white-space: normal;
-  }
+/* Start Change style to input combo box */
+::ng-deep .results .rc-card .model-nrs mat-form-field{
+  display: block;
+}
+
+/*Style to select options in indoor unit and furnace*/
+/*no used yet*/
+::ng-deep .rc-select-multiline-option{
+  white-space: initial !important;
+  line-height: 22px !important;
+  height: auto !important;
+  padding: 0.15rem 0.5rem;
+}
+::ng-deep .rc-select-multiline-option .mat-option-text, .rc-select-multiline .mat-select-value-text .mat-select-min-line{
+  font-size: 12px;
+  line-height: 24px;
+}
+::ng-deep .rc-select-multiline-option .mat-option-text .price{
+  margin-left: 0.25rem;
+  background-color: rgba(0, 114, 5, 0.09);
+  padding: 0 0.25rem;
+  color: #007205;
+  font-weight: bold;
+}
+::ng-deep .rc-select-multiline-option .mat-select-value{
+  white-space: normal;
+}

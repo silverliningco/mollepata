@@ -50,6 +50,10 @@ h1, h2, h3, h4, h5, .bitter-font {
 .rc-mb-large{
   margin-bottom: 2rem;
 }
+.rc-unlisted{
+  list-style: none;
+  padding-inline-start: 0;
+}
 /* End General Classes */
 
 /* Titles in all pages */
@@ -336,8 +340,8 @@ table tbody tr:nth-of-type(even) {
     padding: 1px 6px;
   }
   .rc-btn-primary{
-    background-color: var(--rc-primary-color);
-    color: white;
+    background-color: var(--rc-primary-color) !important;
+    color: white !important;;
   }
   .rc-btn-secondary {
     background-color: white !important;

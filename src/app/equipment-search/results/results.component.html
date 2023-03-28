@@ -16,10 +16,27 @@
 <div fxLayout="row column" fxLayoutAlign="space-around start" fxLayoutAlign.sm="center start"
   fxLayoutAlign.xs="center start" fxLayoutGap="10px grid" class="results">
   
+  <!-- Eligible Rebates Filter -->
+  <div fxFlex="30" fxFlex.xs="100" fxFlex.sm="90">
+    <mat-accordion>
+      <mat-expansion-panel [disabled]="true" [expanded]="true">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <mat-icon>filter_list</mat-icon>
+            <h4>Filter by Eligible Rebate</h4>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <section class="example-section">
+          <p><mat-checkbox formControlName="pepperoni">Mass Save Partial Heat Pump Rebates</mat-checkbox></p>
+          <p><mat-checkbox formControlName="extracheese">Mass Save Gas Heating</mat-checkbox></p>
+          <p><mat-checkbox formControlName="mushroom">Carrier Cool Cash</mat-checkbox></p>
+        </section>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </div>
+
   <!-- Search results -->
-  <div fxFlex="100" fxFlex.xs="100" fxFlex.sm="90">
-
-
+  <div fxFlex="70" fxFlex.xs="100" fxFlex.sm="90">
     <!-- Search results grouped by outdoor unit in "card" type displays. -->
     <app-card *ngFor="let myResult of myResults" [mySystems]="myResult">
     </app-card>
