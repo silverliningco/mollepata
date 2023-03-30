@@ -9,16 +9,14 @@ import { Result } from '../interfaces/results.interface';
 })
 export class TableComponent implements OnInit {
 
-  mySystems: Result[];
+  mySystems: any;
   
-  //pass Object to template, to iterate object keys using *ngFor (AHRI Ratings)
-  Object = Object;
+  myColumnRatings = ["eer2", "seer2", "hspf2", "AFUE"];
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     private dialog: MatDialog) {
       this.mySystems = data.systems;
-      console.log(this.mySystems);
      }
 
   ngOnInit(): void {
@@ -28,17 +26,6 @@ export class TableComponent implements OnInit {
     this.dialog.closeAll();
   }
  
-  // Function to show if a field in table will be visible or not.
-  isVisible(param:string) {
-    let myVisibles = ["EER", "SEER","HSPF","AFUE"];
-    
-    if (myVisibles.includes(param)) {
-      return true;
-    } 
-
-    return false;
-  }
-
   // Simple function to get component object from components by component type.
   getComponentByComponentType(components: any[], componentType:string) {
     return components.filter((c:any) => c.componentType == componentType)[0];
@@ -58,4 +45,18 @@ export class TableComponent implements OnInit {
     let url = '/home/detail/' + JSON.stringify(body);
     window.open(url)
   }
+
+  getRating(ratings: any[], myString: string) :string {
+    let ratingString = "N/A";
+
+    ratings.forEach( rating => { 
+      if(rating[myString]) {
+        ratingString = rating[myString];
+      }
+    });
+
+    return ratingString;
+
+  }
+
 }

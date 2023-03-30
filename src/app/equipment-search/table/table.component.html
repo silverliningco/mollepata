@@ -9,33 +9,33 @@
           <th>N°</th>
           <th *ngFor="let unit of mySystems[0].components">{{unit.componentType|uppercase}}</th>
           <th>Configuration</th>
-          <ng-container *ngFor="let ratings of mySystems[0].AHRIRatings">
-            <ng-container *ngFor="let key of Object.keys(ratings)">
-              <th *ngIf="this.isVisible(key)">{{key}}</th>
-            </ng-container>
-          </ng-container>
+          <th *ngFor="let rating of myColumnRatings">
+            {{ rating | uppercase }}
+          </th>
           <th></th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let ahriCombination of mySystems; index as i">
           <td data-title="n°">{{i+1}}</td>
-
-          <td [attr.data-title]="unit.componentType" *ngFor="let unit of ahriCombination.components"
-           matTooltip="{{unit.title}}" matTooltipPosition="right">{{unit.title}}
+       
+          <td *ngFor="let td of mySystems[0].components" [attr.data-title]="this.getComponentByComponentType(mySystems[0].components, td.componentType)?.componentType"
+            matTooltip="{{this.getComponentByComponentType(ahriCombination.components, td.componentType)?.title}}" 
+            matTooltipPosition="right">
+            {{this.getComponentByComponentType(ahriCombination.components, td.componentType)?.title||"N/A"}}
           </td>
-
+     
           <td data-title="configuration" *ngIf="ahriCombination.configurationOptions" data-title="Configuration">
             <ul *ngFor="let configuration of ahriCombination.configurationOptions" class="rc-list-in-table">
-              <li>{{configuration.name }}</li>
+              <li>{{configuration.name}}</li>
             </ul>
+            <span *ngIf="ahriCombination.configurationOptions.length == 0">N/A</span>
           </td>
-          <ng-container *ngFor="let ratings of ahriCombination.AHRIRatings">
-            <ng-container *ngFor="let key of Object.keys(ratings)">
-              <td [attr.data-title]="key" *ngIf="this.isVisible(key)">{{ratings[key]}}</td>
-            </ng-container>
-          </ng-container>
 
+          <td *ngFor="let rating of myColumnRatings">
+            {{ getRating(ahriCombination.AHRIRatings, rating) }}
+          </td>
+         
           <td data-title="Details">
             <button class="rc-btn rc-btn-secondary" (click)="sendModelNrs(ahriCombination)">
               <mat-icon>search</mat-icon>
