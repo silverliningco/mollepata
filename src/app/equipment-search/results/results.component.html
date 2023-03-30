@@ -6,8 +6,8 @@
   <form [formGroup]="commerceInfoForm">
     <h5 class="rc-filter-group-title">Stock status</h5>
     <mat-radio-group #rGroup formControlName="stockStatus" fxLayout="row" fxLayout.xs="column" (change)="loadResults()">
-      <mat-radio-button [value]="false" radioGroup="rGroup">Stock items only</mat-radio-button>
-      <mat-radio-button [value]="true" radioGroup="rGroup">Show all</mat-radio-button>
+      <mat-radio-button value="Stock" radioGroup="rGroup">Stock items only</mat-radio-button>
+      <mat-radio-button value="*" radioGroup="rGroup">Show all</mat-radio-button>
     </mat-radio-group>
   </form>
 </div>

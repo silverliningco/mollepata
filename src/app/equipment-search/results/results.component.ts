@@ -35,7 +35,7 @@ export class ResultsComponent implements OnInit {
 
     // Stock Status form group.
     this.commerceInfoForm = this.fb.group({
-      ecommerceGatewayId: 1,
+      eCommerceGatewayId: 1,
       //storeId: null,
       stockStatus: 'Stock'
     });
@@ -94,7 +94,7 @@ export class ResultsComponent implements OnInit {
         
       });
     });
-
+    this.elibibleRebates.clear();
     // when you have data accessible:
     myRebateEligibilityArr.forEach(value => {
       this.elibibleRebates.push(this.fb.group({
