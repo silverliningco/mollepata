@@ -31,18 +31,9 @@ export class TableComponent implements OnInit {
     return components.filter((c:any) => c.componentType == componentType)[0];
   }
 
-  sendModelNrs(myCombination: any) {
+  print(myCombination: any) {
 
-    let myAHRIs: String[] = []
-    myCombination.components!.forEach((element: any) => {
-      myAHRIs.push(element.SKU!)
-    });
-
-    let body = {
-      //commerceInfo: this.commerceInfo,
-      skus: myAHRIs
-    }
-    let url = '/home/detail/' + JSON.stringify(body);
+    let url = '/print?q=' + JSON.stringify(myCombination);
     window.open(url)
   }
 

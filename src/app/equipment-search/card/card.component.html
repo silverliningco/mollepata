@@ -1,4 +1,4 @@
-<mat-card class="rc-card results">
+<mat-card class="rc-card results" *ngIf="appliesEligibleRebates(card.result!)">
   <div fxLayout="row column" fxLayoutAlign="center center" class="rc-card-header">
     <!-- Card title -->
     <div fxFlex="100">
@@ -36,7 +36,7 @@
           <!-- card configurations -->
           <div fxFlex="25" *ngFor="let cardConfiguration of Object.keys(card.cardConfigurations)">
             <mat-form-field class="rc-select-multiline">
-              <mat-select [value]="card.result!.configurationOptions[0].value" placeholder="{{cardConfiguration}}" (selectionChange)="filterByConfigurationOptions($event.value, cardConfiguration)">
+              <mat-select [value]="card.result!.configurationOptions[0].id" placeholder="{{cardConfiguration}}" (selectionChange)="filterByConfigurationOptions($event.value, cardConfiguration)">
                 <mat-option  class="rc-select-multiline-option" value="reset" disabled="true"> Plese select an option</mat-option>
                 <mat-option class="rc-select-multiline-option" *ngFor="let configuration of card.cardConfigurations[cardConfiguration]" [value]="configuration.value">
                   <b>{{configuration.name}}</b>

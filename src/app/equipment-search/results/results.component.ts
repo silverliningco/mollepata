@@ -23,14 +23,14 @@ export class ResultsComponent implements OnInit {
   constructor(private _endpoint: EndpointsService, private fb: FormBuilder) { }
 
 
-  get elibibleRebates(){
-    return this.eligibleRebatesForm.get('elibibleRebates') as FormArray;
+  get eligibleRebates(){
+    return this.eligibleRebatesForm.get('eligibleRebates') as FormArray;
   }
 
   ngOnInit(): void {
 
     this.eligibleRebatesForm = this.fb.group({  
-      elibibleRebates: this.fb.array([])
+      eligibleRebates: this.fb.array([])
     });
 
     // Stock Status form group.
@@ -38,11 +38,6 @@ export class ResultsComponent implements OnInit {
       eCommerceGatewayId: 1,
       //storeId: null,
       stockStatus: 'Stock'
-    });
-
-    this.eligibleRebatesForm.valueChanges.subscribe(selectedValue => {
-      console.log(selectedValue);
-      // TODO hide cards that dont apply to selected elibible rebates
     });
 
   }
@@ -94,11 +89,11 @@ export class ResultsComponent implements OnInit {
         
       });
     });
-    this.elibibleRebates.clear();
+    this.eligibleRebates.clear();
     // when you have data accessible:
     myRebateEligibilityArr.forEach(value => {
-      this.elibibleRebates.push(this.fb.group({
-        isActive: false,//value.IsActive,
+      this.eligibleRebates.push(this.fb.group({
+        isActive: true,
         name: value
       }))
     })

@@ -43,6 +43,7 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import { MatTableModule } from '@angular/material/table';
+import { PrintComponent } from './print/print.component';
 
 
 @NgModule({
@@ -56,6 +57,7 @@ import { MatTableModule } from '@angular/material/table';
     TableComponent,
     HvacSystemDetailComponent,
     ModalSystemComponent,
+    PrintComponent,
   ],
   imports: [
     CommonModule,

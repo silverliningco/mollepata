@@ -28,8 +28,8 @@
         </mat-expansion-panel-header>
         <form [formGroup]="eligibleRebatesForm">
           
-          <section class="example-section" formArrayName="elibibleRebates">
-              <ng-container *ngFor="let rebate of elibibleRebates.controls;let i=index" [formGroupName]="i">
+          <section class="example-section" formArrayName="eligibleRebates">
+              <ng-container *ngFor="let rebate of eligibleRebates.controls;let i=index" [formGroupName]="i">
                 <mat-checkbox  formControlName="isActive">
                   {{rebate.get('name')!.value}}
                 </mat-checkbox>
@@ -44,7 +44,7 @@
   <!-- Search results -->
   <div fxFlex="70" fxFlex.xs="100" fxFlex.sm="90">
     <!-- Search results grouped by outdoor unit in "card" type displays. -->
-    <app-card *ngFor="let myResult of myResults" [mySystems]="myResult">
+    <app-card *ngFor="let myResult of myResults" [mySystems]="myResult" [myEligibleRebates]="this.eligibleRebatesForm.value">
     </app-card>
 
   </div>

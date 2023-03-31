@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { PrintComponent } from './equipment-search/print/print.component';
 
 const routes: Routes = [
 
@@ -8,8 +9,8 @@ const routes: Routes = [
     loadChildren: () => import('./basic-estructure/basic-estructure.module').then(m => m.BasicEstructureModule)
   },
   {
-    path: '**',
-    redirectTo: 'rebate-finder'
+    path:'print',
+    component: PrintComponent
   }
 
 ];
