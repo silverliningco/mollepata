@@ -9,6 +9,9 @@ import { json } from 'express';
 })
 export class PrintComponent implements OnInit {
   result: any; 
+  
+  //pass Object to template, to iterate object keys using *ngFor (AHRI Ratings)
+  Object = Object;
 
   constructor(
     public activatedRoute: ActivatedRoute) {
@@ -21,6 +24,14 @@ export class PrintComponent implements OnInit {
    }
 
   ngOnInit(): void {
+  }
+
+  getComponentByComponentType(components: any[], componentType:string) {
+    let myComponentByType = components.filter((c:any) => c.componentType == componentType);
+    if(myComponentByType.length > 0){
+      return myComponentByType[0];
+    }
+    return 0;
   }
 
 }

@@ -1,1 +1,63 @@
-{{ this.result | json }}
+<!--{{ this.result | json }}-->
+
+<div class="rc-container">
+    <div class="rc-report">
+        <!-- Report Header
+        <div fxLayout="row" fxLayoutAlign="space-around center">
+          <div fxFlex="20">
+            <img src="./assets/images/logo-dcne.svg" alt="logo DCNE" >
+          </div>
+          <div fxFlex="80"></div>
+        </div> -->
+        <!-- Report Title -->
+        <div class="title">
+          <h2>{{this.getComponentByComponentType(result!.components, "Outdoor unit").description}}</h2>
+          <h4>{{this.getComponentByComponentType(result!.components, "Outdoor unit").title}}</h4>
+        </div>
+        <!-- Model numbers -->
+        <div fxLayout="row column" fxLayoutAlign="center center" class="model-numbers">
+          <div fxFlex="100">
+            <h4 class="subtitle">Numbers</h4>
+          </div>
+          <div fxFlex="100">
+            <div class="item">
+              <span class="key">Indoor Unit: </span>
+              <span class="rating">{{this.getComponentByComponentType(result!.components, "Indoor unit").title}} <span class="componet-description">({{this.getComponentByComponentType(result!.components, "Indoor unit").description}})</span></span>
+            </div>
+            <div class="item">
+              <span class="key">Furnace: </span>
+              <span class="rating">{{this.getComponentByComponentType(result!.components, "Furnace").title}} <span class="componet-description">({{this.getComponentByComponentType(result!.components, "Furnace").description}})</span></span>
+            </div>        
+          </div>
+        </div>
+        <!-- AHRI Ratings -->
+        <div fxLayout="row column" fxLayoutAlign="center start" class="ahri-ratings">
+          <div fxFlex="100">
+            <h4 class="subtitle">AHRI Ratings</h4>
+          </div>
+          <div fxFlex="50" *ngFor="let ratings of result!.AHRIRatings">
+            <div class="item" *ngFor="let key of Object.keys(ratings)">
+              <span class="key">{{key}} </span>
+              <span class="rating">{{ratings[key] || 'N/A'}}</span>
+            </div>
+          </div>
+        </div>
+        <!-- Aviable Rebates -->  
+        <div fxLayout="row column" fxLayoutAlign="space-around center" class="elegible-rebates">
+          <div fxFlex="100">
+            <h4 class="subtitle">Eligible Rebates</h4>
+          </div>
+          <div fxFlex="100">
+            <div class="rebate" *ngFor="let rebate of result!.rebateEligibility">
+              <!--<mat-icon class="available" *ngIf="rebate.isEligibile">check_circle</mat-icon>
+              <mat-icon *ngIf="!rebate.isEligibile">cancel</mat-icon>-->
+              <mat-icon class="available">check_circle</mat-icon>
+              <div class="information">
+                <h4>{{rebate.title}}</h4>
+                <p>{{rebate.description}}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+</div>

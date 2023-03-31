@@ -514,3 +514,11 @@ table tbody tr:nth-of-type(even) {
   width: 100%;
 }
 /* End Form Styles */
+
+/*print styles*/
+/* print styles */
+@media print {
+  header, footer, nav, .mat-horizontal-stepper-header-container, .rc-main-title, .rc-filter-stock{
+    display: none !important;
+  }
+}

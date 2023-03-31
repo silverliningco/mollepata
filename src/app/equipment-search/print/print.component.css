@@ -1,0 +1,84 @@
+
+
+
+/*Report*/
+.rc-report{
+    border: 1px solid #c5c5c5;
+    border-radius: 4px;
+    background-color: white;
+    padding: 2rem 1rem;
+    margin-top: 1rem;
+}
+.rc-report .title{
+    text-align: center;
+    border: 1px solid #f3f3f3;
+    border-left: none;
+    border-right: none;
+    padding: 2rem 1rem;
+}
+.model-numbers,.ahri-ratings, .elegible-rebates{
+    padding: 1rem;
+}
+.subtitle{
+    color: var(--rc-text-light-color);
+    font-weight: bold;
+    margin-bottom: .5rem;
+}
+
+.item .key{
+    color: #8f8f8f;
+    font-size: 14px;
+}
+.item .rating{
+    color: var(--rc-text-light-color);
+    font-weight: 500;
+    padding-left: 0.5rem;
+}
+.item .rating .componet-description{
+    font-weight: 400;
+    font-size: 13px;
+    font-style: italic;
+    text-transform: uppercase;
+}
+.rebate{
+    position: relative;
+    background-color: #fafafa;
+    margin-bottom: 0.45rem;
+    border-radius: 5px;
+    padding: 1rem;
+    border: 1px solid #fafafa;
+}
+.rebate .mat-icon{
+    position: absolute;
+    color: rgb(21 101 192 / 64%);
+    font-size: 25px;
+    left: 10px;
+}
+.rebate .information{
+    padding-left: 20px;
+}
+.rebate .information h4{
+    color: var(--rc-primary-color);
+}
+.rebate .information p{
+    color: var(--rc-text-color);
+}
+@media print {
+    .rc-report{
+        border: none;
+        background-color:transparent;
+        padding: 0;
+        margin-top: 0;
+        font-size: 12px;
+    }
+    .item{
+        margin-bottom: 2px;
+        padding-left: 1rem;
+    }
+    .item .key{
+        font-size: 10px;
+    }
+    .item .rating{
+        font-weight: bold;
+    }
+}
