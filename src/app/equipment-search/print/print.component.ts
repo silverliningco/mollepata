@@ -19,7 +19,6 @@ export class PrintComponent implements OnInit {
     
       this.result = JSON.parse(params["q"]);
       
-      console.log(JSON.parse(params["q"]));
     });
    }
 
@@ -32,6 +31,11 @@ export class PrintComponent implements OnInit {
       return myComponentByType[0];
     }
     return 0;
+  }
+
+  // open window dialog to print.
+  printDocument(){ 
+    window.print();
   }
 
 }

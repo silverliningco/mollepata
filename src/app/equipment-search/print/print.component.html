@@ -1,5 +1,3 @@
-<!--{{ this.result | json }}-->
-
 <div class="rc-container">
   <div class="rc-report">
     <div fxLayout="row" fxLayoutAlign="end center">
@@ -18,14 +16,10 @@
         <h4 class="subtitle">Numbers</h4>
       </div>
       <div fxFlex="100">
-        <div class="item">
-          <span class="key">Indoor Unit: </span>
-          <span class="rating">{{this.getComponentByComponentType(result!.components, "Indoor unit").title}} <span class="componet-description">({{this.getComponentByComponentType(result!.components, "Indoor unit").description}})</span></span>
+        <div class="item" *ngFor="let component of result!.components">
+          <span class="key">{{component.componentType}}:</span>
+          <span class="rating">{{component.title}} <span class="componet-description">({{component.description}})</span></span>
         </div>
-        <div class="item">
-          <span class="key">Furnace: </span>
-          <span class="rating">{{this.getComponentByComponentType(result!.components, "Furnace").title}} <span class="componet-description">({{this.getComponentByComponentType(result!.components, "Furnace").description}})</span></span>
-        </div>        
       </div>
     </div>
     <!-- AHRI Ratings -->
@@ -59,7 +53,7 @@
     </div>
     <!-- Print button -->
     <div fxLayout="column" fxLayoutAlign="center end" class="print-btn">
-      <button type="button" mat-raised-button color="primary">
+      <button type="button" mat-raised-button color="primary" (click)="printDocument()">
           Print
           <mat-icon>print</mat-icon>
       </button>
