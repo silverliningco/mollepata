@@ -1,4 +1,4 @@
-<mat-card class="rc-card results" *ngIf="appliesEligibleRebates(card.result!)">
+<mat-card class="rc-card results">
   <div fxLayout="row column" fxLayoutAlign="center center" class="rc-card-header">
     <!-- Card title -->
     <div fxFlex="100">
@@ -100,7 +100,7 @@
         </button>
       </div>
       <div>
-        <button mat-button class="rc-card-btn primary" fxLayout fxLayoutAlign="center center"  target="_blank">
+        <button mat-button class="rc-card-btn primary" fxLayout fxLayoutAlign="center center"  (click)="print(card.result)">
           PRINT
           <mat-icon>print</mat-icon>
         </button>

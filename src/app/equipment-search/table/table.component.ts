@@ -32,7 +32,6 @@ export class TableComponent implements OnInit {
   }
 
   print(myCombination: any) {
-
     let url = '/print?q=' + JSON.stringify(myCombination);
     window.open(url)
   }

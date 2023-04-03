@@ -1,7 +1,6 @@
 import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 
-
 import { EquipmentSearch } from '../interfaces/equipment-search.interface';
 
 import { EndpointsService } from '../services/endpoints.service';
@@ -14,7 +13,7 @@ import { EndpointsService } from '../services/endpoints.service';
 export class ResultsComponent implements OnInit {
 
   @Input() payload: EquipmentSearch = {};
-
+  mySearchResponse!: Array<any>;
   myResults!: Array<any>;
   commerceInfoForm!: FormGroup;
   eligibleRebatesForm!: FormGroup;
@@ -100,20 +99,40 @@ export class ResultsComponent implements OnInit {
 
   }
 
+  // onChangeEligibleRebate filter results by user selections in eligible rebates form selection.   
+  onChangeEligibleRebate() {
+    // extract into an array of strings the properties of an eligibleRebatesForm that have the property isActive in common.
+    const myeligibles =  this.eligibleRebatesForm.value.eligibleRebates.filter((objeto:any) => objeto.isActive == true ).map((objeto:any) => objeto.name);
+
+    const nuevoArregloDeObjetos = this.mySearchResponse.filter(objeto =>
+      //objeto.rebateEligibility.every(
+      objeto.rebateEligibility.some(
+        // TODO: Change to true when we have eligible rebates.
+        (rebateEligibility:any) => myeligibles.includes(rebateEligibility.title) && rebateEligibility.isEligible == false
+      )
+    );
+
+  // Group results by outdoor unit and asign to results variable.
+  this.myResults = this.groupByOutdoorUnit(nuevoArregloDeObjetos);
+ }
+
   // loadResults loads the AHRI combinations for the given input params.
   loadResults() {
-
     // Update commerce info.
     this.currentEquipmentSearch.commerceInfo = this.commerceInfoForm.value;
 
     // May have to group or order the results here.
     this._endpoint.Search(this.currentEquipmentSearch).subscribe({
       next: (resp: any) => {
+        this.mySearchResponse = [...resp]
+        // Render eligible rebates.
+        this.loadEligibileRebates(this.mySearchResponse);
+
+        // remove systems that doesn't apply eligible rebates?
+        // this.onChangeEligibleRebate()
+
         // Group results by outdoor unit and asign to results variable.
         this.myResults = this.groupByOutdoorUnit(resp);
-
-        // Render eligible rebates.
-        this.loadEligibileRebates(resp);
 
       },
       error: (e) => alert(e.error)

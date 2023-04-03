@@ -246,24 +246,8 @@ export class CardComponent implements OnInit {
     }); 
   }
 
-  appliesEligibleRebates(myresult: Result) :boolean {
-
-    //chequear que apliquen a los dos?
-    console.log(myresult);
-    let myReturn = false;
-    let myeligibles = this.myEligibleRebates.eligibleRebates.filter((eligible:any) => eligible.isActive);
-    myresult.rebateEligibility.forEach(rebate => {
-      myeligibles.forEach((eligible:any) => {
-        if(eligible.name == rebate.title /* && rebate.isEligible*/) {
-          myReturn = true;
-        } else {
-          myReturn = false;
-        }
-      });
-     
-    });
-    
-    return myReturn;
+  print(myCombination: any) {
+    let url = '/print?q=' + JSON.stringify(myCombination);
+    window.open(url)
   }
-
 }

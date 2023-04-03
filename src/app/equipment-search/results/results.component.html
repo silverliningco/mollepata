@@ -30,7 +30,7 @@
           
           <section class="example-section" formArrayName="eligibleRebates">
               <ng-container *ngFor="let rebate of eligibleRebates.controls;let i=index" [formGroupName]="i">
-                <mat-checkbox  formControlName="isActive">
+                <mat-checkbox  formControlName="isActive" (change)="onChangeEligibleRebate()">
                   {{rebate.get('name')!.value}}
                 </mat-checkbox>
               </ng-container>
