@@ -1,13 +1,10 @@
-
-
-
 /*Report*/
 .rc-report{
     border: 1px solid #c5c5c5;
     border-radius: 4px;
     background-color: white;
     padding: 2rem 1rem;
-    margin-top: 1rem;
+    margin: 1rem 0;
 }
 .rc-report .title{
     text-align: center;
@@ -80,5 +77,8 @@
     }
     .item .rating{
         font-weight: bold;
+    }
+    .print-btn{
+        display: none !important;
     }
 }
