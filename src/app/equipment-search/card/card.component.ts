@@ -80,8 +80,7 @@ export class CardComponent implements OnInit {
 
               countOks++
               if (this.card.result?.components.length == countOks) {
-               
-                sys.configurationOptions.forEach((comp: { type: string; value: any; }) => {
+                sys.configurationOptions.forEach((comp: any) => {
 
                   if (!myConfigurations.hasOwnProperty(comp.type)) {
                     myConfigurations[comp.type] = [];
@@ -97,10 +96,10 @@ export class CardComponent implements OnInit {
         });
       });
     });
-
-    // Remove duplicated configuration option that has same value.
+    
+    // Remove duplicated configuration option that has same id.
     this.Object.keys(myConfigurations).forEach((element, i) => {
-      const myUniqueOptions = [...new Map(myConfigurations[element].map((m: any) => [m.value, m])).values()];
+      const myUniqueOptions = [...new Map(myConfigurations[element].map((m: any) => [m.id, m])).values()];
       myConfigurations[element] = myUniqueOptions;
     });
 

@@ -133,7 +133,6 @@ export class ResultsComponent implements OnInit {
 
         // Group results by outdoor unit and asign to results variable.
         this.myResults = this.groupByOutdoorUnit(resp);
-
       },
       error: (e) => alert(e.error)
     })
