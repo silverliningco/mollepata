@@ -61,6 +61,10 @@
     color: var(--rc-text-color);
 }
 @media print {
+    @page {
+        margin-top: 0;
+        margin-bottom: 0;
+    }
     .rc-report{
         border: none;
         background-color:transparent;
@@ -80,5 +84,8 @@
     }
     .print-btn{
         display: none !important;
+    }
+    .logo img{
+        width: 130px;
     }
 }
