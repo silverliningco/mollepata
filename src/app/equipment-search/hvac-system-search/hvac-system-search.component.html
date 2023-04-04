@@ -110,7 +110,7 @@
             </div>
 
             <!--Add new-->
-            <div fxFlex="20" fxLayout="column" fxLayoutAlign="center stretch" fxFlex.xs="100" fxFlex.sm="70" fxFlex.md="25">
+            <div fxFlex="20" fxLayout="column" fxLayoutAlign="center stretch" fxFlex.xs="100" fxFlex.sm="70" fxFlex.md="25" *ngIf="!validateResults()">
                 <button class="rc-hvac-unit-add" (click)="openDialog('add')">
                     <div class="icon">
                         <mat-icon>add</mat-icon>

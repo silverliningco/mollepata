@@ -6,8 +6,8 @@
                 <mat-label>Unit Type</mat-label>
                 <mat-select formControlName="unitType">                
                     <mat-option radioGroup="sGroup" value="Outdoor unit">Outdoor unit</mat-option>
-                    <mat-option radioGroup="sGroup" value="Indoor unit">Indoor unit</mat-option>
-                    <mat-option radioGroup="sGroup" value="Furnace">Furnace</mat-option>
+                    <mat-option radioGroup="sGroup" value="Indoor unit" *ngIf="this.myData.systemDesign?.length>0">Indoor unit</mat-option>
+                    <mat-option radioGroup="sGroup" value="Furnace" *ngIf="this.myData.systemDesign?.length>0">Furnace</mat-option>
                 </mat-select> 
             </mat-form-field>   
         </div>
@@ -17,15 +17,25 @@
                 <mat-label>System Type</mat-label>
                 <mat-select formControlName="systemType">                 
                     <mat-option radioGroup="sGroup" value="Split system">Split system</mat-option>
-                    <mat-option radioGroup="sGroup" value="Mini-Split">Mini-Split</mat-option>                
+                    <mat-option radioGroup="sGroup" value="Mini-Split">Mini-Split</mat-option>
+                    <mat-option radioGroup="sGroup" value="Small Packaged Unit">Small Packaged Unit</mat-option>
                 </mat-select> 
             </mat-form-field> 
 
-            <mat-form-field appearance="fill">
+            <mat-form-field appearance="fill" *ngIf="systemForm.get('systemType')!.value != 'Small Packaged Unit'">
                 <mat-label>HVAC System Type</mat-label>
                 <mat-select formControlName="HVACType">                
                     <mat-option radioGroup="sGroup" value="HP">HP</mat-option>
                     <mat-option radioGroup="sGroup" value="AC">AC</mat-option>  
+                </mat-select> 
+            </mat-form-field>
+            
+            <mat-form-field appearance="fill" *ngIf="systemForm.get('systemType')!.value == 'Small Packaged Unit'">
+                <mat-label>HVAC System Type</mat-label>
+                <mat-select formControlName="HVACType">                
+                    <mat-option radioGroup="sGroup" value="AC + Gas Furnace">AC + Gas Furnace</mat-option>
+                    <mat-option radioGroup="sGroup" value="HP + Gas Furnace">HP + Gas Furnace</mat-option>
+                    <mat-option radioGroup="sGroup" value="HP Electric Heating && Cooling">HP Electric Heating && Cooling</mat-option>  
                 </mat-select> 
             </mat-form-field>
         </div>
@@ -35,7 +45,7 @@
                 <mat-label>System Type</mat-label>
                 <mat-select formControlName="systemType">                 
                     <mat-option radioGroup="sGroup" value="Fan coil">Fan coil</mat-option>
-                    <mat-option radioGroup="sGroup" value="Furnace + Evaporator Coil">Furnace + Evaporator Coil</mat-option>
+                    <mat-option radioGroup="sGroup" value="Evaporator Coil">Evaporator Coil</mat-option>
                     <mat-option radioGroup="sGroup" value="Mini-Split indoor">Mini-Split indoor</mat-option>                
                 </mat-select> 
             </mat-form-field> 

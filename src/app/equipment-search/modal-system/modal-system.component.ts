@@ -34,6 +34,54 @@ export class ModalSystemComponent implements OnInit {
 
   }
 
+  validateResults(mySystemDesign: any[], myFormValue: any) :boolean {
+    
+    // if the Outdoor unit is Small Packaged Unit, no more systems can be added
+    if(myFormValue.systemType == "Small Packaged Unit"){
+      
+      // you can only have one small packaged unit
+      if(mySystemDesign.length >= 1 && this.myData.method == "add" || mySystemDesign.length > 1) {
+        alert("You can only have one system for this option.")
+        return false;
+      }
+    }
+  
+    // if the Outdoor unit is a Split system and the Indoor unit is a Fan coil, no more systems can be added.
+    if(myFormValue.systemType == "Fan coil"){
+      // you can only have one small packaged unit
+      if(mySystemDesign.length >= 2 && this.myData.method == "add" || mySystemDesign.length >2) {
+        alert("You can only have 2 systems for this option.")
+        return false;
+      }
+    }
+   
+    // If the Outdoor unit is Split system, the Indoor unit is Evaporator Coil, then a Furnace is mandatory.
+    const isSplitWEvaporatorCoil = ["Split system", "Evaporator Coil"].every((valorSeleccionado) => {
+      return mySystemDesign.some((system) => system.systemType === valorSeleccionado);
+    });
+    if(isSplitWEvaporatorCoil) {
+     // this.myData.systenType == "Evaporator Coil"
+      if(myFormValue.unitType != "Furnace" && myFormValue.unitType != "Indoor unit"){
+        alert("You need to add a furnace for your choseen machines.")
+        return false;
+      }
+    }
+
+     // If the Outdoor unit is Mini-Split and the Indoor unit is Mini-Split indoor controlling the sum of quantity(<=5)
+     if(myFormValue.systemType == "Mini-Split indoor") {
+      let sumaDeQuantities = mySystemDesign.reduce((total, objeto) => total + (objeto.quantity || 0), 0);
+      if(this.myData.method == "edit"){
+        sumaDeQuantities = sumaDeQuantities - this.myData.data.quantity;
+      }
+      if((sumaDeQuantities + myFormValue.quantity) > 5){
+        alert("The sum of the quantities must be <= 5")
+        return false;
+      }
+     }
+
+    return true;
+  }
+
   addEditSystem() {
 
     // Exclude empty fields on form submit.
@@ -45,7 +93,12 @@ export class ModalSystemComponent implements OnInit {
       }
     }
 
-    this.dialogRef.close({method: this.myData.method, index: this.myData.index, data: myFormValue })
+    // Validate modal
+    if(this.validateResults(this.myData.systemDesign, myFormValue)) {
+
+      this.dialogRef.close({method: this.myData.method, index: this.myData.index, data: myFormValue })
+
+    }
   
   }
 

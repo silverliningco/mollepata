@@ -77,9 +77,9 @@ export class HVACSystemSearchComponent implements OnInit {
     let myData = {}
 
     if (method == "edit" && i !== undefined) {
-      myData = { method: method, index: i, data: this.systems[i] }
+      myData = { method: method, index: i, data: this.systems[i], systemDesign: this.myData.systemDesign || []}
     }else{ 
-      myData = { method: method }
+      myData = { method: method, systemDesign: this.myData.systemDesign || []}
     }
 
     const dialogRef = this.dialog.open(ModalSystemComponent, {
@@ -118,6 +118,44 @@ export class HVACSystemSearchComponent implements OnInit {
     e.stopPropagation()
   }
 
+  validateResults(): boolean {
+    if(this.myData.systemDesign) {
+      
+      // if the Outdoor unit is Small Packaged Unit, no more systems can be added
+      const existsSmallPackagedUnit = this.myData.systemDesign.some(system => system.systemType === "Small Packaged Unit");
+
+      if(existsSmallPackagedUnit) {
+        return true
+      }
+
+      // if the Outdoor unit is a Split system and the Indoor unit is a Fan coil, no more systems can be added.
+      const isSplitWfanCoil = ["Split system", "Fan coil"].every((valorSeleccionado) => {
+        return this.myData.systemDesign?.some((system) => system.systemType === valorSeleccionado);
+      });
+
+      if(isSplitWfanCoil) {
+        return true
+      }
+
+       // If the Outdoor unit is Split system, the Indoor unit is Evaporator Coil, then a Furnace is mandatory.
+       const isSplitWEvaporatorCoil = ["Split system", "Evaporator Coil"].every((valorSeleccionado) => {
+         return this.myData.systemDesign?.some((system) => system.systemType === valorSeleccionado);
+       });
+ 
+       if(isSplitWEvaporatorCoil && this.myData.systemDesign.some(system => system.unitType === "Furnace")) {
+         return true
+       }
+
+       // If the Outdoor unit is Mini-Split and the Indoor unit is Mini-Split indoor controlling the sum of quantity(=5), hide add button.
+       let sumaDeQuantities = this.myData.systemDesign.reduce((total, objeto) => total + (objeto.quantity || 0), 0);
+       if(sumaDeQuantities == 5){
+        return true;
+      }
+    }
+      
+    return false;
+  }
+
   // tabChange is a callback when the progress bar step is changed.
   // If the new step is the final step in sequence, we load the equipment search results.
   tabChange(e: any) {
@@ -130,7 +168,7 @@ export class HVACSystemSearchComponent implements OnInit {
       // that value is the object reference. If the object reference does not change, OnChanges is not triggered.
       // To force change detection is to set a new object reference after modifying the property values
       this.payload = { ...this.myData };
-
+    
     }
 
   }
