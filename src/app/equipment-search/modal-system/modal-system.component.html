@@ -44,7 +44,7 @@
             <mat-form-field appearance="fill">
                 <mat-label>System Type</mat-label>
                 <mat-select formControlName="systemType">                 
-                    <mat-option radioGroup="sGroup" value="Fan coil" *ngIf="isSplitSystem()">Fan coil</mat-option>
+                    <mat-option radioGroup="sGroup" value="Fan Coil" *ngIf="isSplitSystem()">Fan Coil</mat-option>
                     <mat-option radioGroup="sGroup" value="Evaporator Coil" *ngIf="isSplitSystem()">Evaporator Coil</mat-option>
                     <mat-option radioGroup="sGroup" value="Mini-Split indoor" *ngIf="isMiniSplit()">Mini-Split indoor</mat-option>                
                 </mat-select> 
@@ -56,10 +56,10 @@
                 <mat-label>Ms Unit Type Style</mat-label>
                 <mat-select formControlName="msIndoorUnitStyle">                 
                     <mat-option radioGroup="sGroup" value="Mini-Split Air Handler (Full Size)">Mini-Split Air Handler (Full Size)</mat-option>
-                    <mat-option radioGroup="sGroup" value="Ducted mini-split Air Handler (Slim Style)">Ducted mini-split Air Handler (Slim Style)</mat-option>
+                    <mat-option radioGroup="sGroup" value="Ducted Mini-Split Air Handler (Slim Style)">Ducted Mini-Split Air Handler (Slim Style)</mat-option>
                     <mat-option radioGroup="sGroup" value="Floor/Ceiling Mount">Floor/Ceiling Mount</mat-option>
                     <mat-option radioGroup="sGroup" value="Cassette">Cassette</mat-option>
-                    <mat-option radioGroup="sGroup" value="High wall">High wall</mat-option>
+                    <mat-option radioGroup="sGroup" value="High Wall">High Wall</mat-option>
                     <mat-option radioGroup="sGroup" value="1-Way Casette">1-Way Casette</mat-option>                    
                 </mat-select> 
             </mat-form-field> 
