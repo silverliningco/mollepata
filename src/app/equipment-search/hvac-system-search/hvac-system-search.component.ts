@@ -146,8 +146,8 @@ export class HVACSystemSearchComponent implements OnInit {
          return true
        }
 
-       // If the Outdoor unit is Mini-Split and the Indoor unit is Mini-Split indoor controlling the sum of quantity(=5), hide add button.
-       let sumaDeQuantities = this.myData.systemDesign.reduce((total, objeto) => total + (objeto.quantity || 0), 0);
+       // If the Outdoor unit is Mini-Split and the Indoor unit is Mini-Split indoor controlling the sum of qty(=5), hide add button.
+       let sumaDeQuantities = this.myData.systemDesign.reduce((total, objeto) => total + (objeto.qty || 0), 0);
        if(sumaDeQuantities == 5){
         return true;
       }

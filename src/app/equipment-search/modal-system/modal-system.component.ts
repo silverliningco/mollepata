@@ -24,7 +24,7 @@ export class ModalSystemComponent implements OnInit {
       energyDistribution: [null, Validators.required],   
       msIndoorUnitStyle: [null, Validators.required],
       coolingCapacity: [null, Validators.required],
-      quantity: [null, Validators.required],       
+      qty: [null, Validators.required],       
     });
 
     if(this.myData.method == "edit"){
@@ -71,13 +71,13 @@ export class ModalSystemComponent implements OnInit {
       }
     }
    
-     // If the Outdoor unit is Mini-Split and the Indoor unit is Mini-Split indoor controlling the sum of quantity(<=5)
+     // If the Outdoor unit is Mini-Split and the Indoor unit is Mini-Split indoor controlling the sum of qty(<=5)
      if(myFormValue.systemType == "Mini-Split indoor") {
-      let sumaDeQuantities = mySystemDesign.reduce((total, objeto) => total + (objeto.quantity || 0), 0);
+      let sumaDeQuantities = mySystemDesign.reduce((total, objeto) => total + (objeto.qty || 0), 0);
       if(this.myData.method == "edit"){
-        sumaDeQuantities = sumaDeQuantities - this.myData.data.quantity;
+        sumaDeQuantities = sumaDeQuantities - this.myData.data.qty;
       }
-      if((sumaDeQuantities + myFormValue.quantity) > 5){
+      if((sumaDeQuantities + myFormValue.qty) > 5){
         alert("The sum of the quantities must be <= 5")
         return false;
       }
