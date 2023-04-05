@@ -23,7 +23,7 @@ export class ModalSystemComponent implements OnInit {
       HVACType: [null, Validators.required],
       energyDistribution: [null, Validators.required],   
       msIndoorUnitStyle: [null, Validators.required],
-      coolingCapacity: [null, Validators.required],
+      size: [null, Validators.required],
       qty: [null, Validators.required],       
     });
 
