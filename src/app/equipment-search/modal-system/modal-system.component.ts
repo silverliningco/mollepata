@@ -27,11 +27,27 @@ export class ModalSystemComponent implements OnInit {
       quantity: [null, Validators.required],       
     });
 
-    console.log(this.myData);
     if(this.myData.method == "edit"){
       this.systemForm.patchValue(this.myData.data);
     }
 
+  }
+
+  
+  isSplitSystem(){
+    return this.myData.systemDesign.some((system:any) => system.systemType === "Split system");
+    
+  } 
+  isMiniSplit(){
+    return this.myData.systemDesign.some((system:any) => system.systemType === "Mini-Split");
+  }
+
+  hasOutdoors(){
+    return this.myData.systemDesign.some((system:any) => system.unitType === "Outdoor unit");
+  }
+
+  isEvaporatorCoil(){
+    return this.myData.systemDesign.some((system:any) => system.systemType === "Evaporator Coil");
   }
 
   validateResults(mySystemDesign: any[], myFormValue: any) :boolean {
@@ -55,18 +71,6 @@ export class ModalSystemComponent implements OnInit {
       }
     }
    
-    // If the Outdoor unit is Split system, the Indoor unit is Evaporator Coil, then a Furnace is mandatory.
-    const isSplitWEvaporatorCoil = ["Split system", "Evaporator Coil"].every((valorSeleccionado) => {
-      return mySystemDesign.some((system) => system.systemType === valorSeleccionado);
-    });
-    if(isSplitWEvaporatorCoil) {
-     // this.myData.systenType == "Evaporator Coil"
-      if(myFormValue.unitType != "Furnace" && myFormValue.unitType != "Indoor unit"){
-        alert("You need to add a furnace for your choseen machines.")
-        return false;
-      }
-    }
-
      // If the Outdoor unit is Mini-Split and the Indoor unit is Mini-Split indoor controlling the sum of quantity(<=5)
      if(myFormValue.systemType == "Mini-Split indoor") {
       let sumaDeQuantities = mySystemDesign.reduce((total, objeto) => total + (objeto.quantity || 0), 0);

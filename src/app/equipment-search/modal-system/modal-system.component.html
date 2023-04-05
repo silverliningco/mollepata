@@ -4,10 +4,10 @@
         <div>
             <mat-form-field appearance="fill">
                 <mat-label>Unit Type</mat-label>
-                <mat-select formControlName="unitType">                
-                    <mat-option radioGroup="sGroup" value="Outdoor unit">Outdoor unit</mat-option>
-                    <mat-option radioGroup="sGroup" value="Indoor unit" *ngIf="this.myData.systemDesign?.length>0">Indoor unit</mat-option>
-                    <mat-option radioGroup="sGroup" value="Furnace" *ngIf="this.myData.systemDesign?.length>0">Furnace</mat-option>
+                <mat-select formControlName="unitType">              
+                    <mat-option radioGroup="sGroup" value="Outdoor unit" *ngIf="!hasOutdoors() || this.myData.data?.unitType == 'Outdoor unit'">Outdoor unit</mat-option>
+                    <mat-option radioGroup="sGroup" value="Indoor unit" *ngIf="(hasOutdoors() && this.myData.data?.unitType == 'Indoor unit') || (hasOutdoors() && !this.myData.data && !isEvaporatorCoil())">Indoor unit</mat-option>
+                    <mat-option radioGroup="sGroup" value="Furnace" *ngIf="(isEvaporatorCoil() && this.myData.data?.unitType == 'Furnace') || (isEvaporatorCoil() && !this.myData.data)">Furnace</mat-option>
                 </mat-select> 
             </mat-form-field>   
         </div>
@@ -22,7 +22,7 @@
                 </mat-select> 
             </mat-form-field> 
 
-            <mat-form-field appearance="fill" *ngIf="systemForm.get('systemType')!.value != 'Small Packaged Unit'">
+            <mat-form-field appearance="fill" *ngIf="systemForm.get('systemType')!.value == 'Split system' || systemForm.get('systemType')!.value == 'Mini-Split'">
                 <mat-label>HVAC System Type</mat-label>
                 <mat-select formControlName="HVACType">                
                     <mat-option radioGroup="sGroup" value="HP">HP</mat-option>
@@ -44,9 +44,9 @@
             <mat-form-field appearance="fill">
                 <mat-label>System Type</mat-label>
                 <mat-select formControlName="systemType">                 
-                    <mat-option radioGroup="sGroup" value="Fan coil">Fan coil</mat-option>
-                    <mat-option radioGroup="sGroup" value="Evaporator Coil">Evaporator Coil</mat-option>
-                    <mat-option radioGroup="sGroup" value="Mini-Split indoor">Mini-Split indoor</mat-option>                
+                    <mat-option radioGroup="sGroup" value="Fan coil" *ngIf="isSplitSystem()">Fan coil</mat-option>
+                    <mat-option radioGroup="sGroup" value="Evaporator Coil" *ngIf="isSplitSystem()">Evaporator Coil</mat-option>
+                    <mat-option radioGroup="sGroup" value="Mini-Split indoor" *ngIf="isMiniSplit()">Mini-Split indoor</mat-option>                
                 </mat-select> 
             </mat-form-field> 
         </div>
