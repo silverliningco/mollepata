@@ -62,8 +62,8 @@ export class ModalSystemComponent implements OnInit {
       }
     }
   
-    // if the Outdoor unit is a Split system and the Indoor unit is a Fan coil, no more systems can be added.
-    if(myFormValue.systemType == "Fan coil"){
+    // if the Outdoor unit is a Split system and the Indoor unit is a Fan Coil, no more systems can be added.
+    if(myFormValue.systemType == "Fan Coil"){
       // you can only have one small packaged unit
       if(mySystemDesign.length >= 2 && this.myData.method == "add" || mySystemDesign.length >2) {
         alert("You can only have 2 systems for this option.")

@@ -128,8 +128,8 @@ export class HVACSystemSearchComponent implements OnInit {
         return true
       }
 
-      // if the Outdoor unit is a Split system and the Indoor unit is a Fan coil, no more systems can be added.
-      const isSplitWfanCoil = ["Split system", "Fan coil"].every((valorSeleccionado) => {
+      // if the Outdoor unit is a Split system and the Indoor unit is a Fan Coil, no more systems can be added.
+      const isSplitWfanCoil = ["Split system", "Fan Coil"].every((valorSeleccionado) => {
         return this.myData.systemDesign?.some((system) => system.systemType === valorSeleccionado);
       });
 
