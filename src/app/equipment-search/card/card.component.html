@@ -100,10 +100,10 @@
         </button>
       </div>
       <div>
-        <button mat-button class="rc-card-btn primary" fxLayout fxLayoutAlign="center center"  (click)="print(card.result)">
+        <a  mat-button class="rc-card-btn primary" fxLayout fxLayoutAlign="center center" [routerLink]="['/print', JSON.stringify(card.result)]" target="_blank">
           PRINT
           <mat-icon>print</mat-icon>
-        </button>
+        </a>
       </div>
     </div>
   </mat-card-actions>

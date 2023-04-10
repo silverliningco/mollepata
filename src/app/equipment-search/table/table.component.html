@@ -37,9 +37,9 @@
           </td>
          
           <td data-title="Details">
-            <button class="rc-btn rc-btn-secondary" (click)="print(ahriCombination)">
+            <a mat-button class="rc-btn rc-btn-secondary" fxLayout fxLayoutAlign="center center" [routerLink]="['/print', JSON.stringify(ahriCombination)]" target="_blank">
               <mat-icon>print</mat-icon>
-            </button>
+            </a>
           </td>
         </tr>
       </tbody>

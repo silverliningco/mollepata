@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { json } from 'express';
 
 @Component({
   selector: 'app-print',
@@ -15,14 +14,11 @@ export class PrintComponent implements OnInit {
 
   constructor(
     public activatedRoute: ActivatedRoute) {
-    activatedRoute.queryParams.subscribe( params => {
-    
-      this.result = JSON.parse(params["q"]);
-      
-    });
    }
 
   ngOnInit(): void {
+    let res = this.activatedRoute.snapshot.paramMap.get('payload');
+    this.result = JSON.parse(res!);
   }
 
   getComponentByComponentType(components: any[], componentType:string) {

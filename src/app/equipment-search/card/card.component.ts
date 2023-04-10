@@ -21,7 +21,8 @@ export class CardComponent implements OnInit {
 
   //pass Object to template, to iterate object keys using *ngFor (AHRI Ratings)
   Object = Object;
-
+  JSON = JSON;
+  
   constructor(
     private dialog: MatDialog) { }
 
@@ -245,8 +246,4 @@ export class CardComponent implements OnInit {
     }); 
   }
 
-  print(myCombination: any) {
-    let url = '/print?q=' + JSON.stringify(myCombination);
-    window.open(url)
-  }
 }

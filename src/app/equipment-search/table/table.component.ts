@@ -10,7 +10,7 @@ import { Result } from '../interfaces/results.interface';
 export class TableComponent implements OnInit {
 
   mySystems: any;
-  
+  JSON = JSON;
   myColumnRatings = ["eer2", "seer2", "hspf2", "AFUE"];
 
   constructor(
@@ -29,11 +29,6 @@ export class TableComponent implements OnInit {
   // Simple function to get component object from components by component type.
   getComponentByComponentType(components: any[], componentType:string) {
     return components.filter((c:any) => c.componentType == componentType)[0];
-  }
-
-  print(myCombination: any) {
-    let url = '/print?q=' + JSON.stringify(myCombination);
-    window.open(url)
   }
 
   getRating(ratings: any[], myString: string) :string {

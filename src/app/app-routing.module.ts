@@ -9,7 +9,7 @@ const routes: Routes = [
     loadChildren: () => import('./basic-estructure/basic-estructure.module').then(m => m.BasicEstructureModule)
   },
   {
-    path:'print',
+    path:'print/:payload',
     component: PrintComponent
   }
 
