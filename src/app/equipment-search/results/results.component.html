@@ -17,7 +17,7 @@
   fxLayoutAlign.xs="center start" fxLayoutGap="10px grid" class="results">
   
   <!-- Eligible Rebates Filter -->
-  <div fxFlex="30" fxFlex.xs="100" fxFlex.sm="90">
+  <div fxFlex="30" fxFlex.xs="100" fxFlex.sm="100">
     <mat-accordion>
       <mat-expansion-panel [disabled]="true" [expanded]="true">
         <mat-expansion-panel-header>
@@ -42,7 +42,7 @@
   </div>
 
   <!-- Search results -->
-  <div fxFlex="70" fxFlex.xs="100" fxFlex.sm="90">
+  <div fxFlex="70" fxFlex.xs="100" fxFlex.sm="100">
     <!-- Search results grouped by outdoor unit in "card" type displays. -->
     <app-card *ngFor="let myResult of myResults" [mySystems]="myResult" [myEligibleRebates]="this.eligibleRebatesForm.value">
     </app-card>
