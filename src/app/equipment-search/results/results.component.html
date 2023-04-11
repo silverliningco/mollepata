@@ -48,7 +48,13 @@
     </app-card>
 
     <div *ngIf="myResults?.length == 0"> 
-      No results for this search.
+      <div fxLayout fxLayoutAlign="center center" >
+        <div fxFlex="50">
+          <img src="../../../../assets/images/icons/no-results.png" alt="">
+          <p class="text-no--results">No results found</p>
+        </div>
+
+      </div>
     </div>
   </div>
   <!-- ./Search results grouped by outdoor unit in "card" type displays. -->

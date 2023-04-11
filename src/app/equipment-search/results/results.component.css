@@ -48,3 +48,10 @@
     color: var(--rc-text-color) !important;
     font-weight: bold;
 }
+.text-no-results{
+    text-align: center;
+    text-transform: uppercase;
+    color: var(--rc-text-light-color);
+    font-weight: bold;
+    font-size: 22px;
+}
