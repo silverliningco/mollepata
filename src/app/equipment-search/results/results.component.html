@@ -47,6 +47,9 @@
     <app-card *ngFor="let myResult of myResults" [mySystems]="myResult" [myEligibleRebates]="this.eligibleRebatesForm.value">
     </app-card>
 
+    <div *ngIf="myResults?.length == 0"> 
+      No results for this search.
+    </div>
   </div>
   <!-- ./Search results grouped by outdoor unit in "card" type displays. -->
 </div>
