@@ -1,15 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
+//import { EndpointsService } from '../../equipment-search/services/endpoints.service';
+
+import { LoaderService } from '../../equipment-search/services/loader.service';
 
 @Component({
   selector: 'app-spinner',
   templateUrl: './spinner.component.html',
-  styleUrls: ['./spinner.component.css']
+  styleUrls: ['./spinner.component.css'],
+  encapsulation: ViewEncapsulation.ShadowDom
 })
-export class SpinnerComponent implements OnInit {
+export class SpinnerComponent {
 
-  constructor() { }
-
-  ngOnInit(): void {
-  }
+  constructor(public loader: LoaderService) { }  
 
 }
