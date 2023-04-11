@@ -18,7 +18,7 @@
       <div fxFlex="100">
         <div class="item" *ngFor="let component of result!.components">
           <span class="key">{{component.componentType}}:</span>
-          <span class="rating">{{component.title}} <span class="componet-description">({{component.description}})</span></span>
+          <span class="rating">{{component.title}} <span class="componet-description" *ngIf="component.description">({{component.description}})</span></span>
         </div>
       </div>
     </div>
