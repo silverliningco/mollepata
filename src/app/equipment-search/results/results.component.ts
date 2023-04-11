@@ -22,13 +22,13 @@ export class ResultsComponent implements OnInit {
   constructor(private _endpoint: EndpointsService, private fb: FormBuilder) { }
 
 
-  get eligibleRebates(){
+  get eligibleRebates() {
     return this.eligibleRebatesForm.get('eligibleRebates') as FormArray;
   }
 
   ngOnInit(): void {
 
-    this.eligibleRebatesForm = this.fb.group({  
+    this.eligibleRebatesForm = this.fb.group({
       eligibleRebates: this.fb.array([])
     });
 
@@ -54,67 +54,104 @@ export class ResultsComponent implements OnInit {
       this.loadResults();
     }
   }
-
-  // Function to group response by outdoor unit.
+ 
+  /**
+  
+  This function takes an array of systems and groups them by their outdoor units, returning an array of arrays of systems.
+  @param systems An array of systems to group.
+  @returns An array of arrays of systems, grouped by their outdoor units.
+  */
   groupByOutdoorUnit(systems: Array<any>) {
+    // Create a new Map to store the grouped systems.
+    const groupedSystems = new Map();
+    // Iterate through each system in the array.
+    systems.forEach((system) => {
+      // Get all outdoor units in the system.
+      const outdoorUnits = system.components.filter((comp: any) => comp.componentType === 'Outdoor unit');
 
-    let newObj: { [index: string]: any } = {};
-    systems.forEach(sys => {
-      sys.components.forEach((comp: { componentType: string; title: any; }) => {
-        if (comp.componentType == "Outdoor unit") {
+      // Iterate through each outdoor unit in the system.
+      outdoorUnits.forEach((outdoorUnit: any) => {
+        // Get all indoor units in the system.
+        const indoorUnits = system.components.filter((comp: any) => comp.componentType === 'Indoor unit');
 
-          if (!newObj.hasOwnProperty(comp.title)) {
-            newObj[comp.title] = [];
-          }
-          newObj[comp.title].push(sys);
+        // Determine if the system has multiple indoor units.
+        const hasMultipleIndoorUnits = indoorUnits.length > 1;
 
+        // If the system has multiple indoor units, update their names.
+        if (hasMultipleIndoorUnits) {
+          this.updateIndoorUnitNames(system.components);
         }
+
+        // If the outdoor unit has not been added to the Map yet, add it.
+        if (!groupedSystems.has(outdoorUnit.title)) {
+          groupedSystems.set(outdoorUnit.title, []);
+        }
+
+        // Add the system to the array for the outdoor unit in the Map.
+        groupedSystems.get(outdoorUnit.title)?.push(system);
       });
     });
 
-    // returns an array of a given object's own enumerable string-keyed property values.
-    return Object.values(newObj);
-
+    // Return an array of arrays of systems grouped by their outdoor units.
+    return Array.from(groupedSystems.values());
   }
 
-  // loadEligibileRebates load rebates based on systems param. and update rebateEligible Form array.
-  loadEligibileRebates(mySystems: Array<any>) {
-    // Loop through the "availableRebates" field of all rows in the results received from the server 
-    // and compile a list of distinct rebates.
-    let myRebateEligibilityArr: string[] = [];
-    mySystems.forEach((el:any) => {
-      el.rebateEligibility.forEach((el2:any) => {
-        myRebateEligibilityArr = [...new Set([...myRebateEligibilityArr, el2.title])];
-        
-      });
+  // This function updates the names of indoor units in a system to be unique.
+  updateIndoorUnitNames(components: any[]) {
+    let count = 1;
+    components.forEach((comp) => {
+      if (comp.componentType === 'Indoor unit') {
+        comp.componentType = `Indoor unit ${count++}`;
+      }
     });
+  }
+
+  /**
+  This function takes an array of systems and loads a list of eligible rebates from the "rebateEligibility" field
+  of each system. It then creates a list of distinct rebate titles using a Set object, clears the existing list of
+  eligible rebates, and pushes each rebate title to the "eligibleRebates" array as a FormGroup object with isActive
+  set to true and name set to the rebate title.
+  @param mySystems An array of systems containing rebate eligibility data.
+  */
+  loadEligibileRebates(mySystems: Array<any>) {
+    const rebateTitles = new Set(mySystems.flatMap((system: any) => system.rebateEligibility.map((rebate: any) => rebate.title)));
+  
     this.eligibleRebates.clear();
-    // when you have data accessible:
-    myRebateEligibilityArr.forEach(value => {
+    rebateTitles.forEach(value => {
       this.eligibleRebates.push(this.fb.group({
         isActive: true,
         name: value
-      }))
-    })
-
+      }));
+    });
   }
 
-  // onChangeEligibleRebate filter results by user selections in eligible rebates form selection.   
-  onChangeEligibleRebate() {
-    // extract into an array of strings the properties of an eligibleRebatesForm that have the property isActive in common.
-    const myeligibles =  this.eligibleRebatesForm.value.eligibleRebates.filter((objeto:any) => objeto.isActive == true ).map((objeto:any) => objeto.name);
-
-    const nuevoArregloDeObjetos = this.mySearchResponse.filter(objeto =>
-      //objeto.rebateEligibility.every(
-      objeto.rebateEligibility.some(
-        // TODO: Change to true when we have eligible rebates.
-        (rebateEligibility:any) => myeligibles.includes(rebateEligibility.title) && rebateEligibility.isEligible == false
+  // Function to get a list of the selected rebates
+  getSelectedRebates() {
+    return this.eligibleRebatesForm.value.eligibleRebates
+      .filter((rebate: any) => rebate.isActive)
+      .map((rebate: any) => rebate.name);
+  }
+  
+  // Function to filter the eligible systems for the selected rebates
+  filterEligibleSystems(selectedRebates: string[]) {
+    return this.mySearchResponse.filter((system: any) =>
+      system.rebateEligibility.some((rebate: any) =>
+        selectedRebates.includes(rebate.title) && rebate.isEligible == false
       )
     );
+  }
+  
+  // Function to handle changes to the eligible rebate list
+  onChangeEligibleRebate() {
+    // Get a list of selected rebates
+    const selectedRebates = this.getSelectedRebates();
+  
+    // Filter the eligible systems for the selected rebates
+    const eligibleSystems = this.filterEligibleSystems(selectedRebates);
 
-  // Group results by outdoor unit and asign to results variable.
-  this.myResults = this.groupByOutdoorUnit(nuevoArregloDeObjetos);
- }
+    // Group the systems filtered by outdoor unit
+    this.myResults = this.groupByOutdoorUnit(eligibleSystems);
+  }
 
   // loadResults loads the AHRI combinations for the given input params.
   loadResults() {
@@ -125,6 +162,7 @@ export class ResultsComponent implements OnInit {
     this._endpoint.Search(this.currentEquipmentSearch).subscribe({
       next: (resp: any) => {
         this.mySearchResponse = [...resp]
+
         // Render eligible rebates.
         this.loadEligibileRebates(this.mySearchResponse);
 
