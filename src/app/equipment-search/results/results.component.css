@@ -11,27 +11,17 @@
 }
 /* End Stock status container */
 
-/* Result panel */
-.results .lateral-panel .mat-expansion-panel{
-    margin-bottom: 0.5rem !important;
+/* Result Filter panel */
+::ng-deep .result-filters .mat-checkbox{
+    display: block;
 }
-.results .lateral-panel .mat-expansion-panel .mat-expansion-panel-header{
-    padding: 12px 24px;
-    height: auto !important;
-    border-bottom: 1px solid #e4e4e4;
-    border-radius: 0;
-    background-color: transparent!important;
+::ng-deep .result-filters .mat-checkbox-layout{
+    white-space: normal;
 }
-.results .lateral-panel .mat-expansion-panel .mat-expansion-panel-header-title{
-    place-content: center space-around;
+::ng-deep .result-filters .mat-checkbox-inner-container {
+    margin-top: 5px;
 }
-.results .lateral-panel mat-accordion mat-panel-title {
-    font-weight: bold;
-    text-transform: uppercase;
-    font-size: 17px;
-    color: #606060;
-}
-/* End Result panel */
+/* End Filter panel */
 
 /* ToolTip */
 .cdk-overlay-pane.mat-tooltip-panel .mat-tooltip {

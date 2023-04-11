@@ -14,14 +14,14 @@
     <div fxFlex="100" fxLayout="column">
       <mat-card-subtitle>
         <div fxLayout="row column" fxLayoutAlign="space-between center" class="model-nrs" fxLayoutGap="16px grid">
-          <div fxFlex="25" fxFlex.sm="50" fxFlex.xs="100">
+          <div fxFlex="25" fxFlex.sm="50" fxFlex.md="50" fxFlex.xs="100">
             <mat-form-field class="example-full-width">
               <mat-label>Outdoor</mat-label>
               <input matInput value='{{this.getComponentByComponentType(card.result!.components, "Outdoor unit").sku}}' readonly="">
             </mat-form-field>
           </div>
           <ng-container *ngFor="let cardComponent of Object.keys(card.cardComponents)">
-            <div fxFlex="25" fxFlex.sm="50" fxFlex.xs="100" *ngIf="cardComponent != 'Outdoor unit'">
+            <div fxFlex="25" fxFlex.sm="50" fxFlex.md="50" fxFlex.xs="100" *ngIf="cardComponent != 'Outdoor unit'">
               <mat-form-field class="rc-select-multiline">
                   <mat-select [value]="this.getComponentByComponentType(card.result!.components, cardComponent).title" placeholder="{{cardComponent}}" (selectionChange)="filterByID($event.value, cardComponent)">
                   <mat-option  class="rc-select-multiline-option" value="reset" disabled="true"> Plese select an option</mat-option>
@@ -34,7 +34,7 @@
           </ng-container>
           
           <!-- card configurations -->
-          <div fxFlex="25" fxFlex.sm="50" fxFlex.xs="100" *ngFor="let cardConfiguration of Object.keys(card.cardConfigurations)">
+          <div fxFlex="25" fxFlex.sm="50" fxFlex.md="50" fxFlex.xs="100" *ngFor="let cardConfiguration of Object.keys(card.cardConfigurations)">
             <mat-form-field class="rc-select-multiline">
               <mat-select [value]="card.result!.AHRIRatings[1].configurations" placeholder="{{cardConfiguration}}" (selectionChange)="filterByConfigurationOptions($event.value, cardConfiguration)">
                 <mat-option class="rc-select-multiline-option" value="reset" disabled="true"> Plese select an option</mat-option>
@@ -54,10 +54,10 @@
   <mat-card-content>
     <div fxLayout="row column" fxLayoutAlign="start" fxLayoutGap="16px grid">
       <!-- AHRI ratings -->
-      <div fxFlex="60" fxFlex.sm="90" fxFlex.xs="100" fxLayout="column">
+      <div fxFlex="60" fxFlex.md="100" fxFlex.sm="100" fxFlex.xs="100" fxLayout="column">
         <h4 class="section-title">AHRI Ratings</h4>
         <div fxLayout="row column" fxLayoutAlign="start stretch" fxLayoutAlign.sm="center stretch" fxLayoutAlign.xs="center center" fxLayoutGap="12px grid">
-          <div fxFlex="50" fxFlex.sm="100" fxFlex.xs="100" *ngFor="let ratings of card.result!.AHRIRatings" class="">
+          <div fxFlex="50" fxFlex.sm="100" fxFlex.md="50" fxFlex.xs="100" *ngFor="let ratings of card.result!.AHRIRatings" class="">
             <div class="ahri-ratings">
                 <div *ngFor="let key of Object.keys(ratings)">
                   <span class="key">{{key}} :</span>
@@ -67,7 +67,7 @@
           </div>        
         </div>
       </div>
-      <div fxFlex="40" fxFlex.sm="90" fxFlex.xs="100" fxLayout="column">
+      <div fxFlex="40" fxFlex.sm="100" fxFlex.md="100" fxFlex.xs="100" fxLayout="column">
         <h4 class="section-title">Rebate eligibility</h4>
         <div class="rc-rebates">
           <ul class="rc-unlisted list">

@@ -17,7 +17,7 @@
   fxLayoutAlign.xs="center start" fxLayoutGap="10px grid" class="results">
   
   <!-- Eligible Rebates Filter -->
-  <div fxFlex="30" fxFlex.xs="100" fxFlex.sm="100">
+  <div fxFlex="30" fxFlex.xs="100" fxFlex.sm="100" class="result-filters">
     <mat-accordion>
       <mat-expansion-panel [disabled]="true" [expanded]="true">
         <mat-expansion-panel-header>
@@ -28,7 +28,7 @@
         </mat-expansion-panel-header>
         <form [formGroup]="eligibleRebatesForm">
           
-          <section class="example-section" formArrayName="eligibleRebates">
+          <section formArrayName="eligibleRebates">
               <ng-container *ngFor="let rebate of eligibleRebates.controls;let i=index" [formGroupName]="i">
                 <mat-checkbox  formControlName="isActive" (change)="onChangeEligibleRebate()">
                   {{rebate.get('name')!.value}}
