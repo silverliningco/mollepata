@@ -15,6 +15,7 @@
   font-size: 20px;
   font-weight: bold;
   color: var(--rc-text-color);
+  text-transform: uppercase;
 }
 ::ng-deep .results .rc-card .rc-card-header{
   padding-bottom: .5rem;
@@ -111,10 +112,19 @@
 }
 ::ng-deep .results .rc-card .mat-card-content .ahri-ratings{
   padding: 10px;
-  height: 90%;
+  height: 90%;  
+  font-size: 12px;
+  line-height: 20px;
+}
+::ng-deep .results .rc-card .mat-card-content .ahri-ratings .item-rating{
+  padding: 2px;
+}
+::ng-deep .results .rc-card .mat-card-content .ahri-ratings .item-rating:nth-child(odd){
+  background-color: #fbfbfba3;
 }
 .ahri-ratings .key{
   color: #999999;
+  padding-left: 5px;
 }
 .ahri-ratings .rating{
   color: var(--rc-text-light-color);
@@ -133,6 +143,7 @@
   border: 1px solid #f8f8f8;
   background-color: #fbfbfb;
   margin-top: 0.5rem;
+  font-size: 12px;
 }
 .rc-rebates .list{
 
@@ -142,6 +153,7 @@
     height: 16px;
     width: 20px;
     color: #c5c5c5;
+    margin: 5px 5px 0 0;
 }
 .rc-rebates .list .mat-icon.available{
     color: var(--rc-primary-color);
@@ -153,7 +165,7 @@
   font-weight: 500;
   padding-right: 5px;
   display: flex;
-  align-items: center;
+  align-items: start;
 }
 .rc-rebates .list span.description{
   font-size: 12px;

@@ -54,21 +54,21 @@
   <mat-card-content>
     <div fxLayout="row column" fxLayoutAlign="start" fxLayoutGap="16px grid">
       <!-- AHRI ratings -->
-      <div fxFlex="60" fxFlex.md="100" fxFlex.sm="100" fxFlex.xs="100" fxLayout="column">
-        <h4 class="section-title">AHRI Ratings</h4>
-        <div fxLayout="row column" fxLayoutAlign="start stretch" fxLayoutAlign.sm="center stretch" fxLayoutAlign.xs="center center" fxLayoutGap="12px grid">
+      <div fxFlex="70" fxFlex.md="100" fxFlex.sm="100" fxFlex.xs="100" fxLayout="column">
+        <h4 class="section-title">AHRI RATINGS</h4>
+        <div fxLayout="row column" fxLayoutAlign="start stretch" fxLayoutAlign.sm="center stretch" fxLayoutAlign.xs="center center" fxLayoutGap="12px grid" fxLayoutGap.xs="1px grid">
           <div fxFlex="50" fxFlex.sm="100" fxFlex.md="50" fxFlex.xs="100" *ngFor="let ratings of card.result!.AHRIRatings" class="">
             <div class="ahri-ratings">
-                <div *ngFor="let key of Object.keys(ratings)">
-                  <span class="key">{{key}} :</span>
-                  <span class="rating">{{ratings[key] || 'N/A'}}</span>
+                <div fxLayout="row column" *ngFor="let key of Object.keys(ratings)" class="item-rating">
+                  <span fxFlex="60" class="key">{{key | uppercase}}</span>
+                  <span fxFlex="40" class="rating">{{ratings[key] || 'N/A'}}</span>
                 </div>
             </div>
           </div>        
         </div>
       </div>
-      <div fxFlex="40" fxFlex.sm="100" fxFlex.md="100" fxFlex.xs="100" fxLayout="column">
-        <h4 class="section-title">Rebate eligibility</h4>
+      <div fxFlex="30" fxFlex.sm="100" fxFlex.md="100" fxFlex.xs="100" fxLayout="column">
+        <h4 class="section-title">REBATE ELIGIBILITY</h4>
         <div class="rc-rebates">
           <ul class="rc-unlisted list">
             <li *ngFor="let rebate of card.result!.rebateEligibility">              

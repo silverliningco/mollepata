@@ -1,5 +1,5 @@
 <!--- Begin Material Stepper progress bar content. -->
-<mat-stepper #stepper (selectionChange)="tabChange($event)">
+<mat-stepper #stepper [orientation]="(stepperOrientation | async)!" (selectionChange)="tabChange($event)">
 
     <!--- Step 1: Location. -->
     <mat-step [completed]="MySubmitValidation['location']">

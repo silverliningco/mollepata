@@ -1,8 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatSnackBar } from '@angular/material/snack-bar';
 
-import { MatStepper } from '@angular/material/stepper';
+import { BreakpointObserver } from '@angular/cdk/layout';
+import { MatStepper, StepperOrientation  } from '@angular/material/stepper';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 import { EquipmentSearch } from '../interfaces/equipment-search.interface'
 import { MatDialog } from '@angular/material/dialog';
@@ -27,15 +29,23 @@ export class HVACSystemSearchComponent implements OnInit {
   myData: EquipmentSearch = {};
   payload!: EquipmentSearch;
 
+  
+  stepperOrientation: Observable<StepperOrientation>;
+
   MySubmitValidation: any = { location: false, utilityProviders: false, dwellingInfo: false, systemSize: false, systemDesign: false };
 
   systems: any[] = []
 
   constructor(
     private fb: FormBuilder,
-    private _snackBar: MatSnackBar,
-    private dialog: MatDialog
-  ) { }
+    private dialog: MatDialog,
+    public breakpointObserver: BreakpointObserver,
+  ) {
+    this.stepperOrientation = breakpointObserver
+      .observe('(min-width: 800px)')
+      .pipe(
+        map(({ matches }) => (matches ? 'horizontal' : 'vertical')));
+   }
 
   ngOnInit(): void {
 

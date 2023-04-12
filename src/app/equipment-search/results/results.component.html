@@ -4,7 +4,7 @@
 <!-- Stock status div.fxFlex="100" -->
 <div class="rc-filter-stock">
   <form [formGroup]="commerceInfoForm">
-    <h5 class="rc-filter-group-title">Stock status</h5>
+    <h5 class="rc-filter-group-title">STOCK STATUS</h5>
     <mat-radio-group #rGroup formControlName="stockStatus" fxLayout="row" fxLayout.xs="column" (change)="loadResults()">
       <mat-radio-button value="Stock" radioGroup="rGroup">Stock items only</mat-radio-button>
       <mat-radio-button value="*" radioGroup="rGroup">Show all</mat-radio-button>
@@ -23,7 +23,7 @@
         <mat-expansion-panel-header>
           <mat-panel-title>
             <mat-icon>filter_list</mat-icon>
-            <h4>Filter by Eligible Rebate</h4>
+            <h4>FILTER BY ELIGIBLE REBATE</h4>
           </mat-panel-title>
         </mat-expansion-panel-header>
         <form [formGroup]="eligibleRebatesForm">
