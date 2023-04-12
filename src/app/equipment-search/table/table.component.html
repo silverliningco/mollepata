@@ -18,7 +18,7 @@
       <tbody>
         <tr *ngFor="let ahriCombination of mySystems; index as i">
           <td data-title="n°">{{i+1}}</td>
-          <td  matTooltip="{{mySystems[i].components[y]?.description}}" matTooltipPosition="right" *ngFor="let unit of mySystems[0].components; index as y">{{ mySystems[i].components[y]?.title||"N/A"}}</td>
+          <td [attr.data-title]="mySystems[i].components[y]?.componentType" matTooltip="{{mySystems[i].components[y]?.description}}" matTooltipPosition="right" *ngFor="let unit of mySystems[0].components; index as y">{{ mySystems[i].components[y]?.title||"N/A"}}</td>
           <td data-title="configuration" *ngIf="ahriCombination.configurationOptions" data-title="Configuration">
             <ul *ngFor="let configuration of ahriCombination.configurationOptions" class="rc-list-in-table">
               <li>{{configuration.name}}</li>
@@ -26,7 +26,7 @@
             <span *ngIf="ahriCombination.configurationOptions.length == 0">N/A</span>
           </td>
 
-          <td *ngFor="let rating of myColumnRatings">
+          <td *ngFor="let rating of myColumnRatings" [attr.data-title]="rating">
             {{ getRating(ahriCombination.AHRIRatings, rating) }}
           </td>
          
