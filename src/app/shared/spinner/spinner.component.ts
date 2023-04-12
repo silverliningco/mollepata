@@ -1,6 +1,4 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-//import { EndpointsService } from '../../equipment-search/services/endpoints.service';
-
 import { LoaderService } from '../../equipment-search/services/loader.service';
 
 @Component({
