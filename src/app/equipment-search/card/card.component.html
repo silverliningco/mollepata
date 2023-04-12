@@ -4,7 +4,7 @@
     <div fxFlex="100">
       <mat-card-header>
         <mat-card-title>
-          <span class="title">{{this.getComponentByComponentType(card.result!.components, "Outdoor unit").description}}</span>
+          <span class="title">{{this.getComponentByComponentType(card.result!.components, "Outdoor unit").description | uppercase}}</span>
         </mat-card-title>
       </mat-card-header>
     </div>
