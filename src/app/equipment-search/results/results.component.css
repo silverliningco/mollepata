@@ -1,18 +1,6 @@
-/* Stock status container */
-.rc-filter-stock {
-    background-color: #ffffff;
-    border-radius: 4px;
-    border: 1px solid #ececec;
-    margin-bottom: 0.75rem;
-    padding: 15px 10px;
-}
-.rc-filter-stock .mat-radio-button {
-    margin-right: 1rem;
-}
-/* End Stock status container */
-
 /* Result Filter panel */
-::ng-deep .result-filters .mat-checkbox{
+::ng-deep .result-filters .mat-checkbox,
+::ng-deep .result-filters .mat-radio-button{
     display: block;
 }
 ::ng-deep .result-filters .mat-checkbox-layout{
@@ -21,6 +9,11 @@
 ::ng-deep .result-filters .mat-checkbox-inner-container {
     margin-top: 5px;
 }
+::ng-deep .result-filters .mat-radio-group{
+    display: block !important;
+}
+
+result-filters
 /* End Filter panel */
 
 /* ToolTip */

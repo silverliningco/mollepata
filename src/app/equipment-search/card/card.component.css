@@ -111,7 +111,7 @@
   }
 }
 ::ng-deep .results .rc-card .mat-card-content .ahri-ratings{
-  padding: 10px;
+  padding: .5rem;
   height: 90%;  
   font-size: 12px;
   line-height: 20px;
@@ -126,9 +126,12 @@
   color: #999999;
   padding-left: 5px;
 }
+@media (max-width:599px) {
+  
+}
 .ahri-ratings .rating{
   color: var(--rc-text-light-color);
-  font-weight: 600;    
+  font-weight: 600;
   padding-left: 0.5rem;
 }
 ::ng-deep .results .rc-card .mat-card-content .section-title {
@@ -138,15 +141,14 @@
 
 /* Rebate List */
 .rc-rebates {
+  padding: .5rem;
+}
+.rc-rebates .list{
   padding: 5px;
   border-radius: 4px;
   border: 1px solid #f8f8f8;
   background-color: #fbfbfb;
-  margin-top: 0.5rem;
   font-size: 12px;
-}
-.rc-rebates .list{
-
 }
 .rc-rebates .list .mat-icon{
     font-size: 16px;

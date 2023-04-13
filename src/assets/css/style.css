@@ -44,6 +44,9 @@ h1, h2, h3, h4, h5, .bitter-font {
 .rc-small{
   font-size: 80%;
 }
+.rc-mt-medium{
+  margin-top: 1rem;
+}
 .rc-mt-large{
   margin-top: 2rem;
 }
@@ -327,6 +330,15 @@ table tbody tr:nth-of-type(even) {
     height: 60px;
     background-color: white;
   }
+  @media (max-width: 767px) {
+    main {
+      min-height: calc(100% - 64px);
+    }
+    footer {
+      height: 40px;
+      font-size: 12px;
+    }
+  }
 /* End Footer */
 
 /* Button styles */
@@ -429,6 +441,18 @@ table tbody tr:nth-of-type(even) {
   .rc-radio-img .mat-radio-checked p{
     color: var(--rc-accent-color);
   }
+  @media (max-width: 599px) {
+    .rc-radio-img label.mat-radio-label {
+      padding: 1.5rem 0.25rem;
+    }
+    .rc-radio-img img {
+      width: 70px;
+      height: 70px;
+    }
+    .rc-radio-img p {
+      margin: 1rem 0 0 0;
+    }
+  }
 /* End Card with line */
 
 /* Star Stepper styles */
@@ -437,6 +461,15 @@ table tbody tr:nth-of-type(even) {
   }
   .rc-stepper-buttons{
     margin-top: 1.5rem;
+  }
+  @media (max-width: 799px){
+    .mat-vertical-content-container{
+      margin-left: 0 !important;
+    }
+    .mat-stepper-vertical-line::before{
+      margin-left: 36px !important;
+    }
+
   }
 /* End Stepper styles */
 
@@ -501,7 +534,7 @@ table tbody tr:nth-of-type(even) {
 
 /* Spinner */
 .mat-progress-spinner circle, .mat-spinner circle{
-  stroke: #1565c0 !important;
+  stroke: var(--rc-primary-color) !important;
 }
 /* End Spinner */
 

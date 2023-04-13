@@ -1,20 +1,7 @@
 <!-- Title -->
 <h2 class="rc-main-title">AHRI Combinations</h2>
 
-<!-- Stock status div.fxFlex="100" -->
-<div class="rc-filter-stock">
-  <form [formGroup]="commerceInfoForm">
-    <h5 class="rc-filter-group-title">STOCK STATUS</h5>
-    <mat-radio-group #rGroup formControlName="stockStatus" fxLayout="row" fxLayout.xs="column" (change)="loadResults()">
-      <mat-radio-button value="Stock" radioGroup="rGroup">Stock items only</mat-radio-button>
-      <mat-radio-button value="*" radioGroup="rGroup">Show all</mat-radio-button>
-    </mat-radio-group>
-  </form>
-</div>
-<!-- ... -->
-
-<div fxLayout="row column" fxLayoutAlign="space-around start" fxLayoutAlign.sm="center start"
-  fxLayoutAlign.xs="center start" fxLayoutGap="10px grid" class="results">
+<div fxLayout="row column" fxLayoutAlign="space-around start" fxLayoutAlign.sm="center start" fxLayoutAlign.xs="center start" fxLayoutGap="10px grid" class="results">
   
   <!-- Eligible Rebates Filter -->
   <div fxFlex="30" fxFlex.xs="100" fxFlex.sm="100" class="result-filters">
@@ -23,10 +10,19 @@
         <mat-expansion-panel-header>
           <mat-panel-title>
             <mat-icon>filter_list</mat-icon>
-            <h4>FILTER BY ELIGIBLE REBATE</h4>
+            <h4>FILTERS</h4>
           </mat-panel-title>
         </mat-expansion-panel-header>
-        <form [formGroup]="eligibleRebatesForm">
+        <form [formGroup]="commerceInfoForm">
+          <h5 class="rc-filter-group-title">STOCK STATUS</h5>
+          <mat-radio-group #rGroup formControlName="stockStatus" fxLayout="row" fxLayout.xs="column" (change)="loadResults()">
+            <mat-radio-button value="Stock" radioGroup="rGroup">Stock items only</mat-radio-button>
+            <mat-radio-button value="*" radioGroup="rGroup">Show all</mat-radio-button>
+          </mat-radio-group>
+        </form>
+
+        <form [formGroup]="eligibleRebatesForm" class="rc-mt-medium">
+          <h5 class="rc-filter-group-title">ELIGIBLE REBATE</h5>
           
           <section formArrayName="eligibleRebates">
               <ng-container *ngFor="let rebate of eligibleRebates.controls;let i=index" [formGroupName]="i">

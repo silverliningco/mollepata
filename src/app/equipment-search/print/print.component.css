@@ -21,49 +21,35 @@
     font-weight: bold;
     margin-bottom: .5rem;
 }
-
-.item .key{
-    color: #8f8f8f;
-    font-size: 14px;
+.item-rating, .item-numbers{
+    line-height: 1.7rem;
 }
-.item .rating{
+.item-rating:nth-child(odd){
+    background-color: #fbfbfba3;
+  }
+.item-rating .key, .item-numbers .key{
+    color: #8f8f8f;
+    font-size: 13px;
+}
+.item-rating .rating, .item-numbers .rating{
     color: var(--rc-text-light-color);
     font-weight: 500;
-    padding-left: 0.5rem;
 }
-.item .rating .componet-description{
+.item-numbers .rating .description{
     font-weight: 400;
-    font-size: 13px;
+    font-size: 12px;
     font-style: italic;
     text-transform: uppercase;
 }
 .rebate{
     position: relative;
-    background-color: #fafafa;
     margin-bottom: 0.45rem;
     border-radius: 5px;
-    padding: 1rem;
-    border: 1px solid #fafafa;
-}
-.rebate .mat-icon{
-    position: absolute;
-    color: rgb(21 101 192 / 64%);
-    font-size: 25px;
-    left: 10px;
-}
-.rebate .information{
-    padding-left: 20px;
-}
-.rebate .information h4{
-    color: var(--rc-primary-color);
-}
-.rebate .information p{
-    color: var(--rc-text-color);
 }
 @media print {
     @page {
-        margin-top: 0;
-        margin-bottom: 0;
+        margin-top: auto;
+        margin-bottom: auto;
     }
     .rc-report{
         border: none;
@@ -72,15 +58,27 @@
         margin-top: 0;
         font-size: 12px;
     }
-    .item{
-        margin-bottom: 2px;
-        padding-left: 1rem;
+    .ahri-ratings{
+        padding: auto !important;
     }
-    .item .key{
+    .item-rating, .item-numbers{
+        margin-bottom: 0; 
+        border-top: 1px solid #f3f3f3;
+        border-right: 1px solid #f3f3f3;
+        border-left: 1px solid #f3f3f3;
+        padding: 0 0 0 1rem;
+    }
+    .item-rating:last-child, .item-numbers:last-child{
+        border-bottom: 1px solid #f3f3f3;
+    }
+    .item-rating .key, .item-numbers .key{
         font-size: 10px;
     }
-    .item .rating{
+    .item-rating .rating, .item-numbers .rating{
         font-weight: bold;
+    }
+    .item-numbers .rating .description, .rebate .description{
+        font-size: 10px;
     }
     .print-btn{
         display: none !important;
