@@ -108,16 +108,18 @@ export class CardComponent implements OnInit {
   }
  
   // returns component names that are diferent to first selection and Outdoor unit.
-  selectsToUpdate() :string[] {
-
-    const myUserSelections: string[] = this.Object.keys(this.card.userSelections);
-
+  selectsToUpdate(myApplicableResult: Result) :string[] {
     let toUpdate: string[] = [];
-    let myComponentTypes = this.card.result!.components.map(a => a.componentType);
+    if(myApplicableResult){
+      const myUserSelections: string[] = this.Object.keys(this.card.userSelections);
 
-    if(myUserSelections.length != myComponentTypes.length){
-      toUpdate = myComponentTypes.filter(componentType => componentType !== this.firstSelection && componentType !== 'Outdoor unit')
+      let myComponentTypes = myApplicableResult.components.map(a => a.componentType);
+  
+      if(myUserSelections.length != myComponentTypes.length){
+        toUpdate = myComponentTypes.filter(componentType => componentType !== this.firstSelection && componentType !== 'Outdoor unit')
+      }
     }
+    
 
     return toUpdate;
   }
@@ -165,16 +167,18 @@ export class CardComponent implements OnInit {
     if(myComponentByType.length > 0){
       return myComponentByType[0];
     }
-    return 0;
+    return null;
   }
 
-  updateSelections(  currentSelection :string){
+  updateSelections(currentSelection :string){
 
-    let mySelectsToUpdate: string[] = this.selectsToUpdate();
     let myUpdatedOptions: any[] = [];
 
     // Systems matching user selections
     let myOptionsToUpdate = this.optionsToUpdate();
+
+
+    let mySelectsToUpdate: string[] = this.selectsToUpdate(myOptionsToUpdate[0]);
 
     if(myOptionsToUpdate.length == 0 ){
 
@@ -185,13 +189,19 @@ export class CardComponent implements OnInit {
           mySelectsToUpdate = this.selectsToReset(currentSelection);
    
           myOptionsToUpdate = this.optionsToUpdate();
+      } else{
+        // Maybe dont close the select?.
       }
     }
 
     mySelectsToUpdate.forEach(selectToUpdate => {
       
       myOptionsToUpdate.forEach(optionToUpdate => {
-          myUpdatedOptions.push(this.getComponentByComponentType(optionToUpdate.components,selectToUpdate));
+        const myOption = this.getComponentByComponentType(optionToUpdate.components,selectToUpdate);
+        if(myOption) {
+          myUpdatedOptions.push(myOption);
+        }
+         
       });
 
       // Remove duplicated components that has same title.
@@ -201,9 +211,19 @@ export class CardComponent implements OnInit {
       
       this.card.cardComponents[selectToUpdate] = myUniqueOptions;
     });
+    if(myOptionsToUpdate.length > 0){
+      const myCardComponents = Object.keys(this.card.cardComponents)
+        const myComponentsToUpdate = myOptionsToUpdate[0]?.components.flatMap((el: any) => el.componentType)
+        if(myCardComponents.length != myComponentsToUpdate.length){
+          const diff = myCardComponents.filter(item => !myComponentsToUpdate.includes(item));
+          diff.forEach(element => {
+            delete this.card.cardComponents[element];
+          });
+        }
 
-    this.card.result = myOptionsToUpdate[0];
-    this.card.cardConfigurations = this.cardConfigurations();
+        this.card.result = myOptionsToUpdate[0];
+        this.card.cardConfigurations = this.cardConfigurations();
+    }
 
   }
 
