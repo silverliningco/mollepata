@@ -1,7 +1,10 @@
 <div class="rc-container">
   <div class="rc-report">
     <div fxLayout="row" fxLayoutAlign="end center">
-      <div fxFlex="20" class="logo">
+      <div fxFlex="80" fxFlex.xs="100" fxFlex.sm="50" fxFlex.md="50" class="logo">
+        <h3>REBATE CALCULATOR</h3>
+      </div>
+      <div fxFlex="20" fxFlex.xs="100" fxFlex.sm="50" fxFlex.md="50" class="logo">
         <img src="./assets/images/logo-dcne.svg" alt="logo DCNE" >
       </div>
     </div>
@@ -13,41 +16,45 @@
     <!-- Model numbers -->
     <div fxLayout="row column" fxLayoutAlign="center center" class="model-numbers">
       <div fxFlex="100">
-        <h4 class="subtitle">Numbers</h4>
+        <h4 class="subtitle">MODEL NUMBERS</h4>
       </div>
       <div fxFlex="100">
-        <div class="item" *ngFor="let component of result!.components">
-          <span class="key">{{component.componentType}}:</span>
-          <span class="rating">{{component.title}} <span class="componet-description" *ngIf="component.description">({{component.description}})</span></span>
+        <div fxLayout="row column" *ngFor="let component of result!.components" class="item-numbers">
+          <span fxFlex="20" fxFlex.xs="100" fxFlex.sm="30" fxFlex.md="30" class="key">{{component.componentType}}:</span>
+          <span fxFlex="80" fxFlex.xs="100" fxFlex.sm="70" fxFlex.md="70" class="rating">{{component.title}} <span class="description" *ngIf="component.description">({{component.description}})</span></span>
         </div>
       </div>
     </div>
     <!-- AHRI Ratings -->
     <div fxLayout="row column" fxLayoutAlign="center start" class="ahri-ratings">
       <div fxFlex="100">
-        <h4 class="subtitle">AHRI Ratings</h4>
+        <h4 class="subtitle">AHRI RATINGS</h4>
       </div>
-      <div fxFlex="50" *ngFor="let ratings of result!.AHRIRatings">
-        <div class="item" *ngFor="let key of Object.keys(ratings)">
-          <span class="key">{{key | prettify}} </span>
-          <span class="rating">{{ratings[key] || 'N/A'}}</span>
+      
+      <div fxFlex="100">
+        <div fxLayout="row column" fxLayoutGap="16px grid">
+          <div fxFlex="50" *ngFor="let ratings of result!.AHRIRatings">
+            <div fxLayout="row column" *ngFor="let key of Object.keys(ratings)" class="item-rating">
+              <span fxFlex="50" fxFlex.xs="100" class="key">{{key | prettify}}</span>
+              <span fxFlex="50" fxFlex.xs="100" class="rating">{{ratings[key] || 'N/A'}}</span>
+            </div>
+          </div>
         </div>
       </div>
     </div>
     <!-- Aviable Rebates -->  
     <div fxLayout="row column" fxLayoutAlign="space-around center" class="elegible-rebates">
       <div fxFlex="100">
-        <h4 class="subtitle">Eligible Rebates</h4>
+        <h4 class="subtitle">ELIGIBLE REBATES</h4>
       </div>
-      <div fxFlex="100">
-        <div class="rebate" *ngFor="let rebate of result!.rebateEligibility">
-          <!--<mat-icon class="available" *ngIf="rebate.isEligibile">check_circle</mat-icon>
-          <mat-icon *ngIf="!rebate.isEligibile">cancel</mat-icon>-->
-          <mat-icon class="available">check_circle</mat-icon>
-          <div class="information">
-            <h4>{{rebate.title}}</h4>
-            <p>{{rebate.description}}</p>
-          </div>
+      <div fxFlex="100" class="rebate">
+        <div>
+          <ul>
+            <li *ngFor="let rebate of result!.rebateEligibility">
+              <span>{{rebate.title}}</span>
+              <span class="description">{{rebate.description}}</span>
+            </li>
+          </ul>
         </div>
       </div>
     </div>
