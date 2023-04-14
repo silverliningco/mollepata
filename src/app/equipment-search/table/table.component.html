@@ -1,5 +1,8 @@
-<h1 mat-dialog-title>Combination ratings with outdoor unit:
-  <b>{{this.getComponentByComponentType(mySystems[0].components, "Outdoor unit").title}}</b></h1>
+  <h1 mat-dialog-title class="modal-title">
+    Combination ratings with outdoor unit:
+    <b>{{this.getComponentByComponentType(mySystems[0].components, "Outdoor unit").title}}</b>
+    <mat-icon class="close-btn" mat-button (click)="closeDialog()">close</mat-icon>
+  </h1>
 
 <div mat-dialog-content>
   <div class="table-overflow">
@@ -39,11 +42,4 @@
       </tbody>
     </table>
   </div>
-</div>
-
-
-<div mat-dialog-actions>
-  <button mat-button (click)="closeDialog()" class="rc-detail-button" fxLayout fxLayoutAlign="center center">
-    Close
-  </button>
 </div>

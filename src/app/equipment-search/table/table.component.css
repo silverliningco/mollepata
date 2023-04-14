@@ -1,0 +1,13 @@
+.modal-title{
+    position: relative !important;
+}
+.close-btn{
+    position: absolute;
+    top: -1rem;
+    right: -1rem;
+    color: #a9a9a9;
+}
+.close-btn:hover{
+    color:#444444;
+    cursor: pointer;
+}
