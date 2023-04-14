@@ -44,6 +44,7 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import { MatTableModule } from '@angular/material/table';
 import { PrintComponent } from './print/print.component';
+import { PrettifyPipe } from './pipes/prettify.pipe';
 
 
 @NgModule({
@@ -58,6 +59,7 @@ import { PrintComponent } from './print/print.component';
     HvacSystemDetailComponent,
     ModalSystemComponent,
     PrintComponent,
+    PrettifyPipe,
   ],
   imports: [
     CommonModule,
