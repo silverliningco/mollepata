@@ -47,6 +47,11 @@ export class ResultsComponent implements OnInit {
     this.currentEquipmentSearch = changes["payload"].currentValue;
     const previousEquipmentSearch: EquipmentSearch = changes["payload"].previousValue;
 
+    // set commerce info to currentEquipmentSearch.
+    if(this.commerceInfoForm){
+      this.currentEquipmentSearch.commerceInfo = this.commerceInfoForm.value;
+    }
+  
     // Check if current value has changes from previous value to call search service.
     if (JSON.stringify(this.currentEquipmentSearch) !== JSON.stringify(previousEquipmentSearch)) {
 

@@ -35,7 +35,7 @@
         <div fxLayout="row column" fxLayoutGap="16px grid">
           <div fxFlex="50" *ngFor="let ratings of result!.AHRIRatings">
             <div fxLayout="row column" *ngFor="let key of Object.keys(ratings)" class="item-rating">
-              <span fxFlex="50" fxFlex.xs="100" class="key">{{key | uppercase}}</span>
+              <span fxFlex="50" fxFlex.xs="100" class="key">{{key | prettify}}</span>
               <span fxFlex="50" fxFlex.xs="100" class="rating">{{ratings[key] || 'N/A'}}</span>
             </div>
           </div>

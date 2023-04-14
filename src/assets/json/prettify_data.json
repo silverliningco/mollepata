@@ -1,0 +1,23 @@
+{       
+        "eer": "EER",
+        "eer2": "EER2",
+        "hspf": "HSPF",
+        "seer": "SEER",
+        "hspf2": "HSPF2",
+        "seer2": "SEER2",
+        "HCap17": "HCAP17",
+        "HCap47": "HCAP47",
+        "M1COP5": "M1COP5",
+        "AHRIRef": "AHRIREF",
+        "M1HCap5": "M1HCAP5",
+        "M1HCap17": "M1HCAP17",
+        "H1FullHCap47": "H1FULLHCAP47",
+        "coolingCapacity": "COOLING CAPACITY",
+        "aFullCoolingCapacity": "AFULL COOLING CAPACITY",
+        "AFUE": "AFUE",        
+        "fuelTypes": "FUEL TYPES",
+        "inputBTUH": "INPUT BTUH",
+        "mobileHome": "MOBILE HOME",
+        "outputBTUH": "OUTPUT BTUH",
+        "configurations": "CONFIGURATIONS"        
+}
