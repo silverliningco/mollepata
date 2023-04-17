@@ -7,11 +7,14 @@
     margin: 1rem 0;
 }
 .rc-report .title{
-    text-align: center;
+    text-align: start;
     border: 1px solid #f3f3f3;
     border-left: none;
     border-right: none;
     padding: 2rem 1rem;
+}
+.logo{
+    text-align: end;
 }
 .model-numbers,.ahri-ratings, .elegible-rebates{
     padding: 1rem;

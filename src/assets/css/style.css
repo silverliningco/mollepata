@@ -236,6 +236,7 @@ table {
   width: 100%;
   display: table;
   border: 1px solid #DEE2E6;
+  font-size: 14px;
 }
 table thead th {
   vertical-align: bottom;
@@ -244,8 +245,8 @@ table thead th {
 }
 table th, table td {
   text-align: left;
-  padding-top: 1.1rem;
-  padding-bottom: 1rem;
+  padding-top: .25rem;
+  padding-bottom: .25rem;
 }
 table td {
   font-family: 'Bitter', serif;
@@ -321,7 +322,7 @@ table tbody tr:nth-of-type(even) {
 }
 
 .rc-list-in-table{
-  padding-inline-start: 12px;
+  padding-inline-start: 20px;
 }
 /* End Table responsive */
 
