@@ -134,7 +134,7 @@ export class CardComponent implements OnInit {
 
   //  Return systems that apply user selections.
   optionsToUpdate() {
-    
+
     let myCombinedCombinations: Result[] = [];
     const myUserSelections: string[] = this.Object.keys(this.card.userSelections);
 
@@ -240,10 +240,29 @@ export class CardComponent implements OnInit {
     this.updateSelections(myUnitType);
   }
 
+
+  findObjectsWithComponents(arr: any[], components: any[]): Result[] {
+    const result: Result[] = [];
+    arr.forEach(obj => {
+      if (obj.components && Array.isArray(obj.components)) {
+        const objComponents = obj.components;
+        if (objComponents.length === components.length && objComponents.every((component:any, i:number) => {
+          const otherComponent = components[i];
+          return Object.keys(component).every(key => {
+            return component[key] === otherComponent[key];
+          });
+        })) {
+          result.push(obj);
+        }
+      }
+    });
+    return result;
+  }
+
   filterByConfigurationOptions(myUnitID: string, myUnitType: string) {
     
     // Systems matching user selections
-    let myOptionsToUpdate = this.optionsToUpdate();
+    let myOptionsToUpdate = this.findObjectsWithComponents(this.mySystems, this.card.result!.components)
 
     //search by configurationOptions
     const findResult = myOptionsToUpdate.find(result =>
