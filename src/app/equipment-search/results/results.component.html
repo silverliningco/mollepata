@@ -22,8 +22,7 @@
         </form>
 
         <form [formGroup]="eligibleRebatesForm" class="rc-mt-medium">
-          <h5 class="rc-filter-group-title">ELIGIBLE REBATE</h5>
-          
+          <h5 class="rc-filter-group-title" style="display: inline-block;" matTooltip="Check rebate(s) to show only results that qualify for the selected rebate(s).  Not all rebates apply to every search.  Not all customers are eligible for all rebates, refer to rebate forms for details and eligibility requirements." matTooltipPosition="right">ELIGIBLE REBATE</h5>
           <section formArrayName="eligibleRebates">
               <ng-container *ngFor="let rebate of eligibleRebates.controls;let i=index" [formGroupName]="i">
                 <mat-checkbox  formControlName="isActive" (change)="onChangeEligibleRebate()">
