@@ -82,14 +82,14 @@ export class HVACSystemSearchComponent implements OnInit {
   }
 
   // Open dialog 
-  openDialog(method: string, i?: number): void {
+  openDialog(method: string, unitType: string, i?: number): void {
 
     let myData = {}
 
     if (method == "edit" && i !== undefined) {
-      myData = { method: method, index: i, data: this.systems[i], systemDesign: this.myData.systemDesign || []}
-    }else{ 
-      myData = { method: method, systemDesign: this.myData.systemDesign || []}
+      myData = { method: method, unitType: unitType, index: i, data: this.systems[i], systemDesign: this.myData.systemDesign || []}
+    }else { 
+      myData = { method: method, unitType: unitType, systemDesign: this.myData.systemDesign || []}
     }
 
     const dialogRef = this.dialog.open(ModalSystemComponent, {

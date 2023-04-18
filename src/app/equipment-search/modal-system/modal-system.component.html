@@ -1,16 +1,12 @@
-<h1 mat-dialog-title>{{this.myData.method| uppercase}} SYSTEM DESIGN</h1>
+<h1 mat-dialog-title>{{this.myData.method +' '+ this.myData.unitType | uppercase}}</h1>
    
     <form [formGroup]="systemForm">
-        <div>
-            <mat-form-field appearance="fill">
-                <mat-label>Unit Type</mat-label>
-                <mat-select formControlName="unitType">              
-                    <mat-option radioGroup="sGroup" value="Outdoor unit" *ngIf="!hasOutdoors() || this.myData.data?.unitType == 'Outdoor unit'">Outdoor unit</mat-option>
-                    <mat-option radioGroup="sGroup" value="Indoor unit" *ngIf="(hasOutdoors() && this.myData.data?.unitType == 'Indoor unit') || (hasOutdoors() && !this.myData.data && !isEvaporatorCoil())">Indoor unit</mat-option>
-                    <mat-option radioGroup="sGroup" value="Furnace" *ngIf="(isEvaporatorCoil() && this.myData.data?.unitType == 'Furnace') || (isEvaporatorCoil() && !this.myData.data)">Furnace</mat-option>
-                </mat-select> 
-            </mat-form-field>   
-        </div>
+        <!-- unit type is hidden because, we set the unit type in toolbox-->
+        <mat-select formControlName="unitType" class="cdk-visually-hidden">              
+            <mat-option radioGroup="sGroup" value="Outdoor unit">Outdoor unit</mat-option>
+            <mat-option radioGroup="sGroup" value="Indoor unit">Indoor unit</mat-option>
+            <mat-option radioGroup="sGroup" value="Furnace">Furnace</mat-option>
+        </mat-select> 
 
         <div *ngIf="systemForm.get('unitType')!.value == 'Outdoor unit'">
             <mat-form-field appearance="fill">

@@ -27,12 +27,13 @@ export class ModalSystemComponent implements OnInit {
       qty: [null, Validators.required],       
     });
 
-    if(this.myData.method == "edit"){
+    if(this.myData.method == "edit") {
       this.systemForm.patchValue(this.myData.data);
+    } else {
+      this.systemForm.controls["unitType"].patchValue(this.myData.unitType);
     }
 
   }
-
   
   isSplitSystem(){
     return this.myData.systemDesign.some((system:any) => system.systemType === "Split system");
@@ -40,14 +41,6 @@ export class ModalSystemComponent implements OnInit {
   } 
   isMiniSplit(){
     return this.myData.systemDesign.some((system:any) => system.systemType === "Mini-Split");
-  }
-
-  hasOutdoors(){
-    return this.myData.systemDesign.some((system:any) => system.unitType === "Outdoor unit");
-  }
-
-  isEvaporatorCoil(){
-    return this.myData.systemDesign.some((system:any) => system.systemType === "Evaporator Coil");
   }
 
   validateResults(mySystemDesign: any[], myFormValue: any) :boolean {
