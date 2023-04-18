@@ -3,7 +3,7 @@
 .rc-hvac-unit-add, 
 .rc-hvac-unit-card{
   position: relative;
-  padding: 50px;
+  padding: 15px;
   background-color: white;
   border: 1px solid #D7D7D7;
   border-radius: 4px;
@@ -38,9 +38,6 @@
   transition: color 1s; 
 }
 /* HVAC unit list in cards */
-.rc-hvac-unit-card{
-  padding: 30px;
-}
 .rc-hvac-unit-card .icon {
   text-align: center;
 }
@@ -71,9 +68,37 @@
   color: black;
 }
 .rc-hvac-unit-card:hover img.no-active,
-.rc-hvac-unit-card img.active{
+.rc-hvac-unit-card img.active,
+.toolbox-btn button:hover img.no-active,
+.toolbox-btn img.active{
   display: none;
 }
-.rc-hvac-unit-card:hover img.active{
+.rc-hvac-unit-card:hover img.active,
+.toolbox-btn button:hover img.active{
   display: inline-block;
+}
+/*Float button*/
+.rc-toolbox{
+  text-align: center;
+  padding: .5rem 1rem 1rem 1rem;
+  display: inline-block;
+  border-radius: 3px;
+  background-color: #f2f2f2;;
+}
+.rc-toolbox .title{
+  line-height: 1rem;
+  margin-bottom: 0.75rem;
+  color: var(--rc-primary-dark-color);
+}
+.toolbox-btn button{
+  margin-bottom: .75rem;
+  border:none;
+  background-color: #fafafa;
+  border-radius: 4px;
+}
+.toolbox-btn img{
+  width: 58px;
+}
+.toolbox-btn button:hover{
+  box-shadow: 0px 0px 4px 1px #d7d7d7;;
 }

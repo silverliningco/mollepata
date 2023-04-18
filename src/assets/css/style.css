@@ -95,10 +95,10 @@ h1, h2, h3, h4, h5, .bitter-font {
 /* Alerts */
 .rc-alert{
   position: relative;
-  padding: 1.25rem 1.5rem;
   margin-bottom: 1rem;
   border: 0;
   border-radius: 0.5rem;
+  padding: 1rem;
 }
 .rc-alert p{
   margin-left: 1rem;
@@ -110,9 +110,17 @@ h1, h2, h3, h4, h5, .bitter-font {
 .rc-alert mat-icon{
   position: absolute;
   z-index: 0;
-  font-size: 3rem;
+  font-size: 2rem;
   top: .5rem;
   left: .5rem;
+}
+.rc-alert.warning {
+  color: #640;
+  background-color: #fec;
+  border-color: #FFE5B3;
+}
+.rc-alert.warning mat-icon {
+  color: rgba(102, 68, 0, 0.22);
 }
 /* End Alerts*/
 
