@@ -115,7 +115,7 @@ export class HVACSystemSearchComponent implements OnInit {
         }
       }
 
-      this.myData.systemDesign = this.systems;
+      this.myData.systemDesign = [...this.systems];
     });
   }
 
@@ -123,7 +123,7 @@ export class HVACSystemSearchComponent implements OnInit {
   deleteSystem(i: number,e: Event){
     if(confirm("Are you sure that you want to delete the system?")) {
         this.systems.splice(i, 1);
-        this.myData.systemDesign = this.systems;
+        this.myData.systemDesign = [...this.systems];
     }
     e.stopPropagation()
   }
