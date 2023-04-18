@@ -60,10 +60,10 @@
           <div fxFlex="50" fxFlex.sm="100" fxFlex.md="50" fxFlex.xs="100" *ngFor="let ratings of card.result!.AHRIRatings" class="">
             <div class="ahri-ratings">
                 <div fxLayout="row column" *ngFor="let key of Object.keys(ratings)" class="item-rating">
-                  <div *ngIf="ratings[key]">
+                  <ng-container *ngIf="ratings[key]">
                     <span fxFlex="60" fxFlex.xs="100" class="key">{{key | prettify}}</span>                  
                     <span fxFlex="40" fxFlex.xs="100" class="rating">{{ratings[key]}}</span>
-                  </div>
+                  </ng-container>
                 </div>
             </div>
           </div>        
