@@ -80,18 +80,21 @@
         <!--Title-->
         <h2 class="rc-main-title">System design</h2>
 
-        <div fxLayout="row column" fxLayoutAlign="center stretch" fxLayoutGap="8px grid" style="position: relative;">
-            
-            <div fxFlex="90" fxFlex.sm="90" fxFlex.xs="100">
+        <div fxLayout="row column" fxLayoutAlign="center stretch" fxLayoutGap="8px grid" class="rc-system-design">
+            <div fxFlex="90" fxFlex.sm="90" fxFlex.xs="90" class="list">
+                <!-- note if no system layout list exists -->
                 <div fxLayout fxLayoutAlign="center stretch" fxLayoutGap="8px grid">
-                   
-                    <div fxLayout fxLayoutAlign="center" fxLayoutGap="16px" fxLayout.sm="column" fxLayout.xs="column"  *ngIf="systems.length == 0">
+                    <div fxLayout="row column" fxLayoutAlign="center" fxLayoutGap="16px" *ngIf="systems.length == 0">
                         <div fxFlex="100" fxFlex.sm="100" fxFlex.xs="100" class="rc-note">
                             <p class="rc-small"> <b>Note: </b> At least one system is required to perform the search.</p>
                         </div>
                     </div>
-                    <div *ngFor="let sys of systems; index as i"  fxFlex="20" fxLayout="column" fxLayoutAlign="center stretch" fxFlex.xs="100" fxFlex.sm="50" fxFlex.md="25">
-                        <div class="rc-hvac-unit-card" (click)="openDialog('edit',sys.unitType, i)">
+                </div>
+                <!-- system layout list -->
+                <div fxLayout="row column" fxLayoutAlign="center stretch" fxLayoutGap="16px grid">
+                    <div *ngFor="let sys of systems; index as i" (click)="openDialog('edit',sys.unitType, i)"
+                        fxFlex="20" fxFlex.xs="100" fxFlex.sm="50" fxFlex.md="20" >
+                        <div class="rc-hvac-unit-card">
                             <div class="icon" *ngFor="let key of Object.keys(sys)">
                                 <div *ngIf="sys[key]=='Indoor unit'">
                                     <img src="../../../../assets/images/icons/indoor_icon.png" alt="" class="no-active unchecked">
@@ -112,37 +115,40 @@
                                     <p>{{sys[key]}}</p>
                                 </div>
                             </div>
-                            <div class="delete" (click)="deleteSystem(i, $event)"  matTooltip="Delete System " matTooltipPosition="right">
+                            <div class="delete" (click)="deleteSystem(i, $event)" matTooltip="Delete System" matTooltipPosition="right">
                                 <mat-icon>close</mat-icon>
                             </div>
                         </div>
-                    </div>
+                      </div>
+
                 </div>
             </div>
-            <div fxFlex="10" fxFlex.sm="10" fxFlex.xs="100" *ngIf="!validateResults()">
+            <div fxFlex="10" fxFlex.sm="90" fxFlex.xs="90" *ngIf="!validateResults()" fxLayoutAlign="center" class="toolbox">
                 <!--Add new-->
                 <div class="rc-toolbox">
                     <h5 class="title">ADD SYSTEM DESIGN</h5>
-                    <div class="toolbox-btn">
-                        <button (click)="openDialog('add', 'Outdoor unit')">
-                            <img src="../../../../assets/images/icons/outdoor_icon.png" alt="" class="no-active">
-                            <img src="../../../../assets/images/icons/outdoor_icon_active.png" alt="" class="active">
-                            <span class="rc-small">Outdoor Unit</span>
-                        </button>
-                    </div>
-                    <div class="toolbox-btn">
-                        <button (click)="openDialog('add', 'Indoor unit')">
-                            <img src="../../../../assets/images/icons/indoor_icon.png" alt="" class="no-active">
-                            <img src="../../../../assets/images/icons/indoor_icon_active.png" alt="" class="active">
-                            <span class="rc-small">Indoor Unit</span>
-                        </button>
-                    </div>
-                    <div class="toolbox-btn">
-                        <button (click)="openDialog('add', 'Furnace')">
-                            <img src="../../../../assets/images/icons/furnace_icon.png" alt="" class="no-active">
-                            <img src="../../../../assets/images/icons/furnace_icon_active.png" alt="" class="active">
-                            <span class="rc-small">Furnace Unit</span>
-                        </button>
+                    <div fxLayout="row column" fxLayoutAlign="center stretch" fxLayoutGap="12px grid">
+                        <div class="toolbox-btn" matTooltip="Add Outdoor Unit" matTooltipPosition="right">
+                            <button (click)="openDialog('add', 'Outdoor unit')">
+                                <img src="../../../../assets/images/icons/outdoor_icon.png" alt="" class="no-active">
+                                <img src="../../../../assets/images/icons/outdoor_icon_active.png" alt="" class="active">
+                                <h5 class="rc-small">Outdoor Unit</h5>
+                            </button>
+                        </div>
+                        <div class="toolbox-btn" matTooltip="Add Indoor Unit" matTooltipPosition="right">
+                            <button (click)="openDialog('add', 'Indoor unit')">
+                                <img src="../../../../assets/images/icons/indoor_icon.png" alt="" class="no-active">
+                                <img src="../../../../assets/images/icons/indoor_icon_active.png" alt="" class="active">
+                                <h5 class="rc-small">Indoor Unit</h5>
+                            </button>
+                        </div>
+                        <div class="toolbox-btn" matTooltip="Add Furnace Unit" matTooltipPosition="right">
+                            <button (click)="openDialog('add', 'Furnace')">
+                                <img src="../../../../assets/images/icons/furnace_icon.png" alt="" class="no-active">
+                                <img src="../../../../assets/images/icons/furnace_icon_active.png" alt="" class="active">
+                                <h5 class="rc-small">Furnace Unit</h5>
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
