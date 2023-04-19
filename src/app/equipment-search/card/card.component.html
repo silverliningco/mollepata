@@ -75,8 +75,8 @@
           <ul class="rc-unlisted list">
             <li *ngFor="let rebate of card.result!.rebateEligibility">              
               <span class="title"> 
-                <mat-icon class="available" *ngIf="rebate.isEligibile">check_circle</mat-icon>
-                <mat-icon *ngIf="!rebate.isEligibile">cancel</mat-icon>
+                <mat-icon class="available" *ngIf="rebate.isEligible">check_circle</mat-icon>
+                <mat-icon *ngIf="!rebate.isEligible">cancel</mat-icon>
                 {{rebate.title}}
               </span>
               <span class="description">{{rebate.description}}</span>

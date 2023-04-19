@@ -141,7 +141,7 @@ export class ResultsComponent implements OnInit {
   filterEligibleSystems(selectedRebates: string[]) {
     return this.mySearchResponse.filter((system: any) =>
       system.rebateEligibility.some((rebate: any) =>
-        selectedRebates.includes(rebate.title) && rebate.isEligible == false
+        selectedRebates.includes(rebate.title) && rebate.isEligible
       )
     );
   }

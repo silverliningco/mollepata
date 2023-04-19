@@ -45,14 +45,15 @@
     <!-- Aviable Rebates -->  
     <div fxLayout="row column" fxLayoutAlign="space-around center" class="elegible-rebates">
       <div fxFlex="100">
-        <h4 class="subtitle">ELIGIBLE REBATES</h4>
+        <h4 class="subtitle">REBATE ELIGIBILITY</h4>
       </div>
       <div fxFlex="100" class="rebate">
         <div>
           <ul>
             <li *ngFor="let rebate of result!.rebateEligibility">
               <span>{{rebate.title}}</span>
-              <span class="description">{{rebate.description}}</span>
+              <span class="description">{{rebate.description}} [<span *ngIf="rebate.isEligible else not_eligible">ELIGIBLE</span> <ng-template #not_eligible>NOT ELIGIBLE</ng-template>]
+              </span>
             </li>
           </ul>
         </div>
