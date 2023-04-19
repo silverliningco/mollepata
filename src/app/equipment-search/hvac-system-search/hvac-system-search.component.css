@@ -106,6 +106,9 @@
   margin-bottom: 0.75rem;
   color: var(--rc-primary-dark-color);
 }
+.toolbox-btn h5{
+  color: var(--rc-text-color);
+}
 .toolbox-btn button{
   border:none;
   background-color: #fafafa;
