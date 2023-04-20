@@ -147,7 +147,7 @@ export class ResultsComponent implements OnInit {
   }
   
   // Function to handle changes to the eligible rebate list
-  onChangeEligibleRebate() {
+  filterSystemsbyEligibleRebate() {
     // Get a list of selected rebates
     const selectedRebates = this.getSelectedRebates();
   
@@ -171,11 +171,10 @@ export class ResultsComponent implements OnInit {
         // Render eligible rebates.
         this.loadEligibileRebates(this.mySearchResponse);
 
-        // remove systems that doesn't apply eligible rebates?
-        // this.onChangeEligibleRebate()
+        // Remove systems that doesn't apply to eligible rebates
+        // And group results by outdoor unit and asign to results variable.
+         this.filterSystemsbyEligibleRebate()
 
-        // Group results by outdoor unit and asign to results variable.
-        this.myResults = this.groupByOutdoorUnit(resp);
       },
       error: (e) => alert(e.error)
     })

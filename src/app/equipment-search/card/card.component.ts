@@ -14,7 +14,6 @@ export class CardComponent implements OnInit {
 
 
   @Input() mySystems!: Result[];
-  @Input() myEligibleRebates !: any;
   card: Card = {}; 
 
   firstSelection!: string;

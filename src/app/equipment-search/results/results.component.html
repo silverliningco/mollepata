@@ -25,7 +25,7 @@
           <h5 class="rc-filter-group-title" style="display: inline-block;" matTooltip="Check rebate(s) to show only results that qualify for the selected rebate(s).  Not all rebates apply to every search.  Not all customers are eligible for all rebates, refer to rebate forms for details and eligibility requirements." matTooltipPosition="right">ELIGIBLE REBATE</h5>
           <section formArrayName="eligibleRebates">
               <ng-container *ngFor="let rebate of eligibleRebates.controls;let i=index" [formGroupName]="i">
-                <mat-checkbox  formControlName="isActive" (change)="onChangeEligibleRebate()">
+                <mat-checkbox  formControlName="isActive" (change)="filterSystemsbyEligibleRebate()">
                   {{rebate.get('name')!.value}}
                 </mat-checkbox>
               </ng-container>
@@ -39,7 +39,7 @@
   <!-- Search results -->
   <div fxFlex="70" fxFlex.xs="100" fxFlex.sm="100">
     <!-- Search results grouped by outdoor unit in "card" type displays. -->
-    <app-card *ngFor="let myResult of myResults" [mySystems]="myResult" [myEligibleRebates]="this.eligibleRebatesForm.value">
+    <app-card *ngFor="let myResult of myResults" [mySystems]="myResult">
     </app-card>
 
     <div *ngIf="myResults?.length == 0"> 
