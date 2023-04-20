@@ -5,9 +5,13 @@ import prettifyData from '../../../assets/json/prettify_data.json';
   name: 'prettify'
 })
 export class PrettifyPipe implements PipeTransform {
-
-  transform(value: string): string { 
-    return prettifyData[value as keyof typeof prettifyData];
+  transform(value: string): string {     
+    const myPrettifyData = prettifyData[value as keyof typeof prettifyData]; 
+    if(myPrettifyData) {
+      return myPrettifyData;
+    } 
+    else {
+      return value;
+    }
   }
-
 }
