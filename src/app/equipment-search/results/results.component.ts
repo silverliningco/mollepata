@@ -1,8 +1,6 @@
 import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
-
 import { EquipmentSearch } from '../interfaces/equipment-search.interface';
-
 import { EndpointsService } from '../services/endpoints.service';
 
 @Component({
@@ -124,7 +122,7 @@ export class ResultsComponent implements OnInit {
     this.eligibleRebates.clear();
     rebateTitles.forEach(value => {
       this.eligibleRebates.push(this.fb.group({
-        isActive: true,
+        isActive: false,
         name: value
       }));
     });
@@ -137,15 +135,24 @@ export class ResultsComponent implements OnInit {
       .map((rebate: any) => rebate.name);
   }
   
-  // Function to filter the eligible systems for the selected rebates
-  filterEligibleSystems(selectedRebates: string[]) {
-    return this.mySearchResponse.filter((system: any) =>
-      system.rebateEligibility.some((rebate: any) =>
-        selectedRebates.includes(rebate.title) && rebate.isEligible
-      )
-    );
+  // Filters eligible systems for a set of selected rebates.
+  filterEligibleSystems(selectedRebates: string[]): any[] {
+    // Filter eligible systems
+    return this.mySearchResponse.filter((system: any) => {
+      // Check if selected rebates array is empty
+      if (selectedRebates.length === 0) {
+        // If empty, select all systems
+        return true;
+      }
+      // Filter eligible rebates for the system
+      const eligibleRebates = system.rebateEligibility.filter(
+        (rebate: any) => selectedRebates.includes(rebate.title) && rebate.isEligible
+      );
+      // Check if number of eligible rebates equals number of selected rebates
+      return eligibleRebates.length === selectedRebates.length;
+    });
   }
-  
+
   // Function to handle changes to the eligible rebate list
   filterSystemsbyEligibleRebate() {
     // Get a list of selected rebates
@@ -170,11 +177,10 @@ export class ResultsComponent implements OnInit {
 
         // Render eligible rebates.
         this.loadEligibileRebates(this.mySearchResponse);
-
-        // Remove systems that doesn't apply to eligible rebates
-        // And group results by outdoor unit and asign to results variable.
-         this.filterSystemsbyEligibleRebate()
-
+      
+        // Group the systems filtered by outdoor unit 
+        //We don't filter systems by eligible rebates here, because initially we doesn't select any rebate
+        this.myResults = this.groupByOutdoorUnit(this.mySearchResponse);
       },
       error: (e) => alert(e.error)
     })
