@@ -12,6 +12,7 @@ import { TableComponent } from '../table/table.component';
 
 export class CardComponent implements OnInit {
 
+  @Input() selectedRebates!: String[];
 
   @Input() mySystems!: Result[];
   card: Card = {}; 

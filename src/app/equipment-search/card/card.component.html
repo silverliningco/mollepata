@@ -77,7 +77,7 @@
               <span class="title"> 
                 <mat-icon class="available" *ngIf="rebate.isEligible">check_circle</mat-icon>
                 <mat-icon *ngIf="!rebate.isEligible">cancel</mat-icon>
-                {{rebate.title}}
+                <span [ngClass]="selectedRebates.includes(rebate.title) ? 'bold' : ''">{{rebate.title}}</span>
               </span>
               <span class="description">{{rebate.description}}</span>
             </li>

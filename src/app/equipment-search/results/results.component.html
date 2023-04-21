@@ -39,7 +39,7 @@
   <!-- Search results -->
   <div fxFlex="70" fxFlex.xs="100" fxFlex.sm="100">
     <!-- Search results grouped by outdoor unit in "card" type displays. -->
-    <app-card *ngFor="let myResult of myResults" [mySystems]="myResult">
+    <app-card *ngFor="let myResult of myResults" [mySystems]="myResult" [selectedRebates]="this.getSelectedRebates()">
     </app-card>
 
     <div *ngIf="myResults?.length == 0"> 

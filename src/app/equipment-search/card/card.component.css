@@ -224,3 +224,8 @@
 ::ng-deep .rc-select-multiline-option .mat-select-value{
   white-space: normal;
 }
+/* Custom class to highlight rebate*/
+
+::ng-deep .results .rc-card .bold{
+  font-weight: bold;
+}
