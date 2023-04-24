@@ -48,3 +48,11 @@ result-filters
     font-weight: bold;
     font-size: 22px;
 }
+.rc-info-icon{
+    font-size: 14px;
+    height: 14px;
+    width: 14px;
+    margin-left: 5px;
+    color: #7a7a7a;
+    
+}

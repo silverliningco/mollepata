@@ -154,11 +154,11 @@
     font-size: 16px;
     height: 16px;
     width: 20px;
-    color: #c5c5c5;
+    color: red;
     margin: 5px 5px 0 0;
 }
 .rc-rebates .list .mat-icon.available{
-    color: var(--rc-primary-color);
+    color: #13c013;
 }
 .rc-rebates .list li{
   margin-bottom: .5rem;  

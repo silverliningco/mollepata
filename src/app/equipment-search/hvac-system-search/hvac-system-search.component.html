@@ -1,5 +1,6 @@
 <!--- Begin Material Stepper progress bar content. -->
-<mat-stepper #stepper [orientation]="(stepperOrientation | async)!" linear="true" (selectionChange)="tabChange($event)">
+<!--<mat-stepper #stepper [orientation]="(stepperOrientation | async)!" linear="true" (selectionChange)="tabChange($event)">-->
+    <mat-stepper #stepper [orientation]="(stepperOrientation | async)!" (selectionChange)="tabChange($event)">
 
     <!--- Step 1: Location. -->
     <mat-step [completed]="MySubmitValidation['location']">
@@ -75,10 +76,10 @@
 
     <!--- Step 4: System design. -->
     <mat-step [completed]="this.systems.length > 0">
-        <ng-template matStepLabel>System Design</ng-template>
+        <ng-template matStepLabel>HVAC System Design</ng-template>
         
         <!--Title-->
-        <h2 class="rc-main-title">System design</h2>
+        <h2 class="rc-main-title">HVAC System Design</h2>
 
         <div fxLayout="row column" fxLayoutAlign="center stretch" fxLayoutGap="8px grid" class="rc-system-design">
             <div fxFlex="90" fxFlex.sm="90" fxFlex.xs="85" class="list">
@@ -125,8 +126,8 @@
             </div>
             <div fxFlex="10" fxFlex.sm="90" fxFlex.xs="85" *ngIf="!validateResults()" fxLayoutAlign="center" class="toolbox">
                 <!--Add new-->
-                <div class="rc-toolbox">
-                    <h5 class="title">ADD SYSTEM DESIGN</h5>
+                <div class="rc-toolbox" matTooltip="Click the component icons on the RH side of the screen to start designing your HVAC system. At a minimum an outdoor unit selection is required." matTooltipPosition="right">
+                    <h5 class="title">HVAC system components</h5>
                     <div fxLayout="row column" fxLayoutAlign="center stretch" fxLayoutGap="12px grid">
                         <div class="toolbox-btn" matTooltip="Add Outdoor Unit" matTooltipPosition="right">
                             <button (click)="openDialog('add', 'Outdoor unit')">
@@ -142,11 +143,11 @@
                                 <h5 class="rc-small">Indoor Unit</h5>
                             </button>
                         </div>
-                        <div class="toolbox-btn" matTooltip="Add Furnace Unit" matTooltipPosition="right">
+                        <div class="toolbox-btn" matTooltip="Add Furnace" matTooltipPosition="right">
                             <button (click)="openDialog('add', 'Furnace')">
                                 <img src="../../../../assets/images/icons/furnace_icon.png" alt="" class="no-active">
                                 <img src="../../../../assets/images/icons/furnace_icon_active.png" alt="" class="active">
-                                <h5 class="rc-small">Furnace Unit</h5>
+                                <h5 class="rc-small">Furnace</h5>
                             </button>
                         </div>
                     </div>
