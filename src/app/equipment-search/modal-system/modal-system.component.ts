@@ -11,6 +11,9 @@ export class ModalSystemComponent implements OnInit {
 
   systemForm !: FormGroup;  
 
+  outdoorSystemTypes : Array<string> = ["Split system", "Mini-Split", "Small Packaged Unit"];
+  indoorSystemTypes : Array<string> = ["Fan Coil", "Evaporator Coil", "Mini-Split indoor"];
+
   constructor(
     private formBuilder : FormBuilder,
     @Inject(MAT_DIALOG_DATA) public myData: any,
@@ -26,6 +29,9 @@ export class ModalSystemComponent implements OnInit {
       size: [null, Validators.required],
       qty: [null, Validators.required],       
     });
+ 
+    // Populate dynamic systemTypes for outdoor and indoor units.
+    this.populateSystemTypes();
 
     if(this.myData.method == "edit") {
       this.systemForm.patchValue(this.myData.data);
@@ -35,12 +41,32 @@ export class ModalSystemComponent implements OnInit {
 
   }
   
-  isSplitSystem(){
-    return this.myData.systemDesign.some((system:any) => system.systemType === "Split system");
+  populateSystemTypes() {
     
-  } 
-  isMiniSplit(){
-    return this.myData.systemDesign.some((system:any) => system.systemType === "Mini-Split");
+    const someMiniSplitIndoor = this.myData.payload.systemDesign?.some((system:any) => system.systemType === "Mini-Split indoor");
+    if(someMiniSplitIndoor) {
+      this.outdoorSystemTypes = ["Mini-Split"];
+      this.indoorSystemTypes = ["Mini-Split indoor"];
+    } 
+
+    const someFanCoilOrEvaporatorIndoor = this.myData.payload.systemDesign?.some((system:any) => system.systemType === "Fan Coil" || system.systemType === "Evaporator Coil");
+    if(someFanCoilOrEvaporatorIndoor) {
+      this.outdoorSystemTypes = ["Split system", "Mini-Split"];
+    }
+
+    const someSplitSystemsOutdoor = this.myData.payload.systemDesign?.some((system:any) => system.systemType === "Split system");
+    if(someSplitSystemsOutdoor) {
+      this.indoorSystemTypes = ["Fan Coil", "Evaporator Coil"];
+    }
+
+    if(this.myData.payload.dwellingInfo?.fuelSource == 'None'){
+      this.indoorSystemTypes = ["Fan Coil", "Mini-Split indoor"];
+    }
+
+    const someFurnace = this.myData.payload.systemDesign?.some((system:any) => system.unitType === "Furnace");
+    if(someFurnace) {
+      this.indoorSystemTypes = ["Evaporator Coil"];
+    }
   }
 
   validateResults(mySystemDesign: any[], myFormValue: any) :boolean {
@@ -49,18 +75,11 @@ export class ModalSystemComponent implements OnInit {
     if(myFormValue.systemType == "Small Packaged Unit"){
       
       // you can only have one small packaged unit
-      if(mySystemDesign.length >= 1 && this.myData.method == "add" || mySystemDesign.length > 1) {
-        alert("You can only have one system for this option.")
-        return false;
-      }
-    }
-  
-    // if the Outdoor unit is a Split system and the Indoor unit is a Fan Coil, no more systems can be added.
-    if(myFormValue.systemType == "Fan Coil"){
-      // you can only have one small packaged unit
-      if(mySystemDesign.length >= 2 && this.myData.method == "add" || mySystemDesign.length >2) {
-        alert("You can only have 2 systems for this option.")
-        return false;
+      if(mySystemDesign){
+        if(mySystemDesign.length >= 1 && this.myData.method == "add" || mySystemDesign.length > 1) {
+          alert("You can only have one system for this option.")
+          return false;
+        }
       }
     }
    
@@ -91,7 +110,7 @@ export class ModalSystemComponent implements OnInit {
     }
 
     // Validate modal
-    if(this.validateResults(this.myData.systemDesign, myFormValue)) {
+    if(this.validateResults(this.myData.payload.systemDesign, myFormValue)) {
 
       this.dialogRef.close({method: this.myData.method, index: this.myData.index, data: myFormValue })
 

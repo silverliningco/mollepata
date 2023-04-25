@@ -11,10 +11,8 @@
         <div *ngIf="systemForm.get('unitType')!.value == 'Outdoor unit'">
             <mat-form-field appearance="fill">
                 <mat-label>System Type</mat-label>
-                <mat-select formControlName="systemType">                 
-                    <mat-option radioGroup="sGroup" value="Split system">Split system</mat-option>
-                    <mat-option radioGroup="sGroup" value="Mini-Split">Mini-Split</mat-option>
-                    <mat-option radioGroup="sGroup" value="Small Packaged Unit">Small Packaged Unit</mat-option>
+                <mat-select formControlName="systemType">     
+                    <mat-option *ngFor ="let sysType of outdoorSystemTypes" [value]="sysType" radioGroup="sGroup">{{sysType}}</mat-option>
                 </mat-select> 
             </mat-form-field> 
 
@@ -40,9 +38,7 @@
             <mat-form-field appearance="fill">
                 <mat-label>System Type</mat-label>
                 <mat-select formControlName="systemType">                 
-                    <mat-option radioGroup="sGroup" value="Fan Coil" *ngIf="isSplitSystem()">Fan Coil</mat-option>
-                    <mat-option radioGroup="sGroup" value="Evaporator Coil" *ngIf="isSplitSystem()">Evaporator Coil</mat-option>
-                    <mat-option radioGroup="sGroup" value="Mini-Split indoor" *ngIf="isMiniSplit()">Mini-Split indoor</mat-option>                
+                    <mat-option *ngFor ="let sysType of indoorSystemTypes" [value]="sysType" radioGroup="sGroup">{{sysType}}</mat-option>              
                 </mat-select> 
             </mat-form-field> 
         </div>
@@ -88,8 +84,7 @@
                 <mat-label>System Type</mat-label>
                 <mat-select formControlName="systemType">                 
                     <mat-option radioGroup="sGroup" value="New ECM furnace">New ECM furnace</mat-option>
-                    <mat-option radioGroup="sGroup" value="Existing or non-ECM furnace">Existing or non-ECM furnace</mat-option>
-                    <mat-option radioGroup="sGroup" value="None">None</mat-option>                
+                    <mat-option radioGroup="sGroup" value="Existing or non-ECM furnace">Existing or non-ECM furnace</mat-option>       
                 </mat-select> 
             </mat-form-field> 
         </div>
