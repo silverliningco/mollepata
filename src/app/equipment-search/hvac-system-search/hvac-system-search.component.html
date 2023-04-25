@@ -124,26 +124,26 @@
 
                 </div>
             </div>
-            <div fxFlex="10" fxFlex.sm="90" fxFlex.xs="85" *ngIf="!validateResults()" fxLayoutAlign="center" class="toolbox">
+            <div fxFlex="10" fxFlex.sm="90" fxFlex.xs="85" fxLayoutAlign="center" class="toolbox">
                 <!--Add new-->
-                <div class="rc-toolbox" matTooltip="Click the component icons on the RH side of the screen to start designing your HVAC system. At a minimum an outdoor unit selection is required." matTooltipPosition="right">
-                    <h5 class="title">HVAC system components</h5>
+                <div class="rc-toolbox">
+                    <h5 class="title" matTooltip="Click the component icons on the RH side of the screen to start designing your HVAC system. At a minimum an outdoor unit selection is required." matTooltipPosition="right">HVAC system components</h5>
                     <div fxLayout="row column" fxLayoutAlign="center stretch" fxLayoutGap="12px grid">
-                        <div class="toolbox-btn" matTooltip="Add Outdoor Unit" matTooltipPosition="right">
+                        <div class="toolbox-btn" matTooltip="Add Outdoor Unit" matTooltipPosition="right" [ngClass]="this.toolBoxValidation('Outdoor unit') ? 'disabled' : ''">
                             <button (click)="openDialog('add', 'Outdoor unit')">
                                 <img src="../../../../assets/images/icons/outdoor_icon.png" alt="" class="no-active">
                                 <img src="../../../../assets/images/icons/outdoor_icon_active.png" alt="" class="active">
                                 <h5 class="rc-small">Outdoor Unit</h5>
                             </button>
                         </div>
-                        <div class="toolbox-btn" matTooltip="Add Indoor Unit" matTooltipPosition="right">
+                        <div class="toolbox-btn" matTooltip="Add Indoor Unit" matTooltipPosition="right" [ngClass]="this.toolBoxValidation('Indoor unit') ? 'disabled': ''">
                             <button (click)="openDialog('add', 'Indoor unit')">
                                 <img src="../../../../assets/images/icons/indoor_icon.png" alt="" class="no-active">
                                 <img src="../../../../assets/images/icons/indoor_icon_active.png" alt="" class="active">
                                 <h5 class="rc-small">Indoor Unit</h5>
                             </button>
                         </div>
-                        <div class="toolbox-btn" matTooltip="Add Furnace" matTooltipPosition="right">
+                        <div class="toolbox-btn" matTooltip="Add Furnace" matTooltipPosition="right" [ngClass]="this.myData.dwellingInfo?.fuelSource == 'None' || this.toolBoxValidation('Furnace') ? 'disabled': ''">
                             <button (click)="openDialog('add', 'Furnace')">
                                 <img src="../../../../assets/images/icons/furnace_icon.png" alt="" class="no-active">
                                 <img src="../../../../assets/images/icons/furnace_icon_active.png" alt="" class="active">

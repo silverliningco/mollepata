@@ -87,9 +87,9 @@ export class HVACSystemSearchComponent implements OnInit {
     let myData = {}
 
     if (method == "edit" && i !== undefined) {
-      myData = { method: method, unitType: unitType, index: i, data: this.systems[i], systemDesign: this.myData.systemDesign || []}
+      myData = { method: method, unitType: unitType, index: i, data: this.systems[i], payload: this.myData || []}
     }else { 
-      myData = { method: method, unitType: unitType, systemDesign: this.myData.systemDesign || []}
+      myData = { method: method, unitType: unitType, payload: this.myData || []}
     }
 
     const dialogRef = this.dialog.open(ModalSystemComponent, {
@@ -128,41 +128,59 @@ export class HVACSystemSearchComponent implements OnInit {
     e.stopPropagation()
   }
 
-  validateResults(): boolean {
+  toolBoxValidation(unitType: string): boolean {
+
     if(this.myData.systemDesign) {
+      const hasSmallPackagedUnit = this.myData.systemDesign.some(system => system.systemType === "Small Packaged Unit");
+      switch (unitType) {
+        case "Outdoor unit":
+           
+          const hasOutdoorUnit = this.myData.systemDesign.some(system => system.unitType === "Outdoor unit");
+           
+           if(hasOutdoorUnit){
+            return true;
+           }
+
+          break;
+
+        case "Indoor unit":
+
+          if(hasSmallPackagedUnit){
+           return true;
+          }
+          
+          const hasFanOrEvaporatorCoil = this.myData.systemDesign.some(system => system.systemType === "Fan Coil" || system.systemType === "Evaporator Coil");
+          if(hasFanOrEvaporatorCoil){
+            return true;
+          }
+          
+           // If the Outdoor unit is Mini-Split and the Indoor unit is Mini-Split indoor controlling the sum of qty(=5), hide add button.
+          let sumaDeQuantities = this.myData.systemDesign.reduce((total, objeto) => total + (objeto.qty || 0), 0);
+          if(sumaDeQuantities == 5){
+            return true;
+          }
+          break;
+
+        case "Furnace":
+          
+          if(hasSmallPackagedUnit){
+            return true;
+          }
+           
+          const hasIndoorUnits = this.myData.systemDesign.some(system => system.unitType === "Indoor unit");
+          const hasFurnaces = this.myData.systemDesign.some(system => system.unitType === "Furnace");
+          const equalEvaporatorCoil = this.myData.systemDesign.some(system => system.systemType === "Evaporator Coil" );
+          if(hasIndoorUnits && !equalEvaporatorCoil || hasFurnaces){
+            return true;
+          }
+
+          break;
       
-      // if the Outdoor unit is Small Packaged Unit, no more systems can be added
-      const existsSmallPackagedUnit = this.myData.systemDesign.some(system => system.systemType === "Small Packaged Unit");
-
-      if(existsSmallPackagedUnit) {
-        return true
-      }
-
-      // if the Outdoor unit is a Split system and the Indoor unit is a Fan Coil, no more systems can be added.
-      const isSplitWfanCoil = ["Split system", "Fan Coil"].every((valorSeleccionado) => {
-        return this.myData.systemDesign?.some((system) => system.systemType === valorSeleccionado);
-      });
-
-      if(isSplitWfanCoil) {
-        return true
-      }
-
-       // If the Outdoor unit is Split system, the Indoor unit is Evaporator Coil, then a Furnace is mandatory.
-       const isSplitWEvaporatorCoil = ["Split system", "Evaporator Coil"].every((valorSeleccionado) => {
-         return this.myData.systemDesign?.some((system) => system.systemType === valorSeleccionado);
-       });
- 
-       if(isSplitWEvaporatorCoil && this.myData.systemDesign.some(system => system.unitType === "Furnace")) {
-         return true
-       }
-
-       // If the Outdoor unit is Mini-Split and the Indoor unit is Mini-Split indoor controlling the sum of qty(=5), hide add button.
-       let sumaDeQuantities = this.myData.systemDesign.reduce((total, objeto) => total + (objeto.qty || 0), 0);
-       if(sumaDeQuantities == 5){
-        return true;
+        default:
+          break;
       }
     }
-      
+    
     return false;
   }
 
