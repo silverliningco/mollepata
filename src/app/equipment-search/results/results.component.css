@@ -48,11 +48,66 @@ result-filters
     font-weight: bold;
     font-size: 22px;
 }
-.rc-info-icon{
-    font-size: 14px;
+.title-info-icon{
+    display: inline-flex;
+    justify-items: center;
+    align-items: center;
+}
+.title-info-icon .mat-icon{
+    font-size: 12px;
     height: 14px;
     width: 14px;
     margin-left: 5px;
     color: #7a7a7a;
     
 }
+
+
+
+
+
+
+
+
+
+
+
+
+/*----------------------------*/
+.rc-rebates {
+    padding: .5rem;
+  }
+  .rc-rebates .list{
+    padding: 5px;
+    border-radius: 4px;
+    border: 1px solid #f8f8f8;
+    background-color: #fbfbfb;
+    font-size: 12px;  
+    line-height: 14px;
+  }
+  .rc-rebates .list .mat-icon{
+      font-size: 16px;
+      height: 16px;
+      width: 20px;
+      color: red;
+      margin: 5px 5px 0 0;
+  }
+  .rc-rebates .list .mat-icon.available{
+      color: #13c013;
+  }
+  .rc-rebates .list li{
+    margin-bottom: .5rem;  
+  }
+  .rc-rebates .list span.title{
+    font-weight: 500;
+    padding-right: 5px;
+    display: flex;
+    align-items: start;
+  }
+  .rc-rebates .list span.description{
+    font-size: 11px;
+    display: block;
+    padding-left: 25px;
+    line-height: 1rem;
+    color: #999999;
+  }

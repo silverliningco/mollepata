@@ -111,24 +111,63 @@
   }
 }
 ::ng-deep .results .rc-card .mat-card-content .ahri-ratings{
-  padding: .5rem;
-  height: 90%;  
   font-size: 12px;
   line-height: 20px;
+  border: 1px solid #d5d5d5;
 }
 ::ng-deep .results .rc-card .mat-card-content .ahri-ratings .item-rating{
   padding: 2px;
-}
-::ng-deep .results .rc-card .mat-card-content .ahri-ratings .item-rating:nth-child(odd){
-  background-color: #fbfbfba3;
 }
 .ahri-ratings .key{
   color: #999999;
   padding-left: 5px;
 }
-@media (max-width:599px) {
-  
+::ng-deep .results .rc-card .mat-card-content .ahri-ratings .item-rating{
+  padding: 0 .5rem;
 }
+::ng-deep .results .rc-card .mat-card-content .ahri-ratings h5{
+  padding-left: 0.5rem;
+}
+::ng-deep .results .rc-card .mat-card-content .ahri-ratings .item-rating:nth-child(even){
+  background-color: #efefef;
+}
+/* New Ratings */
+::ng-deep .results .rc-card .mat-card-content .ahri-ratings.new{
+  background-color: #F2F8FD;
+  border: 1px solid #b0c8de;
+}
+::ng-deep .results .rc-card .mat-card-content .ahri-ratings.new h5{
+  color:var(--rc-primary-color);
+}
+::ng-deep .results .rc-card .mat-card-content .ahri-ratings.new .item-rating:nth-child(even){
+  background-color: #e1edf8;
+}
+/* Old Ratings */
+::ng-deep .results .rc-card .mat-card-content .ahri-ratings.old{
+  background-color: #FBF7F1;
+  border: 1px solid #eed4ad;
+}
+::ng-deep .results .rc-card .mat-card-content .ahri-ratings.old h5{
+  color:var(--rc-accent-color);
+}
+::ng-deep .results .rc-card .mat-card-content .ahri-ratings.old .item-rating:nth-child(even){
+  background-color: #ffeed5;
+}
+/*button toggle*/
+::ng-deep .results .rc-card .mat-card-content .ahri-ratings .rating-toggle {
+  padding: 0.5rem 0.15rem;
+}
+::ng-deep .results .rc-card .mat-card-content .ahri-ratings.new .rating-toggle button{
+  background-color: #FBF7F1;
+  border: 1px solid #FFBC59;
+  color: #FFBC59;
+}
+::ng-deep .results .rc-card .mat-card-content .ahri-ratings.old .rating-toggle button{
+  background-color: #F2F8FD;
+  border: 1px solid var(--rc-primary-color);
+  color: var(--rc-primary-color);
+}
+
 .ahri-ratings .rating{
   color: var(--rc-text-light-color);
   font-weight: 600;
@@ -148,7 +187,8 @@
   border-radius: 4px;
   border: 1px solid #f8f8f8;
   background-color: #fbfbfb;
-  font-size: 12px;
+  font-size: 12px;  
+  line-height: 14px;
 }
 .rc-rebates .list .mat-icon{
     font-size: 16px;
@@ -170,10 +210,10 @@
   align-items: start;
 }
 .rc-rebates .list span.description{
-  font-size: 12px;
+  font-size: 11px;
   display: block;
-  padding-left: 20px;
-  line-height: 16px;
+  padding-left: 25px;
+  line-height: 1rem;
   color: #999999;
 }
 

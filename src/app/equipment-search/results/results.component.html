@@ -22,7 +22,7 @@
         </form>
 
         <form [formGroup]="eligibleRebatesForm" class="rc-mt-medium">
-          <h5 class="rc-filter-group-title" style="display: inline-block;">REBATE ELIGIBILITY <mat-icon class="rc-info-icon"  matTooltip="Check rebate(s) to show only results that qualify for the selected rebate(s).  Not all rebates apply to every search.  Not all customers are eligible for all rebates, refer to rebate forms for details and eligibility requirements." matTooltipPosition="right">info</mat-icon></h5>
+          <h5 class="rc-filter-group-title" class="title-info-icon">REBATE ELIGIBILITY <mat-icon class="rc-info-icon"  matTooltip="Check rebate(s) to show only results that qualify for the selected rebate(s).  Not all rebates apply to every search.  Not all customers are eligible for all rebates, refer to rebate forms for details and eligibility requirements." matTooltipPosition="right">info</mat-icon></h5>
           <section formArrayName="eligibleRebates">
               <ng-container *ngFor="let rebate of eligibleRebates.controls;let i=index" [formGroupName]="i">
                 <mat-checkbox  formControlName="isActive" (change)="filterSystemsbyEligibleRebate()">
@@ -38,6 +38,285 @@
 
   <!-- Search results -->
   <div fxFlex="70" fxFlex.xs="100" fxFlex.sm="100">
+    <mat-card class="rc-card results">
+      <div fxLayout="row column" fxLayoutAlign="center center" class="rc-card-header">
+        <!-- Card title -->
+        <div fxFlex="100">
+          <mat-card-header>
+            <mat-card-title>
+              <span class="title">INFINITY 18VS VARIABLE SPEED HP</span>
+            </mat-card-title>
+          </mat-card-header>
+        </div>
+      </div>
+      <div fxLayout="row column" fxLayoutAlign="center start">
+        <!-- Outdoor, indoor, furnace, furnace confguration -->
+        <div fxFlex="100" fxLayout="column">
+          <mat-card-subtitle>
+            <div fxLayout="row column" fxLayoutAlign="start center" class="model-nrs" fxLayoutGap="16px grid">
+              <div fxFlex="25" fxFlex.sm="50" fxFlex.md="50" fxFlex.xs="100">
+                <mat-form-field class="example-full-width">
+                  <mat-label>Outdoor</mat-label>
+                  <input matInput value='25VNA824B003' readonly="">
+                </mat-form-field>
+              </div>
+              <ng-container>
+                <div fxFlex="25" fxFlex.sm="50" fxFlex.md="50" fxFlex.xs="100">
+                  <mat-form-field class="rc-select-multiline">
+                      <mat-select value="FV4CNF002L00" placeholder="FV4CNF002L00" >
+                      <mat-option  class="rc-select-multiline-option" value="reset" disabled="true"> Plese select an option</mat-option>
+                      <mat-option class="rc-select-multiline-option" value="FV4CNF002L00"><b>FV4CNF002L00</b></mat-option>
+                      <mat-option class="rc-select-multiline-option" value="FV4CNF002L00"><b>FV4CNF002L00</b></mat-option>
+                      <mat-option class="rc-select-multiline-option" value="FV4CNF002L00"><b>FV4CNF002L00</b></mat-option>
+                      <mat-option class="rc-select-multiline-option" value="FV4CNF002L00"><b>FV4CNF002L00</b></mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+              </ng-container>
+              
+              <!-- card configurations -->
+              <div fxFlex="25" fxFlex.sm="50" fxFlex.md="50" fxFlex.xs="100">
+                <mat-form-field class="rc-select-multiline">
+                  <mat-select value="FV4CNF002L00" placeholder="FV4CNF002L00" >
+                    <mat-option  class="rc-select-multiline-option" value="reset" disabled="true"> Plese select an option</mat-option>
+                    <mat-option class="rc-select-multiline-option" value="FV4CNF002L00"><b>FV4CNF002L00</b></mat-option>
+                    <mat-option class="rc-select-multiline-option" value="FV4CNF002L00"><b>FV4CNF002L00</b></mat-option>
+                    <mat-option class="rc-select-multiline-option" value="FV4CNF002L00"><b>FV4CNF002L00</b></mat-option>
+                    <mat-option class="rc-select-multiline-option" value="FV4CNF002L00"><b>FV4CNF002L00</b></mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              
+            </div>
+          </mat-card-subtitle>
+        </div>
+      </div>
+    
+      <!-- Card Content -->  
+      <mat-card-content>
+        <div fxLayout="row column" fxLayoutAlign="start" fxLayoutGap="16px grid">
+          <!-- AHRI ratings -->
+          <div fxFlex="70" fxFlex.md="100" fxFlex.sm="100" fxFlex.xs="100" fxLayout="column">
+            <h4 class="section-title">AHRI RATINGS</h4>
+            <div fxLayout="row column" fxLayoutAlign="start stretch" fxLayoutAlign.sm="center stretch" fxLayoutAlign.xs="center center" fxLayoutGap="12px grid" fxLayoutGap.xs="1px grid">
+              <div fxFlex="50" fxFlex.sm="100" fxFlex.md="50" fxFlex.xs="100" class="">
+                <div class="ahri-ratings new">
+                  <h5>Ratings 2023</h5>
+                    <div fxLayout="row column" class="item-rating">
+                      <ng-container>
+                        <span fxFlex="60" fxFlex.xs="100" class="key">EER2</span>
+                        <span fxFlex="40" fxFlex.xs="100" class="rating">13.5</span>
+                      </ng-container>
+                    </div>
+                    <div fxLayout="row column" class="item-rating">
+                      <ng-container>
+                        <span fxFlex="60" fxFlex.xs="100" class="key">EER2</span>
+                        <span fxFlex="40" fxFlex.xs="100" class="rating">13.5</span>
+                      </ng-container>
+                    </div>
+                    <div fxLayout="row column" class="item-rating">
+                      <ng-container>
+                        <span fxFlex="60" fxFlex.xs="100" class="key">EER2</span>
+                        <span fxFlex="40" fxFlex.xs="100" class="rating">13.5</span>
+                      </ng-container>
+                    </div>
+                    <div fxLayout="row column" class="item-rating">
+                      <ng-container>
+                        <span fxFlex="60" fxFlex.xs="100" class="key">EER2</span>
+                        <span fxFlex="40" fxFlex.xs="100" class="rating">13.5</span>
+                      </ng-container>
+                    </div>
+                    <div fxLayout="row column" class="item-rating">
+                      <ng-container>
+                        <span fxFlex="60" fxFlex.xs="100" class="key">EER2</span>
+                        <span fxFlex="40" fxFlex.xs="100" class="rating">13.5</span>
+                      </ng-container>
+                    </div>
+                    <div fxLayout="row column" class="item-rating">
+                      <ng-container>
+                        <span fxFlex="60" fxFlex.xs="100" class="key">EER2</span>
+                        <span fxFlex="40" fxFlex.xs="100" class="rating">13.5</span>
+                      </ng-container>
+                    </div>
+                    <div fxLayout fxLayoutAlign="end center" class="rating-toggle">
+                      <button  mat-button fxLayout fxLayoutAlign="center center">
+                        View Ratings 2017
+                      </button>
+                    </div>                    
+                </div>
+                <div class="ahri-ratings old">
+                  <h5>Ratings 2017</h5>
+                  <div fxLayout="row column" class="item-rating">
+                    <ng-container>
+                      <span fxFlex="60" fxFlex.xs="100" class="key">EER</span>
+                      <span fxFlex="40" fxFlex.xs="100" class="rating">10.5</span>
+                    </ng-container>
+                  </div>
+                  <div fxLayout="row column" class="item-rating">
+                    <ng-container>
+                      <span fxFlex="60" fxFlex.xs="100" class="key">EER</span>
+                      <span fxFlex="40" fxFlex.xs="100" class="rating">10.5</span>
+                    </ng-container>
+                  </div>
+                  <div fxLayout="row column" class="item-rating">
+                    <ng-container>
+                      <span fxFlex="60" fxFlex.xs="100" class="key">EER</span>
+                      <span fxFlex="40" fxFlex.xs="100" class="rating">10.5</span>
+                    </ng-container>
+                  </div>
+                  <div fxLayout="row column" class="item-rating">
+                    <ng-container>
+                      <span fxFlex="60" fxFlex.xs="100" class="key">EER</span>
+                      <span fxFlex="40" fxFlex.xs="100" class="rating">10.5</span>
+                    </ng-container>
+                  </div>
+                  <div fxLayout="row column" class="item-rating">
+                    <ng-container>
+                      <span fxFlex="60" fxFlex.xs="100" class="key">EER</span>
+                      <span fxFlex="40" fxFlex.xs="100" class="rating">10.5</span>
+                    </ng-container>
+                  </div>
+                  <div fxLayout="row column" class="item-rating">
+                    <ng-container>
+                      <span fxFlex="60" fxFlex.xs="100" class="key">EER</span>
+                      <span fxFlex="40" fxFlex.xs="100" class="rating">10.5</span>
+                    </ng-container>
+                  </div>
+                  <div fxLayout="row column" class="item-rating">
+                    <ng-container>
+                      <span fxFlex="60" fxFlex.xs="100" class="key">EER</span>
+                      <span fxFlex="40" fxFlex.xs="100" class="rating">10.5</span>
+                    </ng-container>
+                  </div>
+                  <div fxLayout="row column" class="item-rating">
+                    <ng-container>
+                      <span fxFlex="60" fxFlex.xs="100" class="key">EER</span>
+                      <span fxFlex="40" fxFlex.xs="100" class="rating">10.5</span>
+                    </ng-container>
+                  </div>
+                  <div fxLayout="row column" class="item-rating">
+                    <ng-container>
+                      <span fxFlex="60" fxFlex.xs="100" class="key">EER</span>
+                      <span fxFlex="40" fxFlex.xs="100" class="rating">10.5</span>
+                    </ng-container>
+                  </div>
+                  <div fxLayout="row column" class="item-rating">
+                    <ng-container>
+                      <span fxFlex="60" fxFlex.xs="100" class="key">EER</span>
+                      <span fxFlex="40" fxFlex.xs="100" class="rating">10.5</span>
+                    </ng-container>
+                  </div>
+                  <div fxLayout="row column" class="item-rating">
+                    <ng-container>
+                      <span fxFlex="60" fxFlex.xs="100" class="key">EER</span>
+                      <span fxFlex="40" fxFlex.xs="100" class="rating">10.5</span>
+                    </ng-container>
+                  </div>
+                  <div fxLayout fxLayoutAlign="end center" class="rating-toggle">
+                    <button  mat-button fxLayout fxLayoutAlign="center center">
+                      View Ratings 2023
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div fxFlex="50" fxFlex.sm="100" fxFlex.md="50" fxFlex.xs="100" class="">
+                <div class="ahri-ratings">
+                    <div fxLayout="row column" class="item-rating">
+                      <ng-container>
+                        <span fxFlex="60" fxFlex.xs="100" class="key">EER</span>
+                        <span fxFlex="40" fxFlex.xs="100" class="rating">10.5</span>
+                      </ng-container>
+                    </div>
+                    <div fxLayout="row column" class="item-rating">
+                      <ng-container>
+                        <span fxFlex="60" fxFlex.xs="100" class="key">EER</span>
+                        <span fxFlex="40" fxFlex.xs="100" class="rating">10.5</span>
+                      </ng-container>
+                    </div>
+                    <div fxLayout="row column" class="item-rating">
+                      <ng-container>
+                        <span fxFlex="60" fxFlex.xs="100" class="key">EER</span>
+                        <span fxFlex="40" fxFlex.xs="100" class="rating">10.5</span>
+                      </ng-container>
+                    </div>
+                    <div fxLayout="row column" class="item-rating">
+                      <ng-container>
+                        <span fxFlex="60" fxFlex.xs="100" class="key">EER</span>
+                        <span fxFlex="40" fxFlex.xs="100" class="rating">10.5</span>
+                      </ng-container>
+                    </div>
+                    <div fxLayout="row column" class="item-rating">
+                      <ng-container>
+                        <span fxFlex="60" fxFlex.xs="100" class="key">EER</span>
+                        <span fxFlex="40" fxFlex.xs="100" class="rating">10.5</span>
+                      </ng-container>
+                    </div>
+                    <div fxLayout="row column" class="item-rating">
+                      <ng-container>
+                        <span fxFlex="60" fxFlex.xs="100" class="key">EER</span>
+                        <span fxFlex="40" fxFlex.xs="100" class="rating">10.5</span>
+                      </ng-container>
+                    </div>
+                    <div fxLayout="row column" class="item-rating">
+                      <ng-container>
+                        <span fxFlex="60" fxFlex.xs="100" class="key">EER</span>
+                        <span fxFlex="40" fxFlex.xs="100" class="rating">10.5</span>
+                      </ng-container>
+                    </div>
+                    <div fxLayout="row column" class="item-rating">
+                      <ng-container>
+                        <span fxFlex="60" fxFlex.xs="100" class="key">EER</span>
+                        <span fxFlex="40" fxFlex.xs="100" class="rating">10.5</span>
+                      </ng-container>
+                    </div>
+                </div>
+              </div> 
+            </div>
+          </div>
+          <div fxFlex="30" fxFlex.sm="100" fxFlex.md="100" fxFlex.xs="100" fxLayout="column">
+            <h4 class="section-title">REBATE ELIGIBILITY</h4>
+            <div class="rc-rebates">
+              <ul class="rc-unlisted list">
+                <li>
+                  <span class="title">
+                    <mat-icon class="available">check_circle</mat-icon>
+                    <span>Mass Save Heat Pump rebates</span>
+                  </span>
+                  <span class="description">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</span>
+                </li>
+                <li>
+                  <span class="title">
+                    <mat-icon class="available">check_circle</mat-icon>
+                    <span>Mass Save Heat Pump rebates2</span>
+                  </span>
+                  <span class="description">Accusantium error reprehenderit ipsa facere, dolores sit unde explicabo</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </mat-card-content>
+      <!-- ./Card Content -->
+    
+      <!-- Card Footer --> 
+      <mat-card-actions>
+        <div fxLayout="row column" fxLayoutAlign="end center" fxLayoutAlign.xs="center center" fxLayoutGap="16px grid">
+          <div>
+            <button mat-button class="rc-card-btn accent" fxLayout fxLayoutAlign="center center">
+              VIEW IN TABLE
+              <mat-icon> table_chart</mat-icon>
+            </button>
+          </div>
+          <div>
+            <a  mat-button class="rc-card-btn primary" fxLayout fxLayoutAlign="center center" target="_blank">
+              PRINT
+              <mat-icon>print</mat-icon>
+            </a>
+          </div>
+        </div>
+      </mat-card-actions>
+      <!-- ./Card Footer --> 
+    </mat-card>
     <!-- Search results grouped by outdoor unit in "card" type displays. -->
     <app-card *ngFor="let myResult of myResults" [mySystems]="myResult" [selectedRebates]="this.getSelectedRebates()">
     </app-card>
