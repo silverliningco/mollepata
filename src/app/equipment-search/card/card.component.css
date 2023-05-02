@@ -110,59 +110,66 @@
     margin: 1rem 0;
   }
 }
-::ng-deep .results .rc-card .mat-card-content .ahri-ratings{
+::ng-deep .results .rc-card .mat-card-content .rating-container{
+}
+::ng-deep .results .rc-card .mat-card-content .rating-container .ahri-ratings{
   font-size: 12px;
   line-height: 20px;
   border: 1px solid #d5d5d5;
 }
-::ng-deep .results .rc-card .mat-card-content .ahri-ratings .item-rating{
+::ng-deep .results .rc-card .mat-card-content .rating-container .ahri-ratings .item-rating{
   padding: 2px;
 }
 .ahri-ratings .key{
   color: #999999;
   padding-left: 5px;
 }
-::ng-deep .results .rc-card .mat-card-content .ahri-ratings .item-rating{
+::ng-deep .results .rc-card .mat-card-content .rating-container .ahri-ratings .item-rating{
   padding: 0 .5rem;
 }
-::ng-deep .results .rc-card .mat-card-content .ahri-ratings h5{
+::ng-deep .results .rc-card .mat-card-content .rating-container .ahri-ratings h5{
   padding-left: 0.5rem;
 }
-::ng-deep .results .rc-card .mat-card-content .ahri-ratings .item-rating:nth-child(even){
+::ng-deep .results .rc-card .mat-card-content .rating-container .ahri-ratings .item-rating:nth-child(even){
   background-color: #efefef;
 }
 /* New Ratings */
-::ng-deep .results .rc-card .mat-card-content .ahri-ratings.new{
+::ng-deep .results .rc-card .mat-card-content .rating-container.new .ahri-ratings{
   background-color: #F2F8FD;
-  border: 1px solid #b0c8de;
+  /*border: 1px solid #b0c8de;*/
 }
-::ng-deep .results .rc-card .mat-card-content .ahri-ratings.new h5{
+::ng-deep .results .rc-card .mat-card-content .rating-container.new .ahri-ratings h5{
   color:var(--rc-primary-color);
 }
-::ng-deep .results .rc-card .mat-card-content .ahri-ratings.new .item-rating:nth-child(even){
+::ng-deep .results .rc-card .mat-card-content .rating-container.new .ahri-ratings .item-rating:nth-child(even){
   background-color: #e1edf8;
 }
 /* Old Ratings */
-::ng-deep .results .rc-card .mat-card-content .ahri-ratings.old{
+::ng-deep .results .rc-card .mat-card-content .rating-container.old .ahri-ratings{
   background-color: #FBF7F1;
   border: 1px solid #eed4ad;
 }
-::ng-deep .results .rc-card .mat-card-content .ahri-ratings.old h5{
+::ng-deep .results .rc-card .mat-card-content .rating-container.old .ahri-ratings h5{
   color:var(--rc-accent-color);
 }
-::ng-deep .results .rc-card .mat-card-content .ahri-ratings.old .item-rating:nth-child(even){
+::ng-deep .results .rc-card .mat-card-content .rating-container.old .ahri-ratings .item-rating:nth-child(even){
   background-color: #ffeed5;
 }
 /*button toggle*/
 ::ng-deep .results .rc-card .mat-card-content .ahri-ratings .rating-toggle {
   padding: 0.5rem 0.15rem;
 }
-::ng-deep .results .rc-card .mat-card-content .ahri-ratings.new .rating-toggle button{
+::ng-deep .results .rc-card .mat-card-content .rating-container .rating-toggle button{
+  line-height: 25px;
+  font-size: 12px;
+  margin: 6px 0;
+}
+::ng-deep .results .rc-card .mat-card-content .rating-container.new .rating-toggle button{
   background-color: #FBF7F1;
   border: 1px solid #FFBC59;
   color: #FFBC59;
 }
-::ng-deep .results .rc-card .mat-card-content .ahri-ratings.old .rating-toggle button{
+::ng-deep .results .rc-card .mat-card-content .rating-container.old .rating-toggle button{
   background-color: #F2F8FD;
   border: 1px solid var(--rc-primary-color);
   color: var(--rc-primary-color);
