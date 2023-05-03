@@ -19,7 +19,7 @@ export interface UtilityProviders {
 
 export interface DwellingInfo {
     fuelSource: string;
-    constructionType: string; 
+    //constructionType: string; 
 }
 
 export interface SystemSize {
