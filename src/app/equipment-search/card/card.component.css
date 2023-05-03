@@ -115,54 +115,40 @@
 ::ng-deep .results .rc-card .mat-card-content .rating-container .ahri-ratings{
   font-size: 12px;
   line-height: 20px;
-  border: 1px solid #d5d5d5;
+  padding: 4px 8px;
+  background-color: #fbfbfb;
+  border-radius: 4px;
 }
 ::ng-deep .results .rc-card .mat-card-content .rating-container .ahri-ratings .item-rating{
-  padding: 2px;
+  padding: 1px;
 }
 .ahri-ratings .key{
   color: #999999;
   padding-left: 5px;
 }
-::ng-deep .results .rc-card .mat-card-content .rating-container .ahri-ratings .item-rating{
-  padding: 0 .5rem;
-}
-::ng-deep .results .rc-card .mat-card-content .rating-container .ahri-ratings h5{
-  padding-left: 0.5rem;
-}
-::ng-deep .results .rc-card .mat-card-content .rating-container .ahri-ratings .item-rating:nth-child(even){
-  background-color: #efefef;
-}
 /* New Ratings */
 ::ng-deep .results .rc-card .mat-card-content .rating-container.new .ahri-ratings{
   background-color: #F2F8FD;
-  /*border: 1px solid #b0c8de;*/
 }
 ::ng-deep .results .rc-card .mat-card-content .rating-container.new .ahri-ratings h5{
   color:var(--rc-primary-color);
 }
-::ng-deep .results .rc-card .mat-card-content .rating-container.new .ahri-ratings .item-rating:nth-child(even){
-  background-color: #e1edf8;
-}
 /* Old Ratings */
 ::ng-deep .results .rc-card .mat-card-content .rating-container.old .ahri-ratings{
   background-color: #FBF7F1;
-  border: 1px solid #eed4ad;
 }
 ::ng-deep .results .rc-card .mat-card-content .rating-container.old .ahri-ratings h5{
   color:var(--rc-accent-color);
-}
-::ng-deep .results .rc-card .mat-card-content .rating-container.old .ahri-ratings .item-rating:nth-child(even){
-  background-color: #ffeed5;
 }
 /*button toggle*/
 ::ng-deep .results .rc-card .mat-card-content .ahri-ratings .rating-toggle {
   padding: 0.5rem 0.15rem;
 }
 ::ng-deep .results .rc-card .mat-card-content .rating-container .rating-toggle button{
-  line-height: 25px;
-  font-size: 12px;
+  line-height: 20px;
+  font-size: 10px;
   margin: 6px 0;
+  padding: 1px 6px;
 }
 ::ng-deep .results .rc-card .mat-card-content .rating-container.new .rating-toggle button{
   background-color: #FBF7F1;
@@ -185,43 +171,61 @@
   font-weight: 400;
 }
 
-/* Rebate List */
-.rc-rebates {
-  padding: .5rem;
+/*Rebates List*/
+::ng-deep .results .rc-card .mat-card-content .mat-expansion-panel{
+  background: #F8F8F8;
+  margin-bottom: 0.75rem !important;
+  box-shadow: none !important;
+  border-radius: 0px !important;
 }
-.rc-rebates .list{
-  padding: 5px;
-  border-radius: 4px;
-  border: 1px solid #f8f8f8;
-  background-color: #fbfbfb;
-  font-size: 12px;  
+::ng-deep .results .rc-card .mat-card-content .mat-expansion-panel .mat-expansion-panel-header{
+  padding: .5rem;
+  height: auto;
+}
+::ng-deep .results .rc-card .mat-card-content .mat-expansion-panel .mat-expansion-panel-header .mat-expansion-panel-header-title{
+  font-size: 12px;
+  font-weight: 500;  
   line-height: 14px;
 }
-.rc-rebates .list .mat-icon{
-    font-size: 16px;
-    height: 16px;
-    width: 20px;
-    color: red;
-    margin: 5px 5px 0 0;
+::ng-deep .results .rc-card .mat-card-content .mat-expansion-panel .mat-expansion-panel-header .mat-expansion-panel-header-title .mat-icon{
+  font-size: 16px;
+  height: 16px;
+  width: 16px;
+  padding-right: 4px;
+  color: #c01313;
 }
-.rc-rebates .list .mat-icon.available{
-    color: #13c013;
+::ng-deep .results .rc-card .mat-card-content .mat-expansion-panel .mat-expansion-panel-header .mat-expansion-panel-header-title .mat-icon.available{
+  color: #13c013;
 }
-.rc-rebates .list li{
-  margin-bottom: .5rem;  
+::ng-deep .results .rc-card .mat-card-content .mat-expansion-panel .mat-expansion-panel-header.mat-expanded{
+  border-bottom: 1px solid #D7D7D7;
+  height: auto;
 }
-.rc-rebates .list span.title{
-  font-weight: 500;
-  padding-right: 5px;
-  display: flex;
-  align-items: start;
+::ng-deep .results .rc-card .mat-card-content .mat-expansion-panel .mat-expansion-panel-header .mat-expansion-panel-header-description{
+  background-color: #E1ECF8;
+  border-radius: 4px;
+  color:var(--rc-primary-color);
+  padding: 0 0.5rem;
+  font-weight: bold;
+}  
+::ng-deep .results .rc-card .mat-card-content .mat-expansion-panel .mat-expansion-panel-body{
+  padding: .5rem;
 }
-.rc-rebates .list span.description{
-  font-size: 11px;
-  display: block;
-  padding-left: 25px;
-  line-height: 1rem;
-  color: #999999;
+::ng-deep .results .rc-card .mat-card-content .mat-expansion-panel .mat-expansion-panel-body p.description{
+  color: #606060;
+  margin-bottom: .5rem;font-size: 11px;
+  line-height: 14px;
+}
+.rc-unlisted.link-rebates a{
+  padding-left: 1rem;
+  color: var(--rc-primary-color);
+  font-size: 12px;
+}
+.rc-unlisted.link-rebates .mat-icon{
+  position: absolute;
+  left: .6rem;
+  transform: rotate(315deg);
+  font-size: 1rem;
 }
 
 

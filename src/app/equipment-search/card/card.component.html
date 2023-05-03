@@ -71,19 +71,36 @@
       </div>
       <div fxFlex="30" fxFlex.sm="100" fxFlex.md="100" fxFlex.xs="100" fxLayout="column">
         <h4 class="section-title">REBATE ELIGIBILITY</h4>
-        <div class="rc-rebates">
-          <ul class="rc-unlisted list">
-            <li *ngFor="let rebate of card.result!.rebateEligibility">
-              <span class="title"> 
+        <mat-accordion>
+          <mat-expansion-panel *ngFor="let rebate of card.result!.rebateEligibility">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
                 <mat-icon class="available" *ngIf="rebate.isEligible">check_circle</mat-icon>
                 <mat-icon *ngIf="!rebate.isEligible">cancel</mat-icon>
-                <span [ngClass]="selectedRebates.includes(rebate.title) ? 'bold' : ''">{{rebate.title}}</span>
-              </span>
-              <span class="description">{{rebate.description}}</span>
-            </li>
-            
-          </ul>
-        </div>
+                {{rebate.title}}
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <p class="description">
+              {{rebate.description}}
+            </p>
+            <ul class="rc-unlisted link-rebates">
+              <li *ngFor="let link of rebate.rebateLinks">
+                <span *ngIf="rebate.rebateLinks.length > 0; else noLinks">
+                  <a href="{{link.url}}">
+                    <mat-icon>link</mat-icon> 
+                    {{link.title}}
+                  </a>
+                </span>
+                <ng-template #noLinks>
+                  <span>
+                    No links registered found
+                  </span>
+                </ng-template>
+              </li>
+           
+            </ul>
+          </mat-expansion-panel>
+        </mat-accordion>
       </div>
     </div>
   </mat-card-content>

@@ -111,3 +111,14 @@ result-filters
     line-height: 1rem;
     color: #999999;
   }
+  .rc-unlisted.link-rebates a{
+    padding-left: 1rem;
+    color: var(--rc-primary-color);
+    font-size: 12px;
+  }
+  .rc-unlisted.link-rebates .mat-icon{
+    position: absolute;
+    left: .6rem;
+    transform: rotate(315deg);
+    font-size: 1rem;
+  }
