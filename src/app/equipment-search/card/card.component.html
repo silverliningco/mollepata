@@ -56,17 +56,56 @@
       <!-- AHRI ratings -->
       <div fxFlex="70" fxFlex.md="100" fxFlex.sm="100" fxFlex.xs="100" fxLayout="column">
         <h4 class="section-title">AHRI RATINGS</h4>
+
         <div fxLayout="row column" fxLayoutAlign="start stretch" fxLayoutAlign.sm="center stretch" fxLayoutAlign.xs="center center" fxLayoutGap="12px grid" fxLayoutGap.xs="1px grid">
-          <div fxFlex="50" fxFlex.sm="100" fxFlex.md="50" fxFlex.xs="100" *ngFor="let ratings of card.result!.AHRIRatings" class="">
-            <div class="ahri-ratings">
-                <div fxLayout="row column" *ngFor="let rating of ratings" class="item-rating">
-                  <ng-container *ngIf="rating.value">
+          <div fxFlex="50" fxFlex.sm="100" fxFlex.md="50" fxFlex.xs="100" class="">
+            <div class="rating-container new" *ngIf="showDiv2023">
+              <div class="ahri-ratings">
+                <h5>Electrical Ratings 2023</h5>
+                  <div fxLayout="row column" class="item-rating" *ngFor="let rating of card.result!.AHRIRatings[0][2023]">
+                    <ng-container>
+                      <span fxFlex="60" fxFlex.xs="100" class="key">{{rating.title}}</span>
+                      <span fxFlex="40" fxFlex.xs="100" class="rating">{{rating.value | prettify: rating.rating }}</span>
+                    </ng-container>
+                  </div>
+                 
+              </div>                  
+              <div fxLayout fxLayoutAlign="end center" class="rating-toggle">
+                <button  mat-button fxLayout fxLayoutAlign="center center"  (click)="toggleDiv()">
+                  Electrical Ratings 2017
+                </button>
+              </div>
+            </div>
+            <div class="rating-container old" *ngIf="!showDiv2023">
+              <div class="ahri-ratings">
+                <h5>Electrical Ratings 2017</h5>
+                <div fxLayout="row column" class="item-rating" *ngFor="let rating of card.result!.AHRIRatings[0][2017]">
+                  <ng-container>
                     <span fxFlex="60" fxFlex.xs="100" class="key">{{rating.title}}</span>
-                    <span fxFlex="40" fxFlex.xs="100" class="rating">{{rating.value}}</span>
+                    <span fxFlex="40" fxFlex.xs="100" class="rating">{{rating.value | prettify: rating.rating }}</span>
                   </ng-container>
                 </div>
+              </div>
+              <div fxLayout fxLayoutAlign="end center" class="rating-toggle">
+                <button  mat-button fxLayout fxLayoutAlign="center center" (click)="toggleDiv()">
+                  Electrical Ratings 2023
+                </button>
+              </div>
             </div>
           </div>
+          <div fxFlex="50" fxFlex.sm="100" fxFlex.md="50" fxFlex.xs="100" class="" *ngIf="card.result!.AHRIRatings.length> 1 ">
+            <div class="rating-container">
+              <div class="ahri-ratings">
+                <h5>Furnace Ratings</h5>
+                <div fxLayout="row column" class="item-rating" *ngFor="let rating of card.result!.AHRIRatings[1]">
+                  <ng-container>
+                    <span fxFlex="60" fxFlex.xs="100" class="key">{{rating.title}}</span>
+                    <span fxFlex="40" fxFlex.xs="100" class="rating">{{rating.value | prettify: rating.rating }}</span>
+                  </ng-container>
+                </div>
+              </div>
+            </div>
+          </div> 
         </div>
       </div>
       <div fxFlex="30" fxFlex.sm="100" fxFlex.md="100" fxFlex.xs="100" fxLayout="column">

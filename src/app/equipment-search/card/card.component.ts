@@ -22,14 +22,15 @@ export class CardComponent implements OnInit {
   //pass Object to template, to iterate object keys using *ngFor (AHRI Ratings)
   Object = Object;
   JSON = JSON;
-  
+  showDiv2023 = true;
+
   constructor(
     private dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.loadCard();
   }
-
+  
   loadCard() {
     // Asign first element of array to card.
     this.card.result = this.mySystems[0];
@@ -283,6 +284,10 @@ export class CardComponent implements OnInit {
         systems: this.mySystems
       }
     }); 
+  }
+  // This function helps us to switch from ratings from 2023 to 2017
+  toggleDiv() {
+    this.showDiv2023 = !this.showDiv2023;
   }
 
 }

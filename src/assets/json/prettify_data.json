@@ -1,23 +1,107 @@
-{       
-        "EER": "EER",
-        "EER2": "EER2",
-        "HSPF": "HSPF",
-        "SEER": "SEER",
-        "HSPF2": "HSPF2",
-        "SEER2": "SEER2",
-        "HCap17": "HCAP17",
-        "HCap47": "HCAP47",
-        "M1COP5": "M1COP5",
-        "AHRIRef": "AHRIREF",
-        "M1HCap5": "M1HCAP5",
-        "M1HCap17": "M1HCAP17",
-        "H1FullHCap47": "H1FULLHCAP47",
-        "coolingCapacity": "COOLING CAPACITY",
-        "aFullCoolingCapacity": "AFULL COOLING CAPACITY",
-        "AFUE": "AFUE",        
-        "fuelTypes": "FUEL TYPES",
-        "inputBTUH": "INPUT BTUH",
-        "mobileHome": "MOBILE HOME",
-        "outputBTUH": "OUTPUT BTUH",
-        "configurations": "CONFIGURATIONS"        
+{
+        "AHRIRef": {
+                "type": "string",
+                "year": null,
+                "order": 0
+        },
+        "SEER2": {
+                "type": "number",
+                "year": 2023,
+                "order": 1
+        },
+        "EER2": {
+                "type": "number",
+                "year": 2023,
+                "order": 2
+        },
+        "HSPF2": {
+                "type": "number",
+                "year": 2023,
+                "order": 3
+        },
+        "AFullCoolingCapacity": {
+                "type": "number",
+                "year": 2023,
+                "order": 4
+        },
+        "H1FullHCap47": {
+                "type": "number",
+                "year": 2023,
+                "order": 5
+        },
+        "M1HCap17": {
+                "type": "number",
+                "year": 2023,
+                "order": 6
+        },
+        "HSPF": {
+                "type": "number",
+                "year": 2017,
+                "order": 3
+        },
+        "SEER": {
+                "type": "number",
+                "year": 2017,
+                "order": 1
+        },
+        "EER": {
+                "type": "number",
+                "year": 2017,
+                "order": 2
+        },
+        "HCap17": {
+                "type": "number",
+                "year": 2017,
+                "order": 5
+        },
+        "HCap47": {
+                "type": "number",
+                "year": 2017,
+                "order": 4
+        },
+        "M1COP5": {
+                "type": "number",
+                "year": 2023,
+                "order": 7
+        },
+        "M1HCap5": {
+                "type": "number",
+                "year": 2023,
+                "order": 8
+        },
+        "coolingCapacity": {
+                "type": "number",
+                "year": 2017,
+                "order": 6
+        },
+        "AFUE": {
+                "type": "number",
+                "year": null,
+                "order": 1
+        },
+        "fuelTypes": {
+                "type": "string",
+                "year": null,
+                "order": 5
+        },
+        "inputBTUH": {
+                "type": "number",
+                "year": null,
+                "order": 2
+        },
+        "mobileHome": {
+                "type": "string",
+                "year": null,
+                "order": 4
+        },
+        "outputBTUH": {
+                "type": "number",
+                "year": null,
+                "order": 3
+        },
+        "configurations": {
+                "type": "string",
+                "year": null,
+                "order": 6
+        }
 }
