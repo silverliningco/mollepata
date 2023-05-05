@@ -1,92 +1,120 @@
-/*Report*/
 .rc-report{
     border: 1px solid #c5c5c5;
     border-radius: 4px;
     background-color: white;
     padding: 2rem 1rem;
     margin: 1rem 0;
-}
-.rc-report .title{
+  }
+  .rc-report .title{
     text-align: start;
     border: 1px solid #f3f3f3;
     border-left: none;
     border-right: none;
     padding: 2rem 1rem;
-}
-.logo{
+  }
+  .logo{
     text-align: end;
-}
-.model-numbers,.ahri-ratings, .elegible-rebates{
+  }
+  .model-numbers,.ahri-ratings, .elegible-rebates{
     padding: 1rem;
-}
-.subtitle{
+  }
+  .subtitle{
     color: var(--rc-text-light-color);
     font-weight: bold;
     margin-bottom: .5rem;
-}
-.item-rating, .item-numbers{
+  }
+  .item-rating, .item-numbers{
     line-height: 1.7rem;
-}
-.item-rating:nth-child(odd){
+  }
+  .item-rating:nth-child(odd){
     background-color: #fbfbfba3;
   }
-.item-rating .key, .item-numbers .key{
+  .key{
     color: #8f8f8f;
     font-size: 13px;
-}
-.item-rating .rating, .item-numbers .rating{
+  }
+  .rating{
     color: var(--rc-text-light-color);
     font-weight: 500;
-}
-.item-numbers .rating .description{
+  }
+  .item-numbers .rating .description{
     font-weight: 400;
     font-size: 12px;
     font-style: italic;
     text-transform: uppercase;
-}
-.rebate{
+  }
+  .rebate{
     position: relative;
     margin-bottom: 0.45rem;
     border-radius: 5px;
-}
-@media print {
+  }
+  .item-rebate {
+    padding: 0.5rem 1rem;
+    border: 1px solid #f3f3f3;
+  }
+  .item-rebate:first-child{
+    border-bottom: none;
+  }
+  .rc-unlisted.link-rebates{
+    padding-left: 2rem;
+    font-size: 12px;
+  }
+  .rc-unlisted.link-rebates li a{
+    position: relative;
+    color: var(--rc-text-light-color);
+  }
+  .rc-unlisted.link-rebates .mat-icon{
+    position: absolute;
+    left: -18px;
+    transform: rotate(315deg);
+    font-size: 1rem;
+  }
+  @media print {
     @page {
-        margin-top: auto;
-        margin-bottom: auto;
+      margin-top: auto;
+      margin-bottom: auto;
     }
     .rc-report{
-        border: none;
-        background-color:transparent;
-        padding: 0;
-        margin-top: 0;
-        font-size: 12px;
+      border: none;
+      background-color:transparent;
+      padding: 0;
+      margin-top: 0;
+      font-size: 12px;
+    }
+    .model-numbers,.ahri-ratings, .elegible-rebates{
+      padding: .25rem;
+    }
+    .rc-report .title{
+      padding: 1rem .5rem;
     }
     .ahri-ratings{
-        padding: auto !important;
+      padding: 2px !important;
     }
     .item-rating, .item-numbers{
-        margin-bottom: 0; 
-        border-top: 1px solid #f3f3f3;
-        border-right: 1px solid #f3f3f3;
-        border-left: 1px solid #f3f3f3;
-        padding: 0 0 0 1rem;
+      margin-bottom: 0; 
+      border: 1px solid #f3f3f3;
+      padding: 0 0 0 1rem;
     }
     .item-rating:last-child, .item-numbers:last-child{
-        border-bottom: 1px solid #f3f3f3;
+      border-bottom: 1px solid #f3f3f3;
     }
     .item-rating .key, .item-numbers .key{
-        font-size: 10px;
+      font-size: 10px;
     }
     .item-rating .rating, .item-numbers .rating{
-        font-weight: bold;
+      font-weight: bold;
     }
     .item-numbers .rating .description, .rebate .description{
-        font-size: 10px;
+      font-size: 10px;
     }
     .print-btn{
-        display: none !important;
+      display: none !important;
     }
     .logo img{
-        width: 130px;
+      width: 130px;
     }
-}
+    div.nextpage{
+      display:block;
+      page-break-before:always;
+    }
+  }
