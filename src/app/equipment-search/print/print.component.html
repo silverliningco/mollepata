@@ -42,132 +42,30 @@
         <div fxFlex="50">
           <div class="ahri-ratings">
             <h5>Electrical Ratings 2023</h5>
-              <div fxLayout="row column" class="item-rating">
+              <div fxLayout="row column" class="item-rating" *ngFor="let rating of result!.AHRIRatings[0][2023]">
                 <ng-container>
-                  <span fxFlex="60" fxFlex.xs="100" class="key">EER2</span>
-                  <span fxFlex="40" fxFlex.xs="100" class="rating">13.5</span>
-                </ng-container>
-              </div>
-              <div fxLayout="row column" class="item-rating">
-                <ng-container>
-                  <span fxFlex="60" fxFlex.xs="100" class="key">EER2</span>
-                  <span fxFlex="40" fxFlex.xs="100" class="rating">13.5</span>
-                </ng-container>
-              </div>
-              <div fxLayout="row column" class="item-rating">
-                <ng-container>
-                  <span fxFlex="60" fxFlex.xs="100" class="key">EER2</span>
-                  <span fxFlex="40" fxFlex.xs="100" class="rating">13.5</span>
-                </ng-container>
-              </div>
-              <div fxLayout="row column" class="item-rating">
-                <ng-container>
-                  <span fxFlex="60" fxFlex.xs="100" class="key">EER2</span>
-                  <span fxFlex="40" fxFlex.xs="100" class="rating">13.5</span>
-                </ng-container>
-              </div>
-              <div fxLayout="row column" class="item-rating">
-                <ng-container>
-                  <span fxFlex="60" fxFlex.xs="100" class="key">EER2</span>
-                  <span fxFlex="40" fxFlex.xs="100" class="rating">13.5</span>
-                </ng-container>
-              </div>
-              <div fxLayout="row column" class="item-rating">
-                <ng-container>
-                  <span fxFlex="60" fxFlex.xs="100" class="key">EER2</span>
-                  <span fxFlex="40" fxFlex.xs="100" class="rating">13.5</span>
+                  <span fxFlex="60" fxFlex.xs="100" class="key">{{rating.title}}</span>
+                  <span fxFlex="40" fxFlex.xs="100" class="rating">{{rating.value | prettify: rating.rating }}</span>
                 </ng-container>
               </div>
           </div>
           <div class="ahri-ratings">
             <h5>Electrical Ratings 2017</h5>
-            <div fxLayout="row column" class="item-rating">
+            <div fxLayout="row column" class="item-rating" *ngFor="let rating of result!.AHRIRatings[0][2017]">
               <ng-container>
-                <span fxFlex="60" fxFlex.xs="100" class="key">EER2</span>
-                <span fxFlex="40" fxFlex.xs="100" class="rating">13.5</span>
-              </ng-container>
-            </div>
-            <div fxLayout="row column" class="item-rating">
-              <ng-container>
-                <span fxFlex="60" fxFlex.xs="100" class="key">EER2</span>
-                <span fxFlex="40" fxFlex.xs="100" class="rating">13.5</span>
-              </ng-container>
-            </div>
-            <div fxLayout="row column" class="item-rating">
-              <ng-container>
-                <span fxFlex="60" fxFlex.xs="100" class="key">EER2</span>
-                <span fxFlex="40" fxFlex.xs="100" class="rating">13.5</span>
-              </ng-container>
-            </div>
-            <div fxLayout="row column" class="item-rating">
-              <ng-container>
-                <span fxFlex="60" fxFlex.xs="100" class="key">EER2</span>
-                <span fxFlex="40" fxFlex.xs="100" class="rating">13.5</span>
-              </ng-container>
-            </div>
-            <div fxLayout="row column" class="item-rating">
-              <ng-container>
-                <span fxFlex="60" fxFlex.xs="100" class="key">EER2</span>
-                <span fxFlex="40" fxFlex.xs="100" class="rating">13.5</span>
-              </ng-container>
-            </div>
-            <div fxLayout="row column" class="item-rating">
-              <ng-container>
-                <span fxFlex="60" fxFlex.xs="100" class="key">EER2</span>
-                <span fxFlex="40" fxFlex.xs="100" class="rating">13.5</span>
+                <span fxFlex="60" fxFlex.xs="100" class="key">{{rating.title}}</span>
+                <span fxFlex="40" fxFlex.xs="100" class="rating">{{rating.value | prettify: rating.rating }}</span>
               </ng-container>
             </div>
           </div>
         </div>
-        <div fxFlex="50">
+        <div fxFlex="50" *ngIf="result!.AHRIRatings.length > 1 ">
           <div class="ahri-ratings">
             <h5>Furnace Ratings</h5>
-            <div fxLayout="row column" class="item-rating">
+            <div fxLayout="row column" class="item-rating" *ngFor="let rating of result!.AHRIRatings[1]">
               <ng-container>
-                <span fxFlex="60" fxFlex.xs="100" class="key">EER</span>
-                <span fxFlex="40" fxFlex.xs="100" class="rating">10.5</span>
-              </ng-container>
-            </div>
-            <div fxLayout="row column" class="item-rating">
-              <ng-container>
-                <span fxFlex="60" fxFlex.xs="100" class="key">EER</span>
-                <span fxFlex="40" fxFlex.xs="100" class="rating">10.5</span>
-              </ng-container>
-            </div>
-            <div fxLayout="row column" class="item-rating">
-              <ng-container>
-                <span fxFlex="60" fxFlex.xs="100" class="key">EER</span>
-                <span fxFlex="40" fxFlex.xs="100" class="rating">10.5</span>
-              </ng-container>
-            </div>
-            <div fxLayout="row column" class="item-rating">
-              <ng-container>
-                <span fxFlex="60" fxFlex.xs="100" class="key">EER</span>
-                <span fxFlex="40" fxFlex.xs="100" class="rating">10.5</span>
-              </ng-container>
-            </div>
-            <div fxLayout="row column" class="item-rating">
-              <ng-container>
-                <span fxFlex="60" fxFlex.xs="100" class="key">EER</span>
-                <span fxFlex="40" fxFlex.xs="100" class="rating">10.5</span>
-              </ng-container>
-            </div>
-            <div fxLayout="row column" class="item-rating">
-              <ng-container>
-                <span fxFlex="60" fxFlex.xs="100" class="key">EER</span>
-                <span fxFlex="40" fxFlex.xs="100" class="rating">10.5</span>
-              </ng-container>
-            </div>
-            <div fxLayout="row column" class="item-rating">
-              <ng-container>
-                <span fxFlex="60" fxFlex.xs="100" class="key">EER</span>
-                <span fxFlex="40" fxFlex.xs="100" class="rating">10.5</span>
-              </ng-container>
-            </div>
-            <div fxLayout="row column" class="item-rating">
-              <ng-container>
-                <span fxFlex="60" fxFlex.xs="100" class="key">EER</span>
-                <span fxFlex="40" fxFlex.xs="100" class="rating">10.5</span>
+                <span fxFlex="60" fxFlex.xs="100" class="key">{{rating.title}}</span>
+                <span fxFlex="40" fxFlex.xs="100" class="rating">{{rating.value | prettify: rating.rating }}</span>
               </ng-container>
             </div>
           </div>
@@ -184,7 +82,6 @@
         <div class="item-rebate" *ngFor="let rebate of result!.rebateEligibility">
           <h4>{{rebate.title}} [<span *ngIf="rebate.isEligible else not_eligible">ELIGIBLE</span> <ng-template #not_eligible>NOT ELIGIBLE</ng-template>]</h4>
           <p class="description">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum, reprehenderit soluta, inventore, quaerat aliquam quisquam modi eligendi consequatur sit odit illo quo magni esse blanditiis dolorum exercitationem est tenetur recusandae?
             {{rebate.description}}
           </p>
           <ul class="rc-unlisted link-rebates">
