@@ -21,7 +21,7 @@
   padding-bottom: .5rem;
 }
 
-/*Revisar esta clase*/
+/*Revisar*/
 ::ng-deep .results .rc-card .model-nrs {
   width: 100%;
   padding-bottom: 6px;
@@ -110,8 +110,7 @@
     margin: 1rem 0;
   }
 }
-::ng-deep .results .rc-card .mat-card-content .rating-container{
-}
+
 ::ng-deep .results .rc-card .mat-card-content .rating-container .ahri-ratings{
   font-size: 12px;
   line-height: 20px;
@@ -228,7 +227,6 @@
   font-size: 1rem;
 }
 
-
 /*Card buttons*/
 ::ng-deep .results .rc-card .rc-card-btn{
   color: white;
@@ -275,8 +273,6 @@
 ::ng-deep .rc-select-multiline-option .mat-select-value{
   white-space: normal;
 }
-/* Custom class to highlight rebate*/
-
 ::ng-deep .results .rc-card .bold{
   font-weight: bold;
 }
