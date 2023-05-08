@@ -21,13 +21,12 @@ export class ModalSystemComponent implements OnInit {
 
   ngOnInit(): void {
     this.systemForm = this.formBuilder.group({
-      unitType: [null, Validators.required],
-      systemType: [null, Validators.required],
-      HVACType: [null, Validators.required],
-      energyDistribution: [null, Validators.required],   
-      msIndoorUnitStyle: [null, Validators.required],
-      size: [null, Validators.required],
-      qty: [null, Validators.required],       
+      unitType: [null],
+      systemType: [null],
+      HVACType: [null],  
+      msIndoorUnitStyle: [null],
+      size: [null],
+      qty: [null],       
     });
  
     // Populate dynamic systemTypes for outdoor and indoor units.

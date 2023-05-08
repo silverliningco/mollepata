@@ -11,14 +11,14 @@
         <div *ngIf="systemForm.get('unitType')!.value == 'Outdoor unit'">
             <mat-form-field appearance="fill">
                 <mat-label>System Type</mat-label>
-                <mat-select formControlName="systemType">     
+                <mat-select formControlName="systemType" [required]="true">     
                     <mat-option *ngFor ="let sysType of outdoorSystemTypes" [value]="sysType" radioGroup="sGroup">{{sysType}}</mat-option>
                 </mat-select> 
             </mat-form-field> 
 
-            <mat-form-field appearance="fill" *ngIf="systemForm.get('systemType')!.value == 'Split system' || systemForm.get('systemType')!.value == 'Mini-Split'">
+            <mat-form-field appearance="fill" *ngIf="systemForm.get('systemType')!.value == 'Split system' || systemForm.get('systemType')!.value == 'Mini-Split'" required>
                 <mat-label>HVAC System Type</mat-label>
-                <mat-select formControlName="HVACType">                
+                <mat-select formControlName="HVACType"  [required]="true">                
                     <mat-option radioGroup="sGroup" value="HP">HP</mat-option>
                     <mat-option radioGroup="sGroup" value="AC">AC</mat-option>  
                 </mat-select> 
@@ -26,7 +26,7 @@
             
             <mat-form-field appearance="fill" *ngIf="systemForm.get('systemType')!.value == 'Small Packaged Unit'">
                 <mat-label>HVAC System Type</mat-label>
-                <mat-select formControlName="HVACType">                
+                <mat-select formControlName="HVACType"  [required]="true">                
                     <mat-option radioGroup="sGroup" value="AC + Gas Furnace">AC + Gas Furnace</mat-option>
                     <mat-option radioGroup="sGroup" value="HP + Gas Furnace">HP + Gas Furnace</mat-option>
                     <mat-option radioGroup="sGroup" value="HP Electric Heating && Cooling">HP Electric Heating && Cooling</mat-option>  
@@ -37,7 +37,7 @@
         <div *ngIf="systemForm.get('unitType')!.value == 'Indoor unit'">
             <mat-form-field appearance="fill">
                 <mat-label>System Type</mat-label>
-                <mat-select formControlName="systemType">                 
+                <mat-select formControlName="systemType"  [required]="true">                 
                     <mat-option *ngFor ="let sysType of indoorSystemTypes" [value]="sysType" radioGroup="sGroup">{{sysType}}</mat-option>              
                 </mat-select> 
             </mat-form-field> 
@@ -46,7 +46,7 @@
         <div *ngIf="(systemForm.get('unitType')!.value == 'Indoor unit') && (systemForm.get('systemType')!.value == 'Mini-Split indoor')">
             <mat-form-field appearance="fill">
                 <mat-label>Ms Unit Type Style</mat-label>
-                <mat-select formControlName="msIndoorUnitStyle">                 
+                <mat-select formControlName="msIndoorUnitStyle" [required]="true">                 
                     <mat-option radioGroup="sGroup" value="Mini-Split Air Handler (Full Size)">Mini-Split Air Handler (Full Size)</mat-option>
                     <mat-option radioGroup="sGroup" value="Ducted Mini-Split Air Handler (Slim Style)">Ducted Mini-Split Air Handler (Slim Style)</mat-option>
                     <mat-option radioGroup="sGroup" value="Floor/Ceiling Mount">Floor/Ceiling Mount</mat-option>
@@ -58,7 +58,7 @@
 
             <mat-form-field appearance="fill">
                 <mat-label>Cooling Capacity</mat-label>
-                <mat-select formControlName="size">                 
+                <mat-select formControlName="size" [required]="true">                 
                     <mat-option radioGroup="sGroup" [value]="6000">6000</mat-option>
                     <mat-option radioGroup="sGroup" [value]="9000">9000</mat-option>
                     <mat-option radioGroup="sGroup" [value]="12000">12000</mat-option>
@@ -69,7 +69,7 @@
 
             <mat-form-field appearance="fill">
                 <mat-label>Quantity</mat-label>
-                <mat-select formControlName="qty">                 
+                <mat-select formControlName="qty" [required]="true">                 
                     <mat-option radioGroup="sGroup" [value]="1">1</mat-option>
                     <mat-option radioGroup="sGroup" [value]="2">2</mat-option>
                     <mat-option radioGroup="sGroup" [value]="3">3</mat-option>
@@ -82,7 +82,7 @@
         <div *ngIf="systemForm.get('unitType')!.value == 'Furnace'">
             <mat-form-field appearance="fill">
                 <mat-label>System Type</mat-label>
-                <mat-select formControlName="systemType">                 
+                <mat-select formControlName="systemType" [required]="true">                 
                     <mat-option radioGroup="sGroup" value="New ECM furnace">New ECM furnace</mat-option>
                     <mat-option radioGroup="sGroup" value="Existing or non-ECM furnace">Existing or non-ECM furnace</mat-option>       
                 </mat-select> 
@@ -94,7 +94,7 @@
 
 <div mat-dialog-actions [align]="'end'">    
     <button mat-raised-button mat-dialog-close class="rc-btn">CLOSE</button>
-    <button style="margin-left: 8px;" mat-raised-button  (click)="addEditSystem()" class="rc-btn-primary">{{this.myData.method| uppercase}}</button>
+    <button type="button" mat-raised-button color="primary" style="margin-left: 8px;" (click)="addEditSystem()" [disabled]="!this.systemForm.valid">{{this.myData.method| uppercase}}</button>
 </div>
 
 
