@@ -196,9 +196,7 @@ export class HVACSystemSearchComponent implements OnInit {
       // that value is the object reference. If the object reference does not change, OnChanges is not triggered.
       // To force change detection is to set a new object reference after modifying the property values
       this.payload = { ...this.myData };
-    
-//this.payload = {"location":{"state":"MA","country":"US"},"utilityProviders":{"electricUtilityId":5,"fossilFuelUtilityId":4},"dwellingInfo":{"constructionType":"new-construction","fuelSource":"Natural Gas"},"systemDesign":[{"unitType":"Outdoor unit","systemType":"Split system","HVACType":"HP"}],"systemSize":{"heatingBTUH":58000,"coolingTons":2},"commerceInfo":{"eCommerceGatewayId":1,"stockStatus":"Stock"}}
-    
+
     }
 
   }
