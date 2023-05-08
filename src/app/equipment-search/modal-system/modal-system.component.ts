@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
@@ -13,6 +13,7 @@ export class ModalSystemComponent implements OnInit {
 
   outdoorSystemTypes : Array<string> = ["Split system", "Mini-Split", "Small Packaged Unit"];
   indoorSystemTypes : Array<string> = ["Fan Coil", "Evaporator Coil", "Mini-Split indoor"];
+  formIsComplete: boolean = false;
 
   constructor(
     private formBuilder : FormBuilder,
@@ -26,7 +27,7 @@ export class ModalSystemComponent implements OnInit {
       HVACType: [null],  
       msIndoorUnitStyle: [null],
       size: [null],
-      qty: [null],       
+      qty: [null],
     });
  
     // Populate dynamic systemTypes for outdoor and indoor units.
@@ -38,8 +39,55 @@ export class ModalSystemComponent implements OnInit {
       this.systemForm.controls["unitType"].patchValue(this.myData.unitType);
     }
 
+    //Function that check if all form controls are complete.
+    this.formIsComplete = this.validateForm(this.systemForm.value);
+
+    this.systemForm.valueChanges.subscribe(selectedValue => { 
+      this.formIsComplete = this.validateForm(selectedValue);
+    });
   }
   
+  // Validates a form based on the selected value.
+  validateForm(selectedValue: any) {
+    // Initialize formIsComplete to false to start.
+    let isComplete = false;
+  
+    // Check if the selected value is an outdoor unit.
+    if (selectedValue.unitType === 'Outdoor unit') {
+      // If the systemType and HVACType are not null, the form is complete.
+      if (selectedValue.systemType !== null && selectedValue.HVACType !== null) {
+        isComplete = true;
+      }
+    }
+  
+    // Check if the selected value is an indoor unit.
+    if (selectedValue.unitType === 'Indoor unit') {
+      // If the systemType is Mini-Split indoor, check if msIndoorUnitStyle, size, and qty are not null.
+      if (selectedValue.systemType === 'Mini-Split indoor') {
+        if (selectedValue.msIndoorUnitStyle !== null && selectedValue.size !== null && selectedValue.qty !== null) {
+          isComplete = true;
+        }
+      }
+      // If the systemType is not Mini-Split indoor, check if systemType is not null.
+      else {
+        if (selectedValue.systemType !== null) {
+          isComplete = true;
+        }
+      }
+    }
+  
+    // Check if the selected value is a furnace.
+    if (selectedValue.unitType === 'Furnace') {
+      // If the systemType is not null, the form is complete.
+      if (selectedValue.systemType !== null) {
+        isComplete = true;
+      }
+    }
+  
+    // Return the value of isComplete.
+    return isComplete;
+  }
+
   populateSystemTypes() {
     
     const someMiniSplitIndoor = this.myData.payload.systemDesign?.some((system:any) => system.systemType === "Mini-Split indoor");
