@@ -84,8 +84,12 @@ export class ResultsComponent implements OnInit {
         
         // Add the AHRIRef rating to the 2017 and 2023 groups
         const myAHRI = ratings[0].find((f:any) => f.rating === "AHRIRef");
-        grouped[2017].unshift(myAHRI);
-        grouped[2023].unshift(myAHRI);
+        if(grouped[2017]){
+          grouped[2017].unshift(myAHRI);
+        }
+        if(grouped[2023]){
+          grouped[2023].unshift(myAHRI);
+        }
       
         ratings[0] = grouped;
       }

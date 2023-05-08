@@ -47,10 +47,12 @@ export class TableComponent implements OnInit {
       case "SEER2":
       case "HSPF2":
         // Find the rating in the 2023 array
-        const rating = ratings[0]['2023'].find((rating:any) => rating.rating === myString);
-        // If the rating is found
-        if(rating){
-          ratingString = rating.value;
+        if(ratings[0]['2023']){
+          const rating = ratings[0]['2023'].find((rating:any) => rating.rating === myString);
+          // If the rating is found
+          if(rating){
+            ratingString = rating.value;
+          }
         }
         break;
   

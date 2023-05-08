@@ -62,6 +62,7 @@
             <div class="rating-container new" *ngIf="showDiv2023">
               <div class="ahri-ratings">
                 <h5>Electrical Ratings 2023</h5>
+                <span *ngIf="!card.result!.AHRIRatings[0][2023]">No Electrical Ratings 2023 available.</span>
                   <div fxLayout="row column" class="item-rating" *ngFor="let rating of card.result!.AHRIRatings[0][2023]">
                     <ng-container>
                       <span fxFlex="60" fxFlex.xs="100" class="key">{{rating.title}}</span>
