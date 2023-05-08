@@ -39,7 +39,7 @@
               <span fxFlex="50" fxFlex.xs="100" class="rating">{{rating.value || 'N/A'}}</span>
             </div>
           </div>-->
-        <div fxFlex="50">
+        <div fxFlex="50" fxFlex.xs="100" fxFlex.sm="100">
           <div class="ahri-ratings">
             <h5>Electrical Ratings 2023</h5>
               <div fxLayout="row column" class="item-rating" *ngFor="let rating of result!.AHRIRatings[0][2023]">
@@ -59,7 +59,7 @@
             </div>
           </div>
         </div>
-        <div fxFlex="50" *ngIf="result!.AHRIRatings.length > 1 ">
+        <div fxFlex="50" fxFlex.xs="100" fxFlex.sm="100" *ngIf="result!.AHRIRatings.length > 1 ">
           <div class="ahri-ratings">
             <h5>Furnace Ratings</h5>
             <div fxLayout="row column" class="item-rating" *ngFor="let rating of result!.AHRIRatings[1]">
@@ -80,7 +80,15 @@
       </div>
       <div fxFlex="100" class="rebate">
         <div class="item-rebate" *ngFor="let rebate of result!.rebateEligibility">
-          <h4>{{rebate.title}} [<span *ngIf="rebate.isEligible else not_eligible">ELIGIBLE</span> <ng-template #not_eligible>NOT ELIGIBLE</ng-template>]</h4>
+          <p class="print-rebate" *ngIf="rebate.isEligible else not_eligible">
+             ELIGIBLE
+          </p>
+          <ng-template #not_eligible>
+            <p class="print-rebate">
+               NOT ELIGIBLE
+            </p>
+          </ng-template>
+          <h4>{{rebate.title}}</h4>
           <p class="description">
             {{rebate.description}}
           </p>

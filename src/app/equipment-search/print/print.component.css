@@ -55,6 +55,9 @@
   .item-rebate:first-child{
     border-bottom: none;
   }
+  .item-rebate:last-child{
+    border: 1px solid #f3f3f3;
+  }
   .rc-unlisted.link-rebates{
     padding-left: 2rem;
     font-size: 12px;
@@ -68,6 +71,12 @@
     left: -18px;
     transform: rotate(315deg);
     font-size: 1rem;
+  }
+  .print-rebate{
+    font-size: 10px;
+    line-height: 12px;
+    color: #9b9b9b;
+    font-weight: 600;
   }
   @media print {
     @page {
