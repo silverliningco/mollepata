@@ -36,7 +36,7 @@
           <!-- card configurations -->
           <div fxFlex="25" fxFlex.sm="50" fxFlex.md="50" fxFlex.xs="100" *ngFor="let cardConfiguration of Object.keys(card.cardConfigurations)">
             <mat-form-field class="rc-select-multiline">
-              <mat-select [value]="card.result!.AHRIRatings[1].configurations" placeholder="{{cardConfiguration}}" (selectionChange)="filterByConfigurationOptions($event.value, cardConfiguration)">
+              <mat-select [value]="card.cardConfigurations[cardConfiguration][0].name" placeholder="{{cardConfiguration}}" (selectionChange)="filterByConfigurationOptions($event.value, cardConfiguration)">
                 <mat-option class="rc-select-multiline-option" value="reset" disabled="true"> Plese select an option</mat-option>
                 <mat-option class="rc-select-multiline-option" *ngFor="let configuration of card.cardConfigurations[cardConfiguration]" [value]="configuration.name">
                   <b>{{configuration.name}}</b>
@@ -116,7 +116,7 @@
               <mat-panel-title>
                 <mat-icon class="available" *ngIf="rebate.isEligible">check_circle</mat-icon>
                 <mat-icon *ngIf="!rebate.isEligible">cancel</mat-icon>
-                {{rebate.title}}
+                <span [ngClass]="selectedRebates.includes(rebate.title) ? 'bold' : ''">{{rebate.title}}</span>
               </mat-panel-title>
             </mat-expansion-panel-header>
             <p class="description">

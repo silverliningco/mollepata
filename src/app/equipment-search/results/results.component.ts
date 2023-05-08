@@ -61,40 +61,42 @@ export class ResultsComponent implements OnInit {
   }
  
  // Orders and groups the ratings in the given array according to a pre-defined order in the prettifyData JSON.
-  orderRatings(ratings: any[]){
-    
-    // Electrical Ratings.
-    if(ratings[0]){
-      // Sort each rating by their prettifyData order
-      ratings[0].sort((a:any, b:any) => prettifyData[a.rating as keyof typeof prettifyData].order - prettifyData[b.rating as keyof typeof prettifyData].order);
+  orderRatings(systems: any[]){
+   
+    systems.forEach((system:any) => {
+      let ratings = system.AHRIRatings
+      // Electrical Ratings.
+      if(ratings[0]){
+        // Sort each rating by their prettifyData order
+        ratings[0].sort((a:any, b:any) => prettifyData[a.rating as keyof typeof prettifyData].order - prettifyData[b.rating as keyof typeof prettifyData].order);
 
-      // Group each rating array by year
-      const grouped:any = {};
-      ratings[0].forEach((obj: any) => {
-        const year = prettifyData[obj.rating as keyof typeof prettifyData].year;
-        if(year){
-          if (!grouped[year]) {
-            grouped[year] = [];
+        // Group each rating array by year
+        const grouped:any = {};
+        ratings[0].forEach((obj: any) => {
+          const year = prettifyData[obj.rating as keyof typeof prettifyData].year;
+          if(year){
+            if (!grouped[year]) {
+              grouped[year] = [];
+            }
+            grouped[year].push(obj);
           }
-          grouped[year].push(obj);
-        }
-      });
+        });
+        
+        // Add the AHRIRef rating to the 2017 and 2023 groups
+        const myAHRI = ratings[0].find((f:any) => f.rating === "AHRIRef");
+        grouped[2017].unshift(myAHRI);
+        grouped[2023].unshift(myAHRI);
       
-      // Add the AHRIRef rating to the 2017 and 2023 groups
-      const myAHRI = ratings[0].find((f:any) => f.rating === "AHRIRef");
-      grouped[2017].unshift(myAHRI);
-      grouped[2023].unshift(myAHRI);
-    
-      ratings[0] = grouped;
-    }
+        ratings[0] = grouped;
+      }
 
-    // Furnace Ratings.
-    if(ratings[1]){
-      // Sort each rating by their prettifyData order
-      ratings[1].sort((a:any, b:any) => prettifyData[a.rating as keyof typeof prettifyData].order - prettifyData[b.rating as keyof typeof prettifyData].order);
-    }
+      // Furnace Ratings.
+      if(ratings[1]){
+        // Sort each rating by their prettifyData order
+        ratings[1].sort((a:any, b:any) => prettifyData[a.rating as keyof typeof prettifyData].order - prettifyData[b.rating as keyof typeof prettifyData].order);
+      }
+    });
 
-    return ratings;
   }
 
  
@@ -109,9 +111,6 @@ export class ResultsComponent implements OnInit {
     const groupedSystems = new Map();
     // Iterate through each system in the array.
     systems.forEach((system) => {
-
-      // Order and Group each rating array by year
-      system.AHRIRatings = this.orderRatings(system.AHRIRatings)
 
       // Get all outdoor units in the system.
       const outdoorUnits = system.components.filter((comp: any) => comp.componentType === 'Outdoor unit');
@@ -222,6 +221,9 @@ export class ResultsComponent implements OnInit {
         // Render eligible rebates.
         this.loadEligibileRebates(this.mySearchResponse);
       
+        // Order and Group each rating array by year
+        this.orderRatings(resp)
+
         // Group the systems filtered by outdoor unit 
         //We don't filter systems by eligible rebates here, because initially we doesn't select any rebate
         this.myResults = this.groupByOutdoorUnit(this.mySearchResponse);
