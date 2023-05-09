@@ -31,7 +31,7 @@
         <h2 class="rc-main-title">Utility providers</h2>
 
         <div fxLayout="row column" fxLayoutAlign="center">
-            <div fxFlex="25" fxLayout="column" fxLayoutAlign="center center" fxFlex.xs="85" fxFlex.sm="50" fxFlex.md="25" fxLayoutGap="20">
+            <div fxFlex="50" fxLayout="column" fxLayoutAlign="center center" fxFlex.xs="85" fxFlex.sm="50" fxFlex.md="50" fxLayoutGap="20">
             
                 <app-utility-providers [location]="myData.location!"
                     (utilityProvidersChange)="setNewUtilityProviders( $event )"></app-utility-providers>
@@ -81,7 +81,7 @@
         <h2 class="rc-main-title">HVAC System Design</h2>
 
         <div fxLayout="row column" fxLayoutAlign="center stretch" fxLayoutGap="8px grid" class="rc-system-design">
-            <div fxFlex="90" fxFlex.sm="90" fxFlex.xs="85" class="list">
+            <div fxFlex="84" fxFlex.sm="90" fxFlex.xs="85" class="list">
                 <!-- note if no system layout list exists -->
                 <div fxLayout fxLayoutAlign="center stretch" fxLayoutGap="8px grid">
                     <div fxLayout="row column" fxLayoutAlign="center" fxLayoutGap="16px" *ngIf="systems.length == 0">
@@ -123,7 +123,7 @@
 
                 </div>
             </div>
-            <div fxFlex="10" fxFlex.sm="90" fxFlex.xs="85" fxLayoutAlign="center" class="toolbox">
+            <div fxFlex="100" fxFlex.sm="90" fxFlex.xs="85" fxLayoutAlign="center" class="toolbox">
                 <!--Add new-->
                 <div class="rc-toolbox">
                     <h5 class="title" matTooltip="Click the component icons on the RH side of the screen to start designing your HVAC system. At a minimum an outdoor unit selection is required." matTooltipPosition="right">HVAC system components</h5>

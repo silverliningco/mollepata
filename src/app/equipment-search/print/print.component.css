@@ -15,6 +15,9 @@
   .logo{
     text-align: end;
   }
+  .logo img{
+    width: 50%;
+  }
   .model-numbers,.ahri-ratings, .elegible-rebates{
     padding: 1rem;
   }
@@ -77,6 +80,14 @@
     line-height: 12px;
     color: #9b9b9b;
     font-weight: 600;
+  }
+  @media (max-width: 767px){
+    .logo img{
+      width: 100%;
+    }
+    .rc-report .title{
+      padding: 1rem;
+    }
   }
   @media print {
     @page {

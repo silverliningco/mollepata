@@ -1,14 +1,7 @@
 /* Step 4: System Design */
 .rc-system-design{
   position: relative;
-}
-@media (max-width: 959px){
-  .rc-system-design .list{
-    order:2;
-  }
-  .rc-system-design .toolbox{
-    order: 1;
-  }
+  min-height: 400px;
 }
 /* --- Add hvac unit Button --- */
 .rc-hvac-unit-add, 
@@ -89,17 +82,17 @@
   display: inline-block;
 }
 /*Toolbox*/
+.toolbox{
+  position: absolute;
+  width: 90px;
+  right: 0;
+}
 .rc-toolbox{
   text-align: center;
   padding: .5rem 1rem 1rem 1rem;
   display: inline-block;
   border-radius: 3px;
   background-color: #f2f2f2;;
-}
-@media (max-width: 959px){
-  .rc-toolbox{
-    margin-bottom: 10px;
-  }
 }
 .rc-toolbox .title{
   line-height: 1rem;
@@ -120,6 +113,24 @@
 .toolbox-btn button:hover{
   box-shadow: 0px 0px 4px 1px #d7d7d7;
   cursor: pointer;
+}
+@media (max-width: 959px){
+  .rc-system-design{
+    min-height: auto;
+  }
+  .rc-system-design .list{
+    order:2;
+  }
+  .rc-system-design .toolbox{
+    order: 1;
+  }
+  .toolbox{
+    position: relative;
+    width: auto;
+  }
+  .rc-toolbox{
+    margin-bottom: 10px;
+  }
 }
 @media (max-width: 767px){
   .toolbox-btn img{
