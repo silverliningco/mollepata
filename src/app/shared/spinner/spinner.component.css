@@ -13,8 +13,11 @@
     content: "";
     display: block;
     position: absolute;
-    left: 48%;
     top: 40%;
+    left: 0; 
+    right: 0; 
+    margin-left: auto; 
+    margin-right: auto; 
     width: 63px;
     height: 63px;
     margin: 0 auto;
