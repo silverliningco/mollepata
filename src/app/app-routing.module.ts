@@ -11,7 +11,7 @@ const routes: Routes = [
   {
     path: '**',
     redirectTo: 'rebate-finder'
-  }
+  },
   {
     path:'print/:payload',
     component: PrintComponent
