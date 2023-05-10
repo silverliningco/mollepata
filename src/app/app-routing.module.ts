@@ -9,12 +9,12 @@ const routes: Routes = [
     loadChildren: () => import('./basic-estructure/basic-estructure.module').then(m => m.BasicEstructureModule)
   },
   {
-    path: '**',
-    redirectTo: 'rebate-finder'
-  },
-  {
     path:'print/:payload',
     component: PrintComponent
+  },
+  {
+    path: '**',
+    redirectTo: 'rebate-finder'
   }
 
 ];
