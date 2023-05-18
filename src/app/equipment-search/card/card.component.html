@@ -119,6 +119,9 @@
                 <mat-icon *ngIf="!rebate.isEligible">cancel</mat-icon>
                 <span [ngClass]="selectedRebates.includes(rebate.title) ? 'bold' : ''">{{rebate.title}}</span>
               </mat-panel-title>
+              <mat-panel-description>
+                $4,500.00
+              </mat-panel-description>
             </mat-expansion-panel-header>
             <p class="description">
               {{rebate.description}}
