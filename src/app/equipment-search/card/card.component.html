@@ -115,12 +115,21 @@
           <mat-expansion-panel *ngFor="let rebate of card.result!.rebateEligibility">
             <mat-expansion-panel-header>
               <mat-panel-title>
-                <mat-icon class="available" *ngIf="rebate.isEligible">check_circle</mat-icon>
-                <mat-icon *ngIf="!rebate.isEligible">cancel</mat-icon>
-                <span [ngClass]="selectedRebates.includes(rebate.title) ? 'bold' : ''">{{rebate.title}}</span>
+                <div fxLayout fxLayoutAlign="start center" >
+                  <mat-icon class="available" *ngIf="rebate.isEligible">check_circle</mat-icon>
+                  <mat-icon *ngIf="!rebate.isEligible">cancel</mat-icon>
+                  <span [ngClass]="selectedRebates.includes(rebate.title) ? 'bold' : ''">{{rebate.title}}</span>
+                </div>
+                
+                <div fxLayout fxLayoutAlign="end center" *ngIf="rebate.rebateUpTo">
+                  <div class="rebate-amount">
+                  {{rebate.rebateUpTo | currency:'USD'}}
+                  </div>
+                </div>
               </mat-panel-title>
+              
             </mat-expansion-panel-header>
-            <p class="description">
+            <p *ngIf="rebate.description" class="description">
               {{rebate.description}}
             </p>
             <ul class="rc-unlisted link-rebates">
