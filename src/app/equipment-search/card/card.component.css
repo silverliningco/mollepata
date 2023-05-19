@@ -104,10 +104,20 @@
   padding: .5rem;
   height: auto;
 }
+::ng-deep .results .rc-card .mat-card-content .mat-expansion-panel .mat-expansion-panel-header .rebate-amount {
+  background-color: #e1ecf8;
+  padding: 4px;
+  font-size: 12px;
+  line-height: 12px;
+  border-radius: 4px;
+  font-weight: bold;
+  color: var(--rc-primary-color);
+}
 ::ng-deep .results .rc-card .mat-card-content .mat-expansion-panel .mat-expansion-panel-header .mat-expansion-panel-header-title{
   font-size: 12px;
   font-weight: 500;  
   line-height: 14px;
+  display: grid;
 }
 ::ng-deep .results .rc-card .mat-card-content .mat-expansion-panel .mat-expansion-panel-header .mat-expansion-panel-header-title .mat-icon{
   font-size: 16px;
