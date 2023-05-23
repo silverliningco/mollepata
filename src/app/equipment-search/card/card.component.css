@@ -12,15 +12,26 @@
   width: 100% !important;
   margin: 0;
   min-width: 98%;
-}  
-::ng-deep .results .rc-card .mat-card-title{
-  margin-bottom: 0;
 }
 ::ng-deep .results .rc-card .mat-card-title span{
   font-size: 20px;
   font-weight: bold;
   color: var(--rc-text-color);
   text-transform: uppercase;
+}
+::ng-deep .results .rc-card .mat-card-title .rebates-price{
+  position: relative;
+  background-color: #ffecd1;
+  padding: 1.1rem 0.75rem 0.75rem;
+  border-radius: 4px;
+  color: var(--rc-warn-color);
+  font-weight: 600;
+}
+::ng-deep .results .rc-card .mat-card-title .rebates-price .float-text.tl{
+  position: absolute;
+  font-size: 8px;
+  top: -3px;
+  left: 3px;
 }
   /* Model numbers */
 ::ng-deep .results .rc-card .mat-card-subtitle{
@@ -186,5 +197,9 @@
 @media only screen and (max-width: 767px){
   ::ng-deep .results .rc-card .mat-card-subtitle{
     margin-bottom: .25rem !important;
+  }
+  ::ng-deep .results .rc-card .mat-card-title span{
+    text-align: center;
+    margin-bottom: 10px;
   }
 }
