@@ -78,9 +78,9 @@
       <div fxFlex="100">
         <div fxLayout="row column" fxLayoutAlign="space-between center">
           <h4 class="subtitle">REBATE ELIGIBILITY</h4>
-          <div class="rebates-price">
+          <div class="rebates-price"  *ngIf="this.totalRebateUp != 0">
             <span class="float-text tl">REBATES UP TO</span>
-            $ 1,000.00
+            {{ this.totalRebateUp | currency:'USD' }}
           </div>
         </div>
       </div>
@@ -96,7 +96,9 @@
           </ng-template>
           <div fxLayout="row column" fxLayoutAlign="space-between center">
             <h4>{{rebate.title}}</h4>
-            <div class="rebate-amount"> $1,000.00 </div>
+            <div class="rebate-amount" *ngIf="rebate.rebateUpTo">
+              {{rebate.rebateUpTo | currency:'USD'}}
+            </div>
           </div>
           <p class="description">
             {{rebate.description}}
