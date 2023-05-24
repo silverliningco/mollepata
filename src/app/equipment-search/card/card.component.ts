@@ -24,6 +24,8 @@ export class CardComponent implements OnInit {
   JSON = JSON;
   showDiv2023 = true;
 
+  totalRebateUp = 0;
+
   constructor(
     private dialog: MatDialog) { }
 
@@ -34,6 +36,8 @@ export class CardComponent implements OnInit {
   loadCard() {
     // Asign first element of array to card.
     this.card.result = this.mySystems[0];
+    this.totalRebateUp = this.sumRebateValues(this.card.result!.rebateEligibility)
+
     this.card.userSelections = { "Outdoor unit": this.card.result.components[0].title };
     this.card.cardComponents = this.cardComponents();
     this.card.cardConfigurations = this.cardConfigurations();
@@ -223,6 +227,8 @@ export class CardComponent implements OnInit {
         }
 
         this.card.result = myOptionsToUpdate[0];
+        this.totalRebateUp = this.sumRebateValues(this.card.result!.rebateEligibility)
+
         this.card.cardConfigurations = this.cardConfigurations();
     }
 
@@ -272,9 +278,22 @@ export class CardComponent implements OnInit {
 
     if(findResult) {
       this.card.result = findResult;
+      this.totalRebateUp = this.sumRebateValues(this.card.result!.rebateEligibility)
+      
     } else {
       console.log("this never happen");
     }
+  }
+
+  /**
+ * Calculates the sum of rebate values from an array of objects.
+ * @param rebateEligibility An array of objects containing rebate information.
+ * @returns The total sum of rebate values.
+ */
+  sumRebateValues(rebateEligibility: any[]): number {
+    return rebateEligibility.reduce((accumulator, object) => {
+      return accumulator + object["rebateUpTo"];
+    }, 0);
   }
 
   openDialog() {

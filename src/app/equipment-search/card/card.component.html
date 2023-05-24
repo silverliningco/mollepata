@@ -6,9 +6,9 @@
         <mat-card-title>
           <div fxLayout="row column" fxLayoutAlign="space-between center" fxLayoutAlign.xs="center center">
             <span class="title">{{this.getComponentByComponentType(card.result!.components, "Outdoor unit").description | uppercase}}</span>
-            <div class="rebates-price">
+            <div class="rebates-price" *ngIf="this.totalRebateUp != 0">
               <span class="float-text tl">REBATES UP TO</span>
-              $ 1,000.00
+              {{ this.totalRebateUp | currency:'USD' }}
             </div>
           </div>          
         </mat-card-title>
