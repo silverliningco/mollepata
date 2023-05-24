@@ -76,7 +76,13 @@
     <!-- Aviable Rebates -->  
     <div fxLayout="row column" fxLayoutAlign="space-around center" class="elegible-rebates nextpage">
       <div fxFlex="100">
-        <h4 class="subtitle">REBATE ELIGIBILITY</h4>
+        <div fxLayout="row column" fxLayoutAlign="space-between center">
+          <h4 class="subtitle">REBATE ELIGIBILITY</h4>
+          <div class="rebates-price">
+            <span class="float-text tl">REBATES UP TO</span>
+            $ 1,000.00
+          </div>
+        </div>
       </div>
       <div fxFlex="100" class="rebate">
         <div class="item-rebate" *ngFor="let rebate of result!.rebateEligibility">
@@ -88,7 +94,10 @@
                NOT ELIGIBLE
             </p>
           </ng-template>
-          <h4>{{rebate.title}}</h4>
+          <div fxLayout="row column" fxLayoutAlign="space-between center">
+            <h4>{{rebate.title}}</h4>
+            <div class="rebate-amount"> $1,000.00 </div>
+          </div>
           <p class="description">
             {{rebate.description}}
           </p>

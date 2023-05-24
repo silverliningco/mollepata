@@ -46,6 +46,21 @@
     font-style: italic;
     text-transform: uppercase;
   }
+  .rebates-price{
+    position: relative;
+    background-color: #dfdfdf;
+    padding: 1.1rem 0.75rem 0.75rem;
+    border-radius: 4px;
+    color: var(--rc-text-color);
+    font-weight: 600;
+    margin-bottom: 5px;
+  }
+  .float-text.tl{
+    position: absolute;
+    font-size: 8px;
+    top: -3px;
+    left: 3px;
+  }
   .rebate{
     position: relative;
     margin-bottom: 0.45rem;
@@ -54,6 +69,15 @@
   .item-rebate {
     padding: 0.5rem 1rem;
     border: 1px solid #f3f3f3;
+  }
+  .rebate-amount {
+    background-color: #e8e8e8;
+    padding: 4px;
+    font-size: 12px;
+    line-height: 12px;
+    border-radius: 4px;
+    font-weight: bold;
+    color: #575757;
   }
   .item-rebate:first-child{
     border-bottom: none;
